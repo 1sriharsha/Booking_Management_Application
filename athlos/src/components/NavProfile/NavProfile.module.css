@@ -98,3 +98,45 @@ a:active {
   font-weight: 800;
 }
 
+.login {
+  text-align: right;
+}
+
+.login button {
+  margin: 0 0 0 0.6em;
+}
+
+/* Responsive Layout */
+@media screen and (min-width: 1230px) {
+  .container {
+    width: 1150px;
+  }
+
+  .logo {
+    width: 175px;
+    font-size: 1.9em;
+  }
+
+  .menu {
+    width: 750px;
+  }
+
+  .login {
+    width: 230px;
+  }
+}
+
+@media screen and (min-width: 1630px) {
+
+  .logo {
+    width: 200px;
+  }
+
+  .menu {
+    width: 1000px;
+  }
+
+  .login {
+    width: 300px;
+  }
+}
