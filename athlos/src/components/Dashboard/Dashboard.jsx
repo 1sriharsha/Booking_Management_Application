@@ -51,7 +51,12 @@ class Dashboard extends Component {
               </div>
 
               {/* Navigation: User Login/Sign Up Buttons [Right] */}
-              <NavProfile onShowModal={this.props.onShowModal} />
+              <NavProfile
+                isAuthenticated={this.props.isAuthenticated}
+                userFirstName={this.props.userFirstName}
+                userLastName={this.props.userLastName}
+                onShowModal={this.props.onShowModal}
+              />
             </div>
           </div>
         </header>

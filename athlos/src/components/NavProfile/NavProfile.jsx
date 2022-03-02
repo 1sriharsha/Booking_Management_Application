@@ -5,15 +5,12 @@ class NavProfile extends Component {
   constructor(props) {
     super(props);
   }
-  state = {
-    isAuthenticated: false,
-  };
-
+  
   render() {
     return (
       <React.Fragment>
         {/* Navigation: User Login/Sign Up Buttons [Right] */}
-        {!this.state.isAuthenticated && (
+        {!this.props.isAuthenticated && (
           <div className={styles.login}>
             <button
               className={styles.button}
@@ -29,14 +26,17 @@ class NavProfile extends Component {
             </button>
           </div>
         )}
-        {this.state.isAuthenticated && (
+        {this.props.isAuthenticated && (
           <div className={[styles.login, styles.profile].join(" ")}>
             <div className={styles.profileName}>
-              <span>John</span>
-              <span>Smith</span>
+              <span>{this.props.userFirstName}</span>
+              <span>{this.props.userLastName}</span>
             </div>
             <div className={styles.profileIcon}>
-              <span>JS</span>
+              <span>
+                {this.props.userFirstName.charAt(0) +
+                  this.props.userLastName.charAt(0)}
+              </span>
             </div>
           </div>
         )}

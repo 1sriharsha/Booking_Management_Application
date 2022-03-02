@@ -5,12 +5,17 @@ import { Home, Dashboard, RegistrationModal } from "./components";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: false,
-      showModalLogin: false,
-      showModalSignUp: false,
-    };
   }
+
+  state = {
+    isAuthenticated: false,
+    userFirstName: "John",
+    userLastName: "Smith",
+    userType: "Customer",
+    showModal: false,
+    showModalLogin: false,
+    showModalSignUp: false,
+  };
 
   showModal = (tab) => {
     if (tab === "login") {
@@ -37,10 +42,29 @@ class App extends Component {
     return (
       <Router>
         <Routes>
-          <Route path="/" element={<Home onShowModal={this.showModal} />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                isAuthenticated={this.state.isAuthenticated}
+                userFirstName={this.state.userFirstName}
+                userLastName={this.state.userLastName}
+                userType={this.state.userType}
+                onShowModal={this.showModal}
+              />
+            }
+          />
           <Route
             path="/dashboard"
-            element={<Dashboard onShowModal={this.showModal} />}
+            element={
+              <Dashboard
+                isAuthenticated={this.state.isAuthenticated}
+                userFirstName={this.state.userFirstName}
+                userLastName={this.state.userLastName}
+                userType={this.state.userType}
+                onShowModal={this.showModal}
+              />
+            }
           />
         </Routes>
         {this.state.showModal && (
