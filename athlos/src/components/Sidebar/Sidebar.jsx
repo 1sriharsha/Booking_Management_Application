@@ -9,11 +9,6 @@ class Sidebar extends Component {
     super(props);
   }
 
-  state = {
-    isUser: true,
-    isManagement: false,
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -24,8 +19,8 @@ class Sidebar extends Component {
             <a href="/">Athlos</a>
           </div>
 
-          {this.state.isUser && <UserTabs />}
-          {this.state.isManagement && <ManagementTabs />}
+          {this.props.userType == "Customer" && <UserTabs />}
+          {this.props.userType == "Manager" && <ManagementTabs />}
         </div>
       </React.Fragment>
     );

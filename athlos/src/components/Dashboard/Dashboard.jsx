@@ -61,7 +61,7 @@ class Dashboard extends Component {
           </div>
         </header>
 
-        <Sidebar />
+        <Sidebar userType={this.props.userType} />
       </>
     );
   }
