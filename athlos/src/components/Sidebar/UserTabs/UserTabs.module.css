@@ -412,15 +412,13 @@ input[type]:focus,
     width: 300px;
   }
 
-  
-
   .intro img {
     max-width: 1000px !important;
   }
 
   .modal .name > input {
-  width: 88%;
-}
+    width: 88%;
+  }
 
   .shortcutContainer button {
     width: 260px !important;
@@ -464,9 +462,6 @@ input[type]:focus,
     transition-duration: 0s !important;
   }
 }
-
-
-
 
 /* 
     Athlos - Booking Styles 
