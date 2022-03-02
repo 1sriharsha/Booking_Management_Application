@@ -6,7 +6,7 @@ class NavProfile extends Component {
     super(props);
   }
   state = {
-    isAuthenticated: true,
+    isAuthenticated: false,
   };
 
   render() {

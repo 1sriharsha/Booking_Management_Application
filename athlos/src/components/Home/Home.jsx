@@ -60,7 +60,7 @@ class Home extends Component {
               </div>
 
               {/* Navigation: User Login/Sign Up Buttons [Right] */}
-              <NavProfile />
+              <NavProfile onShowModal={this.props.onShowModal} />
             </div>
           </div>
         </header>

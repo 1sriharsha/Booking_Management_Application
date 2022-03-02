@@ -5,6 +5,10 @@ import { Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = {
     showFilters: false,
   };
@@ -47,7 +51,7 @@ class Dashboard extends Component {
               </div>
 
               {/* Navigation: User Login/Sign Up Buttons [Right] */}
-              <NavProfile />
+              <NavProfile onShowModal={this.props.onShowModal} />
             </div>
           </div>
         </header>
