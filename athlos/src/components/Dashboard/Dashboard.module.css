@@ -530,7 +530,6 @@ body {
 }
 
 .filterOptions {
-  display: none;
   position: absolute;
   right: -85px;
   list-style: none;

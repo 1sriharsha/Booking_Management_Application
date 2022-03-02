@@ -5,6 +5,18 @@ import { Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 
 class Dashboard extends Component {
+  state = {
+    showFilters: false,
+  };
+
+  toggleFilters() {
+    if (this.state.showFilters) {
+      this.setState({ showFilters: false });
+    } else {
+      this.setState({ showFilters: true });
+    }
+  }
+
   render() {
     return (
       <>
@@ -18,17 +30,19 @@ class Dashboard extends Component {
                   <input type="search" placeholder="Search Bookings..." />
                   <button
                     className={styles.filter}
-                    onclick="toggleVisibility('filter-toggle')"
+                    onClick={() => this.toggleFilters()}
                   >
                     <i>
                       <FontAwesomeIcon icon="fa-solid fa-filter" />
                     </i>
                   </button>
-                  <div className={styles.filterOptions} id="filter-toggle">
-                    <div>Option 1</div>
-                    <div>Option 2</div>
-                    <div>Option 3</div>
-                  </div>
+                  {this.state.showFilters ? (
+                    <div className={styles.filterOptions} id="filter-toggle">
+                      <div>Option 1</div>
+                      <div>Option 2</div>
+                      <div>Option 3</div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
