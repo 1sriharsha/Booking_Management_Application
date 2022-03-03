@@ -27,7 +27,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <>
+      <React.Fragment>
         {/* Top Navigation Bar */}
         <header className={styles.topnav}>
           <div className={styles.container}>
@@ -71,7 +71,15 @@ class Dashboard extends Component {
           activeTab={this.state.activeTab}
           onClick={this.onClickTabItem}
         />
-      </>
+
+        {/* Tab Content */}
+        <div className={styles.tabContainer}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quisquam
+          non harum tenetur hic cumque, natus, quod quae magnam voluptatem
+          culpa! Quos repellat corrupti quia vitae consequuntur asperiores
+          officia dicta.
+        </div>
+      </React.Fragment>
     );
   }
 }

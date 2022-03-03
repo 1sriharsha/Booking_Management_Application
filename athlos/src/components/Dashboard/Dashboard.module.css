@@ -589,7 +589,7 @@ body {
 }
 
 /* Tabs */
-.tab-container {
+.tabContainer {
   position: absolute;
   top: 72px;
   right: 0;
@@ -599,7 +599,7 @@ body {
   border-radius: var(--default-border-radius);
 }
 
-.side-tab {
+.sideTab {
   display: none;
   padding: 1.5em;
 }
