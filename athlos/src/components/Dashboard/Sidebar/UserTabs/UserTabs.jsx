@@ -1,70 +1,52 @@
 import React, { Component } from "react";
 import styles from "./UserTabs.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Tab } from "../../..";
 
 class UserTabs extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <React.Fragment>
         {/* Dashboard Section */}
-        <button
-          className={[styles.sideTabLink, styles.activeTablink].join(" ")}
-          id="tab-dashboard"
-          onclick="openSideTab('dashboard')"
-        >
-          <i>
-            <FontAwesomeIcon icon="fa-solid fa-house-user" />
-          </i>
-          Dashboard
-        </button>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Dashboard"
+          icon="fa-solid fa-house-user"
+        ></Tab>
 
         {/* Bookings Section */}
         <div className={styles.title}>BOOKINGS</div>
-        <button
-          className={styles.sideTabLink}
-          id="tab-book"
-          onclick="openSideTab('book')"
-        >
-          <i>
-            <FontAwesomeIcon icon="fa-solid fa-bookmark" />
-          </i>
-          Book
-        </button>
-        <button
-          className={styles.sideTabLink}
-          id="tab-myBookings"
-          onclick="openSideTab('myBookings')"
-        >
-          <i>
-            <FontAwesomeIcon icon="fa-solid fa-layer-group" />
-          </i>
-          My Bookings
-        </button>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Book"
+          icon="fa-solid fa-bookmark"
+        ></Tab>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="My Bookings"
+          icon="fa-solid fa-layer-group"
+        ></Tab>
 
         {/* Account Section */}
-        <div className={styles.accountView}>
-          <div className={styles.title}>ACCOUNT</div>
-          <button
-            className={styles.sideTabLink}
-            id="tab-notifications"
-            onclick="openSideTab('notifications')"
-          >
-            <i>
-              <FontAwesomeIcon icon="fa-solid fa-bell" />
-            </i>
-            Notifications
-          </button>
-          <button
-            className={styles.sideTabLink}
-            id="tab-settings"
-            onclick="openSideTab('settings')"
-          >
-            <i>
-              <FontAwesomeIcon icon="fa-solid fa-gears" />
-            </i>
-            Settings
-          </button>
-        </div>
+        <div className={styles.title}>ACCOUNT</div>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Notifications"
+          icon="fa-solid fa-bell"
+        ></Tab>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Settings"
+          icon="fa-solid fa-gears"
+        ></Tab>
       </React.Fragment>
     );
   }

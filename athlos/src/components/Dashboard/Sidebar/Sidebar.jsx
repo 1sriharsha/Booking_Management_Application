@@ -19,8 +19,20 @@ class Sidebar extends Component {
             <a href="/">Athlos</a>
           </div>
 
-          {this.props.userType == "Customer" && <UserTabs />}
-          {this.props.userType == "Manager" && <ManagementTabs />}
+          {this.props.userType == "Customer" && (
+            <UserTabs
+              activeTab={this.props.activeTab}
+              onClick={this.props.onClick}
+              tabLabel={this.props.tabLabel}
+            />
+          )}
+          {this.props.userType == "Manager" && (
+            <ManagementTabs
+              activeTab={this.props.activeTab}
+              tabLabel={this.props.tabLabel}
+              onClick={this.props.onClick}
+            />
+          )}
         </div>
       </React.Fragment>
     );

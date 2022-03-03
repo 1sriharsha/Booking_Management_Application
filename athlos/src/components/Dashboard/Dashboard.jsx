@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import styles from "./Dashboard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Sidebar } from "..";
+import { Sidebar, Tabs } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showFilters: false,
+      activeTab: "Dashboard",
+      tabLabel: "err",
+    };
   }
-
-  state = {
-    showFilters: false,
-  };
 
   toggleFilters() {
     if (this.state.showFilters) {
@@ -20,6 +21,14 @@ class Dashboard extends Component {
       this.setState({ showFilters: true });
     }
   }
+
+  onClickTabItem = (tab) => {
+    console.log("Previous Active Tab: " + this.state.activeTab);
+    console.log("Previous Tab Label: " + this.state.tabLabel);
+    this.setState({ activeTab: tab });
+    console.log("New Active Tab: " + this.state.activeTab);
+    console.log("New Tab Label: " + this.state.tabLabel);
+  };
 
   render() {
     return (
@@ -61,7 +70,12 @@ class Dashboard extends Component {
           </div>
         </header>
 
-        <Sidebar userType={this.props.userType} />
+        <Sidebar
+          userType={this.props.userType}
+          activeTab={this.state.activeTab}
+          tabLabel={this.state.tabLabel}
+          onClick={this.onClickTabItem}
+        />
       </>
     );
   }
