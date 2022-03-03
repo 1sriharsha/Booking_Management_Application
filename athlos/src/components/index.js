@@ -6,4 +6,4 @@ export { default as Sidebar } from "./Dashboard/Sidebar/Sidebar";
 export { default as UserTabs } from "./Dashboard/Sidebar/UserTabs/UserTabs";
 export { default as ManagementTabs } from "./Dashboard/Sidebar/ManagementTabs/ManagementTabs";
 export { default as NavProfile } from "./NavProfile/NavProfile";
-export { default as BookTab } from "./Dashboard/BookTab/BookTab";
+export { default as BookTab } from "./Dashboard/TabContent/BookTab/BookTab";
