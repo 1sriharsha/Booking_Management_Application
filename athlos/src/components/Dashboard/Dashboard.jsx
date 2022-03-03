@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./Dashboard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Sidebar, Tabs } from "..";
+import { Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 
 class Dashboard extends Component {
