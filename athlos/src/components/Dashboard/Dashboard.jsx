@@ -10,7 +10,6 @@ class Dashboard extends Component {
     this.state = {
       showFilters: false,
       activeTab: "Dashboard",
-      tabLabel: "err",
     };
   }
 
@@ -23,11 +22,7 @@ class Dashboard extends Component {
   }
 
   onClickTabItem = (tab) => {
-    console.log("Previous Active Tab: " + this.state.activeTab);
-    console.log("Previous Tab Label: " + this.state.tabLabel);
     this.setState({ activeTab: tab });
-    console.log("New Active Tab: " + this.state.activeTab);
-    console.log("New Tab Label: " + this.state.tabLabel);
   };
 
   render() {
@@ -73,7 +68,6 @@ class Dashboard extends Component {
         <Sidebar
           userType={this.props.userType}
           activeTab={this.state.activeTab}
-          tabLabel={this.state.tabLabel}
           onClick={this.onClickTabItem}
         />
       </>
