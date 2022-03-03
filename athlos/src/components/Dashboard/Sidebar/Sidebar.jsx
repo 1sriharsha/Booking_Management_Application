@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./Sidebar.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserTabs from "./UserTabs/UserTabs";
 import ManagementTabs from "./ManagementTabs/ManagementTabs";
 
@@ -12,13 +11,13 @@ class Sidebar extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* Sidebar */}
         <div className={styles.sidebar}>
-          {/* Sidebar: Athlos Branding [Top] */}
+          {/* Athlos Branding */}
           <div className={styles.logo}>
             <a href="/">Athlos</a>
           </div>
 
+          {/* Customer View Tabs */}
           {this.props.userType == "Customer" && (
             <UserTabs
               activeTab={this.props.activeTab}
@@ -26,6 +25,8 @@ class Sidebar extends Component {
               tabLabel={this.props.tabLabel}
             />
           )}
+
+          {/* Manager View Tabs */}
           {this.props.userType == "Manager" && (
             <ManagementTabs
               activeTab={this.props.activeTab}
