@@ -68,7 +68,7 @@ input[type]:focus,
 }
 
 .logo a {
-  color: black;
+  color: black !important;
 }
 
 /* Buttons */
@@ -555,7 +555,7 @@ body {
   border-bottom: 1px solid var(--color-tertiary);
 }
 
-.title {
+.sidebar .title {
   padding: 0.5em;
   font-weight: 200;
   font-size: 0.8em;
