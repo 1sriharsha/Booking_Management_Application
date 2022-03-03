@@ -22,7 +22,6 @@ class Sidebar extends Component {
             <UserTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}
-              tabLabel={this.props.tabLabel}
             />
           )}
 
@@ -30,7 +29,6 @@ class Sidebar extends Component {
           {this.props.userType == "Manager" && (
             <ManagementTabs
               activeTab={this.props.activeTab}
-              tabLabel={this.props.tabLabel}
               onClick={this.props.onClick}
             />
           )}
