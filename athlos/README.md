@@ -73,6 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # Resources
 
 - [How to Create a Multi-Page Website with React](https://www.techomoro.com/how-to-create-a-multi-page-website-with-react-in-5-minutes/)
+- [How to Build a Tabs Component with React](https://www.digitalocean.com/community/tutorials/react-tabs-component)
 
 Format all .js, .jsx, .json, .css, and .html files at once:
 
