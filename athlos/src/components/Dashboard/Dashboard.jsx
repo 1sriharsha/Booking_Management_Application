@@ -9,7 +9,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       showFilters: false,
-      activeTab: "Dashboard",
+      activeTab: "Dashboard", // Default to Dashboard
     };
   }
 
@@ -65,6 +65,7 @@ class Dashboard extends Component {
           </div>
         </header>
 
+        {/* Side Navigation Bar */}
         <Sidebar
           userType={this.props.userType}
           activeTab={this.state.activeTab}
