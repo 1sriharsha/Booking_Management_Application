@@ -1,13 +1,39 @@
 import React, { Component } from "react";
 import styles from "./ManagementTabs.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Tab } from "../../..";
 class ManagementTabs extends Component {
   render() {
     return (
       <React.Fragment>
         {/* Management Section */}
-        <div className={styles.managementView}>
+        <div className={styles.title}>MANAGEMENT</div>
+
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Edit Bookings"
+          icon="fa-solid fa-pen-to-square"
+        ></Tab>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Edit Equipment"
+          icon="fa-solid fa-pen-to-square"
+        ></Tab>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Edit Promotions"
+          icon="fa-solid fa-receipt"
+        ></Tab>
+        <Tab
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Chat Support"
+          icon="fa-solid fa-headset"
+        ></Tab>
+
+        {/* <div className={styles.managementView}>
           <div className={styles.title}>MANAGEMENT</div>
           <button
             className={styles.sideTabLink}
@@ -42,7 +68,7 @@ class ManagementTabs extends Component {
             </i>
             Chat Support
           </button>
-        </div>
+        </div> */}
       </React.Fragment>
     );
   }
