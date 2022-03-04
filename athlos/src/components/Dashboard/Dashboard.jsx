@@ -3,6 +3,7 @@ import styles from "./Dashboard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
+import Shortcut from "./Shortcut/Shortcut";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -74,10 +75,33 @@ class Dashboard extends Component {
 
         {/* Tab Content */}
         <div className={styles.tabContainer}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quisquam
-          non harum tenetur hic cumque, natus, quod quae magnam voluptatem
-          culpa! Quos repellat corrupti quia vitae consequuntur asperiores
-          officia dicta.
+          {/* Dashboard */}
+          <div className={styles.shortcutContainer}>
+            <Shortcut
+              shortcutTo="Book"
+              title="Book"
+              description="Book A Facility"
+              icon="fa-solid fa-bookmark"
+              iconClass="icon iconBlue"
+              onClick={this.onClickTabItem}
+            />
+            <Shortcut
+              shortcutTo="My Bookings"
+              title="Bookings"
+              description="My Bookings"
+              icon="fa-solid fa-layer-group"
+              iconClass="icon iconPurple"
+              onClick={this.onClickTabItem}
+            />
+            <Shortcut
+              shortcutTo="Notifications"
+              title="Notifications"
+              description="My Notifications"
+              icon="fa-solid fa-bell"
+              iconClass="icon iconOrange"
+              onClick={this.onClickTabItem}
+            />
+          </div>
         </div>
       </React.Fragment>
     );

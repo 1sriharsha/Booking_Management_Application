@@ -600,7 +600,6 @@ body {
 }
 
 .sideTab {
-  display: none;
   padding: 1.5em;
 }
 
@@ -674,7 +673,7 @@ body {
 }
 
 /* Book Tab */
-.book-container {
+.bookContainer {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -688,7 +687,8 @@ body {
 }
 
 /* Dashboard Tab */
-.shortcut-container {
+.shortcutContainer {
+  padding: 1.5em;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
