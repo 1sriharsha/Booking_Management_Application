@@ -15,11 +15,7 @@ class Dashboard extends Component {
   }
 
   toggleFilters() {
-    if (this.state.showFilters) {
-      this.setState({ showFilters: false });
-    } else {
-      this.setState({ showFilters: true });
-    }
+    this.setState({ showFilters: !this.state.showFilters });
   }
 
   onClickTabItem = (tab) => {
