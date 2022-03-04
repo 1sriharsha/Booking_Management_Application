@@ -91,6 +91,7 @@ input[type]:focus,
 }
 
 .card .image {
+  position: relative;
   display: flex;
   justify-content: center;
   border-bottom: 2px solid #37392e;
@@ -98,6 +99,27 @@ input[type]:focus,
 
 .card img {
   height: 170px;
+  min-width: 100%;
+}
+
+.card .available {
+  font-size: 1.05em;
+  color: #2bc016;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-weight: 800;
+  padding: 0.5em;
+  border-radius: 0 var(--default-border-radius);
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: default;
+  transition: all 0.2s ease-in-out;
+  transform: translateX(0.3em);
+  opacity: 0;
+}
+
+.card .available:hover {
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .card button {
@@ -124,4 +146,16 @@ input[type]:focus,
 
 .card .location i {
   margin-right: 0.3em;
+}
+
+/* Animations */
+.fadeIn {
+  animation: fade-in 3s ease forwards;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -10,7 +10,7 @@ class BookCard extends Component {
 
   render() {
     const {
-      props: { facilityName, facilityLocation, facilitySport },
+      props: { facilityName, facilityLocation, facilitySport, availableNow },
     } = this;
 
     let facilityLabel = facilityName;
@@ -18,15 +18,18 @@ class BookCard extends Component {
       facilityLabel = facilityLabel.substring(0, 22) + "...";
     }
 
-    let sportImage = "images/tmp/" + facilitySport + ".jpg";
-    // if (facilitySport.toLowerCase() === "soccer") {
-    //   sportImage = "soccer";
-    // }
+    let sportImage = "images/" + facilitySport + ".jpg";
+
     return (
       <React.Fragment>
         <div className={styles.card}>
           <div className={styles.image}>
-            <img src={sportImage} alt="Soccer Field" />
+            {availableNow && (
+              <div className={[styles.available, styles.fadeIn].join(" ")}>
+                Available Now
+              </div>
+            )}
+            <img src={sportImage} alt={facilitySport} />
           </div>
           <div className={styles.content}>
             <div title={facilityName} className={styles.title}>

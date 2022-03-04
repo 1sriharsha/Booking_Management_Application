@@ -29,47 +29,55 @@ class Dashboard extends Component {
         facilityName: "Student Recreational Sports Center",
         facilityLocation: "Bloomington, IN",
         facilitySport: "Soccer",
+        availableNow: true,
       },
       {
         id: 2,
         facilityName: "Student Recreational Sports Center",
         facilityLocation: "Bloomington, IN",
         facilitySport: "Basketball",
+        availableNow: false,
       },
       {
         id: 3,
         facilityName: "Student Recreational Sports Center",
         facilityLocation: "Bloomington, IN",
         facilitySport: "Volleyball",
+        availableNow: false,
       },
       {
         id: 4,
         facilityName: "Student Recreational Sports Center",
         facilityLocation: "Bloomington, IN",
-        facilitySport: "Soccer",
+        facilitySport: "TableTennis",
+        availableNow: false,
       },
       {
         id: 5,
         facilityName: "Student Recreational Sports Center",
         facilityLocation: "Bloomington, IN",
-        facilitySport: "Basketball",
+        facilitySport: "Squash",
+        availableNow: true,
       },
       {
         id: 6,
         facilityName: "Student Recreational Sports Center",
         facilityLocation: "Bloomington, IN",
-        facilitySport: "Volleyball",
+        facilitySport: "Badminton",
+        availableNow: false,
       },
     ];
 
+    // Generates n elements from Database
     const nBookCards = facilities.map(
-      ({ id, facilityName, facilityLocation, facilitySport }) => {
+      ({ id, facilityName, facilityLocation, facilitySport, availableNow }) => {
         return (
           <BookCard
             key={id}
             facilityName={facilityName}
             facilityLocation={facilityLocation}
             facilitySport={facilitySport}
+            availableNow={availableNow}
           />
         );
       }
