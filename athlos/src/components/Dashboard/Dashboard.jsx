@@ -71,7 +71,7 @@ class Dashboard extends Component {
 
         {/* Tab Content */}
         <div className={styles.tabContainer}>
-          {/* Dashboard */}
+          {/* Dashboard Content */}
           {this.state.activeTab === "Dashboard" && (
             <div className={styles.shortcutContainer}>
               <Shortcut
@@ -99,6 +99,10 @@ class Dashboard extends Component {
                 onClick={this.onClickTabItem}
               />
             </div>
+          )}
+          {/* Book Content */}
+          {this.state.activeTab === "Book" && (
+            <div className={styles.bookContainer}></div>
           )}
         </div>
       </React.Fragment>
