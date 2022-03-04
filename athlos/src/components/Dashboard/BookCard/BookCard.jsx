@@ -4,10 +4,6 @@ import "./BookCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class BookCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
       props: {
