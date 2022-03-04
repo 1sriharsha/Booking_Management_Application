@@ -7,6 +7,7 @@ class BookCard extends Component {
   render() {
     const {
       props: {
+        facilityID,
         facilityName,
         facilityLocation,
         facilitySport,
@@ -48,7 +49,10 @@ class BookCard extends Component {
               </i>
               {facilityLocation}
             </div>
-            <button className={[styles.button, styles.buttonPrimary].join(" ")}>
+            <button
+              className={[styles.button, styles.buttonPrimary].join(" ")}
+              onClick={() => this.props.onClickBook({ facilityID })}
+            >
               Book
             </button>
           </div>

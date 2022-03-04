@@ -22,6 +22,10 @@ class Dashboard extends Component {
     this.setState({ activeTab: tab });
   };
 
+  onClickBook = (bookID) => {
+    console.log(bookID);
+  };
+
   render() {
     const facilities = [
       {
@@ -83,11 +87,13 @@ class Dashboard extends Component {
           <React.Fragment>
             <BookCard
               key={id}
+              facilityID={id}
               facilityName={facilityName}
               facilityLocation={facilityLocation}
               facilitySport={facilitySport}
               availableNow={availableNow}
               animationDelay={animationDelay}
+              onClickBook={this.onClickBook}
             />
           </React.Fragment>
         );
