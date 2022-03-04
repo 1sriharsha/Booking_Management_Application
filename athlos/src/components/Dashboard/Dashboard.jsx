@@ -68,17 +68,28 @@ class Dashboard extends Component {
       },
     ];
 
+    var i = 0;
+    var animationDelay = 0;
     // Generates n elements from Database
     const nBookCards = facilities.map(
       ({ id, facilityName, facilityLocation, facilitySport, availableNow }) => {
+        if (i >= 3) {
+          animationDelay += 0.05;
+          i = 0;
+        }
+        i += 1;
+
         return (
-          <BookCard
-            key={id}
-            facilityName={facilityName}
-            facilityLocation={facilityLocation}
-            facilitySport={facilitySport}
-            availableNow={availableNow}
-          />
+          <React.Fragment>
+            <BookCard
+              key={id}
+              facilityName={facilityName}
+              facilityLocation={facilityLocation}
+              facilitySport={facilitySport}
+              availableNow={availableNow}
+              animationDelay={animationDelay}
+            />
+          </React.Fragment>
         );
       }
     );

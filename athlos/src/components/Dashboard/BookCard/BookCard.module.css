@@ -153,6 +153,11 @@ input[type]:focus,
   animation: fade-in 3s ease forwards;
 }
 
+.loadIn {
+  animation: fade-in 0.4s ease forwards;
+  opacity: 0.7;
+}
+
 @keyframes fade-in {
   to {
     opacity: 1;

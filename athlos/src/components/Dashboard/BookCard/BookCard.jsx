@@ -10,19 +10,30 @@ class BookCard extends Component {
 
   render() {
     const {
-      props: { facilityName, facilityLocation, facilitySport, availableNow },
+      props: {
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        availableNow,
+        animationDelay,
+      },
     } = this;
 
     let facilityLabel = facilityName;
-    if (facilityLabel.length > 21) {
-      facilityLabel = facilityLabel.substring(0, 22) + "...";
+    const maxLabelLength = 35;
+    if (facilityLabel.length > maxLabelLength) {
+      facilityLabel = facilityLabel.substring(0, maxLabelLength) + "...";
     }
 
     let sportImage = "images/" + facilitySport + ".jpg";
+    let fadeDelay = { animationDelay: animationDelay + "s" };
 
     return (
       <React.Fragment>
-        <div className={styles.card}>
+        <div
+          className={[styles.card, styles.loadIn].join(" ")}
+          style={fadeDelay}
+        >
           <div className={styles.image}>
             {availableNow && (
               <div className={[styles.available, styles.fadeIn].join(" ")}>
