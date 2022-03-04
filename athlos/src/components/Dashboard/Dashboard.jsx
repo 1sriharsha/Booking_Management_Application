@@ -23,6 +23,58 @@ class Dashboard extends Component {
   };
 
   render() {
+    const facilities = [
+      {
+        id: 1,
+        facilityName: "Student Recreational Sports Center",
+        facilityLocation: "Bloomington, IN",
+        facilitySport: "Soccer",
+      },
+      {
+        id: 2,
+        facilityName: "Student Recreational Sports Center",
+        facilityLocation: "Bloomington, IN",
+        facilitySport: "Basketball",
+      },
+      {
+        id: 3,
+        facilityName: "Student Recreational Sports Center",
+        facilityLocation: "Bloomington, IN",
+        facilitySport: "Volleyball",
+      },
+      {
+        id: 4,
+        facilityName: "Student Recreational Sports Center",
+        facilityLocation: "Bloomington, IN",
+        facilitySport: "Soccer",
+      },
+      {
+        id: 5,
+        facilityName: "Student Recreational Sports Center",
+        facilityLocation: "Bloomington, IN",
+        facilitySport: "Basketball",
+      },
+      {
+        id: 6,
+        facilityName: "Student Recreational Sports Center",
+        facilityLocation: "Bloomington, IN",
+        facilitySport: "Volleyball",
+      },
+    ];
+
+    const nBookCards = facilities.map(
+      ({ id, facilityName, facilityLocation, facilitySport }) => {
+        return (
+          <BookCard
+            key={id}
+            facilityName={facilityName}
+            facilityLocation={facilityLocation}
+            facilitySport={facilitySport}
+          />
+        );
+      }
+    );
+
     return (
       <React.Fragment>
         {/* Top Navigation Bar */}
@@ -102,28 +154,7 @@ class Dashboard extends Component {
           )}
           {/* Book Content */}
           {this.state.activeTab === "Book" && (
-            <div className={styles.bookContainer}>
-              <BookCard
-                facilityName="Student Recreational Sports Center"
-                facilityLocation="Bloomington, IN"
-                facilitySport="Soccer"
-              />
-              <BookCard
-                facilityName="Student Recreational Sports Center"
-                facilityLocation="Bloomington, IN"
-                facilitySport="Basketball"
-              />
-              <BookCard
-                facilityName="Student Recreational Sports Center"
-                facilityLocation="Bloomington, IN"
-                facilitySport="Volleyball"
-              />
-              <BookCard
-                facilityName="Student Recreational Sports Center"
-                facilityLocation="Bloomington, IN"
-                facilitySport="Soccer"
-              />
-            </div>
+            <div className={styles.bookContainer}>{nBookCards}</div>
           )}
         </div>
       </React.Fragment>
