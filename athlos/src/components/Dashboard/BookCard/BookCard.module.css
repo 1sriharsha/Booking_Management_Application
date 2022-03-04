@@ -72,51 +72,56 @@ input[type]:focus,
   background-color: var(--color-primary-dark);
 }
 
-.sideTab {
-  padding: 1.5em;
+/* Cards */
+.card {
+  height: 400px;
+  width: 300px;
+  border-radius: var(--default-border-radius);
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+  animation: all 0.2s ease;
+  position: relative;
+  transition: all 0.2s ease-in-out;
 }
 
-.shortcutContainer button {
-  width: 240px;
-  margin-bottom: 2em;
+.card:hover {
+  box-shadow: 0 1px 5px rgba(34, 25, 25, 0.3);
+  transform: scale(1.01);
+}
+
+.card .image {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 3px 5px rgba(41, 41, 41, 0.3);
-  background-color: white;
-  border: none;
-  animation: all 0.2s ease-in-out;
+  justify-content: center;
+  border-bottom: 2px solid #37392e;
 }
 
-.shortcutContainer button:hover {
-  color: white;
-  border: none;
-  background-color: white;
-  box-shadow: 0 3px 5px rgba(41, 41, 41, 0.5);
+.card img {
+  height: 170px;
 }
 
-.shortcutContainer button > .text {
-  text-align: left;
+.card button {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
 }
 
-.shortcutContainer button i {
-  font-size: 1.8em;
+.card .title {
+  font-family: var(--font-title);
+  font-size: 1.4em;
+  font-weight: 500;
+  margin-bottom: 0.4em;
+  word-wrap: break-word;
 }
 
-.shortcutContainer .title {
-  color: var(--color-gray);
-  font-size: 1.2em;
+.card .content {
+  padding: 0.5em 1em 1em 1em;
 }
 
-.shortcutContainer .subtitle {
-  color: var(--color-primary);
-  font-size: 0.9em;
-  font-weight: 400;
+.card .location {
+  font-weight: 300;
 }
 
-/* Animations */
-@keyframes scrollgradient {
-  to {
-    background-position: 300% center;
-  }
+.card .location i {
+  margin-right: 0.3em;
 }

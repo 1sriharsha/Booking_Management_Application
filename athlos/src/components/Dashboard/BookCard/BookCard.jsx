@@ -10,10 +10,41 @@ class BookCard extends Component {
 
   render() {
     const {
-      props: {},
+      props: { facilityName, facilityLocation, facilitySport },
     } = this;
 
-    return <React.Fragment></React.Fragment>;
+    let facilityLabel = facilityName;
+    if (facilityLabel.length > 21) {
+      facilityLabel = facilityLabel.substring(0, 22) + "...";
+    }
+
+    let sportImage = "images/tmp/" + facilitySport + ".jpg";
+    // if (facilitySport.toLowerCase() === "soccer") {
+    //   sportImage = "soccer";
+    // }
+    return (
+      <React.Fragment>
+        <div className={styles.card}>
+          <div className={styles.image}>
+            <img src={sportImage} alt="Soccer Field" />
+          </div>
+          <div className={styles.content}>
+            <div title={facilityName} className={styles.title}>
+              {facilityLabel}
+            </div>
+            <div className={styles.location}>
+              <i>
+                <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
+              </i>
+              {facilityLocation}
+            </div>
+            <button className={[styles.button, styles.buttonPrimary].join(" ")}>
+              Book
+            </button>
+          </div>
+        </div>
+      </React.Fragment>
+    );
   }
 }
 

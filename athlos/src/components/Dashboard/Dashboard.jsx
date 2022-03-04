@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./Dashboard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Sidebar } from "..";
+import { BookCard, Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 import Shortcut from "./Shortcut/Shortcut";
 
@@ -102,7 +102,28 @@ class Dashboard extends Component {
           )}
           {/* Book Content */}
           {this.state.activeTab === "Book" && (
-            <div className={styles.bookContainer}></div>
+            <div className={styles.bookContainer}>
+              <BookCard
+                facilityName="Student Recreational Sports Center"
+                facilityLocation="Bloomington, IN"
+                facilitySport="Soccer"
+              />
+              <BookCard
+                facilityName="Student Recreational Sports Center"
+                facilityLocation="Bloomington, IN"
+                facilitySport="Basketball"
+              />
+              <BookCard
+                facilityName="Student Recreational Sports Center"
+                facilityLocation="Bloomington, IN"
+                facilitySport="Volleyball"
+              />
+              <BookCard
+                facilityName="Student Recreational Sports Center"
+                facilityLocation="Bloomington, IN"
+                facilitySport="Soccer"
+              />
+            </div>
           )}
         </div>
       </React.Fragment>

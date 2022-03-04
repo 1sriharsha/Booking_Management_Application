@@ -674,9 +674,11 @@ body {
 
 /* Book Tab */
 .bookContainer {
+  padding: 1em 1em 1em 0;
   display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  gap: 80px;
 }
 
 /* My Bookings Tab */
