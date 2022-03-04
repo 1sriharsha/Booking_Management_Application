@@ -3,8 +3,6 @@
 */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,700&family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
 
-
-
 :root {
   --font-logo: "Roman", serif;
   --font-body: "Nunito", sans-serif;
@@ -20,8 +18,6 @@
 }
 
 /* TODO Remove CSS Not Needed For Dashboard Component  */
-
-
 
 a:link,
 a:visited {
@@ -43,7 +39,6 @@ input[type]:focus,
     0 0 8px rgba(33, 146, 146, 0.7);
   outline: 0 none;
 }
-
 
 /* Buttons */
 .button {
@@ -77,13 +72,9 @@ input[type]:focus,
   background-color: var(--color-primary-dark);
 }
 
-
-
 .sideTab {
   padding: 1.5em;
 }
-
-
 
 .shortcutContainer button {
   width: 240px;
@@ -122,8 +113,6 @@ input[type]:focus,
   font-size: 0.9em;
   font-weight: 400;
 }
-
-
 
 /* Animations */
 @keyframes scrollgradient {
