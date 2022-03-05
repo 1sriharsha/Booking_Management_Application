@@ -11,6 +11,11 @@ class RegistrationModal extends Component {
     super(props);
   }
 
+  state = {
+    showPassword: false,
+    passwordType: "password",
+  };
+
   onSignUp = (event) => {
     var newUserData = {
       firstName: event.target.fname.value,
@@ -41,6 +46,14 @@ class RegistrationModal extends Component {
       username: event.target.username.value,
       password: event.target.password.value,
     };
+  };
+
+  toggleShowPassword = (event) => {
+    if (this.state.showPassword) {
+      this.setState({ showPassword: false, passwordType: "password" });
+    } else {
+      this.setState({ showPassword: true, passwordType: "text" });
+    }
   };
 
   render() {
@@ -109,16 +122,21 @@ class RegistrationModal extends Component {
                         <div className={styles.passwordContainer}>
                           <input
                             id="login-form-password"
-                            type="password"
+                            type={this.state.passwordType}
                             placeholder=""
                             name="password"
                           />
                           <button
-                            onclick="toggleShowPassword(event)" // TODO Fix
+                            onClick={this.toggleShowPassword}
                             type="button"
                             className={styles.showPassword}
                           >
-                            <FontAwesomeIcon icon="fa-solid fa-eye" />
+                            {!this.state.showPassword && (
+                              <FontAwesomeIcon icon="fa-solid fa-eye" />
+                            )}
+                            {this.state.showPassword && (
+                              <FontAwesomeIcon icon="fa-solid fa-eye-slash" />
+                            )}
                           </button>
                         </div>
                       </div>
@@ -206,16 +224,21 @@ class RegistrationModal extends Component {
                       <div className={styles.passwordContainer}>
                         <input
                           id="signup-form-password"
-                          type="password"
+                          type={this.state.passwordType}
                           placeholder=""
                           name="password"
                         />
                         <button
-                          onclick="toggleShowPassword(event)" // TODO fix
+                          onClick={this.toggleShowPassword}
                           type="button"
                           className={styles.showPassword}
                         >
-                          <FontAwesomeIcon icon="fa-solid fa-eye" />
+                          {!this.state.showPassword && (
+                            <FontAwesomeIcon icon="fa-solid fa-eye" />
+                          )}
+                          {this.state.showPassword && (
+                            <FontAwesomeIcon icon="fa-solid fa-eye-slash" />
+                          )}
                         </button>
                         <div className={styles.error}></div>
                       </div>
@@ -226,16 +249,21 @@ class RegistrationModal extends Component {
                       <div className={styles.passwordContainer}>
                         <input
                           id="signup-form-password-repeat"
-                          type="password"
+                          type={this.state.passwordType}
                           placeholder=""
                           name="password-repeat"
                         />
                         <button
-                          onclick="toggleShowPassword(event)"
+                          onClick={this.toggleShowPassword}
                           type="button"
                           className={styles.showPassword}
                         >
-                          <i className="styles.fa-regular fa-eye"></i>
+                          {!this.state.showPassword && (
+                            <FontAwesomeIcon icon="fa-solid fa-eye" />
+                          )}
+                          {this.state.showPassword && (
+                            <FontAwesomeIcon icon="fa-solid fa-eye-slash" />
+                          )}
                         </button>
                         <div className={styles.error}></div>
                       </div>
