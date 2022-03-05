@@ -42,6 +42,8 @@ class CheckoutModal extends Component {
                   <div className={styles.title}>
                     {facilityName} -- ID {facilityID}
                   </div>
+                  <div>Location: {facilityLocation}</div>
+                  <div>Sport: {facilitySport}</div>
                 </div>
               </React.Fragment>
             )}
