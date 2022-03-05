@@ -33,7 +33,12 @@ class RegistrationModal extends Component {
       });
   };
 
-  onLogin = (event) => {};
+  onLogin = (event) => {
+    var userLoginData = {
+      username: event.target.username.value,
+      password: event.target.password.value,
+    };
+  };
 
   render() {
     return (
@@ -84,7 +89,11 @@ class RegistrationModal extends Component {
                       ></div>
                     </div>
                     {/* Email Sign-In */}
-                    <form id="login-form" className={styles.slideInRight}>
+                    <form
+                      id="login-form"
+                      className={styles.slideInRight}
+                      onSubmit={this.onLogin}
+                    >
                       <div className={styles.inputContainer}>
                         <label for="username">Email</label>
                         <input
@@ -120,7 +129,6 @@ class RegistrationModal extends Component {
                 </label> */}
 
                       <button
-                        onClick={this.onLogin}
                         type="submit"
                         className={[
                           styles.button,
