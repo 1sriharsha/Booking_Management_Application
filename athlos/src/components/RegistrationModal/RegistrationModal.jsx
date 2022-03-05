@@ -4,8 +4,6 @@ import "./RegistrationModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLoginButton } from "..";
 
-// const clientID = "YOUR_CLIENT_ID.apps.googleusercontent.com";
-
 class RegistrationModal extends Component {
   constructor(props) {
     super(props);
