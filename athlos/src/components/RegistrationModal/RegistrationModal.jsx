@@ -7,6 +7,34 @@ class RegistrationModal extends Component {
   constructor(props) {
     super(props);
   }
+
+  onSignUp = (event) => {
+    var newUserData = {
+      firstName: event.target.fname.value,
+      lastName: event.target.lname.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
+    };
+    console.log(newUserData);
+
+    fetch("http://localhost:5000/api/add", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserData),
+    })
+      .then((response) => response.json())
+      .then((newUserData) => {
+        console.log("Success:", newUserData);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  onLogin = (event) => {};
+
   render() {
     return (
       <>
@@ -77,11 +105,11 @@ class RegistrationModal extends Component {
                             name="password"
                           />
                           <button
-                            onclick="toggleShowPassword(event)"
+                            onclick="toggleShowPassword(event)" // TODO Fix
                             type="button"
                             className={styles.showPassword}
                           >
-                            <i className="styles.fa-regular fa-eye"></i>
+                            <FontAwesomeIcon icon="fa-solid fa-eye" />
                           </button>
                         </div>
                       </div>
@@ -92,7 +120,7 @@ class RegistrationModal extends Component {
                 </label> */}
 
                       <button
-                        onclick="onLogin()"
+                        onClick={this.onLogin}
                         type="submit"
                         className={[
                           styles.button,
@@ -117,7 +145,11 @@ class RegistrationModal extends Component {
                     ></div>
                   </div>
                   {/* Email Sign Up */}
-                  <form id="signup-form" className={styles.slideInLeft}>
+                  <form
+                    id="signup-form"
+                    className={styles.slideInLeft}
+                    onSubmit={this.onSignUp}
+                  >
                     <div className={styles.nameContainer}>
                       <div
                         className={[styles.name, styles.inputContainer].join(
@@ -174,11 +206,11 @@ class RegistrationModal extends Component {
                           name="password"
                         />
                         <button
-                          onclick="toggleShowPassword(event)"
+                          onclick="toggleShowPassword(event)" // TODO fix
                           type="button"
                           className={styles.showPassword}
                         >
-                          <i className="fa-regular fa-eye"></i>
+                          <FontAwesomeIcon icon="fa-solid fa-eye" />
                         </button>
                         <div className={styles.error}></div>
                       </div>
@@ -210,7 +242,6 @@ class RegistrationModal extends Component {
               </label> */}
 
                     <button
-                      onclick="onSignUp()"
                       type="submit"
                       className={[
                         styles.button,
