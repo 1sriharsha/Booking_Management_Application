@@ -16,6 +16,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faReceipt } from "@fortawesome/free-solid-svg-icons";
 import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import App from "./App";
 
 library.add(
@@ -28,7 +29,8 @@ library.add(
   faPenToSquare,
   faReceipt,
   faHeadset,
-  faLocationArrow
+  faLocationArrow,
+  faEye
 );
 
 ReactDOM.render(
