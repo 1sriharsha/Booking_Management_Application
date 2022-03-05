@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import styles from "./RegistrationModal.module.css";
 import "./RegistrationModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GoogleLoginButton } from "..";
+
+// const clientID = "YOUR_CLIENT_ID.apps.googleusercontent.com";
 
 class RegistrationModal extends Component {
   constructor(props) {
@@ -83,10 +86,7 @@ class RegistrationModal extends Component {
                   <div className={styles.tab} id="login">
                     <div className={styles.thirdParty}>
                       {/* Google Sign-In Button */}
-                      <div
-                        class="styles.g-signin2"
-                        data-onsuccess="onSignIn"
-                      ></div>
+                      <GoogleLoginButton />
                     </div>
                     {/* Email Sign-In */}
                     <form
