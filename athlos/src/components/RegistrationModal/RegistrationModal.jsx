@@ -147,10 +147,7 @@ class RegistrationModal extends Component {
                 <div className={styles.tab} id="sign-up">
                   <div className={styles.thirdParty}>
                     {/* Google Sign-In Button */}
-                    <div
-                      class="styles.g-signin2"
-                      data-onsuccess="onSignIn"
-                    ></div>
+                    <GoogleLoginButton />
                   </div>
                   {/* Email Sign Up */}
                   <form
