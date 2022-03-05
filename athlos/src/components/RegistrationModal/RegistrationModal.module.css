@@ -117,7 +117,7 @@
   width: 31px;
   border: none;
   border-radius: var(--default-border-radius);
-  background-color: var(--color-tertiary);
+  background-color: transparent;
   position: absolute;
   top: 0;
   right: -15px;
@@ -125,6 +125,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 .passwordContainer > button:hover {
