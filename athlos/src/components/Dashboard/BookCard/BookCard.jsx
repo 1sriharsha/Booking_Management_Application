@@ -2,8 +2,23 @@ import React, { Component } from "react";
 import styles from "./BookCard.module.css";
 import "./BookCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CheckoutModal } from "../..";
 
 class BookCard extends Component {
+  state = {
+    showCheckoutModal: false,
+  };
+
+  onClickBook = () => {
+    document.querySelector("body").style.overflow = "hidden";
+    this.setState({ showCheckoutModal: true });
+  };
+
+  closeCheckoutModal = () => {
+    document.querySelector("body").style.overflow = "auto";
+    this.setState({ showCheckoutModal: false });
+  };
+
   render() {
     const {
       props: {
@@ -51,12 +66,23 @@ class BookCard extends Component {
             </div>
             <button
               className={[styles.button, styles.buttonPrimary].join(" ")}
-              onClick={() => this.props.onClickBook({ facilityID })}
+              onClick={() => this.onClickBook({ facilityID })}
             >
               Book
             </button>
           </div>
         </div>
+
+        {this.state.showCheckoutModal && (
+          <CheckoutModal
+            facilityID={facilityID}
+            facilityName={facilityName}
+            facilityLocation={facilityLocation}
+            facilitySport={facilitySport}
+            availableNow={availableNow}
+            onCloseModal={this.closeCheckoutModal}
+          />
+        )}
       </React.Fragment>
     );
   }
