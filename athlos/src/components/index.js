@@ -9,3 +9,4 @@ export { default as NavProfile } from "./NavProfile/NavProfile";
 export { default as Tab } from "./Dashboard/Sidebar/Tab/Tab";
 export { default as BookCard } from "./Dashboard/BookCard/BookCard";
 export { default as CheckoutModal } from "./Dashboard/BookCard/CheckoutModal/CheckoutModal";
+export { default as GoogleLoginButton } from "./RegistrationModal/GoogleLoginButton/GoogleLoginButton";
