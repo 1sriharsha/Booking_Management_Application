@@ -22,6 +22,11 @@ class Dashboard extends Component {
     this.setState({ activeTab: tab });
   };
 
+  // Open "Book" tab when user types in search bar
+  onSearchChange = () => {
+    this.onClickTabItem("Book");
+  };
+
   render() {
     const facilities = [
       {
@@ -70,7 +75,7 @@ class Dashboard extends Component {
 
     var i = 0;
     var animationDelay = 0;
-    // Generates n elements from Database
+    // Generates n BookCard components from Database
     const nBookCards = facilities.map(
       ({ id, facilityName, facilityLocation, facilitySport, availableNow }) => {
         if (i >= 3) {
@@ -104,7 +109,12 @@ class Dashboard extends Component {
               {/* Navigation: Search Bar [Middle] */}
               <div className={styles.menu}>
                 <div className={styles.search}>
-                  <input type="search" placeholder="Search Bookings..." />
+                  <input
+                    id="searchBar"
+                    type="search"
+                    placeholder="Search Bookings..."
+                    onChange={this.onSearchChange}
+                  />
                   <button
                     className={styles.filter}
                     onClick={() => this.toggleFilters()}
