@@ -18,6 +18,7 @@ import { faHeadset } from "@fortawesome/free-solid-svg-icons";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import App from "./App";
 
 library.add(
@@ -32,7 +33,8 @@ library.add(
   faHeadset,
   faLocationArrow,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faArrowRightFromBracket
 );
 
 ReactDOM.render(

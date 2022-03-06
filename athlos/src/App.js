@@ -8,7 +8,7 @@ class App extends Component {
   }
 
   state = {
-    isAuthenticated: false,
+    isAuthenticated: true,
     userFirstName: "John",
     userLastName: "Smith",
     userType: "Customer", // Implemented Options: "Customer", "Manager"
@@ -33,6 +33,10 @@ class App extends Component {
     }
   };
 
+  onLogout = () => {
+    this.setState({ isAuthenticated: false });
+  };
+
   // TODO Hide Modal When Clicked Out Of
   hideModal = () => {
     this.setState({ showModal: false });
@@ -51,6 +55,7 @@ class App extends Component {
                 userLastName={this.state.userLastName}
                 userType={this.state.userType}
                 onShowModal={this.showModal}
+                onLogout={this.onLogout}
               />
             }
           />
@@ -63,6 +68,7 @@ class App extends Component {
                 userLastName={this.state.userLastName}
                 userType={this.state.userType}
                 onShowModal={this.showModal}
+                onLogout={this.onLogout}
               />
             }
           />

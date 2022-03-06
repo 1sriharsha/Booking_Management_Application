@@ -66,6 +66,7 @@ class Home extends Component {
                 userLastName={this.props.userLastName}
                 userType={this.props.userType}
                 onShowModal={this.props.onShowModal}
+                onLogout={this.props.onLogout}
               />
             </div>
           </div>

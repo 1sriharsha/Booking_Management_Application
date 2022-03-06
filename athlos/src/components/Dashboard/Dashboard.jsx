@@ -139,6 +139,7 @@ class Dashboard extends Component {
                 userFirstName={this.props.userFirstName}
                 userLastName={this.props.userLastName}
                 onShowModal={this.props.onShowModal}
+                onLogout={this.props.onLogout}
               />
             </div>
           </div>

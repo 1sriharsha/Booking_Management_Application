@@ -63,9 +63,21 @@ a:active {
 
 /* Profile Icon */
 .profile {
+  background-color: transparent;
+  border: none;
+  border-radius: var(--default-border-radius);
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile:hover {
+  background-color: var(--color-tertiary);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  transform: scale(1.01);
 }
 
 .profileIcon {
@@ -107,6 +119,26 @@ a:active {
   margin: 0 0 0 0.6em;
 }
 
+.profileOptions {
+  width: 8em;
+  padding: 0.7em 2em;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--color-tertiary);
+  box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+  border-radius: var(--default-border-radius);
+  cursor: default;
+}
+
+.profileOptions button {
+  margin: 0;
+}
+
+.profileOptions i {
+  margin-right: 0.5em;
+}
+
 /* Responsive Layout */
 @media screen and (min-width: 1230px) {
   .container {
@@ -125,6 +157,10 @@ a:active {
   .login {
     width: 230px;
   }
+
+  .profile {
+    width: 150px;
+  }
 }
 
 @media screen and (min-width: 1630px) {
@@ -138,5 +174,9 @@ a:active {
 
   .login {
     width: 300px;
+  }
+
+  .profile {
+    width: 220px;
   }
 }

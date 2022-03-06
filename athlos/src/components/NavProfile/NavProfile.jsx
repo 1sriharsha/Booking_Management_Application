@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import styles from "./NavProfile.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class NavProfile extends Component {
   constructor(props) {
     super(props);
   }
+
+  state = {
+    showOptions: false,
+  };
+
+  toggleOptions = () => {
+    this.setState({ showOptions: !this.state.showOptions });
+  };
 
   render() {
     return (
@@ -27,7 +36,10 @@ class NavProfile extends Component {
           </div>
         )}
         {this.props.isAuthenticated && (
-          <div className={[styles.login, styles.profile].join(" ")}>
+          <button
+            className={[styles.login, styles.profile].join(" ")}
+            onClick={this.toggleOptions}
+          >
             <div className={styles.profileName}>
               <span>{this.props.userFirstName}</span>
               <span>{this.props.userLastName}</span>
@@ -38,7 +50,18 @@ class NavProfile extends Component {
                   this.props.userLastName.charAt(0)}
               </span>
             </div>
-          </div>
+
+            {this.state.showOptions && (
+              <div className={styles.profileOptions}>
+                <button className={styles.button} onClick={this.props.onLogout}>
+                  <i>
+                    <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />
+                  </i>
+                  Logout
+                </button>
+              </div>
+            )}
+          </button>
         )}
       </React.Fragment>
     );
