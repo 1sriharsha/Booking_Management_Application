@@ -85,7 +85,7 @@ input[type]:focus,
   box-shadow: 0 3px 5px rgba(41, 41, 41, 0.3);
   background-color: white;
   border: none;
-  animation: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .shortcutContainer button:hover {
@@ -93,6 +93,7 @@ input[type]:focus,
   border: none;
   background-color: white;
   box-shadow: 0 3px 5px rgba(41, 41, 41, 0.5);
+  transform: scale(1.01);
 }
 
 .shortcutContainer button > .text {

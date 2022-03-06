@@ -38,6 +38,7 @@ a:active {
   font-weight: 700;
   letter-spacing: 0.6px;
   background-color: transparent;
+  transition: all 0.2s ease-in-out;
 }
 
 .button:hover {
