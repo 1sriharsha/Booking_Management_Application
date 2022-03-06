@@ -29,7 +29,7 @@ body {
   background-color: var(--color-background);
   font-family: var(--font-body);
   font-size: 16px;
-  height: 200vh; /* Temporary */
+  /* height: 200vh; Temporary */
 }
 
 a:link,
