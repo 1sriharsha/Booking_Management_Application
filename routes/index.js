@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/User');
 const bodyParser = require('body-parser');
 const { default: mongoose } = require('mongoose');
-const cors = require('cors')
 
 
 

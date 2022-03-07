@@ -1,5 +1,4 @@
 const express = require('express')
-var cors = require('cors')
 const dotenv = require("dotenv")
 const connectDB = require('./config/db')
 const morgan = require('morgan')
