@@ -80,12 +80,14 @@ class Home extends Component {
               Athlos is the easiest way to reserve sports <br />
               facilities on campus.
             </div>
-            <button
-              className={[styles.button, styles.buttonPrimary].join(" ")}
-              onClick={() => this.props.onShowModal("sign-up")}
-            >
-              Sign Up Free
-            </button>
+            {!this.props.isAuthenticated && (
+              <button
+                className={[styles.button, styles.buttonPrimary].join(" ")}
+                onClick={() => this.props.onShowModal("sign-up")}
+              >
+                Sign Up Free
+              </button>
+            )}
           </div>
 
           {/* Introduction: Image [Right] */}
