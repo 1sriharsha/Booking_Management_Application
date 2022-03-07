@@ -49,6 +49,13 @@ class NavProfile extends Component {
 
             {this.state.showOptions && (
               <div className={styles.profileOptions}>
+                <button className={styles.button}>
+                  {/* TODO Add Functionality */}
+                  <i>
+                    <FontAwesomeIcon icon="fa-solid fa-user" />
+                  </i>
+                  Profile
+                </button>
                 <button className={styles.button} onClick={this.props.onLogout}>
                   <i>
                     <FontAwesomeIcon icon="fa-solid fa-arrow-right-from-bracket" />

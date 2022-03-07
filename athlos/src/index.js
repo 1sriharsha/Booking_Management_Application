@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./normalize.css";
 import reportWebVitals from "./reportWebVitals";
+import App from "./App";
 
 // FontAwesome Icons
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -18,7 +19,7 @@ import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import App from "./App";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faFilter,
@@ -33,7 +34,8 @@ library.add(
   faLocationArrow,
   faEye,
   faEyeSlash,
-  faArrowRightFromBracket
+  faArrowRightFromBracket,
+  faUser
 );
 
 ReactDOM.render(
