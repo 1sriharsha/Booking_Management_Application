@@ -37,3 +37,10 @@
     0 3px 5px rgba(41, 41, 41, 0.3) !important;
   animation: scrollgradient 60s linear infinite;
 }
+
+/* Animations */
+@keyframes scrollgradient {
+  to {
+    background-position: 300% center;
+  }
+}
