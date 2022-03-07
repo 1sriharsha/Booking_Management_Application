@@ -4,9 +4,9 @@
   "description": "api for athlos project",
   "main": "index.js",
   "scripts": {
-    "build": "npm install --prefix athlos-api && npm run build --prefix athlos-api",
-    "start": "NODE_ENV=production node app",
+    "start": "node app.js",
     "dev": "cross-env NODE_ENV=development nodemon app",
+    "heroku-postbuild": "npm install --prefix athlos-api && npm run build --prefix athlos-api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
