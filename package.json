@@ -4,8 +4,7 @@
   "description": "api for athlos project",
   "main": "index.js",
   "scripts": {
-    "publishToHeroku": "cd ../ && git subtree push --prefix API heroku-api athlos-deployment || true",
-    "build": "npm install",
+    "build": "npm install --prefix athlos-api && npm run build --prefix athlos-api",
     "start": "cross-env NODE_ENV=production node app",
     "dev": "cross-env NODE_ENV=development nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
