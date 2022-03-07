@@ -481,14 +481,15 @@ body {
 
 /* Dashboard Tab */
 .shortcutContainer {
-  padding: 1.5em;
+  margin-right: 1.5em;
+  padding: 1.5em 0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .shortcut-container button {
-  width: 240px;
+  width: 250px;
   margin-bottom: 2em;
   display: flex;
   align-items: center;
