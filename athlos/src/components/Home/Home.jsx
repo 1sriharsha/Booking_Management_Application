@@ -17,7 +17,6 @@ class Home extends Component {
   }
 
   scrollAnimation = () => {
-    const header = document.querySelector("topnav");
     let scrollPosition = window.scrollY;
 
     if (scrollPosition >= 50) {

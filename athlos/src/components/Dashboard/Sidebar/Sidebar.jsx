@@ -4,10 +4,6 @@ import UserTabs from "./UserTabs/UserTabs";
 import ManagementTabs from "./ManagementTabs/ManagementTabs";
 
 class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -18,7 +14,7 @@ class Sidebar extends Component {
           </div>
 
           {/* Customer View Tabs */}
-          {this.props.userType == "Customer" && (
+          {this.props.userType === "Customer" && (
             <UserTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}
@@ -26,7 +22,7 @@ class Sidebar extends Component {
           )}
 
           {/* Manager View Tabs */}
-          {this.props.userType == "Manager" && (
+          {this.props.userType === "Manager" && (
             <ManagementTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}

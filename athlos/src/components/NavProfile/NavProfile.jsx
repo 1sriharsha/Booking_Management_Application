@@ -3,10 +3,6 @@ import styles from "./NavProfile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class NavProfile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     showOptions: false,
   };

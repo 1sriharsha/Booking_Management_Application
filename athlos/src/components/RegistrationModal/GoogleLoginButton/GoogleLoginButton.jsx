@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { GoogleLogin } from "react-google-login";
 // import {refreshTokenSetup} from ""
 import styles from "./GoogleLoginButton.module.css";

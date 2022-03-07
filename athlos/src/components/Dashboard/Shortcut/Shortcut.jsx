@@ -4,10 +4,6 @@ import "./Shortcut.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Shortcut extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onClick = () => {
     const { shortcutTo, onClick } = this.props;
     onClick(shortcutTo);

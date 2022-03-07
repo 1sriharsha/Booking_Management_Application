@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import styles from "./CheckoutModal.module.css";
 import "./CheckoutModal.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class CheckoutModal extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     sectionNumber: 1,
   };
@@ -17,13 +13,7 @@ class CheckoutModal extends Component {
 
   render() {
     const {
-      props: {
-        facilityID,
-        facilityName,
-        facilityLocation,
-        facilitySport,
-        availableNow,
-      },
+      props: { facilityID, facilityName, facilityLocation, facilitySport },
     } = this;
 
     let sportImage = "images/" + facilitySport + ".jpg";

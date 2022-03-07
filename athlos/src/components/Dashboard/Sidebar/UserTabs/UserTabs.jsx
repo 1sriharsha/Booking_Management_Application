@@ -3,10 +3,6 @@ import styles from "./UserTabs.module.css";
 import { Tab } from "../../..";
 
 class UserTabs extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <React.Fragment>

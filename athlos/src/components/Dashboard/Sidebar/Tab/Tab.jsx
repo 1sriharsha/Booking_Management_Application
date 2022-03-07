@@ -3,10 +3,6 @@ import "./Tab.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Tab extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onClick = () => {
     const { tabLabel, onClick } = this.props;
     onClick(tabLabel);

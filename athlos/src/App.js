@@ -3,10 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home, Dashboard, RegistrationModal } from "./components";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     isAuthenticated: true,
     userFirstName: "John",
@@ -38,6 +34,7 @@ class App extends Component {
       username: event.target.username.value,
       password: event.target.password.value,
     };
+    console.log(userLoginData);
     this.setState({ isAuthenticated: true });
   };
 
