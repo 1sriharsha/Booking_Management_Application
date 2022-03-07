@@ -33,6 +33,14 @@ class App extends Component {
     }
   };
 
+  onLogin = (event) => {
+    var userLoginData = {
+      username: event.target.username.value,
+      password: event.target.password.value,
+    };
+    this.setState({ isAuthenticated: true });
+  };
+
   onLogout = () => {
     this.setState({ isAuthenticated: false });
   };
@@ -75,6 +83,7 @@ class App extends Component {
         </Routes>
         {this.state.showModal && (
           <RegistrationModal
+            onLogin={this.onLogin}
             onShowModal={this.showModal}
             onHideModal={this.hideModal}
             onGetModalVisibility={this.getModalVisibility}

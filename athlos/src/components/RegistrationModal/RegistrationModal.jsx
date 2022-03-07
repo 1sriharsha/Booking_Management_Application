@@ -39,13 +39,6 @@ class RegistrationModal extends Component {
       });
   };
 
-  onLogin = (event) => {
-    var userLoginData = {
-      username: event.target.username.value,
-      password: event.target.password.value,
-    };
-  };
-
   toggleShowPassword = (event) => {
     if (this.state.showPassword) {
       this.setState({ showPassword: false, passwordType: "password" });
@@ -56,7 +49,7 @@ class RegistrationModal extends Component {
 
   render() {
     return (
-      <>
+      <React.Fragment>
         {/* User Login/Sign Up Form */}
         <div className={styles.modal} id="user-form">
           <div className={styles.modalContent}>
@@ -103,7 +96,7 @@ class RegistrationModal extends Component {
                     <form
                       id="login-form"
                       className={styles.slideInRight}
-                      onSubmit={this.onLogin}
+                      onSubmit={this.props.onLogin}
                     >
                       <div className={styles.inputContainer}>
                         <label for="username">Email</label>
@@ -288,7 +281,7 @@ class RegistrationModal extends Component {
             </div>
           </div>
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }
