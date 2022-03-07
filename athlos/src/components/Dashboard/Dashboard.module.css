@@ -394,23 +394,6 @@ body {
   padding: 1.5em;
 }
 
-.activeTablink {
-  font-weight: 700;
-  color: var(--color-background);
-  text-shadow: 1px 0.5px 3px black !important;
-  background: linear-gradient(
-    101deg,
-    #5c258d 0%,
-    #4389a2 40%,
-    #4389a2 60%,
-    #5c258d 100%
-  );
-  background-size: 300% auto;
-  box-shadow: 0 1px 4px rgba(41, 41, 41, 0.3) inset,
-    0 3px 5px rgba(41, 41, 41, 0.3) !important;
-  animation: scrollgradient 60s linear infinite;
-}
-
 /* Cards */
 .card {
   height: 400px;

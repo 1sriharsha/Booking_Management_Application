@@ -22,14 +22,11 @@
   --default-border-radius: 5px;
 }
 
-/* TODO Remove CSS Not Needed For Home Component  */
-
 /* General */
 body {
   background-color: var(--color-background);
   font-family: var(--font-body);
   font-size: 16px;
-  /* height: 200vh; Temporary */
 }
 
 a:link,
@@ -118,11 +115,6 @@ input[type]:focus,
   transition: box-shadow 0.5s ease, background-color 0.5s ease;
 }
 
-.topnavOverlay {
-  background-color: rgba(255, 255, 255, 0.99);
-  box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
-}
-
 .navigation {
   display: flex;
   justify-content: center;
@@ -136,10 +128,6 @@ input[type]:focus,
 
 .navigation .login {
   text-align: right;
-}
-
-.login button {
-  margin: 0 0 0 0.6em;
 }
 
 .menuItem {
@@ -161,42 +149,6 @@ input[type]:focus,
   list-style: none;
   padding: 0 3em;
   text-transform: uppercase;
-}
-
-.navigation .profile {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.navigation .profileIcon {
-  height: 45px;
-  width: 45px;
-  border-radius: 100%;
-  background-color: var(--color-gray);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.navigation .profileIcon > span {
-  color: white;
-  font-size: 1.2em;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.navigation .profileName {
-  margin-right: 0.5em;
-}
-
-.navigation .profileName span {
-  display: block;
-}
-
-.navigation .profileName span:first-of-type {
-  font-weight: 800;
 }
 
 /* Responsive Layout */
