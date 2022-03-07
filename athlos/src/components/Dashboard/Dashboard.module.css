@@ -162,7 +162,6 @@ input[type]:focus,
   text-transform: uppercase;
 }
 
-
 /* Responsive Layout */
 @media screen and (min-width: 1230px) {
   .container {
@@ -561,7 +560,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
 }
 
 /* Animations */
