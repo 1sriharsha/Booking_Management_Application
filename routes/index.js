@@ -7,7 +7,10 @@ const { default: mongoose } = require('mongoose');
 
 
 router.get('/',(req, res) => {
-    res.send('Hello')
+  res
+  .status(200)
+  .send('Hello server is running')
+  .end();
   })
   
 router.post('/api',function(req, res, next){
