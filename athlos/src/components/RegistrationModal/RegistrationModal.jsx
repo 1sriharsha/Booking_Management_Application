@@ -35,12 +35,12 @@ class RegistrationModal extends Component {
       });
   };
 
-  toggleShowPassword = (event) => {
-    if (this.state.showPassword) {
-      this.setState({ showPassword: false, passwordType: "password" });
-    } else {
-      this.setState({ showPassword: true, passwordType: "text" });
-    }
+  toggleShowPassword = () => {
+    this.setState({
+      showPassword: !this.state.showPassword,
+      passwordType:
+        this.state.passwordType === "password" ? "text" : "password",
+    });
   };
 
   render() {
