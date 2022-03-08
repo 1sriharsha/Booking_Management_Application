@@ -4,10 +4,16 @@ import styles from "./TimeSlot.module.css";
 class TimeSlot extends Component {
   render() {
     const {
-      props: {},
+      props: { reservationStart, reservationEnd },
     } = this;
 
-    return <React.Fragment></React.Fragment>;
+    return (
+      <React.Fragment>
+        <button>
+          {reservationStart} - {reservationEnd}
+        </button>
+      </React.Fragment>
+    );
   }
 }
 

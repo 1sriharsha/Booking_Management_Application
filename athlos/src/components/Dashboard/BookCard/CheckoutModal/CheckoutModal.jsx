@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import styles from "./CheckoutModal.module.css";
 import "./CheckoutModal.css";
+import TimeSlot from "./TimeSlot/TimeSlot";
 
 class CheckoutModal extends Component {
   state = {
     sectionNumber: 1,
+    timeSlot: "",
   };
 
   setPageNumber(page) {
@@ -17,6 +19,25 @@ class CheckoutModal extends Component {
     } = this;
 
     let sportImage = "images/" + facilitySport + ".jpg";
+
+    var openTime = 6;
+    var closeTime = 21;
+    var nTimeSlots = [];
+
+    var reservationStart = openTime;
+    var reservationEnd = openTime + 1;
+
+    for (let index = 0; index < closeTime - openTime; index++) {
+      reservationEnd = reservationStart + 1;
+
+      nTimeSlots.push(
+        <TimeSlot
+          reservationStart={reservationStart + ":00"}
+          reservationEnd={reservationEnd + ":00"}
+        />
+      );
+      reservationStart += 1;
+    }
 
     return (
       <React.Fragment>
@@ -34,6 +55,15 @@ class CheckoutModal extends Component {
                   </div>
                   <div>Location: {facilityLocation}</div>
                   <div>Sport: {facilitySport}</div>
+                  <div className={styles.timeSlotContainer}>
+                    {/* <button onClick={console.log("Timeslot 6")}>
+                      06:00 - 07:00
+                    </button>
+                    <button onClick={console.log("Timeslot 6")}>
+                      06:00 - 07:00
+                    </button> */}
+                    {nTimeSlots}
+                  </div>
                 </div>
               </React.Fragment>
             )}
