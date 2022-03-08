@@ -6,12 +6,16 @@ import TimeSlot from "./TimeSlot/TimeSlot";
 class CheckoutModal extends Component {
   state = {
     sectionNumber: 1,
-    timeSlot: "",
+    reservedSlot: -1,
   };
 
   setPageNumber(page) {
     this.setState({ sectionNumber: page });
   }
+
+  setReservedSlot = (slot) => {
+    this.setState({ reservedSlot: slot });
+  };
 
   render() {
     const {
@@ -40,8 +44,11 @@ class CheckoutModal extends Component {
 
       nTimeSlots.push(
         <TimeSlot
-          reservationSlotStart={reservationSlotStart + ":00"}
-          reservationSlotEnd={reservationSlotEnd + ":00"}
+          reservationID={reservationSlotStart}
+          reservationSlotStart={reservationSlotStart}
+          reservationSlotEnd={reservationSlotEnd}
+          setReservedSlot={this.setReservedSlot}
+          reservedSlot={this.state.reservedSlot}
         />
       );
       reservationSlotStart++;
