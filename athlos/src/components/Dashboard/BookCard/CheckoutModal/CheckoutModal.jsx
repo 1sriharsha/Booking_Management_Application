@@ -15,28 +15,36 @@ class CheckoutModal extends Component {
 
   render() {
     const {
-      props: { facilityID, facilityName, facilityLocation, facilitySport },
+      props: {
+        facilityID,
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        reservationPeriodStart,
+        reservationPeriodEnd,
+      },
     } = this;
 
     let sportImage = "images/" + facilitySport + ".jpg";
 
-    var openTime = 6;
-    var closeTime = 21;
     var nTimeSlots = [];
+    var reservationSlotStart = reservationPeriodStart;
+    var reservationSlotEnd;
 
-    var reservationStart = openTime;
-    var reservationEnd = openTime + 1;
-
-    for (let index = 0; index < closeTime - openTime; index++) {
-      reservationEnd = reservationStart + 1;
+    for (
+      let index = 0;
+      index < reservationPeriodEnd - reservationPeriodStart;
+      index++
+    ) {
+      reservationSlotEnd = reservationSlotStart + 1;
 
       nTimeSlots.push(
         <TimeSlot
-          reservationStart={reservationStart + ":00"}
-          reservationEnd={reservationEnd + ":00"}
+          reservationSlotStart={reservationSlotStart + ":00"}
+          reservationSlotEnd={reservationSlotEnd + ":00"}
         />
       );
-      reservationStart += 1;
+      reservationSlotStart++;
     }
 
     return (

@@ -28,6 +28,8 @@ class BookCard extends Component {
         facilitySport,
         availableNow,
         animationDelay,
+        reservationPeriodStart,
+        reservationPeriodEnd,
       },
     } = this;
 
@@ -81,6 +83,8 @@ class BookCard extends Component {
             facilitySport={facilitySport}
             availableNow={availableNow}
             onCloseModal={this.closeCheckoutModal}
+            reservationPeriodStart={reservationPeriodStart}
+            reservationPeriodEnd={reservationPeriodEnd}
           />
         )}
       </React.Fragment>

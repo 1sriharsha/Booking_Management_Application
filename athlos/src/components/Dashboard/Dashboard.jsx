@@ -35,6 +35,8 @@ class Dashboard extends Component {
         facilityLocation: "Bloomington, IN",
         facilitySport: "Soccer",
         availableNow: true,
+        reservationPeriodStart: 6,
+        reservationPeriodEnd: 17,
       },
       {
         id: 2,
@@ -42,6 +44,8 @@ class Dashboard extends Component {
         facilityLocation: "Bloomington, IN",
         facilitySport: "Basketball",
         availableNow: false,
+        reservationPeriodStart: 6,
+        reservationPeriodEnd: 21,
       },
       {
         id: 3,
@@ -49,6 +53,8 @@ class Dashboard extends Component {
         facilityLocation: "Bloomington, IN",
         facilitySport: "Volleyball",
         availableNow: false,
+        reservationPeriodStart: 11,
+        reservationPeriodEnd: 15,
       },
       {
         id: 4,
@@ -56,6 +62,8 @@ class Dashboard extends Component {
         facilityLocation: "Bloomington, IN",
         facilitySport: "TableTennis",
         availableNow: false,
+        reservationPeriodStart: 5,
+        reservationPeriodEnd: 22,
       },
       {
         id: 5,
@@ -63,6 +71,8 @@ class Dashboard extends Component {
         facilityLocation: "Bloomington, IN",
         facilitySport: "Squash",
         availableNow: true,
+        reservationPeriodStart: 13,
+        reservationPeriodEnd: 18,
       },
       {
         id: 6,
@@ -70,6 +80,8 @@ class Dashboard extends Component {
         facilityLocation: "Bloomington, IN",
         facilitySport: "Badminton",
         availableNow: false,
+        reservationPeriodStart: 15,
+        reservationPeriodEnd: 19,
       },
     ];
 
@@ -77,7 +89,15 @@ class Dashboard extends Component {
     var animationDelay = 0;
     // Generates n BookCard components from Database
     const nBookCards = facilities.map(
-      ({ id, facilityName, facilityLocation, facilitySport, availableNow }) => {
+      ({
+        id,
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        availableNow,
+        reservationPeriodStart,
+        reservationPeriodEnd,
+      }) => {
         if (i >= 3) {
           animationDelay += 0.05;
           i = 0;
@@ -94,6 +114,8 @@ class Dashboard extends Component {
               facilitySport={facilitySport}
               availableNow={availableNow}
               animationDelay={animationDelay}
+              reservationPeriodStart={reservationPeriodStart}
+              reservationPeriodEnd={reservationPeriodEnd}
             />
           </React.Fragment>
         );
