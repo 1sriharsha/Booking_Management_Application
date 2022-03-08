@@ -93,6 +93,7 @@ class RegistrationModal extends Component {
                       id="login-form"
                       className={styles.slideInRight}
                       onSubmit={this.props.onLogin}
+                      method="post"
                     >
                       <div className={styles.inputContainer}>
                         <label for="username">Email</label>
@@ -159,6 +160,7 @@ class RegistrationModal extends Component {
                     id="signup-form"
                     className={styles.slideInLeft}
                     onSubmit={this.onSignUp}
+                    method="post"
                   >
                     <div className={styles.nameContainer}>
                       <div
