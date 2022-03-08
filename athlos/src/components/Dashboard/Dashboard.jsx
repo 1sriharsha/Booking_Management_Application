@@ -155,7 +155,6 @@ class Dashboard extends Component {
         {/* Tab Content */}
         <div className={styles.tabContainer}>
           {/* Dashboard Content */}
-
           {this.state.activeTab === "Dashboard" && (
             <React.Fragment>
               {/* Data Visualization */}
