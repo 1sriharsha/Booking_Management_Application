@@ -63,15 +63,7 @@ class CheckoutModal extends Component {
                   </div>
                   <div>Location: {facilityLocation}</div>
                   <div>Sport: {facilitySport}</div>
-                  <div className={styles.timeSlotContainer}>
-                    {/* <button onClick={console.log("Timeslot 6")}>
-                      06:00 - 07:00
-                    </button>
-                    <button onClick={console.log("Timeslot 6")}>
-                      06:00 - 07:00
-                    </button> */}
-                    {nTimeSlots}
-                  </div>
+                  <div className={styles.timeSlotContainer}>{nTimeSlots}</div>
                 </div>
               </React.Fragment>
             )}
