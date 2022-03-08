@@ -102,8 +102,12 @@
 
 .modal .title {
   font-size: 3em;
+}
+
+.modal .content {
+  margin: 2em;
   position: absolute;
-  top: 50%;
+  top: 45%;
 }
 
 .close {
@@ -133,9 +137,10 @@
 .timeSlotContainer {
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-content: flex-end;
   flex-flow: row wrap;
   gap: 1.3em;
+  margin: 2em auto;
 }
 
 .timeSlotContainer button {

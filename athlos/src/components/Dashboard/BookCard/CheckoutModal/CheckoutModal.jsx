@@ -65,12 +65,14 @@ class CheckoutModal extends Component {
                   <img src={sportImage} alt={facilitySport} />
                 </div>
                 <div className={styles.gradient}>
-                  <div className={styles.title}>
-                    {facilityName} -- ID {facilityID}
-                  </div>
-                  <div>Location: {facilityLocation}</div>
-                  <div>Sport: {facilitySport}</div>
-                  <div className={styles.timeSlotContainer}>{nTimeSlots}</div>
+                  <section className={styles.content}>
+                    <div className={styles.title}>
+                      {facilityName} -- ID {facilityID}
+                    </div>
+                    <div>Location: {facilityLocation}</div>
+                    <div>Sport: {facilitySport}</div>
+                    <div className={styles.timeSlotContainer}>{nTimeSlots}</div>
+                  </section>
                 </div>
               </React.Fragment>
             )}
