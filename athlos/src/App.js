@@ -4,7 +4,7 @@ import { Home, Dashboard, RegistrationModal } from "./components";
 
 class App extends Component {
   state = {
-    isAuthenticated: true,
+    isAuthenticated: false,
     userFirstName: "John",
     userLastName: "Smith",
     userType: "Customer", // Implemented Options: "Customer", "Manager"
