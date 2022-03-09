@@ -8,7 +8,7 @@ const { default: mongoose } = require('mongoose');
 
 router.get('/',(req, res) => {
   console.log('Inside Get')
-  res.send("<h1>Hello!</h1>")
+  res.send("<h1>Hello from the API!</h1>")
   })
   
 router.post('/api',function(req, res, next){
