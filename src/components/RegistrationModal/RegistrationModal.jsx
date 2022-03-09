@@ -96,7 +96,7 @@ class RegistrationModal extends Component {
                       method="post"
                     >
                       <div className={styles.inputContainer}>
-                        <label for="username">Email</label>
+                        <label htmlFor="username">Email</label>
                         <input
                           id="login-form-username"
                           type="text"
@@ -106,7 +106,7 @@ class RegistrationModal extends Component {
                       </div>
 
                       <div className={styles.inputContainer}>
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <div className={styles.passwordContainer}>
                           <input
                             id="login-form-password"
@@ -168,7 +168,7 @@ class RegistrationModal extends Component {
                           " "
                         )}
                       >
-                        <label for="fname">First Name</label>
+                        <label htmlFor="fname">First Name</label>
                         <input
                           id="signup-form-fname"
                           type="text"
@@ -184,7 +184,7 @@ class RegistrationModal extends Component {
                           " "
                         )}
                       >
-                        <label for="lname">Last Name</label>
+                        <label htmlFor="lname">Last Name</label>
                         <input
                           id="signup-form-lname"
                           type="text"
@@ -197,7 +197,7 @@ class RegistrationModal extends Component {
                     </div>
 
                     <div className={styles.inputContainer}>
-                      <label for="email">Email</label>
+                      <label htmlFor="email">Email</label>
                       <input
                         id="signup-form-email"
                         type="text"
@@ -209,7 +209,7 @@ class RegistrationModal extends Component {
                     </div>
 
                     <div className={styles.inputContainer}>
-                      <label for="password">Password</label>
+                      <label htmlFor="password">Password</label>
                       <div className={styles.passwordContainer}>
                         <input
                           id="signup-form-password"
@@ -234,7 +234,7 @@ class RegistrationModal extends Component {
                     </div>
 
                     <div className={styles.inputContainer}>
-                      <label for="password-repeat">Repeat Password</label>
+                      <label htmlFor="password-repeat">Repeat Password</label>
                       <div className={styles.passwordContainer}>
                         <input
                           id="signup-form-password-repeat"
