@@ -3,8 +3,11 @@ const dotenv = require("dotenv")
 const connectDB = require('./config/db')
 const morgan = require('morgan')
 const passport = require('passport')
+
 var bodyParser = require('body-parser');
 const session = require('express-session')
+var cors = require('cors')
+
 
 //Load Configurations
 dotenv.config({path:'./config/config.env'})
@@ -15,6 +18,7 @@ require('./config/passport')(passport)
 connectDB()
 
 const app = express()
+app.use(cors())
 
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
@@ -28,9 +32,12 @@ app.use(session({
     saveUninitialized:false
 }))
 
+//
+
 //Passport Middle-ware
 app.use(passport.initialize())
 app.use(passport.session())
+
 
 
 app.use(bodyParser.json())

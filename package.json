@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "description": "api for athlos project",
   "main": "index.js",
-  "scripts": {
-    "start": "node app.js",
-    "dev": "cross-env NODE_ENV=development nodemon app",
-    "heroku-postbuild": "npm install --prefix athlos-api && npm run build --prefix athlos-api",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": "16.x"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.iu.edu:vavish/SoftwareEngineering.git"
+  "scripts": {
+    "build": "npm install",
+    "start": "NODE_ENV=production node app",
+    "dev": "cross-env NODE_ENV=development nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +20,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "google-auth-library": "^7.14.0",
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
     "mongoose": "^6.2.3",
