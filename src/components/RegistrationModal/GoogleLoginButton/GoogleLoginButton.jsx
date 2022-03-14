@@ -4,16 +4,23 @@ import { GoogleLogin } from "react-google-login";
 import styles from "./GoogleLoginButton.module.css";
 import "./GoogleLoginButton.css";
 import axios from 'axios'
-import { Router } from "react-router-dom";
+
+//Import Environment Variables
+const {REACT_APP_LOCAL_URL,REACT_APP_PRODUCTION_URL} = process.env;
+
 
 // TODO add client ID
 const clientID = "904810367074-hnul9vatut27lq5pedmt0nbd25h5rvqa.apps.googleusercontent.com"
 
 var api_url
 if (process.env.NODE_ENV === "production") {
-  api_url = "https://athlos-api.herokuapp.com"
+  console.log(process.env.NODE_ENV)
+  //console.log(REACT_APP_LOCAL_URL)
+  console.log(REACT_APP_PRODUCTION_URL)
 } else {
-  api_url="http://localhost:3000"
+  console.log(process.env.NODE_ENV)
+  console.log(REACT_APP_LOCAL_URL)
+  //console.log(REACT_APP_PRODUCTION_URL)
 }
   
 

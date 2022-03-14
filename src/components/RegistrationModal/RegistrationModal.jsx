@@ -10,6 +10,8 @@ class RegistrationModal extends Component {
     passwordType: "password",
   };
 
+ 
+
   onSignUp = (event) => {
     var newUserData = {
       firstName: event.target.fname.value,
@@ -19,7 +21,7 @@ class RegistrationModal extends Component {
     };
     console.log(newUserData);
 
-    fetch("http://localhost:5000/api/add", {
+    fetch("http://", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
