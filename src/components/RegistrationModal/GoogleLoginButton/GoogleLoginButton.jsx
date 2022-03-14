@@ -20,30 +20,37 @@ if (process.env.NODE_ENV === "production") {
 function GoogleLoginButton() {
   //console.log(clientID)
   const onSuccess = (res) => {
-    console.log(api_url)
-    console.log("[Login Successful] currentUser:", res.profileObj);
+    console.log(process.env.NODE_ENV)
+    //console.log(api_url)
+    //console.log("[Login Successful] currentUser:", res.profileObj);
     axios({
       method:"POST",
       url:api_url+"/auth/google",
       data:{tokenId:res.tokenId}
-      }).then(response=>{
-      console.log(response);
-      if(response.status===200 && response.data==="Registered User Data"){
-        
-        console.log("Added New User to database")
-        //Redirect to Home Page
-        
-      }
-      
-    },err=>{
-      if(err.status===409){
-        console.log("User already present in the database")
-        //Redirect to Home Page
-      }
-      else{
-        //Show Login Error Message
-      }
-    })
+      })
+      .then(res=>{
+        if(res.status===200){
+          //Redirect to Dashboard
+          console.log('User Added to Database')
+        }
+      })
+      .catch(function(err){
+        console.log(err)
+        if(err.response){
+          if(err.response.status===409){
+            console.log("User Already Exists in Database")
+            //Redirect to Dashboard
+          }
+        }
+        else if(err.request){
+          //Response not received from API
+          console.log("Error: ",err.request)
+        }
+        else{
+          //Unexpected Error
+          console.log("Error",err.message)
+        }
+      })
 
   };
 
