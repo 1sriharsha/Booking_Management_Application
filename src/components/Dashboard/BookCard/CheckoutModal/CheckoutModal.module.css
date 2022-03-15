@@ -222,6 +222,11 @@
   background-color: var(--color-tertiary);
 }
 
+.statusSection:disabled {
+  color: black;
+  cursor: not-allowed;
+}
+
 .sectionText {
   width: 105px;
 }

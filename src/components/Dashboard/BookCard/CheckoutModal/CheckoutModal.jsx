@@ -8,6 +8,8 @@ class CheckoutModal extends Component {
   state = {
     sectionNumber: 1,
     reservedSlot: null,
+    gearSelection: null,
+    extrasSelection: null,
   };
 
   setPageNumber(page) {
@@ -103,6 +105,7 @@ class CheckoutModal extends Component {
                 <button
                   className={styles.statusSection}
                   onClick={() => this.setPageNumber(2)}
+                  disabled={this.state.reservedSlot === null}
                 >
                   <div className={styles.sectionIcon}>
                     <FontAwesomeIcon icon="fa-solid fa-baseball-bat-ball" />
@@ -116,6 +119,7 @@ class CheckoutModal extends Component {
                 <button
                   className={styles.statusSection}
                   onClick={() => this.setPageNumber(3)}
+                  disabled={this.state.gearSelection === null}
                 >
                   <div className={styles.sectionIcon}>
                     <FontAwesomeIcon icon="fa-solid fa-plus" />
@@ -129,6 +133,7 @@ class CheckoutModal extends Component {
                 <button
                   className={styles.statusSection}
                   onClick={() => this.setPageNumber(4)}
+                  disabled={this.state.extrasSelection === null}
                 >
                   <div className={styles.sectionTitle}>Book</div>
                 </button>
