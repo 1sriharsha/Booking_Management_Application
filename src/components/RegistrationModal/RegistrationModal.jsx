@@ -4,7 +4,6 @@ import "./RegistrationModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLoginButton } from "..";
 import axios from 'axios'
-import bcrypt from 'bcryptjs'
 const {REACT_APP_LOCAL_URL,REACT_APP_PRODUCTION_URL,REACT_APP_CLIENT_ID} = process.env;
 class RegistrationModal extends Component {
   state = {
@@ -12,6 +11,7 @@ class RegistrationModal extends Component {
     passwordType: "password",
   };
   
+
   
 
   onSignUp = (event) => {
@@ -35,9 +35,9 @@ class RegistrationModal extends Component {
       firstName: event.target.fname.value,
       lastName: event.target.lname.value,
       email: event.target.email.value,
-      password: event.target.password.value,
+      password: event.target.password.value
     };
-    //console.log(newUserData);
+    console.log(newUserData);
     
     //alert(api_url)
     axios({
@@ -130,12 +130,12 @@ class RegistrationModal extends Component {
                       method="post"
                     >
                       <div className={styles.inputContainer}>
-                        <label htmlFor="username">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
-                          id="login-form-username"
+                          id="login-form-email"
                           type="text"
                           placeholder=""
-                          name="username"
+                          name="email"
                         />
                       </div>
 

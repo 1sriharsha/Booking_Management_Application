@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home, Dashboard, RegistrationModal } from "./components";
+import axios from 'axios'
+const {REACT_APP_LOCAL_URL,REACT_APP_PRODUCTION_URL,REACT_APP_CLIENT_ID} = process.env;
 
 class App extends Component {
   state = {
@@ -30,13 +32,51 @@ class App extends Component {
   };
 
   onLogin = (event) => {
-    var userLoginData = {
-      username: event.target.username.value,
+   
+    var api_url
+    if (process.env.NODE_ENV === "production") {
+      api_url= REACT_APP_PRODUCTION_URL
+      //console.log(api_url)
+      } else {
+        api_url= REACT_APP_LOCAL_URL
+      //console.log(api_url)
+      }
+
+    var loginData = {
+      email: event.target.email.value,
       password: event.target.password.value,
     };
-    console.log(userLoginData);
-    this.setState({ isAuthenticated: true });
+    console.log(loginData);
+    axios({
+      method:"POST",
+      url:api_url+"/users/login",
+      data:{loginData}
+      }).then(res=>{
+        if(res.status===200){
+          //Redirect to Dashboard
+          console.log('Logged In Succesfully')
+        }
+      }).catch(function(err){
+            console.log(err)
+            if(err.response){
+              if(err.response.status===404){
+              console.log("EmailID not found")
+              //Redirect to Dashboard
+              }
+            }
+            else if(err.request){
+              //Response not received from API
+              console.log("Error: ",err.request)
+            }
+          else{
+            //Unexpected Error
+              console.log("Error",err.message)
+          }
+      })
+      event.preventDefault()
   };
+    //this.setState({ isAuthenticated: true });
+  
 
   onLogout = () => {
     this.setState({ isAuthenticated: false });
