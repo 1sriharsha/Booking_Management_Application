@@ -59,11 +59,4 @@ router.post('/google',(req,res)=>{
 
 
 
-//@desc Google Auth Callback - Redirect to home page on success full login, or to login page if error
-//@route GET /auth/google/callback
-router.get('/google/callback',passport.authenticate('google',{failureRedirect:'/'}),(req,res)=>{
-
-    
-})
-
 module.exports = router
