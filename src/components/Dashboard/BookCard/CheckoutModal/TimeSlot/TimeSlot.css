@@ -1,8 +1,8 @@
 :root {
-  --color-secondary: #ddcecd;
+  --color-primary: rgb(40, 175, 176);
 }
 
 .activeTimeSlot {
-  background-color: var(--color-secondary) !important;
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.6);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary) !important;
 }

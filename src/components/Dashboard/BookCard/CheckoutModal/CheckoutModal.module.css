@@ -3,7 +3,7 @@
   --font-body: "Nunito", sans-serif;
   --font-title: "Noto Serif", serif;
   --color-primary: rgb(40, 175, 176);
-  --color-primary-dark: #219292;
+  --color-primary-dark: rgb(33, 146, 146);
   --color-secondary: #ddcecd;
   --color-tertiary: rgb(239, 242, 241);
   --color-gray: rgb(79, 90, 107);
@@ -33,6 +33,8 @@
 }
 
 .buttonPrimary {
+  height: 3em;
+  width: 10em;
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   box-shadow: 0 3px 5px rgba(41, 41, 41, 0.3);
@@ -42,6 +44,12 @@
 .buttonPrimary:hover {
   color: white;
   background-color: var(--color-primary-dark);
+}
+
+.buttonPrimary:disabled {
+  background-color: var(--color-gray-alpha);
+  border-color: var(--color-gray);
+  cursor: not-allowed;
 }
 
 /* Modal */
@@ -73,6 +81,7 @@
   overflow: hidden;
 }
 
+/* 
 .image {
   width: 100%;
   height: 50%;
@@ -108,9 +117,9 @@
   margin: 2em;
   position: absolute;
   top: 45%;
-}
+} */
 
-.close {
+/* .close {
   height: 1em;
   width: 1em;
   border: none;
@@ -125,11 +134,22 @@
   color: var(--color-background);
   border-radius: var(--default-border-radius);
   transition: all 0.2s ease-in-out;
+} */
+
+.close {
+  height: 70px;
+  width: 70px;
+  font-size: 2.5em;
+  border: none;
+  border-right: 1px solid var(--color-gray);
+  background-color: var(--color-background);
+  transition: all 0.2s ease-out;
+  cursor: pointer;
 }
 
 .close:hover {
-  cursor: pointer;
-  background-color: var(--color-secondary);
+  font-size: 3em;
+  background-color: var(--color-tertiary);
   color: red;
 }
 
@@ -144,10 +164,10 @@
 }
 
 .timeSlotContainer button {
-  width: 175px;
+  width: 180px;
   font-size: 1.3em;
   font-weight: 600;
-  border: 1px solid var(--color-gray);
+  border: 2px solid var(--color-gray);
   border-radius: var(--default-border-radius);
   background-color: transparent;
   padding: 1em;
@@ -156,6 +176,96 @@
 }
 
 .timeSlotContainer button:hover {
+  color: var(--color-primary-dark);
+  border: 2px solid var(--color-primary-dark);
+
   background-color: var(--color-background);
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.6);
+  /* box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.6); */
+}
+
+/* Navigation */
+.navigation {
+  height: 70px;
+  display: flex;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Status Bar */
+.statusBar {
+  width: 100%;
+  display: flex;
+  /* flex: 1 1 0; */
+  flex-grow: 1;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  position: relative;
+}
+
+.statusSection {
+  /* height: 70px; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-right: 1px solid var(--color-gray);
+  background-color: var(--color-background);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.statusSection:last-of-type {
+  border: none;
+}
+
+.statusSection:hover {
+  background-color: var(--color-tertiary);
+}
+
+.sectionText {
+  width: 105px;
+}
+
+.sectionTitle {
+  font-size: 0.8em;
+  font-weight: 500;
+  color: var(--color-gray);
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.sectionIcon {
+  color: var(--color-gray);
+  font-size: 2em;
+  margin-right: 8px;
+}
+
+.sectionSelection {
+  text-align: left;
+  font-weight: 800;
+}
+
+.statusIndicator::after {
+  content: "";
+  height: 4px;
+  width: 325px;
+  background-color: var(--color-primary);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 2px 4px rgba(33, 146, 146, 0.7);
+}
+
+.container {
+  padding: 4em;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 4em;
+  text-align: center;
+  /* margin-top: 1em; */
 }

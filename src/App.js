@@ -9,7 +9,7 @@ class App extends Component {
     isAuthenticated: false,
     userFirstName: "John",
     userLastName: "Smith",
-    userType: "Manager", // Implemented Options: "Customer", "Manager"
+    userType: "Customer", // Implemented Options: "Customer", "Manager"
     showModal: false,
     showModalLogin: false,
     showModalSignUp: false,
@@ -32,15 +32,14 @@ class App extends Component {
   };
 
   onLogin = (event) => {
-   
-    var api_url
+    var api_url;
     if (process.env.NODE_ENV === "production") {
-      api_url= REACT_APP_PRODUCTION_URL
+      api_url = REACT_APP_PRODUCTION_URL;
       //console.log(api_url)
-      } else {
-        api_url= REACT_APP_LOCAL_URL
+    } else {
+      api_url = REACT_APP_LOCAL_URL;
       //console.log(api_url)
-      }
+    }
 
     var loginData = {
       email: event.target.email.value,
@@ -48,35 +47,34 @@ class App extends Component {
     };
     console.log(loginData);
     axios({
-      method:"POST",
-      url:api_url+"/users/login",
-      data:{loginData}
-      }).then(res=>{
-        if(res.status===200){
+      method: "POST",
+      url: api_url + "/users/login",
+      data: { loginData },
+    })
+      .then((res) => {
+        if (res.status === 200) {
           //Redirect to Dashboard
-          console.log('Logged In Succesfully')
+          console.log("Logged In Succesfully");
         }
-      }).catch(function(err){
-            console.log(err)
-            if(err.response){
-              if(err.response.status===404){
-              console.log("EmailID not found")
-              //Redirect to Dashboard
-              }
-            }
-            else if(err.request){
-              //Response not received from API
-              console.log("Error: ",err.request)
-            }
-          else{
-            //Unexpected Error
-              console.log("Error",err.message)
-          }
       })
-      event.preventDefault()
+      .catch(function (err) {
+        console.log(err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            console.log("EmailID not found");
+            //Redirect to Dashboard
+          }
+        } else if (err.request) {
+          //Response not received from API
+          console.log("Error: ", err.request);
+        } else {
+          //Unexpected Error
+          console.log("Error", err.message);
+        }
+      });
+    event.preventDefault();
   };
-    //this.setState({ isAuthenticated: true });
-  
+  //this.setState({ isAuthenticated: true });
 
   onLogout = () => {
     this.setState({ isAuthenticated: false });
