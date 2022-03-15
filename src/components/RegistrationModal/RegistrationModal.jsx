@@ -3,38 +3,70 @@ import styles from "./RegistrationModal.module.css";
 import "./RegistrationModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLoginButton } from "..";
-
+import axios from 'axios'
+import bcrypt from 'bcryptjs'
+const {REACT_APP_LOCAL_URL,REACT_APP_PRODUCTION_URL,REACT_APP_CLIENT_ID} = process.env;
 class RegistrationModal extends Component {
   state = {
     showPassword: false,
     passwordType: "password",
   };
-
- 
+  
+  
 
   onSignUp = (event) => {
+    
+    var api_url
+    const clientID=REACT_APP_CLIENT_ID
+    if (process.env.NODE_ENV === "production") {
+      //console.log(process.env.NODE_ENV)
+      //console.log(REACT_APP_LOCAL_URL)
+      //console.log(REACT_APP_PRODUCTION_URL)
+      api_url= REACT_APP_PRODUCTION_URL
+      console.log(api_url)
+    } else {
+      //console.log(process.env.NODE_ENV)
+      //console.log(REACT_APP_LOCAL_URL)
+      api_url= REACT_APP_LOCAL_URL
+      console.log(api_url)
+      //console.log(REACT_APP_PRODUCTION_URL)
+    }
     var newUserData = {
       firstName: event.target.fname.value,
       lastName: event.target.lname.value,
       email: event.target.email.value,
       password: event.target.password.value,
     };
-    console.log(newUserData);
-
-    fetch("http://", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUserData),
-    })
-      .then((response) => response.json())
-      .then((newUserData) => {
-        console.log("Success:", newUserData);
+    //console.log(newUserData);
+    
+    //alert(api_url)
+    axios({
+      method:"POST",
+      url:api_url+"/users/add",
+      data:{newUserData}
+      }).then(res=>{
+        if(res.status===200){
+          //Redirect to Dashboard
+          console.log('User Added to Database')
+        }
+      }).catch(function(err){
+            console.log(err)
+            if(err.response){
+              if(err.response.status===409){
+              console.log("User Already Exists in Database")
+              //Redirect to Dashboard
+              }
+            }
+            else if(err.request){
+              //Response not received from API
+              console.log("Error: ",err.request)
+            }
+          else{
+            //Unexpected Error
+              console.log("Error",err.message)
+          }
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      event.preventDefault()
   };
 
   toggleShowPassword = () => {

@@ -6,20 +6,25 @@ import "./GoogleLoginButton.css";
 import axios from 'axios'
 
 //Import Environment Variables
-const {REACT_APP_LOCAL_URL,REACT_APP_PRODUCTION_URL} = process.env;
+const {REACT_APP_LOCAL_URL,REACT_APP_PRODUCTION_URL,REACT_APP_CLIENT_ID} = process.env;
 
 
 // TODO add client ID
-const clientID = "904810367074-hnul9vatut27lq5pedmt0nbd25h5rvqa.apps.googleusercontent.com"
+const clientID = REACT_APP_CLIENT_ID
 
 var api_url
 if (process.env.NODE_ENV === "production") {
-  console.log(process.env.NODE_ENV)
+  api_url=REACT_APP_PRODUCTION_URL
+  //console.log(process.env.NODE_ENV)
+  //console.log(clientID)
   //console.log(REACT_APP_LOCAL_URL)
-  console.log(REACT_APP_PRODUCTION_URL)
+  //console.log(REACT_APP_PRODUCTION_URL)
 } else {
-  console.log(process.env.NODE_ENV)
-  console.log(REACT_APP_LOCAL_URL)
+  api_url=REACT_APP_LOCAL_URL
+  //console.log(process.env.NODE_ENV)
+  //console.log(REACT_APP_LOCAL_URL)
+  //console.log(clientID)
+  
   //console.log(REACT_APP_PRODUCTION_URL)
 }
   
