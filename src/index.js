@@ -6,20 +6,25 @@ import App from "./App";
 
 // FontAwesome Icons
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { faHouseUser } from "@fortawesome/free-solid-svg-icons";
-import { faBookmark } from "@fortawesome/free-solid-svg-icons";
-import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
-import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { faGears } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { faReceipt } from "@fortawesome/free-solid-svg-icons";
-import { faHeadset } from "@fortawesome/free-solid-svg-icons";
-import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFilter,
+  faPlus,
+  faHouseUser,
+  faBookmark,
+  faLayerGroup,
+  faBell,
+  faGears,
+  faPenToSquare,
+  faReceipt,
+  faHeadset,
+  faLocationArrow,
+  faEye,
+  faEyeSlash,
+  faArrowRightFromBracket,
+  faUser,
+  faClock,
+  faBaseballBatBall,
+} from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faFilter,
@@ -35,7 +40,10 @@ library.add(
   faEye,
   faEyeSlash,
   faArrowRightFromBracket,
-  faUser
+  faUser,
+  faClock,
+  faBaseballBatBall,
+  faPlus
 );
 
 ReactDOM.render(
