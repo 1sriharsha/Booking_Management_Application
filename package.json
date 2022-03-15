@@ -22,7 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start ",
+    "start": "serve -s build",
     "dev": "PORT=3001 NODE_ENV=development react-scripts start",
     "prod": "PORT=3001 serve -s build",
     "build": "react-scripts build",
