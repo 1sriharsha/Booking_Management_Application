@@ -55,14 +55,17 @@ class RegistrationModal extends Component {
               if(err.response.status===409){
               console.log("User Already Exists in Database")
               //Redirect to Dashboard
+              
               }
             }
             else if(err.request){
               //Response not received from API
+
               console.log("Error: ",err.request)
             }
           else{
             //Unexpected Error
+            
               console.log("Error",err.message)
           }
       })
