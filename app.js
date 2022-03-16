@@ -3,11 +3,11 @@ const dotenv = require("dotenv")
 const connectDB = require('./config/db')
 const morgan = require('morgan')
 const passport = require('passport')
-
+const cookieParser = require("cookie-parser");
 var bodyParser = require('body-parser');
 const session = require('express-session')
 var cors = require('cors')
-
+const aliveTime = 1000 * 60 * 30
 
 //Load Configurations
 dotenv.config({path:'./config/config.env'})
@@ -27,12 +27,14 @@ if(process.env.NODE_ENV === 'development'){
 
 //Session Middleware
 app.use(session({   
-    secret:'athlos-secret',
+    key:'session_id',
+    secret:'mySecretKeylxinseqgh21sas98yhb',
+    saveUninitialized:false,
     resave:false,
-    saveUninitialized:false
+    cookie:{maxAge:aliveTime}
 }))
+app.use(cookieParser('AllezAllezAllez'));
 
-//
 
 //Passport Middle-ware
 app.use(passport.initialize())

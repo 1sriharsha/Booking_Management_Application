@@ -4,6 +4,8 @@ const User = require('../models/User');
 const bodyParser = require('body-parser');
 const { default: mongoose } = require('mongoose');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
+const middleware = require('../middleware')
 
 
 router.post('/add',async function(req, res){
@@ -14,7 +16,8 @@ router.post('/add',async function(req, res){
       lastName:req.body.newUserData.lastName,
       email:req.body.newUserData.email,
       password:await bcrypt.hash(req.body.newUserData.password,salt),
-      profileType:"Manual"
+      profileType:"Manual",
+      userType:"Customer"
     }
     //console.log(manualUser)
     try
@@ -48,6 +51,7 @@ router.post('/add',async function(req, res){
     });
 
 router.post('/login',async function(req,res){
+   
     try{
         console.log(req.body.loginData.email)
         let user =await User.findOne({email:req.body.loginData.email}).exec(async (err,user)=>{
@@ -66,8 +70,19 @@ router.post('/login',async function(req,res){
                     const validPassword =await bcrypt.compare(req.body.loginData.password,user.password);
                     console.log(validPassword)
                     if(validPassword){
+                        let token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:'12h'});
+
                         console.log("User Login Successful")
-                        res.status(200).send('Login Successful!')
+                        res.status(200).json({
+                            success: true,
+                            firstName:user.firstName,
+                            lastName:user.lastName,
+                            profileType:user.profileType,
+                            token:token,
+                            message:'Authentication Successful!'
+                        })
+
+                       
                     }
                     else{
                         console.log("Password Mismatch")

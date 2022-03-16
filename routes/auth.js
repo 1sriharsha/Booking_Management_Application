@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const {OAuth2Client} =require('google-auth-library');
-const { response } = require('express');
+let jwt = require('jsonwebtoken')
 const GoogleUser = require("../models/GoogleUser")
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 //@desc Auth with Google
@@ -27,8 +27,8 @@ router.post('/google',(req,res)=>{
             displayName:response.payload.name,
             email:response.payload.email,
             image:response.payload.picture,
-            profileType:"Google"
-            
+            profileType:"Google",
+            userType:"Customer"
         }
         try{
             //console.log(googleUser)
@@ -39,12 +39,33 @@ router.post('/google',(req,res)=>{
                 }
                 else{
                     if(user){
-                        res.status(409).send("Not Adding to Database, Already Exists")
+                        
+                        res.status(409).json(
+                            {
+                                success: true,
+                                firstName:googleUser.firstName,
+                                lastName:googleUser.lastName,
+                                profileType:googleUser.userType,
+                                token:token,
+                                message:'Authentication Successful!'
+                            }
+                        )
                     }
                     else{
+                        let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET,{expiresIn:'12h'});
                         googleUser =GoogleUser.create(googleUser)
-                        res.status(200).send("Registered User Data")
+                        res.status(200).json(
+                            {
+                                success: true,
+                                firstName:response.payload.given_name,
+                                lastName:response.payload.family_name,
+                                profileType:'Customer',
+                                token:token,
+                                message:'Authentication Successful!'
+                            }
+                        )
                     }
+                    
                 }
             })
             

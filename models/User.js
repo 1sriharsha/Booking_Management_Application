@@ -7,7 +7,8 @@ const UserSchema = new mongoose.Schema({
 	lastName: {type: String, required: true},
 	email: {type: String, required: true},
 	password: {type: String, required: true},
-	profileType:{type:String,required:true,default:"Manual"}
+	profileType:{type:String,required:true,default:"Manual"},
+	userType:{type:String,required:true,default:"Customer"}
 });
 
 const User = mongoose.model('Users', UserSchema,'users');
