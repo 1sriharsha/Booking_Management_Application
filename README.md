@@ -4,6 +4,6 @@
 Vedant Benadikar : vbenadik@iu.edu <br/>
 Jacob Day : day6@iu.edu <br/>
 Sri Harsha Vardhan Pratipatti : srpratti@iu.edu <br/>
-Vaibhav Vishwanath : vavish@iu.edu 
+Vaibhav Vishwanath : vavish@iu.edu
 
 <h4> Project Description </h4>

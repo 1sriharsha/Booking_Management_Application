@@ -69,7 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
 # Resources
 
 - [How to Create a Multi-Page Website with React](https://www.techomoro.com/how-to-create-a-multi-page-website-with-react-in-5-minutes/)
