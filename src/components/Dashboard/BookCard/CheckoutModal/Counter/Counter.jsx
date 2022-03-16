@@ -10,12 +10,14 @@ class Counter extends Component {
   onIncrement = () => {
     if (this.state.itemCount < this.props.maxItems) {
       this.setState({ itemCount: this.state.itemCount + 1 });
+      this.props.setSubTotal(this.props.itemPrice);
     }
   };
 
   onDecrement = () => {
     if (this.state.itemCount > 0) {
       this.setState({ itemCount: this.state.itemCount - 1 });
+      this.props.setSubTotal(-this.props.itemPrice);
     }
   };
 

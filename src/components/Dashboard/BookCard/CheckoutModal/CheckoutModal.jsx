@@ -11,7 +11,7 @@ class CheckoutModal extends Component {
     reservedSlot: null,
     gearSelection: null,
     extrasSelection: null,
-    totalCost: 0,
+    subtotalCost: 0,
   };
 
   setPageNumber(page) {
@@ -37,6 +37,10 @@ class CheckoutModal extends Component {
     if (this.state.extrasSelection === null) {
       this.setState({ extrasSelection: "None" });
     }
+  };
+
+  setSubTotal = (costChange) => {
+    this.setState({ subtotalCost: this.state.subtotalCost + costChange });
   };
 
   render() {
@@ -172,7 +176,7 @@ class CheckoutModal extends Component {
                   disabled={this.state.extrasSelection === null}
                 >
                   <div className={styles.sectionTitle}>
-                    <div>{this.state.totalCost}</div>
+                    <div>{this.state.subtotalCost}</div>
                     <span>sub total</span>
                   </div>
                 </button>
@@ -213,11 +217,13 @@ class CheckoutModal extends Component {
                       itemName={"Soccer Ball"}
                       itemPrice={1.75}
                       maxItems={5}
+                      setSubTotal={this.setSubTotal}
                     />
                     <Counter
                       itemName={"Soccer Cleats"}
                       itemPrice={3}
                       maxItems={12}
+                      setSubTotal={this.setSubTotal}
                     />
                   </div>
                   <div>
@@ -245,8 +251,18 @@ class CheckoutModal extends Component {
                   <div className={styles.title}>Upgrade Your Reservation</div>
 
                   <div className={styles.gearContainer}>
-                    <Counter itemName={"Referee"} itemPrice={20} maxItems={3} />
-                    <Counter itemName={"Trainer"} itemPrice={40} maxItems={1} />
+                    <Counter
+                      itemName={"Referee"}
+                      itemPrice={20}
+                      maxItems={3}
+                      setSubTotal={this.setSubTotal}
+                    />
+                    <Counter
+                      itemName={"Trainer"}
+                      itemPrice={40}
+                      maxItems={1}
+                      setSubTotal={this.setSubTotal}
+                    />
                   </div>
                   <div>
                     <button
