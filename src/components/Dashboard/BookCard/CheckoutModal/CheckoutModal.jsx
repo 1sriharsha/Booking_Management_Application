@@ -14,6 +14,7 @@ class CheckoutModal extends Component {
     reservedExtras: [],
     reservedSubtotal: 0,
     gearCounters: [
+      // TODO Get Gear from Database
       {
         id: 1,
         value: 0,
@@ -96,6 +97,7 @@ class CheckoutModal extends Component {
       },
     ],
     extrasCounters: [
+      // TODO Get Extras from Database
       { id: 1, value: 0, itemName: "Referee", itemPrice: 20, maxItems: 3 },
       { id: 2, value: 0, itemName: "Trainer", itemPrice: 40, maxItems: 1 },
     ],
