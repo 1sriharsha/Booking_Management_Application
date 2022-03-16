@@ -3,21 +3,40 @@ import styles from "./CheckoutModal.module.css";
 import "./CheckoutModal.css";
 import TimeSlot from "./TimeSlot/TimeSlot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Counter from "./Counter/Counter";
 import NumberFormat from "react-number-format";
+import Counters from "./Counters/Counters";
 
 class CheckoutModal extends Component {
   state = {
     sectionNumber: 1,
     reservedSlot: null,
     gearSelection: null,
+    gearCounters: [
+      {
+        id: 1,
+        value: 0,
+        itemName: "Soccer Ball",
+        itemPrice: 1.75,
+        maxItems: 5,
+      },
+      {
+        id: 2,
+        value: 0,
+        itemName: "Soccer Cleats",
+        itemPrice: 3,
+        maxItems: 12,
+      },
+    ],
     extrasSelection: null,
+    extrasCounters: [
+      { id: 1, value: 0, itemName: "Referee", itemPrice: 20, maxItems: 3 },
+      { id: 2, value: 0, itemName: "Trainer", itemPrice: 40, maxItems: 1 },
+    ],
     subtotalCost: 0,
   };
 
   setPageNumber(page) {
     this.setState({ sectionNumber: page });
-    console.log("Set Page to " + page);
   }
 
   nextPage() {
@@ -28,20 +47,48 @@ class CheckoutModal extends Component {
     this.setState({ reservedSlot: slot });
   };
 
-  setReservedGear = () => {
-    if (this.state.gearSelection === null) {
-      this.setState({ gearSelection: "None" });
+  incrementGearValue = (counter) => {
+    const gearCounters = [...this.state.gearCounters];
+    const index = gearCounters.indexOf(counter);
+
+    gearCounters[index] = { ...counter };
+    if (gearCounters[index].value < gearCounters[index].maxItems) {
+      gearCounters[index].value++;
     }
+    this.setState({ gearCounters });
   };
 
-  setReservedExtras = () => {
-    if (this.state.extrasSelection === null) {
-      this.setState({ extrasSelection: "None" });
+  incrementExtrasValue = (counter) => {
+    const extrasCounters = [...this.state.extrasCounters];
+    const index = extrasCounters.indexOf(counter);
+
+    extrasCounters[index] = { ...counter };
+    if (extrasCounters[index].value < extrasCounters[index].maxItems) {
+      extrasCounters[index].value++;
     }
+    this.setState({ extrasCounters });
   };
 
-  setSubTotal = (costChange) => {
-    this.setState({ subtotalCost: this.state.subtotalCost + costChange });
+  decrementGearValue = (counter) => {
+    const gearCounters = [...this.state.gearCounters];
+    const index = gearCounters.indexOf(counter);
+
+    gearCounters[index] = { ...counter };
+    if (gearCounters[index].value > 0) {
+      gearCounters[index].value--;
+    }
+    this.setState({ gearCounters });
+  };
+
+  decrementExtrasValue = (counter) => {
+    const extrasCounters = [...this.state.extrasCounters];
+    const index = extrasCounters.indexOf(counter);
+
+    extrasCounters[index] = { ...counter };
+    if (extrasCounters[index].value > 0) {
+      extrasCounters[index].value--;
+    }
+    this.setState({ extrasCounters });
   };
 
   render() {
@@ -221,17 +268,10 @@ class CheckoutModal extends Component {
                   <div className={styles.title}>Choose Your Gear</div>
 
                   <div className={styles.gearContainer}>
-                    <Counter
-                      itemName={"Soccer Ball"}
-                      itemPrice={1.75}
-                      maxItems={5}
-                      setSubTotal={this.setSubTotal}
-                    />
-                    <Counter
-                      itemName={"Soccer Cleats"}
-                      itemPrice={3}
-                      maxItems={12}
-                      setSubTotal={this.setSubTotal}
+                    <Counters
+                      counters={this.state.gearCounters}
+                      onIncrement={this.incrementGearValue}
+                      onDecrement={this.decrementGearValue}
                     />
                   </div>
                   <div>
@@ -259,17 +299,10 @@ class CheckoutModal extends Component {
                   <div className={styles.title}>Upgrade Your Reservation</div>
 
                   <div className={styles.gearContainer}>
-                    <Counter
-                      itemName={"Referee"}
-                      itemPrice={20}
-                      maxItems={3}
-                      setSubTotal={this.setSubTotal}
-                    />
-                    <Counter
-                      itemName={"Trainer"}
-                      itemPrice={40}
-                      maxItems={1}
-                      setSubTotal={this.setSubTotal}
+                    <Counters
+                      counters={this.state.extrasCounters}
+                      onIncrement={this.incrementExtrasValue}
+                      onDecrement={this.decrementExtrasValue}
                     />
                   </div>
                   <div>

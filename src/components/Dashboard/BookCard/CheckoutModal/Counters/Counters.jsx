@@ -1,13 +1,25 @@
 import React, { Component } from "react";
+import Counter from "../Counter/Counter";
 import styles from "./Counters.module.css";
 
 class Counters extends Component {
-  render() {
-    const {
-      props: {},
-    } = this;
+  constructor(props) {
+    super(props);
+  }
 
-    return <React.Fragment></React.Fragment>;
+  render() {
+    return (
+      <React.Fragment>
+        {this.props.counters.map((counters) => (
+          <Counter
+            key={counters.id}
+            onIncrement={this.props.onIncrement}
+            onDecrement={this.props.onDecrement}
+            counter={counters}
+          />
+        ))}
+      </React.Fragment>
+    );
   }
 }
 

@@ -7,36 +7,40 @@ class Counter extends Component {
     itemCount: 0,
   };
 
-  onIncrement = () => {
-    if (this.state.itemCount < this.props.maxItems) {
-      this.setState({ itemCount: this.state.itemCount + 1 });
-      this.props.setSubTotal(this.props.itemPrice);
-    }
-  };
+  // onIncrement = () => {
+  //   if (this.state.itemCount < this.props.maxItems) {
+  //     this.setState({ itemCount: this.state.itemCount + 1 });
+  //     this.props.setSubTotal(this.props.itemPrice);
+  //   }
+  // };
 
-  onDecrement = () => {
-    if (this.state.itemCount > 0) {
-      this.setState({ itemCount: this.state.itemCount - 1 });
-      this.props.setSubTotal(-this.props.itemPrice);
-    }
-  };
+  // onDecrement = () => {
+  //   if (this.state.itemCount > 0) {
+  //     this.setState({ itemCount: this.state.itemCount - 1 });
+  //     this.props.setSubTotal(-this.props.itemPrice);
+  //   }
+  // };
 
   render() {
     const {
-      props: { itemName, itemPrice },
+      props: { counter },
     } = this;
 
     return (
       <React.Fragment>
         <section className={styles.counterContainer}>
-          <div className={styles.label}>{itemName}</div>
+          <div className={styles.label}>{counter.itemName}</div>
           <div className={styles.counter}>
-            <div>{this.state.itemCount}</div>
+            <div>{counter.value}</div>
             <div>
-              <button onClick={this.onIncrement}>
+              <button
+                onClick={() => this.props.onIncrement(this.props.counter)}
+              >
                 <FontAwesomeIcon icon="fa-solid fa-plus" />
               </button>
-              <button onClick={this.onDecrement}>
+              <button
+                onClick={() => this.props.onDecrement(this.props.counter)}
+              >
                 <FontAwesomeIcon icon="fa-solid fa-minus" />
               </button>
             </div>
@@ -44,7 +48,7 @@ class Counter extends Component {
           <div className={styles.price}>
             <NumberFormat
               prefix={"$"}
-              value={(itemPrice * this.state.itemCount).toFixed(2)}
+              value={(counter.itemPrice * counter.value).toFixed(2)}
               displayType={"text"}
               thousandSeparator={true}
             />
