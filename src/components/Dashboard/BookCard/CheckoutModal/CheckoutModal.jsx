@@ -10,7 +10,9 @@ class CheckoutModal extends Component {
   state = {
     sectionNumber: 1,
     reservedSlot: null,
-    gearSelection: null,
+    reservedGear: [],
+    reservedExtras: [],
+    reservedSubtotal: 0,
     gearCounters: [
       {
         id: 1,
@@ -27,12 +29,12 @@ class CheckoutModal extends Component {
         maxItems: 12,
       },
     ],
-    extrasSelection: null,
     extrasCounters: [
       { id: 1, value: 0, itemName: "Referee", itemPrice: 20, maxItems: 3 },
       { id: 2, value: 0, itemName: "Trainer", itemPrice: 40, maxItems: 1 },
     ],
-    subtotalCost: 0,
+    isGearSelected: false,
+    isExtrasSelected: false,
   };
 
   setPageNumber(page) {
@@ -45,6 +47,18 @@ class CheckoutModal extends Component {
 
   setReservedSlot = (slot) => {
     this.setState({ reservedSlot: slot });
+  };
+
+  setReservedGear = () => {
+    var reservedGear = [...this.state.reservedGear];
+    reservedGear = this.state.gearCounters.filter((c) => c.value > 0);
+    this.setState({ reservedGear, isGearSelected: true });
+  };
+
+  setReservedExtras = () => {
+    var reservedExtras = [...this.state.reservedExtras];
+    reservedExtras = this.state.extrasCounters.filter((c) => c.value > 0);
+    this.setState({ reservedExtras, isExtrasSelected: true });
   };
 
   incrementGearValue = (counter) => {
@@ -183,7 +197,7 @@ class CheckoutModal extends Component {
                 <button
                   className={[
                     styles.statusSection,
-                    this.state.gearSelection ? "completedSection" : "",
+                    this.state.isGearSelected ? "completedSection" : "",
                   ].join(" ")}
                   onClick={() => this.setPageNumber(2)}
                   disabled={this.state.reservedSlot === null}
@@ -202,10 +216,10 @@ class CheckoutModal extends Component {
                 <button
                   className={[
                     styles.statusSection,
-                    this.state.extrasSelection ? "completedSection" : "",
+                    this.state.isExtrasSelected ? "completedSection" : "",
                   ].join(" ")}
                   onClick={() => this.setPageNumber(3)}
-                  disabled={this.state.gearSelection === null}
+                  disabled={!this.state.isGearSelected}
                 >
                   <div className={styles.sectionIcon}>
                     <FontAwesomeIcon icon="fa-solid fa-plus" />
@@ -221,13 +235,13 @@ class CheckoutModal extends Component {
                 <button
                   className={[styles.statusSection, styles.subTotal].join(" ")}
                   onClick={() => this.setPageNumber(4)}
-                  disabled={this.state.extrasSelection === null}
+                  disabled={!this.state.isExtrasSelected}
                 >
                   <div className={styles.sectionTitle}>
                     <div>
                       <NumberFormat
                         prefix="$"
-                        value={this.state.subtotalCost.toFixed(2)}
+                        value={this.state.reservedSubtotal.toFixed(2)}
                         displayType={"text"}
                         thousandSeparator={true}
                       />
