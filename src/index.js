@@ -24,6 +24,7 @@ import {
   faUser,
   faClock,
   faBaseballBatBall,
+  faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -43,7 +44,8 @@ library.add(
   faUser,
   faClock,
   faBaseballBatBall,
-  faPlus
+  faPlus,
+  faMinus
 );
 
 ReactDOM.render(

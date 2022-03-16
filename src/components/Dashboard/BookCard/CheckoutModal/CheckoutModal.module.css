@@ -309,3 +309,8 @@
   text-align: center;
   /* margin-top: 1em; */
 }
+
+/* Gear Selection */
+.gearContainer {
+  margin: 2em auto;
+}

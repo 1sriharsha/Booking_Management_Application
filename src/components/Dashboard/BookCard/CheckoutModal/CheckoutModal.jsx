@@ -3,6 +3,7 @@ import styles from "./CheckoutModal.module.css";
 import "./CheckoutModal.css";
 import TimeSlot from "./TimeSlot/TimeSlot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Counter from "./Counter/Counter";
 
 class CheckoutModal extends Component {
   state = {
@@ -207,16 +208,32 @@ class CheckoutModal extends Component {
                 <section className={styles.container}>
                   <div className={styles.title}>Choose Your Gear</div>
 
-                  <button
-                    className={[styles.button, styles.buttonPrimary].join(" ")}
-                    onClick={() => {
-                      this.nextPage();
-                      this.setReservedGear();
-                    }}
-                    disabled={this.state.reservedSlot === null}
-                  >
-                    Next
-                  </button>
+                  <div className={styles.gearContainer}>
+                    <Counter
+                      itemName={"Soccer Ball"}
+                      itemPrice={1.75}
+                      maxItems={5}
+                    />
+                    <Counter
+                      itemName={"Soccer Cleats"}
+                      itemPrice={3}
+                      maxItems={12}
+                    />
+                  </div>
+                  <div>
+                    <button
+                      className={[styles.button, styles.buttonPrimary].join(
+                        " "
+                      )}
+                      onClick={() => {
+                        this.nextPage();
+                        this.setReservedGear();
+                      }}
+                      disabled={this.state.reservedSlot === null}
+                    >
+                      Next
+                    </button>
+                  </div>
                 </section>
               </React.Fragment>
             )}
