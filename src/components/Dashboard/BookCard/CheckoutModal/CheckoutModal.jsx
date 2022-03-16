@@ -12,7 +12,7 @@ class CheckoutModal extends Component {
     reservedSlot: null,
     reservedGear: [],
     reservedExtras: [],
-    reservedSubtotal: 0,
+    reservedSubtotal: 60, // TODO Reset to 0
     reservedTotal: 0,
     gearCounters: [
       // TODO Get Gear from Database
@@ -432,7 +432,7 @@ class CheckoutModal extends Component {
             {this.state.sectionNumber === 4 && (
               <React.Fragment>
                 <section className={styles.container}>
-                  <div className={styles.title}>Checkout</div>
+                  {/* <div className={styles.title}>Checkout</div> */}
 
                   <main className={styles.checkout}>
                     {/* Checkout Payment Information */}
@@ -492,18 +492,64 @@ class CheckoutModal extends Component {
                       </div>
                       {/* Summary Details */}
                       <div className={styles.summaryDetails}>
+                        {/* Facility Name */}
                         <div className={styles.name}>{facilityName}</div>
+                        {/* Facility Location */}
                         <div className={styles.location}>
                           <i>
                             <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
                           </i>
                           {facilityLocation}
                         </div>
-                        <div>
+                        {/* Facility Description */}
+                        <div className={styles.description}>
                           <i>
                             <FontAwesomeIcon icon="fa-solid fa-circle-info" />
                           </i>
                           {facilityInfo}
+                        </div>
+                        {/* Reserved Gear & Extras */}
+                        <div className={styles.reservedOptions}>
+                          <div className={styles.itemName}>Soccer Ball</div>{" "}
+                          <div className={styles.itemCount}>x100</div>{" "}
+                          <div className={styles.itemsTotal}>
+                            <NumberFormat
+                              prefix="$"
+                              value={(100.0).toFixed(2)}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                            />
+                          </div>
+                        </div>
+                        {/* Subtotal, Tax, & Total */}
+                        <div className={styles.reservedPricing}>
+                          <div>
+                            Subtotal:
+                            <NumberFormat
+                              value={this.state.reservedSubtotal.toFixed(2)}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                            />
+                          </div>
+                          <div>
+                            Tax:
+                            <NumberFormat
+                              value={(
+                                this.state.reservedSubtotal * 0.07
+                              ).toFixed(2)}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                            />
+                          </div>
+                          <div className={styles.reservedTotal}>
+                            Total:
+                            <NumberFormat
+                              prefix="$"
+                              value={this.state.reservedTotal.toFixed(2)}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                            />
+                          </div>
                         </div>
                       </div>
                       {/* Payment Button */}

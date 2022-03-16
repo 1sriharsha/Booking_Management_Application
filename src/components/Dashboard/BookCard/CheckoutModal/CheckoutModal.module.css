@@ -329,7 +329,8 @@
   gap: 25px;
 }
 
-.payment input, .payment select {
+.payment input,
+.payment select {
   height: 45px;
   border: 1px solid var(--color-gray);
   margin-right: 25px;
@@ -338,43 +339,48 @@
 
 .payment ::placeholder {
   color: var(--color-gray);
-
 }
 
 .summary {
+  height: 600px;
   width: 400px;
   background-color: var(--color-tertiary);
   padding: 1.5em;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  position: relative;
 }
 
 .summary .image {
-  height: 170px;
-  width: 300px;
+  height: 200px;
+  width: 100%;
   overflow: hidden;
 }
 
 .summary .image img {
-  height: 100%;
+  min-height: 100%;
+  width: 100%;
 }
 
 .summary span {
   margin-left: 5px;
 }
 
-
 .summary .buttonPrimary {
-  width: 100%;
+  width: calc(100% - 3em);
+  position: absolute;
+  bottom: 1.5em;
+  margin: 0;
 }
 
 .summaryDetails {
+  height: 400px;
   width: 100%;
   text-align: left;
   margin: 1em 0 2em 0;
+  overflow: scroll;
 }
-
 
 .summaryDetails div {
   margin-bottom: 8px;
@@ -391,5 +397,35 @@
 }
 
 .summaryDetails i {
+  color: var(--color-gray);
   margin-right: 0.3em;
+}
+
+.summaryDetails .description,
+.reservedOptions {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.summaryDetails .reservedOptions {
+  display: flex;
+  flex-direction: row column;
+  justify-content: space-between;
+}
+
+.reservedOptions .itemCount {
+  width: 40px;
+}
+
+.reservedOptions .itemsTotal {
+  width: 65px;
+}
+
+.reservedPricing {
+  text-align: right;
+}
+
+.reservedTotal {
+  font-size: 1.1em;
+  font-weight: 800;
 }
