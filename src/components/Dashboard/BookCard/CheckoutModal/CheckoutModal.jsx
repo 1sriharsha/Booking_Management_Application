@@ -430,6 +430,65 @@ class CheckoutModal extends Component {
               <React.Fragment>
                 <section className={styles.container}>
                   <div className={styles.title}>Checkout</div>
+
+                  <main className={styles.checkout}>
+                    <aside className={styles.payment}>
+                      <div className={styles.title}>
+                        Enter your payment details
+                      </div>
+                      <form>
+                        <input
+                          type="text"
+                          id="cardNumber"
+                          name="cardNumber"
+                          placeholder="Card Number"
+                        />
+                        <input
+                          type="text"
+                          id="streetAddress"
+                          name="streetAddress"
+                          placeholder="Street Address"
+                        />
+                        <input
+                          type="text"
+                          id="aptAddress"
+                          name="aptAddress"
+                          placeholder="Apt, unit, suite, etc. (optional)"
+                        />
+                        <select name="country" id="country">
+                          <option value="United States">United States</option>
+                        </select>
+                        <div>
+                          <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            placeholder="City"
+                          />
+                          <select name="state" id="state">
+                            <option value="-">-</option>
+                            <option value="IN">IN</option>
+                          </select>
+                          <input
+                            type="text"
+                            id="zip"
+                            name="zip"
+                            placeholder="Zip Code"
+                          />
+                        </div>
+                      </form>
+                    </aside>
+                    <aside className={styles.summary}>
+                      summary
+                      <button
+                        className={[styles.button, styles.buttonPrimary].join(
+                          " "
+                        )}
+                      >
+                        Pay
+                      </button>
+                    </aside>
+                  </main>
                 </section>
               </React.Fragment>
             )}

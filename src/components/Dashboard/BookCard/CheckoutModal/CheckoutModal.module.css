@@ -309,3 +309,33 @@
 .gearContainer {
   margin: 2em auto;
 }
+
+/* Checkout */
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment .title {
+  color: var(--color-gray);
+  font-size: 1.8em;
+  margin-bottom: 1em;
+}
+
+.payment form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 25px;
+}
+
+.payment input, .payment select {
+  border: 1px solid var(--color-gray);
+  margin-right: 25px;
+  padding: 10px 15px;
+}
+
+.payment ::placeholder {
+  color: var(--color-gray);
+
+}
