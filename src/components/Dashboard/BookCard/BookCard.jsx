@@ -67,6 +67,12 @@ class BookCard extends Component {
               </i>
               {facilityLocation}
             </div>
+            <div className={styles.description}>
+              <i>
+                <FontAwesomeIcon icon="fa-solid fa-circle-info" />
+              </i>
+              {facilityInfo}
+            </div>
             <button
               className={[styles.button, styles.buttonPrimary].join(" ")}
               onClick={() => this.onClickBook({ facilityID })}
