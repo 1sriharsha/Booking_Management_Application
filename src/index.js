@@ -25,6 +25,7 @@ import {
   faClock,
   faBaseballBatBall,
   faMinus,
+  faCircleInfo,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -45,7 +46,8 @@ library.add(
   faClock,
   faBaseballBatBall,
   faPlus,
-  faMinus
+  faMinus,
+  faCircleInfo
 );
 
 ReactDOM.render(

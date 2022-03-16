@@ -8,11 +8,12 @@ import Counters from "./Counters/Counters";
 
 class CheckoutModal extends Component {
   state = {
-    sectionNumber: 1,
+    sectionNumber: 4, // TODO Reset to 1
     reservedSlot: null,
     reservedGear: [],
     reservedExtras: [],
     reservedSubtotal: 0,
+    reservedTotal: 0,
     gearCounters: [
       // TODO Get Gear from Database
       {
@@ -205,6 +206,8 @@ class CheckoutModal extends Component {
         reservationPeriodEnd,
       },
     } = this;
+
+    let sportImage = "images/" + facilitySport + ".jpg";
 
     var nTimeSlots = [];
     var reservationSlotStart = reservationPeriodStart;
@@ -432,6 +435,7 @@ class CheckoutModal extends Component {
                   <div className={styles.title}>Checkout</div>
 
                   <main className={styles.checkout}>
+                    {/* Checkout Payment Information */}
                     <aside className={styles.payment}>
                       <div className={styles.title}>
                         Enter your payment details
@@ -478,14 +482,43 @@ class CheckoutModal extends Component {
                         </div>
                       </form>
                     </aside>
+                    {/* Checkout Summary */}
                     <aside className={styles.summary}>
-                      summary
+                      {/* Summary Title */}
+                      <div className={styles.title}>Summary</div>
+                      {/* Summary Image */}
+                      <div className={styles.image}>
+                        <img src={sportImage} alt={facilitySport} />
+                      </div>
+                      {/* Summary Details */}
+                      <div className={styles.summaryDetails}>
+                        <div className={styles.name}>{facilityName}</div>
+                        <div className={styles.location}>
+                          <i>
+                            <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
+                          </i>
+                          {facilityLocation}
+                        </div>
+                        <div>
+                          <i>
+                            <FontAwesomeIcon icon="fa-solid fa-circle-info" />
+                          </i>
+                          {facilityInfo}
+                        </div>
+                      </div>
+                      {/* Payment Button */}
                       <button
                         className={[styles.button, styles.buttonPrimary].join(
                           " "
                         )}
                       >
                         Pay
+                        <NumberFormat
+                          prefix="$"
+                          value={this.state.reservedTotal.toFixed(2)}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                        />
                       </button>
                     </aside>
                   </main>

@@ -314,10 +314,10 @@
 .checkout {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  margin-top: 2em;
 }
 
-.payment .title {
+.checkout .title {
   color: var(--color-gray);
   font-size: 1.8em;
   margin-bottom: 1em;
@@ -339,4 +339,57 @@
 .payment ::placeholder {
   color: var(--color-gray);
 
+}
+
+.summary {
+  width: 400px;
+  background-color: var(--color-tertiary);
+  padding: 1.5em;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.summary .image {
+  height: 170px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.summary .image img {
+  height: 100%;
+}
+
+.summary span {
+  margin-left: 5px;
+}
+
+
+.summary .buttonPrimary {
+  width: 100%;
+}
+
+.summaryDetails {
+  width: 100%;
+  text-align: left;
+  margin: 1em 0 2em 0;
+}
+
+
+.summaryDetails div {
+  margin-bottom: 8px;
+}
+
+.summaryDetails .name {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 500;
+  font-family: var(--font-title);
+  margin-bottom: 0.5em;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.summaryDetails i {
+  margin-right: 0.3em;
 }
