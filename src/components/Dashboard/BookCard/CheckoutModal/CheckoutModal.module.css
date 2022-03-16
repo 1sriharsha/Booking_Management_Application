@@ -263,7 +263,7 @@
 }
 
 .subTotal .sectionTitle div::before {
-content: "$";
+  content: "$";
 }
 
 .sectionIcon {

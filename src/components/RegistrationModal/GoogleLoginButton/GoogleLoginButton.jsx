@@ -3,67 +3,63 @@ import { GoogleLogin } from "react-google-login";
 // import {refreshTokenSetup} from ""
 import styles from "./GoogleLoginButton.module.css";
 import "./GoogleLoginButton.css";
-import axios from 'axios'
+import axios from "axios";
 
 //Import Environment Variables
-const {REACT_APP_LOCAL_URL,REACT_APP_PRODUCTION_URL,REACT_APP_CLIENT_ID} = process.env;
-
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
+  process.env;
 
 // TODO add client ID
-const clientID = REACT_APP_CLIENT_ID
+const clientID = REACT_APP_CLIENT_ID;
 
-var api_url
+var api_url;
 if (process.env.NODE_ENV === "production") {
-  api_url=REACT_APP_PRODUCTION_URL
+  api_url = REACT_APP_PRODUCTION_URL;
   //console.log(process.env.NODE_ENV)
   //console.log(clientID)
   //console.log(REACT_APP_LOCAL_URL)
   //console.log(REACT_APP_PRODUCTION_URL)
 } else {
-  api_url=REACT_APP_LOCAL_URL
+  api_url = REACT_APP_LOCAL_URL;
   //console.log(process.env.NODE_ENV)
   //console.log(REACT_APP_LOCAL_URL)
   //console.log(clientID)
-  
+
   //console.log(REACT_APP_PRODUCTION_URL)
 }
-  
 
 function GoogleLoginButton() {
   //console.log(clientID)
   const onSuccess = (res) => {
-    console.log(process.env.NODE_ENV)
+    console.log(process.env.NODE_ENV);
     //console.log(api_url)
     //console.log("[Login Successful] currentUser:", res.profileObj);
     axios({
-      method:"POST",
-      url:api_url+"/auth/google",
-      data:{tokenId:res.tokenId}
-      })
-      .then(res=>{
-        if(res.status===200){
+      method: "POST",
+      url: api_url + "/auth/google",
+      data: { tokenId: res.tokenId },
+    })
+      .then((res) => {
+        if (res.status === 200) {
           //Redirect to Dashboard
-          console.log('User Added to Database')
+          console.log("User Added to Database");
         }
       })
-      .catch(function(err){
-        console.log(err)
-        if(err.response){
-          if(err.response.status===409){
-            console.log("User Already Exists in Database")
+      .catch(function (err) {
+        console.log(err);
+        if (err.response) {
+          if (err.response.status === 409) {
+            console.log("User Already Exists in Database");
             //Redirect to Dashboard
           }
-        }
-        else if(err.request){
+        } else if (err.request) {
           //Response not received from API
-          console.log("Error: ",err.request)
-        }
-        else{
+          console.log("Error: ", err.request);
+        } else {
           //Unexpected Error
-          console.log("Error",err.message)
+          console.log("Error", err.message);
         }
-      })
-
+      });
   };
 
   const onFailure = (res) => {
