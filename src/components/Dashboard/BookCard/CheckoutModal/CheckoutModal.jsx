@@ -117,27 +117,6 @@ class CheckoutModal extends Component {
       },
     } = this;
 
-    let selectedSlot = "-";
-    if (this.state.reservedSlot) {
-      selectedSlot =
-        this.state.reservedSlot +
-        ":00 - " +
-        (this.state.reservedSlot + 1) +
-        ":00";
-    }
-
-    let selectedGear = "-";
-    if (this.state.gearSelection !== null) {
-      selectedGear = this.state.gearSelection;
-    }
-
-    let selectedExtras = "-";
-    if (this.state.extrasSelection) {
-      selectedExtras = this.state.extrasSelection;
-    }
-
-    let sportImage = "images/" + facilitySport + ".jpg";
-
     var nTimeSlots = [];
     var reservationSlotStart = reservationPeriodStart;
     var reservationSlotEnd;
@@ -188,7 +167,12 @@ class CheckoutModal extends Component {
                   </div>
                   <div className={styles.sectionText}>
                     <div className={styles.sectionSelection}>
-                      {selectedSlot}
+                      {this.state.reservedSlot
+                        ? this.state.reservedSlot +
+                          ":00 - " +
+                          (this.state.reservedSlot + 1) +
+                          ":00"
+                        : "-"}
                     </div>
                     <div className={styles.sectionTitle}>Time Slot</div>
                   </div>
@@ -207,7 +191,11 @@ class CheckoutModal extends Component {
                   </div>
                   <div className={styles.sectionText}>
                     <div className={styles.sectionSelection}>
-                      {selectedGear}
+                      {this.state.isGearSelected
+                        ? this.state.reservedGear.length > 0
+                          ? "# of gear"
+                          : "None"
+                        : "-"}
                     </div>
                     <div className={styles.sectionTitle}>Gear</div>
                   </div>
@@ -226,7 +214,11 @@ class CheckoutModal extends Component {
                   </div>
                   <div className={styles.sectionText}>
                     <div className={styles.sectionSelection}>
-                      {selectedExtras}
+                      {this.state.isExtrasSelected
+                        ? this.state.reservedExtras.length > 0
+                          ? "# of gear"
+                          : "None"
+                        : "-"}
                     </div>
                     <div className={styles.sectionTitle}>Extras</div>
                   </div>
