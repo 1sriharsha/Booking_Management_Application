@@ -262,15 +262,11 @@
   color: white;
 }
 
-.subTotal span {
+.subTotal .sectionTitle > span {
   font-size: 0.5em;
   font-weight: 400;
   display: block;
   margin-top: 3px;
-}
-
-.subTotal .sectionTitle div::before {
-  content: "$";
 }
 
 .sectionIcon {

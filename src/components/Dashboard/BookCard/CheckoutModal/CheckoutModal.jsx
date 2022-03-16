@@ -4,6 +4,7 @@ import "./CheckoutModal.css";
 import TimeSlot from "./TimeSlot/TimeSlot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Counter from "./Counter/Counter";
+import NumberFormat from "react-number-format";
 
 class CheckoutModal extends Component {
   state = {
@@ -176,7 +177,14 @@ class CheckoutModal extends Component {
                   disabled={this.state.extrasSelection === null}
                 >
                   <div className={styles.sectionTitle}>
-                    <div>{this.state.subtotalCost}</div>
+                    <div>
+                      <NumberFormat
+                        prefix="$"
+                        value={this.state.subtotalCost.toFixed(2)}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                      />
+                    </div>
                     <span>sub total</span>
                   </div>
                 </button>
