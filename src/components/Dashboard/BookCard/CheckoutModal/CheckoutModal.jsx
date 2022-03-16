@@ -509,18 +509,23 @@ class CheckoutModal extends Component {
                           {facilityInfo}
                         </div>
                         {/* Reserved Gear & Extras */}
-                        <div className={styles.reservedOptions}>
-                          <div className={styles.itemName}>Soccer Ball</div>{" "}
-                          <div className={styles.itemCount}>x100</div>{" "}
-                          <div className={styles.itemsTotal}>
-                            <NumberFormat
-                              prefix="$"
-                              value={(100.0).toFixed(2)}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                            />
-                          </div>
-                        </div>
+                        {(this.state.reservedGear.length > 0 ||
+                          this.state.reservedExtras.length > 0) && (
+                          <React.Fragment>
+                            <div className={styles.reservedOptions}>
+                              <div className={styles.itemName}>Soccer Ball</div>{" "}
+                              <div className={styles.itemCount}>x100</div>{" "}
+                              <div className={styles.itemsTotal}>
+                                <NumberFormat
+                                  prefix="$"
+                                  value={(100.0).toFixed(2)}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                />
+                              </div>
+                            </div>
+                          </React.Fragment>
+                        )}
                         {/* Subtotal, Tax, & Total */}
                         <div className={styles.reservedPricing}>
                           <div>
