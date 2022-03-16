@@ -100,6 +100,7 @@ class Dashboard extends Component {
         facilityName,
         facilityLocation,
         facilitySport,
+        facilityInfo,
         availableNow,
         reservationPeriodStart,
         reservationPeriodEnd,
@@ -118,6 +119,7 @@ class Dashboard extends Component {
               facilityName={facilityName}
               facilityLocation={facilityLocation}
               facilitySport={facilitySport}
+              facilityInfo={facilityInfo}
               availableNow={availableNow}
               animationDelay={animationDelay}
               reservationPeriodStart={reservationPeriodStart}

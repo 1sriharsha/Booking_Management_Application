@@ -26,6 +26,7 @@ class BookCard extends Component {
         facilityName,
         facilityLocation,
         facilitySport,
+        facilityInfo,
         availableNow,
         animationDelay,
         reservationPeriodStart,
@@ -81,6 +82,7 @@ class BookCard extends Component {
             facilityName={facilityName}
             facilityLocation={facilityLocation}
             facilitySport={facilitySport}
+            facilityInfo={facilityInfo}
             availableNow={availableNow}
             onCloseModal={this.closeCheckoutModal}
             reservationPeriodStart={reservationPeriodStart}

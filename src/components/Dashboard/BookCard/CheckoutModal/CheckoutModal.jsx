@@ -200,6 +200,7 @@ class CheckoutModal extends Component {
         facilityName,
         facilityLocation,
         facilitySport,
+        facilityInfo,
         reservationPeriodStart,
         reservationPeriodEnd,
       },
