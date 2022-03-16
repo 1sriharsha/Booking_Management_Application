@@ -244,16 +244,24 @@ class CheckoutModal extends Component {
                 <section className={styles.container}>
                   <div className={styles.title}>Upgrade Your Reservation</div>
 
-                  <button
-                    className={[styles.button, styles.buttonPrimary].join(" ")}
-                    onClick={() => {
-                      this.nextPage();
-                      this.setReservedExtras();
-                    }}
-                    disabled={this.state.reservedSlot === null}
-                  >
-                    Next
-                  </button>
+                  <div className={styles.gearContainer}>
+                    <Counter itemName={"Referee"} itemPrice={20} maxItems={3} />
+                    <Counter itemName={"Trainer"} itemPrice={40} maxItems={1} />
+                  </div>
+                  <div>
+                    <button
+                      className={[styles.button, styles.buttonPrimary].join(
+                        " "
+                      )}
+                      onClick={() => {
+                        this.nextPage();
+                        this.setReservedExtras();
+                      }}
+                      disabled={this.state.reservedSlot === null}
+                    >
+                      Next
+                    </button>
+                  </div>
                 </section>
               </React.Fragment>
             )}
