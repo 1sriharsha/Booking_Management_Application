@@ -10,6 +10,7 @@ class CheckoutModal extends Component {
     reservedSlot: null,
     gearSelection: null,
     extrasSelection: null,
+    totalCost: 0,
   };
 
   setPageNumber(page) {
@@ -23,6 +24,18 @@ class CheckoutModal extends Component {
 
   setReservedSlot = (slot) => {
     this.setState({ reservedSlot: slot });
+  };
+
+  setReservedGear = () => {
+    if (this.state.gearSelection === null) {
+      this.setState({ gearSelection: "None" });
+    }
+  };
+
+  setReservedExtras = () => {
+    if (this.state.extrasSelection === null) {
+      this.setState({ extrasSelection: "None" });
+    }
   };
 
   render() {
@@ -39,12 +52,21 @@ class CheckoutModal extends Component {
 
     let selectedSlot = "-";
     if (this.state.reservedSlot) {
-      console.log("Section True");
       selectedSlot =
         this.state.reservedSlot +
         ":00 - " +
         (this.state.reservedSlot + 1) +
         ":00";
+    }
+
+    let selectedGear = "-";
+    if (this.state.gearSelection !== null) {
+      selectedGear = this.state.gearSelection;
+    }
+
+    let selectedExtras = "-";
+    if (this.state.extrasSelection) {
+      selectedExtras = this.state.extrasSelection;
     }
 
     let sportImage = "images/" + facilitySport + ".jpg";
@@ -88,7 +110,10 @@ class CheckoutModal extends Component {
               <nav className={styles.statusBar}>
                 {/* Status Bar: Time Selection */}
                 <button
-                  className={styles.statusSection}
+                  className={[
+                    styles.statusSection,
+                    this.state.reservedSlot ? "completedSection" : "",
+                  ].join(" ")}
                   onClick={() => this.setPageNumber(1)}
                 >
                   <div className={styles.sectionIcon}>
@@ -103,7 +128,10 @@ class CheckoutModal extends Component {
                 </button>
                 {/* Status Bar: Gear Selection */}
                 <button
-                  className={styles.statusSection}
+                  className={[
+                    styles.statusSection,
+                    this.state.gearSelection ? "completedSection" : "",
+                  ].join(" ")}
                   onClick={() => this.setPageNumber(2)}
                   disabled={this.state.reservedSlot === null}
                 >
@@ -111,13 +139,18 @@ class CheckoutModal extends Component {
                     <FontAwesomeIcon icon="fa-solid fa-baseball-bat-ball" />
                   </div>
                   <div className={styles.sectionText}>
-                    <div className={styles.sectionSelection}>0</div>
+                    <div className={styles.sectionSelection}>
+                      {selectedGear}
+                    </div>
                     <div className={styles.sectionTitle}>Gear</div>
                   </div>
                 </button>
                 {/* Status Bar: Extras Selection */}
                 <button
-                  className={styles.statusSection}
+                  className={[
+                    styles.statusSection,
+                    this.state.extrasSelection ? "completedSection" : "",
+                  ].join(" ")}
                   onClick={() => this.setPageNumber(3)}
                   disabled={this.state.gearSelection === null}
                 >
@@ -125,17 +158,22 @@ class CheckoutModal extends Component {
                     <FontAwesomeIcon icon="fa-solid fa-plus" />
                   </div>
                   <div className={styles.sectionText}>
-                    <div className={styles.sectionSelection}>Referee</div>
+                    <div className={styles.sectionSelection}>
+                      {selectedExtras}
+                    </div>
                     <div className={styles.sectionTitle}>Extras</div>
                   </div>
                 </button>
                 {/* Status Bar: Book */}
                 <button
-                  className={styles.statusSection}
+                  className={[styles.statusSection, styles.subTotal].join(" ")}
                   onClick={() => this.setPageNumber(4)}
                   disabled={this.state.extrasSelection === null}
                 >
-                  <div className={styles.sectionTitle}>Book</div>
+                  <div className={styles.sectionTitle}>
+                    <div>{this.state.totalCost}</div>
+                    <span>sub total</span>
+                  </div>
                 </button>
                 <div className={styles.statusIndicator}></div>
               </nav>
@@ -146,6 +184,7 @@ class CheckoutModal extends Component {
               <React.Fragment>
                 <section className={styles.container}>
                   <div className={styles.title}>Select A Time Slot</div>
+
                   <div className={styles.timeSlotContainer}>{nTimeSlots}</div>
                   <div>
                     <button
@@ -159,28 +198,57 @@ class CheckoutModal extends Component {
                     </button>
                   </div>
                 </section>
-                {/* <div className={styles.image}>
-                  <img src={sportImage} alt={facilitySport} />
-                </div>
-                <div className={styles.gradient}>
-                  <section className={styles.content}>
-                    <div className={styles.title}>
-                      {facilityName} -- ID {facilityID}
-                    </div>
-                    <div>Location: {facilityLocation}</div>
-                    <div>Sport: {facilitySport}</div>
-                    <div className={styles.timeSlotContainer}>{nTimeSlots}</div>
-                  </section>
-                </div> */}
               </React.Fragment>
             )}
-            {/* <button
-              className={styles.close}
-              onClick={this.props.onCloseModal}
-              title="Close"
-            >
-              &times;
-            </button> */}
+
+            {/* Section 2: Select Gear */}
+            {this.state.sectionNumber === 2 && (
+              <React.Fragment>
+                <section className={styles.container}>
+                  <div className={styles.title}>Choose Your Gear</div>
+
+                  <button
+                    className={[styles.button, styles.buttonPrimary].join(" ")}
+                    onClick={() => {
+                      this.nextPage();
+                      this.setReservedGear();
+                    }}
+                    disabled={this.state.reservedSlot === null}
+                  >
+                    Next
+                  </button>
+                </section>
+              </React.Fragment>
+            )}
+
+            {/* Section 3: Select Extras  */}
+            {this.state.sectionNumber === 3 && (
+              <React.Fragment>
+                <section className={styles.container}>
+                  <div className={styles.title}>Upgrade Your Reservation</div>
+
+                  <button
+                    className={[styles.button, styles.buttonPrimary].join(" ")}
+                    onClick={() => {
+                      this.nextPage();
+                      this.setReservedExtras();
+                    }}
+                    disabled={this.state.reservedSlot === null}
+                  >
+                    Next
+                  </button>
+                </section>
+              </React.Fragment>
+            )}
+
+            {/* Section 4: Checkout */}
+            {this.state.sectionNumber === 4 && (
+              <React.Fragment>
+                <section className={styles.container}>
+                  <div className={styles.title}>Checkout</div>
+                </section>
+              </React.Fragment>
+            )}
           </div>
         </div>
       </React.Fragment>

@@ -239,6 +239,33 @@
   text-transform: uppercase;
 }
 
+.subTotal {
+  /* font-size: 2em; */
+  background-color: var(--color-primary);
+}
+
+.subTotal:hover {
+  background-color: var(--color-primary);
+}
+
+.subTotal .sectionTitle {
+  font-size: 1.9em;
+  font-weight: 500;
+  text-align: center;
+  color: white;
+}
+
+.subTotal span {
+  font-size: 0.5em;
+  font-weight: 400;
+  display: block;
+  margin-top: 3px;
+}
+
+.subTotal .sectionTitle div::before {
+content: "$";
+}
+
 .sectionIcon {
   color: var(--color-gray);
   font-size: 2em;
@@ -250,7 +277,7 @@
   font-weight: 800;
 }
 
-.statusIndicator::after {
+/* .statusIndicator::after {
   content: "";
   height: 4px;
   width: 325px;
@@ -259,7 +286,7 @@
   bottom: 0;
   left: 0;
   box-shadow: 0 2px 4px rgba(33, 146, 146, 0.7);
-}
+} */
 
 .container {
   padding: 4em;
