@@ -55,10 +55,30 @@ class CheckoutModal extends Component {
     this.setState({ reservedGear, isGearSelected: true });
   };
 
+  getReservedGearCount = () => {
+    let count = 0;
+
+    for (let index = 0; index < this.state.reservedGear.length; index++) {
+      const element = this.state.reservedGear[index];
+      count += element.value;
+    }
+    return count;
+  };
+
   setReservedExtras = () => {
     var reservedExtras = [...this.state.reservedExtras];
     reservedExtras = this.state.extrasCounters.filter((c) => c.value > 0);
     this.setState({ reservedExtras, isExtrasSelected: true });
+  };
+
+  getReservedExtrasCount = () => {
+    let count = 0;
+
+    for (let index = 0; index < this.state.reservedExtras.length; index++) {
+      const element = this.state.reservedExtras[index];
+      count += element.value;
+    }
+    return count;
   };
 
   incrementGearValue = (counter) => {
@@ -193,7 +213,7 @@ class CheckoutModal extends Component {
                     <div className={styles.sectionSelection}>
                       {this.state.isGearSelected
                         ? this.state.reservedGear.length > 0
-                          ? "# of gear"
+                          ? this.getReservedGearCount()
                           : "None"
                         : "-"}
                     </div>
@@ -216,7 +236,7 @@ class CheckoutModal extends Component {
                     <div className={styles.sectionSelection}>
                       {this.state.isExtrasSelected
                         ? this.state.reservedExtras.length > 0
-                          ? "# of gear"
+                          ? this.getReservedExtrasCount()
                           : "None"
                         : "-"}
                     </div>
@@ -226,7 +246,11 @@ class CheckoutModal extends Component {
                 {/* Status Bar: Sub Total */}
                 <button
                   className={[styles.statusSection, styles.subTotal].join(" ")}
-                  onClick={() => this.setPageNumber(4)}
+                  onClick={() => {
+                    this.setPageNumber(4);
+                    this.setReservedGear();
+                    this.setReservedExtras();
+                  }}
                   disabled={!this.state.isExtrasSelected}
                 >
                   <div className={styles.sectionTitle}>
@@ -318,6 +342,7 @@ class CheckoutModal extends Component {
                       )}
                       onClick={() => {
                         this.nextPage();
+                        this.setReservedGear();
                         this.setReservedExtras();
                       }}
                       disabled={this.state.reservedSlot === null}
