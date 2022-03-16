@@ -240,13 +240,21 @@
 }
 
 .subTotal {
-  /* font-size: 2em; */
   background-color: var(--color-primary);
 }
 
 .subTotal:hover {
   background-color: var(--color-primary);
 }
+
+.subTotal:disabled {
+  background-color: var(--color-gray);
+}
+
+.subTotal:disabled:hover {
+  background-color: var(--color-gray);
+}
+
 
 .subTotal .sectionTitle {
   font-size: 1.9em;

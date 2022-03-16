@@ -164,7 +164,7 @@ class CheckoutModal extends Component {
                     <div className={styles.sectionTitle}>Extras</div>
                   </div>
                 </button>
-                {/* Status Bar: Book */}
+                {/* Status Bar: Sub Total */}
                 <button
                   className={[styles.statusSection, styles.subTotal].join(" ")}
                   onClick={() => this.setPageNumber(4)}
