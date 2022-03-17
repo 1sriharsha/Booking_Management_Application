@@ -8,12 +8,14 @@ import Counters from "./Counters/Counters";
 
 class CheckoutModal extends Component {
   state = {
-    sectionNumber: 4, // TODO Reset to 1
+    sectionNumber: 1,
     reservedSlot: null,
     reservedGear: [],
     reservedExtras: [],
-    reservedSubtotal: 60, // TODO Reset to 0
-    reservedTotal: 0,
+    reservationSubtotal: 0,
+    reservationTax: 0,
+    reservationTotal: 0,
+    taxRate: 0.07,
     gearCounters: [
       // TODO Get Gear from Database
       {
@@ -157,6 +159,7 @@ class CheckoutModal extends Component {
     gearCounters[index] = { ...counter };
     if (gearCounters[index].value < gearCounters[index].maxItems) {
       gearCounters[index].value++;
+      this.updateCosts(gearCounters[index].itemPrice);
     }
     this.setState({ gearCounters });
   };
@@ -168,6 +171,7 @@ class CheckoutModal extends Component {
     extrasCounters[index] = { ...counter };
     if (extrasCounters[index].value < extrasCounters[index].maxItems) {
       extrasCounters[index].value++;
+      this.updateCosts(extrasCounters[index].itemPrice);
     }
     this.setState({ extrasCounters });
   };
@@ -179,6 +183,7 @@ class CheckoutModal extends Component {
     gearCounters[index] = { ...counter };
     if (gearCounters[index].value > 0) {
       gearCounters[index].value--;
+      this.updateCosts(-gearCounters[index].itemPrice);
     }
     this.setState({ gearCounters });
   };
@@ -190,8 +195,25 @@ class CheckoutModal extends Component {
     extrasCounters[index] = { ...counter };
     if (extrasCounters[index].value > 0) {
       extrasCounters[index].value--;
+      this.updateCosts(-extrasCounters[index].itemPrice);
     }
     this.setState({ extrasCounters });
+  };
+
+  updateCosts = (change) => {
+    var reservationSubtotal = this.state.reservationSubtotal;
+    var reservationTax;
+    var reservationTotal;
+
+    reservationSubtotal += change;
+    reservationTax = reservationSubtotal * this.state.taxRate;
+    reservationTotal = reservationSubtotal + reservationTax;
+
+    this.setState({
+      reservationSubtotal,
+      reservationTax,
+      reservationTotal,
+    });
   };
 
   render() {
@@ -329,7 +351,7 @@ class CheckoutModal extends Component {
                     <div>
                       <NumberFormat
                         prefix="$"
-                        value={this.state.reservedSubtotal.toFixed(2)}
+                        value={this.state.reservationSubtotal.toFixed(2)}
                         displayType={"text"}
                         thousandSeparator={true}
                       />
@@ -513,8 +535,8 @@ class CheckoutModal extends Component {
                           this.state.reservedExtras.length > 0) && (
                           <React.Fragment>
                             <div className={styles.reservedOptions}>
-                              <div className={styles.itemName}>Soccer Ball</div>{" "}
-                              <div className={styles.itemCount}>x100</div>{" "}
+                              <div className={styles.itemName}>Soccer Ball</div>
+                              <div className={styles.itemCount}>x100</div>
                               <div className={styles.itemsTotal}>
                                 <NumberFormat
                                   prefix="$"
@@ -531,7 +553,8 @@ class CheckoutModal extends Component {
                           <div>
                             Subtotal:
                             <NumberFormat
-                              value={this.state.reservedSubtotal.toFixed(2)}
+                              prefix="$"
+                              value={this.state.reservationSubtotal.toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                             />
@@ -539,18 +562,17 @@ class CheckoutModal extends Component {
                           <div>
                             Tax:
                             <NumberFormat
-                              value={(
-                                this.state.reservedSubtotal * 0.07
-                              ).toFixed(2)}
+                              prefix="$"
+                              value={this.state.reservationTax.toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                             />
                           </div>
-                          <div className={styles.reservedTotal}>
+                          <div className={styles.reservationTotal}>
                             Total:
                             <NumberFormat
                               prefix="$"
-                              value={this.state.reservedTotal.toFixed(2)}
+                              value={this.state.reservationTotal.toFixed(2)}
                               displayType={"text"}
                               thousandSeparator={true}
                             />
@@ -566,7 +588,7 @@ class CheckoutModal extends Component {
                         Pay
                         <NumberFormat
                           prefix="$"
-                          value={this.state.reservedTotal.toFixed(2)}
+                          value={this.state.reservationTotal.toFixed(2)}
                           displayType={"text"}
                           thousandSeparator={true}
                         />
