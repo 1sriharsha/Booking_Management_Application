@@ -279,8 +279,6 @@ class CheckoutModal extends Component {
       }
     );
 
-    console.log(combinedOptions);
-
     return (
       <React.Fragment>
         <div className={styles.modal}>
