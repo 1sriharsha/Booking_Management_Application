@@ -254,6 +254,33 @@ class CheckoutModal extends Component {
       reservationSlotStart++;
     }
 
+    // List of Selected Gear & Extras
+    const combinedOptions = this.state.reservedGear.concat(
+      this.state.reservedExtras
+    );
+    const optionsList = combinedOptions.map(
+      ({ itemName, value, itemPrice }) => {
+        return (
+          <React.Fragment>
+            <div>
+              <div className={styles.itemName}>{itemName}</div>
+              <div className={styles.itemCount}>x{value}</div>
+              <div className={styles.itemsTotal}>
+                <NumberFormat
+                  prefix="$"
+                  value={(itemPrice * value).toFixed(2)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                />
+              </div>
+            </div>
+          </React.Fragment>
+        );
+      }
+    );
+
+    console.log(combinedOptions);
+
     return (
       <React.Fragment>
         <div className={styles.modal}>
@@ -535,7 +562,7 @@ class CheckoutModal extends Component {
                           this.state.reservedExtras.length > 0) && (
                           <React.Fragment>
                             <div className={styles.reservedOptions}>
-                              <div className={styles.itemName}>Soccer Ball</div>
+                              {/* <div className={styles.itemName}>Soccer Ball</div>
                               <div className={styles.itemCount}>x100</div>
                               <div className={styles.itemsTotal}>
                                 <NumberFormat
@@ -544,7 +571,8 @@ class CheckoutModal extends Component {
                                   displayType={"text"}
                                   thousandSeparator={true}
                                 />
-                              </div>
+                              </div> */}
+                              {optionsList}
                             </div>
                           </React.Fragment>
                         )}

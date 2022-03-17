@@ -375,7 +375,7 @@
 }
 
 .summaryDetails {
-  height: 400px;
+  height: 250px;
   width: 100%;
   text-align: left;
   margin: 1em 0 2em 0;
@@ -409,8 +409,17 @@
 
 .summaryDetails .reservedOptions {
   display: flex;
-  flex-direction: row column;
+  flex-direction: column;
+}
+
+.reservedOptions > div {
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: space-between;
+}
+
+.reservedOptions .itemName {
+  width: 150px;
 }
 
 .reservedOptions .itemCount {
