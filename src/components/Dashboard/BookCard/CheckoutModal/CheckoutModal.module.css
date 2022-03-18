@@ -455,9 +455,11 @@
   top: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), transparent);
   opacity: 0;
+  display: none;
 }
 
 .shadowBottom {
   bottom: 0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent);
+  display: none;
 }

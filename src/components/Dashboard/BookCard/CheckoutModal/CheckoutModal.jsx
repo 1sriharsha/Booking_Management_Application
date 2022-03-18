@@ -223,7 +223,10 @@ class CheckoutModal extends Component {
     const shadowTop = this.refShadowTop;
     const shadowBottom = this.refShadowBottom;
 
+    // Only show shadow if content is scrollable
     if (content.scrollHeight > summaryDetails.clientHeight) {
+      shadowTop.style.display = "block";
+      shadowBottom.style.display = "block";
       let contentScrollHeight =
         content.scrollHeight - summaryDetails.offsetHeight;
 
