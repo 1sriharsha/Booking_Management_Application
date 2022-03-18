@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./RegistrationModal.module.css";
 import "./RegistrationModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,12 +8,7 @@ import axios from "axios";
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
   process.env;
 const RegistrationModal = (props) => {
-  // state = {
-  //   showPassword: false,
-  //   passwordType: "password",
-  // };
-
-  // const [{ showPassword = false }, { passwordType = "password" }] = useState(0);
+  var navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
 
@@ -48,7 +44,7 @@ const RegistrationModal = (props) => {
     })
       .then((res) => {
         if (res.status === 200) {
-          // TODO Redirect to Dashboard
+          navigate("/dashboard"); // Redirect to Dashboard
           console.log("User Added to Database");
         }
       })
@@ -56,16 +52,14 @@ const RegistrationModal = (props) => {
         console.log(err);
         if (err.response) {
           if (err.response.status === 409) {
+            navigate("/dashboard"); // Redirect to Dashboard
             console.log("User Already Exists in Database");
-            // TODO Redirect to Dashboard
           }
         } else if (err.request) {
           //Response not received from API
-
           console.log("Error: ", err.request);
         } else {
           //Unexpected Error
-
           console.log("Error", err.message);
         }
       });
@@ -75,11 +69,6 @@ const RegistrationModal = (props) => {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
     setPasswordType(passwordType === "password" ? "text" : "password");
-    // this.setState({
-    //   showPassword: !this.state.showPassword,
-    //   passwordType:
-    //     this.state.passwordType === "password" ? "text" : "password",
-    // });
   };
 
   return (
