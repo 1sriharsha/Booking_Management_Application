@@ -7,6 +7,7 @@ import { GoogleLoginButton } from "..";
 import axios from "axios";
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
   process.env;
+
 const RegistrationModal = (props) => {
   var navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
