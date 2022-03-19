@@ -9,7 +9,6 @@ import axios from "axios";
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
   process.env;
 
-// TODO add client ID
 const clientID = REACT_APP_CLIENT_ID;
 
 var api_url;

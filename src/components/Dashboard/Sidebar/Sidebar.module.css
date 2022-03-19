@@ -225,15 +225,6 @@ input[type]:focus,
   padding: 0.2em 0.5em;
 }
 
-/* TODO Fix Input Width */
-/* .modal input[type="text"] {
-  width: 90%;
-}
-
-.modal input[type="password"] {
-  width: 100%;
-} */
-
 .inputContainer {
   position: relative;
   margin: 0.3em 0 1.5em 0;
