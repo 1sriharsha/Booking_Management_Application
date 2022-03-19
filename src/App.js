@@ -81,7 +81,6 @@ class App extends Component {
     this.setState({ isAuthenticated: false });
   };
 
-  // TODO Hide Modal When Clicked Out Of
   hideModal = () => {
     this.setState({ showModal: false });
   };

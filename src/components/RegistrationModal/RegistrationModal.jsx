@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./RegistrationModal.module.css";
 import "./RegistrationModal.css";
@@ -72,10 +72,21 @@ const RegistrationModal = (props) => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
+  useEffect(() => {
+    var modal = document.getElementById("userForm");
+
+    // Hide Modal when clicked out of
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        props.onHideModal();
+      }
+    };
+  });
+
   return (
     <React.Fragment>
       {/* User Login/Sign Up Form */}
-      <div className={styles.modal} id="user-form">
+      <div className={styles.modal} id="userForm">
         <div className={styles.modalContent}>
           <div className={styles.modalContainer}>
             <div
