@@ -10,7 +10,7 @@ class App extends Component {
     isAuthenticated: false,
     userFirstName: "John",
     userLastName: "Smith",
-    userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager"
+    userType: "Customer", // Implemented Options: "Guest", "Customer", "Manager"
     showModal: false,
     showModalLogin: false,
     showModalSignUp: false,
@@ -54,7 +54,7 @@ class App extends Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          //Redirect to Dashboard
+          // TODO Redirect to Dashboard
           console.log("Logged In Succesfully");
         }
       })
@@ -63,7 +63,7 @@ class App extends Component {
         if (err.response) {
           if (err.response.status === 404) {
             console.log("EmailID not found");
-            //Redirect to Dashboard
+            // TODO Redirect to Dashboard
           }
         } else if (err.request) {
           //Response not received from API

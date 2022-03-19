@@ -9,9 +9,18 @@ import { FacilityData } from "../../data/";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
+
+    // Set default tab by user type
+    let defaultTab = "Book";
+    if (props.userType === "Customer") {
+      defaultTab = "Dashboard";
+    } else if (props.userType === "Manager") {
+      defaultTab = "Edit Bookings";
+    }
+
     this.state = {
       showFilters: false,
-      activeTab: "Dashboard", // Default to Dashboard
+      activeTab: defaultTab,
     };
   }
 
