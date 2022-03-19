@@ -34,7 +34,11 @@ class Dashboard extends Component {
 
   // Open "Book" tab when user types in search bar
   onSearchChange = () => {
-    this.onClickTabItem("Book");
+    if (this.props.userType === "Customer" || this.props.userType === "Guest") {
+      this.onClickTabItem("Book");
+    } else if (this.props.userType === "Manager") {
+      this.onClickTabItem("Edit Bookings");
+    }
   };
 
   render() {
