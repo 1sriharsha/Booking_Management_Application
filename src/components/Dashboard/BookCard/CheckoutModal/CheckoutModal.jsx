@@ -6,7 +6,7 @@ import TimeSlot from "./TimeSlot/TimeSlot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFormat from "react-number-format";
 import Counters from "./Counters/Counters";
-import { GearData } from "../../../../data";
+import { ExtrasData, GearData } from "../../../../data";
 
 class CheckoutModal extends Component {
   state = {
@@ -19,11 +19,7 @@ class CheckoutModal extends Component {
     reservationTotal: 0,
     taxRate: 0.07,
     gearCounters: GearData,
-    extrasCounters: [
-      // TODO Get Extras from Database
-      { id: 1, value: 0, itemName: "Referee", itemPrice: 20, maxItems: 3 },
-      { id: 2, value: 0, itemName: "Trainer", itemPrice: 40, maxItems: 1 },
-    ],
+    extrasCounters: ExtrasData,
     isGearSelected: false,
     isExtrasSelected: false,
   };
