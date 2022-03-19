@@ -3,6 +3,7 @@ import styles from "./Sidebar.module.css";
 import UserTabs from "./UserTabs/UserTabs";
 import ManagementTabs from "./ManagementTabs/ManagementTabs";
 import GuestTabs from "./GuestTabs/GuestTabs";
+import EmployeeTabs from "./EmployeeTabs/EmployeeTabs";
 
 class Sidebar extends Component {
   render() {
@@ -33,6 +34,14 @@ class Sidebar extends Component {
           {/* Manager View Tabs */}
           {this.props.userType === "Manager" && (
             <ManagementTabs
+              activeTab={this.props.activeTab}
+              onClick={this.props.onClick}
+            />
+          )}
+
+          {/* On-Site Employee View Tabs */}
+          {this.props.userType === "Employee" && (
+            <EmployeeTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}
             />
