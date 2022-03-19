@@ -31,6 +31,7 @@ class BookCard extends Component {
         animationDelay,
         reservationPeriodStart,
         reservationPeriodEnd,
+        isAuthenticated,
       },
     } = this;
 
@@ -94,6 +95,8 @@ class BookCard extends Component {
             onCloseModal={this.closeCheckoutModal}
             reservationPeriodStart={reservationPeriodStart}
             reservationPeriodEnd={reservationPeriodEnd}
+            isAuthenticated={isAuthenticated}
+            onShowModal={this.props.onShowModal}
           />
         )}
       </React.Fragment>

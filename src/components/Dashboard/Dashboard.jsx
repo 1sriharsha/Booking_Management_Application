@@ -75,6 +75,8 @@ class Dashboard extends Component {
               animationDelay={animationDelay}
               reservationPeriodStart={reservationPeriodStart}
               reservationPeriodEnd={reservationPeriodEnd}
+              isAuthenticated={this.props.isAuthenticated}
+              onShowModal={this.props.onShowModal}
             />
           </React.Fragment>
         );

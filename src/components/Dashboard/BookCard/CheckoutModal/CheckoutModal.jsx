@@ -24,6 +24,16 @@ class CheckoutModal extends Component {
     isExtrasSelected: false,
   };
 
+  onPay = () => {
+    if (!this.props.isAuthenticated) {
+      this.props.onShowModal("login");
+    } else {
+      console.log(
+        `Reserved Slot: ${this.state.reservedSlot}\nReserved Gear: ${this.state.reservedGear}\nReserved Extras: ${this.state.reservedExtras}\nReservation Total: ${this.state.reservationTotal}`
+      );
+    }
+  };
+
   setPageNumber(page) {
     this.setState({ sectionNumber: page });
   }
@@ -604,6 +614,7 @@ class CheckoutModal extends Component {
                       </div>
                       {/* Payment Button */}
                       <button
+                        onClick={this.onPay}
                         className={[styles.button, styles.buttonPrimary].join(
                           " "
                         )}
