@@ -6,6 +6,7 @@ import TimeSlot from "./TimeSlot/TimeSlot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFormat from "react-number-format";
 import Counters from "./Counters/Counters";
+import { GearData } from "../../../../data";
 
 class CheckoutModal extends Component {
   state = {
@@ -17,89 +18,7 @@ class CheckoutModal extends Component {
     reservationTax: 0,
     reservationTotal: 0,
     taxRate: 0.07,
-    gearCounters: [
-      // TODO Get Gear from Database
-      {
-        id: 1,
-        value: 0,
-        sportType: "Soccer",
-        itemName: "Soccer Ball",
-        itemPrice: 1.75,
-        maxItems: 5,
-      },
-      {
-        id: 2,
-        value: 0,
-        sportType: "Soccer",
-        itemName: "Soccer Cleats",
-        itemPrice: 3,
-        maxItems: 12,
-      },
-      {
-        id: 3,
-        value: 0,
-        sportType: "Basketball",
-        itemName: "Basketball",
-        itemPrice: 1.75,
-        maxItems: 5,
-      },
-      {
-        id: 4,
-        value: 0,
-        sportType: "Volleyball",
-        itemName: "Volleyball",
-        itemPrice: 1.75,
-        maxItems: 5,
-      },
-      {
-        id: 5,
-        value: 0,
-        sportType: "TableTennis",
-        itemName: "Ball",
-        itemPrice: 0.5,
-        maxItems: 8,
-      },
-      {
-        id: 6,
-        value: 0,
-        sportType: "TableTennis",
-        itemName: "Racket",
-        itemPrice: 2,
-        maxItems: 3,
-      },
-      {
-        id: 7,
-        value: 0,
-        sportType: "Squash",
-        itemName: "Ball",
-        itemPrice: 0.75,
-        maxItems: 5,
-      },
-      {
-        id: 8,
-        value: 0,
-        sportType: "Squash",
-        itemName: "Racket",
-        itemPrice: 2.5,
-        maxItems: 4,
-      },
-      {
-        id: 9,
-        value: 0,
-        sportType: "Badminton",
-        itemName: "Shuttlecock",
-        itemPrice: 0.5,
-        maxItems: 10,
-      },
-      {
-        id: 10,
-        value: 0,
-        sportType: "Badminton",
-        itemName: "Racket",
-        itemPrice: 2.5,
-        maxItems: 4,
-      },
-    ],
+    gearCounters: GearData,
     extrasCounters: [
       // TODO Get Extras from Database
       { id: 1, value: 0, itemName: "Referee", itemPrice: 20, maxItems: 3 },
