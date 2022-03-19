@@ -40,7 +40,8 @@ class BookCard extends Component {
       facilityLabel = facilityLabel.substring(0, maxLabelLength) + "...";
     }
 
-    let sportImage = "images/" + facilitySport + ".jpg";
+    let sportImage =
+      "images/" + facilitySport.toString().toLowerCase() + ".jpg";
     let fadeDelay = { animationDelay: animationDelay + "s" };
 
     return (
