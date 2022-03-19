@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Sidebar.module.css";
 import UserTabs from "./UserTabs/UserTabs";
 import ManagementTabs from "./ManagementTabs/ManagementTabs";
+import GuestTabs from "./GuestTabs/GuestTabs";
 
 class Sidebar extends Component {
   render() {
@@ -12,6 +13,14 @@ class Sidebar extends Component {
           <div className={styles.logo}>
             <a href="/">Athlos</a>
           </div>
+
+          {/* Guest View Tabs */}
+          {this.props.userType === "Guest" && (
+            <GuestTabs
+              activeTab={this.props.activeTab}
+              onClick={this.props.onClick}
+            />
+          )}
 
           {/* Customer View Tabs */}
           {this.props.userType === "Customer" && (

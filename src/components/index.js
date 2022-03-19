@@ -5,6 +5,7 @@ export { default as RegistrationModal } from "./RegistrationModal/RegistrationMo
 export { default as Sidebar } from "./Dashboard/Sidebar/Sidebar";
 export { default as UserTabs } from "./Dashboard/Sidebar/UserTabs/UserTabs";
 export { default as ManagementTabs } from "./Dashboard/Sidebar/ManagementTabs/ManagementTabs";
+export { default as GuestTabs } from "./Dashboard/Sidebar/GuestTabs/GuestTabs";
 export { default as NavProfile } from "./NavProfile/NavProfile";
 export { default as Tab } from "./Dashboard/Sidebar/Tab/Tab";
 export { default as BookCard } from "./Dashboard/BookCard/BookCard";

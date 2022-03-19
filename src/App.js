@@ -10,7 +10,7 @@ class App extends Component {
     isAuthenticated: false,
     userFirstName: "John",
     userLastName: "Smith",
-    userType: "Customer", // Implemented Options: "Customer", "Manager"
+    userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager"
     showModal: false,
     showModalLogin: false,
     showModalSignUp: false,
