@@ -147,6 +147,7 @@ input[type]:focus,
 }
 
 .card i {
+  color: var(--color-gray);
   margin-right: 0.3em;
 }
 
