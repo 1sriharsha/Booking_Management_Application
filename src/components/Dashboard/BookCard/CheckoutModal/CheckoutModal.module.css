@@ -335,10 +335,17 @@
   border: 1px solid var(--color-gray);
   margin-right: 25px;
   padding: 0 15px;
+  flex-grow: 1;
 }
 
 .payment ::placeholder {
   color: var(--color-gray);
+}
+
+.payment form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .summary {
@@ -427,6 +434,7 @@
 
 .reservedOptions .itemsTotal {
   width: 65px;
+  text-align: right;
 }
 
 .reservedPricing {
