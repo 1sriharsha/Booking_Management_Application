@@ -55,7 +55,7 @@ class App extends Component {
       .then((res) => {
         if (res.status === 200) {
           // TODO Redirect to Dashboard
-          console.log("Logged In Succesfully");
+          console.log("Logged In Successfully");
         }
       })
       .catch(function (err) {
