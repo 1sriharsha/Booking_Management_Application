@@ -32,7 +32,6 @@ class ManagementTabs extends Component {
           tabLabel="Chat Support"
           icon="fa-solid fa-headset"
         ></Tab>
-
       </React.Fragment>
     );
   }
