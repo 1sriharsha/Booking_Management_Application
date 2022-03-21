@@ -88,6 +88,8 @@ const RegistrationModal = (props) => {
     if (targetType === "form" || targetName === "fname") {
       if (fname.value.trim() === "") {
         isError(fname, "First Name cannot be blank.");
+      } else if (!isName(fname.value.trim())) {
+        isError(fname, "First Name is not valid.");
       } else {
         isSuccess(fname);
       }
@@ -96,6 +98,8 @@ const RegistrationModal = (props) => {
     if (targetType === "form" || targetName === "lname") {
       if (lname.value.trim() === "") {
         isError(lname, "Last Name cannot be blank.");
+      } else if (!isName(lname.value.trim())) {
+        isError(lname, "Last Name is not valid.");
       } else {
         isSuccess(lname);
       }
@@ -114,6 +118,13 @@ const RegistrationModal = (props) => {
     if (targetType === "form" || targetName === "password") {
       if (password.value.trim() === "") {
         isError(password, "The password cannot be empty.");
+      } else if (!isPassword(password.value.trim())) {
+        isError(
+          password,
+          "Password must contain:\nOne Uppercase\nOne Lowercase\nOne Number"
+        );
+      } else if (password.value.trim().length < 8) {
+        isError(password, "Password must be at least 8 characters.");
       } else {
         isSuccess(password);
       }
@@ -153,6 +164,18 @@ const RegistrationModal = (props) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+  }
+
+  function isName(name) {
+    const re = /^[a-z ,.'-]+$/i;
+    return re.test(String(name).toLowerCase());
+  }
+
+  function isPassword(password) {
+    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{0,}$/;
+    console.log(password);
+    console.log(re.test(password));
+    return re.test(password);
   }
 
   useEffect(() => {
