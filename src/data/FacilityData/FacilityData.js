@@ -35,7 +35,7 @@ const FacilityData = [
     id: 4,
     facilityName: "Student Recreational Sports Center",
     facilityLocation: "Bloomington, IN",
-    facilitySport: "TableTennis",
+    facilitySport: "Table Tennis",
     facilityInfo: "Table Tennis Table #05",
     availableNow: false,
     reservationPeriodStart: 5,

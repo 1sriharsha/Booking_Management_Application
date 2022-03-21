@@ -92,7 +92,7 @@ const RegistrationModal = (props) => {
             <div
               onClick={props.onHideModal}
               className={styles.close}
-              title="Exit Form"
+              title="Close"
             >
               &times;
             </div>

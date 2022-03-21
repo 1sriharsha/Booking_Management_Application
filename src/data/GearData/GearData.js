@@ -36,7 +36,7 @@ const GearData = [
   {
     id: 5,
     value: 0,
-    sportType: "TableTennis",
+    sportType: "Table Tennis",
     itemName: "Ball",
     itemPrice: 0.5,
     maxItems: 8,
@@ -44,7 +44,7 @@ const GearData = [
   {
     id: 6,
     value: 0,
-    sportType: "TableTennis",
+    sportType: "Table Tennis",
     itemName: "Racket",
     itemPrice: 2,
     maxItems: 3,

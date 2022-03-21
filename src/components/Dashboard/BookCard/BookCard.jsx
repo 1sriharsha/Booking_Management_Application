@@ -42,7 +42,9 @@ class BookCard extends Component {
     }
 
     let sportImage =
-      "images/" + facilitySport.toString().toLowerCase() + ".jpg";
+      "images/" +
+      facilitySport.toString().toLowerCase().replace(/ /g, "") +
+      ".jpg";
     let fadeDelay = { animationDelay: animationDelay + "s" };
 
     return (

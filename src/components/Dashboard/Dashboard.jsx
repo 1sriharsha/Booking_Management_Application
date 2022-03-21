@@ -12,9 +12,9 @@ class Dashboard extends Component {
 
     // Set default tab by user type
     let defaultTab = "Book";
-    if (props.userType === "Customer") {
+    if (props.userType === "customer") {
       defaultTab = "Dashboard";
-    } else if (props.userType === "Manager") {
+    } else if (props.userType === "manager") {
       defaultTab = "Edit Bookings";
     }
 
@@ -34,7 +34,7 @@ class Dashboard extends Component {
 
   // Open "Book" tab when user types in search bar
   onSearchChange = () => {
-    if (this.props.userType === "Manager") {
+    if (this.props.userType === "manager") {
       this.onClickTabItem("Edit Bookings");
     } else {
       this.onClickTabItem("Book");

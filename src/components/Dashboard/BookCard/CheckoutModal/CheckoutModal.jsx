@@ -183,7 +183,10 @@ class CheckoutModal extends Component {
       },
     } = this;
 
-    let sportImage = "images/" + facilitySport + ".jpg";
+    let sportImage =
+      "images/" +
+      facilitySport.toString().toLowerCase().replace(/ /g, "") +
+      ".jpg";
 
     var nTimeSlots = [];
     var reservationSlotStart = reservationPeriodStart;
