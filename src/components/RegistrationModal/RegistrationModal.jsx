@@ -73,7 +73,7 @@ const RegistrationModal = (props) => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
-  const validate = () => {
+  const validate = (event) => {
     const fname = document.getElementById("signup-form-fname");
     const lname = document.getElementById("signup-form-lname");
     const email = document.getElementById("signup-form-email");
@@ -82,38 +82,51 @@ const RegistrationModal = (props) => {
       "signup-form-password-repeat"
     );
 
-    if (fname.value.trim() === "") {
-      isError(fname, "First Name cannot be blank.");
-    } else {
-      isSuccess(fname);
+    const targetName = event.target.name;
+    const targetType = event.target.localName;
+
+    if (targetType === "form" || targetName === "fname") {
+      if (fname.value.trim() === "") {
+        isError(fname, "First Name cannot be blank.");
+      } else {
+        isSuccess(fname);
+      }
     }
 
-    if (lname.value.trim() === "") {
-      isError(lname, "Last Name cannot be blank.");
-    } else {
-      isSuccess(lname);
+    if (targetType === "form" || targetName === "lname") {
+      if (lname.value.trim() === "") {
+        isError(lname, "Last Name cannot be blank.");
+      } else {
+        isSuccess(lname);
+      }
     }
 
-    if (email.value.trim() === "") {
-      isError(email, "Email cannot be blank.");
-    } else if (!isEmail(email.value.trim())) {
-      isError(email, "Email is not valid. Try again!");
-    } else {
-      isSuccess(email);
+    if (targetType === "form" || targetName === "email") {
+      if (email.value.trim() === "") {
+        isError(email, "Email cannot be blank.");
+      } else if (!isEmail(email.value.trim())) {
+        isError(email, "Email is not valid. Try again!");
+      } else {
+        isSuccess(email);
+      }
     }
 
-    if (password.value.trim() === "") {
-      isError(password, "The password cannot be empty.");
-    } else {
-      isSuccess(password);
+    if (targetType === "form" || targetName === "password") {
+      if (password.value.trim() === "") {
+        isError(password, "The password cannot be empty.");
+      } else {
+        isSuccess(password);
+      }
     }
 
-    if (password_repeat.value.trim() === "") {
-      isError(password_repeat, "The password cannot be empty.");
-    } else if (password.value.trim() !== password_repeat.value.trim()) {
-      isError(password_repeat, "The passwords do not match.");
-    } else {
-      isSuccess(password_repeat);
+    if (targetType === "form" || targetName === "password-repeat") {
+      if (password_repeat.value.trim() === "") {
+        isError(password_repeat, "The password cannot be empty.");
+      } else if (password.value.trim() !== password_repeat.value.trim()) {
+        isError(password_repeat, "The passwords do not match.");
+      } else {
+        isSuccess(password_repeat);
+      }
     }
   };
 
@@ -158,7 +171,7 @@ const RegistrationModal = (props) => {
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        validate();
+        validate(e);
       });
     }
   });
@@ -297,7 +310,7 @@ const RegistrationModal = (props) => {
                         type="text"
                         placeholder=""
                         name="fname"
-                        onChange={() => validate()}
+                        onChange={(e) => validate(e)}
                       />
 
                       <div className="error"></div>
@@ -312,7 +325,7 @@ const RegistrationModal = (props) => {
                         type="text"
                         placeholder=""
                         name="lname"
-                        onChange={validate}
+                        onChange={(e) => validate(e)}
                       />
 
                       <div className="error"></div>
@@ -326,7 +339,7 @@ const RegistrationModal = (props) => {
                       type="text"
                       placeholder=""
                       name="email"
-                      onChange={validate}
+                      onChange={(e) => validate(e)}
                     />
 
                     <div className="error"></div>
@@ -340,7 +353,7 @@ const RegistrationModal = (props) => {
                         type={passwordType}
                         placeholder=""
                         name="password"
-                        onChange={validate}
+                        onChange={(e) => validate(e)}
                       />
                       <button
                         onClick={toggleShowPassword}
@@ -366,7 +379,7 @@ const RegistrationModal = (props) => {
                         type={passwordType}
                         placeholder=""
                         name="password-repeat"
-                        onChange={validate}
+                        onChange={(e) => validate(e)}
                       />
                       <button
                         onClick={toggleShowPassword}
