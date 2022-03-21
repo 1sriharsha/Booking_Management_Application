@@ -12,6 +12,7 @@ const RegistrationModal = (props) => {
   var navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
+  const [isValid, setIsValid] = useState(false);
 
   const onSignUp = (event) => {
     var api_url;
@@ -72,6 +73,75 @@ const RegistrationModal = (props) => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
+  const validate = () => {
+    const fname = document.getElementById("signup-form-fname");
+    const lname = document.getElementById("signup-form-lname");
+    const email = document.getElementById("signup-form-email");
+    const password = document.getElementById("signup-form-password");
+    const password_repeat = document.getElementById(
+      "signup-form-password-repeat"
+    );
+
+    if (fname.value.trim() === "") {
+      isError(fname, "First Name cannot be blank.");
+    } else {
+      isSuccess(fname);
+    }
+
+    if (lname.value.trim() === "") {
+      isError(lname, "Last Name cannot be blank.");
+    } else {
+      isSuccess(lname);
+    }
+
+    if (email.value.trim() === "") {
+      isError(email, "Email cannot be blank.");
+    } else if (!isEmail(email.value.trim())) {
+      isError(email, "Email is not valid. Try again!");
+    } else {
+      isSuccess(email);
+    }
+
+    if (password.value.trim() === "") {
+      isError(password, "The password cannot be empty.");
+    } else {
+      isSuccess(password);
+    }
+
+    if (password_repeat.value.trim() === "") {
+      isError(password_repeat, "The password cannot be empty.");
+    } else if (password.value.trim() !== password_repeat.value.trim()) {
+      isError(password_repeat, "The passwords do not match.");
+    } else {
+      isSuccess(password_repeat);
+    }
+  };
+
+  function isError(input, error) {
+    const inputCheck = input.parentElement;
+    const displayError = inputCheck.querySelector(".error");
+
+    input.style.boxShadow =
+      "0 1px 1px rgba(255, 0, 0, 0.08) inset, 0 0 8px rgba(255, 0, 0, 0.7)";
+    displayError.innerText = error;
+    setIsValid(false);
+  }
+
+  function isSuccess(input) {
+    const inputCheck = input.parentElement;
+    const displayError = inputCheck.querySelector(".error");
+
+    input.style.boxShadow = "";
+    displayError.innerText = "";
+    setIsValid(true);
+  }
+
+  function isEmail(email) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   useEffect(() => {
     var modal = document.getElementById("userForm");
 
@@ -81,6 +151,16 @@ const RegistrationModal = (props) => {
         props.onHideModal();
       }
     };
+
+    // Sign Up Validation
+    if (props.isSignUpVisible) {
+      const form = document.getElementById("signup-form");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        validate();
+      });
+    }
   });
 
   return (
@@ -198,7 +278,13 @@ const RegistrationModal = (props) => {
                 <form
                   id="signup-form"
                   className={styles.slideInLeft}
-                  onSubmit={onSignUp}
+                  onSubmit={(e) => {
+                    if (isValid) {
+                      onSignUp(e);
+                    } else {
+                      validate(e);
+                    }
+                  }}
                   method="post"
                 >
                   <div className={styles.nameContainer}>
@@ -211,9 +297,10 @@ const RegistrationModal = (props) => {
                         type="text"
                         placeholder=""
                         name="fname"
+                        onChange={() => validate()}
                       />
 
-                      <div className={styles.error}></div>
+                      <div className="error"></div>
                     </div>
 
                     <div
@@ -225,9 +312,10 @@ const RegistrationModal = (props) => {
                         type="text"
                         placeholder=""
                         name="lname"
+                        onChange={validate}
                       />
 
-                      <div className={styles.error}></div>
+                      <div className="error"></div>
                     </div>
                   </div>
 
@@ -238,9 +326,10 @@ const RegistrationModal = (props) => {
                       type="text"
                       placeholder=""
                       name="email"
+                      onChange={validate}
                     />
 
-                    <div className={styles.error}></div>
+                    <div className="error"></div>
                   </div>
 
                   <div className={styles.inputContainer}>
@@ -251,6 +340,7 @@ const RegistrationModal = (props) => {
                         type={passwordType}
                         placeholder=""
                         name="password"
+                        onChange={validate}
                       />
                       <button
                         onClick={toggleShowPassword}
@@ -264,7 +354,7 @@ const RegistrationModal = (props) => {
                           <FontAwesomeIcon icon="fa-solid fa-eye-slash" />
                         )}
                       </button>
-                      <div className={styles.error}></div>
+                      <div className="error"></div>
                     </div>
                   </div>
 
@@ -276,6 +366,7 @@ const RegistrationModal = (props) => {
                         type={passwordType}
                         placeholder=""
                         name="password-repeat"
+                        onChange={validate}
                       />
                       <button
                         onClick={toggleShowPassword}
@@ -289,7 +380,7 @@ const RegistrationModal = (props) => {
                           <FontAwesomeIcon icon="fa-solid fa-eye-slash" />
                         )}
                       </button>
-                      <div className={styles.error}></div>
+                      <div className="error"></div>
                     </div>
                   </div>
 

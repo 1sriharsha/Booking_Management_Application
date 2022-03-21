@@ -118,11 +118,10 @@ class App extends Component {
         </Routes>
         {this.state.showModal && (
           <RegistrationModal
+            isSignUpVisible={this.state.showModalSignUp}
             onLogin={this.onLogin}
             onShowModal={this.showModal}
             onHideModal={this.hideModal}
-            onGetModalVisibility={this.getModalVisibility}
-            onGetModalTab={this.getModalTab}
             showModalLogin={this.state.showModalLogin}
             showModalSignUp={this.state.showModalSignUp}
           ></RegistrationModal>
