@@ -2,14 +2,14 @@
 
 const FacilityData = [
   {
-    id: 1,
-    facilityName: "Student Recreational Sports Center",
-    facilityLocation: "Bloomington, IN",
-    facilitySport: "Soccer",
-    facilityInfo: "Soccer Field #02",
-    availableNow: true,
-    reservationPeriodStart: 6,
-    reservationPeriodEnd: 17,
+    id: 1, // Primary Key
+    facilityName: "Student Recreational Sports Center", // Recreation Center Name
+    facilityLocation: "Bloomington, IN", // Recreation Center Location
+    facilitySport: "Soccer", // Field/Court Type
+    facilityInfo: "Soccer Field #02", // Field/Court Description
+    availableNow: true, // Is the field/court not reserved during the current hour
+    reservationPeriodStart: 6, // What time does the Recreation Center start accepting reservations
+    reservationPeriodEnd: 17, // What time does the Recreation Center stop accepting reservations
   },
   {
     id: 2,

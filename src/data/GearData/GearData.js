@@ -1,13 +1,14 @@
 // TODO Get Gear from Database
 
+// Gear available to rent by sport
 const GearData = [
   {
-    id: 1,
+    id: 1, // Primary Key
     value: 0,
-    sportType: "Soccer",
-    itemName: "Soccer Ball",
-    itemPrice: 1.75,
-    maxItems: 5,
+    sportType: "Soccer", // Item category  
+    itemName: "Soccer Ball", // Item name
+    itemPrice: 1.75, // Cost to rent 1 item
+    maxItems: 5, // Max number that can be rented per reservation
   },
   {
     id: 2,
