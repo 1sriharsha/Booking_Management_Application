@@ -170,28 +170,32 @@ const RegistrationModal = (props) => {
 
   function isPassword(password) {
     const passwordVal = password.value.trim();
+    let isValid = true;
 
-    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{0,}$/;
     const uppercase = /(?=.*[A-Z])/;
     const lowercase = /(?=.*[a-z])/;
     const digit = /(?=.*\d)/;
 
     let errors = "Password must contain:";
 
-    if (!re.test(passwordVal)) {
-      if (!uppercase.test(passwordVal)) {
-        errors += "\n  - One Uppercase";
-      }
-      if (!lowercase.test(passwordVal)) {
-        errors += "\n  - One Lowercase";
-      }
-      if (!digit.test(passwordVal)) {
-        errors += "\n  - One Number";
-      }
+    if (!uppercase.test(passwordVal)) {
+      errors += "\n  - One Uppercase";
+      isValid = false;
+    }
+    if (!lowercase.test(passwordVal)) {
+      errors += "\n  - One Lowercase";
+      isValid = false;
+    }
+    if (!digit.test(passwordVal)) {
+      errors += "\n  - One Number";
+      isValid = false;
+    }
+
+    if (!isValid) {
       isError(password, errors);
     }
 
-    return re.test(passwordVal);
+    return isValid;
   }
 
   useEffect(() => {
