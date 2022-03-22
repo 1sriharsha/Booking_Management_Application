@@ -109,7 +109,7 @@ const RegistrationModal = (props) => {
       if (email.value.trim() === "") {
         isError(email, "Email cannot be blank.");
       } else if (!isEmail(email.value.trim())) {
-        isError(email, "Email is not valid. Try again!");
+        isError(email, "Email is not valid.");
       } else {
         isSuccess(email);
       }
@@ -117,12 +117,9 @@ const RegistrationModal = (props) => {
 
     if (targetType === "form" || targetName === "password") {
       if (password.value.trim() === "") {
-        isError(password, "The password cannot be empty.");
-      } else if (!isPassword(password.value.trim())) {
-        isError(
-          password,
-          "Password must contain:\nOne Uppercase\nOne Lowercase\nOne Number"
-        );
+        isError(password, "Password cannot be blank.");
+      } else if (!isPassword(password)) {
+        return;
       } else if (password.value.trim().length < 8) {
         isError(password, "Password must be at least 8 characters.");
       } else {
@@ -132,7 +129,7 @@ const RegistrationModal = (props) => {
 
     if (targetType === "form" || targetName === "password-repeat") {
       if (password_repeat.value.trim() === "") {
-        isError(password_repeat, "The password cannot be empty.");
+        isError(password_repeat, "Password cannot be blank.");
       } else if (password.value.trim() !== password_repeat.value.trim()) {
         isError(password_repeat, "The passwords do not match.");
       } else {
@@ -172,10 +169,29 @@ const RegistrationModal = (props) => {
   }
 
   function isPassword(password) {
+    const passwordVal = password.value.trim();
+
     const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{0,}$/;
-    console.log(password);
-    console.log(re.test(password));
-    return re.test(password);
+    const uppercase = /(?=.*[A-Z])/;
+    const lowercase = /(?=.*[a-z])/;
+    const digit = /(?=.*\d)/;
+
+    let errors = "Password must contain:";
+
+    if (!re.test(passwordVal)) {
+      if (!uppercase.test(passwordVal)) {
+        errors += "\n  - One Uppercase";
+      }
+      if (!lowercase.test(passwordVal)) {
+        errors += "\n  - One Lowercase";
+      }
+      if (!digit.test(passwordVal)) {
+        errors += "\n  - One Number";
+      }
+      isError(password, errors);
+    }
+
+    return re.test(passwordVal);
   }
 
   useEffect(() => {
