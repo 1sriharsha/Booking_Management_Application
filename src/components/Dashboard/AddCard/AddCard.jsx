@@ -24,10 +24,15 @@ class AddCard extends Component {
     return (
       <React.Fragment>
         {/* Facility Card */}
-        <div
+        <button
           className={[styles.card, styles.loadIn].join(" ")}
           style={fadeDelay}
-        ></div>
+          title="Add Facility"
+        >
+          <i>
+            <FontAwesomeIcon icon="fa-solid fa-plus" />
+          </i>
+        </button>
       </React.Fragment>
     );
   }
