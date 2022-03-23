@@ -33,16 +33,13 @@ class EditCard extends Component {
 
     return (
       <React.Fragment>
+        {/* Facility Card */}
         <div
           className={[styles.card, styles.loadIn].join(" ")}
           style={fadeDelay}
         >
+          {/* Facility Image */}
           <div className={styles.image}>
-            {availableNow && (
-              <div className={[styles.available, styles.fadeIn].join(" ")}>
-                Available Now
-              </div>
-            )}
             <img src={sportImage} alt={facilitySport} />
           </div>
           <div className={styles.content}>
@@ -61,11 +58,19 @@ class EditCard extends Component {
               </i>
               {facilityInfo}
             </div>
+            {/* Delete Button */}
             <button
-              className={[styles.button, styles.buttonPrimary].join(" ")}
+              className={[styles.button, styles.deleteButton].join(" ")}
               onClick={() => this.onClickBook({ facilityID })}
             >
-              Book
+              Delete
+            </button>
+            {/* Edit Button */}
+            <button
+              className={[styles.button, styles.editButton].join(" ")}
+              onClick={() => this.onClickBook({ facilityID })}
+            >
+              Edit
             </button>
           </div>
         </div>
