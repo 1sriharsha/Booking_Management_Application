@@ -6,6 +6,7 @@ import NavProfile from "../NavProfile/NavProfile";
 import Shortcut from "./Shortcut/Shortcut";
 import { FacilityData } from "../../data/";
 import EditCard from "./EditCard/EditCard";
+import AddCard from "./AddCard/AddCard";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -181,6 +182,7 @@ class Dashboard extends Component {
           {/* Edit Bookings */}
           {this.state.activeTab === "Edit Bookings" && (
             <div className={styles.bookContainer}>
+              <AddCard animationDelay={animationDelay} />
               <EditCard
                 key={1}
                 facilityID={1}
