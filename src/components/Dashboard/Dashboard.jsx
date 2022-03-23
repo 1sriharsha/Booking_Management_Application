@@ -5,6 +5,7 @@ import { BookCard, Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 import Shortcut from "./Shortcut/Shortcut";
 import { FacilityData } from "../../data/";
+import EditCard from "./EditCard/EditCard";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -175,6 +176,26 @@ class Dashboard extends Component {
           {/* Book Content */}
           {this.state.activeTab === "Book" && (
             <div className={styles.bookContainer}>{nBookCards}</div>
+          )}
+
+          {/* Edit Bookings */}
+          {this.state.activeTab === "Edit Bookings" && (
+            <div className={styles.bookContainer}>
+              <EditCard
+                key={1}
+                facilityID={1}
+                facilityName={"SRSC"}
+                facilityLocation={"Bloomington"}
+                facilitySport={"Soccer"}
+                facilityInfo={"Soccer Field #00"}
+                availableNow={true}
+                animationDelay={animationDelay}
+                reservationPeriodStart={6}
+                reservationPeriodEnd={8}
+                isAuthenticated={this.props.isAuthenticated}
+                onShowModal={this.props.onShowModal}
+              />
+            </div>
           )}
         </div>
       </React.Fragment>
