@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 
 class AddModal extends Component {
   state = {
-    sectionNumber: 1,
+    sectionNumber: 2,
     facilityName: "",
     facilityLocation: "",
     facilitySport: "",
@@ -32,6 +32,11 @@ class AddModal extends Component {
     const {
       props: {},
     } = this;
+
+    let timeOptions = [];
+    for (let index = 0; index < 24; index++) {
+      timeOptions.push(<option>{index + ":00"}</option>);
+    }
 
     return (
       <React.Fragment>
@@ -175,7 +180,24 @@ class AddModal extends Component {
             )}
             {/* Section 2: Reservation Period */}
             {this.state.sectionNumber === 2 && (
-              <React.Fragment>Reservation Period</React.Fragment>
+              <React.Fragment>
+                <div className={styles.reservationContainer}>
+                  <section>
+                    <div className={styles.subtitle}>
+                      What time does {this.state.facilityName}{" "}
+                      <span>begin</span> accepting reservations?
+                    </div>
+                    <select>{timeOptions}</select>
+                  </section>
+                  <section>
+                    <div className={styles.subtitle}>
+                      What time does {this.state.facilityName} <span>stop</span>{" "}
+                      accepting reservations?
+                    </div>
+                    <select>{timeOptions}</select>
+                  </section>
+                </div>
+              </React.Fragment>
             )}
           </div>
         </div>

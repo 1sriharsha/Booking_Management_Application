@@ -98,6 +98,17 @@
   color: red;
 }
 
+.title {
+  font-size: 4em;
+  text-align: center;
+  /* margin-top: 1em; */
+}
+
+.subtitle {
+  font-size: 1.5em;
+  text-align: center;
+}
+
 
 /* Add Facility Form */
 .container {
@@ -136,6 +147,32 @@
   justify-content: space-between;
   align-items: center;
 } */
+
+/* Reservation Period */
+.reservationContainer {
+  margin-top: 10vh;
+  display: flex;
+  justify-content: space-around;
+align-items: center;
+gap: 1em;
+padding: 0 1em 1em 1em;
+}
+
+.reservationContainer section {
+  background-color: var(--color-tertiary);
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservationContainer span {
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.reservationContainer select {
+  margin-top: 2em;
+}
+
 
 /* Navigation */
 .navigation {
