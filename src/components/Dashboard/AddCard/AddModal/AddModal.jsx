@@ -46,7 +46,18 @@ class AddModal extends Component {
   };
 
   onSubmit = () => {
-    console.log("Submitted");
+    var newFacilityData = {
+      facilityName: this.state.facilityName,
+      facilityLocation: this.state.facilityLocation,
+      facilitySport: this.state.facilitySport,
+      facilityInfo: this.state.facilityInfo,
+      reservationPeriodStart: this.state.reservationPeriodStart,
+      reservationPeriodEnd: this.state.reservationPeriodEnd,
+    };
+    // TODO Connect to Database
+    console.log(newFacilityData);
+
+    this.props.onCloseModal();
   };
 
   render() {
