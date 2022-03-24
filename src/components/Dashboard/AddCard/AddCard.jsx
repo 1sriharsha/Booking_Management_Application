@@ -9,7 +9,6 @@ class AddCard extends Component {
   };
 
   onClickAdd = () => {
-    console.log("Clicked Add");
     document.querySelector("body").style.overflow = "hidden";
     this.setState({ showAddModal: true });
   };

@@ -25,7 +25,6 @@ class AddModal extends Component {
   }
 
   setFacility = (e) => {
-    console.log("Facility Updated: " + e.target.name);
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -173,6 +172,10 @@ class AddModal extends Component {
                   </button>
                 </div>
               </React.Fragment>
+            )}
+            {/* Section 2: Reservation Period */}
+            {this.state.sectionNumber === 2 && (
+              <React.Fragment>Reservation Period</React.Fragment>
             )}
           </div>
         </div>
