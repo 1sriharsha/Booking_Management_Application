@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import InputMask from "react-input-mask";
 import styles from "./AddModal.module.css";
 import "./AddModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import NumberFormat from "react-number-format";
 
 class AddModal extends Component {
   state = {
@@ -42,14 +40,8 @@ class AddModal extends Component {
       parseInt(this.state.reservationPeriodStart)
     ) {
       this.setState({ isError: true });
-      console.log("Error");
-      console.log("Start: " + this.state.reservationPeriodStart);
-      console.log("End: " + this.state.reservationPeriodEnd);
     } else {
       this.setState({ isError: false });
-      console.log("No Error");
-      console.log("Start: " + this.state.reservationPeriodStart);
-      console.log("End: " + this.state.reservationPeriodEnd);
     }
   };
 
