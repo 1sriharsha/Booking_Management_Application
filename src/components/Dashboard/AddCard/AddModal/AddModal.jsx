@@ -158,6 +158,7 @@ class AddModal extends Component {
                       placeholder="Bloomington Recreation Center"
                       onChange={(e) => this.setFacility(e)}
                       value={this.state.facilityName}
+                      maxLength={50}
                     />
 
                     {/* Facility Location */}
@@ -168,6 +169,7 @@ class AddModal extends Component {
                       placeholder="Bloomington, IN"
                       onChange={(e) => this.setFacility(e)}
                       value={this.state.facilityLocation}
+                      maxLength={50}
                     />
 
                     {/* Facility Sport */}
@@ -178,6 +180,7 @@ class AddModal extends Component {
                       placeholder="Soccer"
                       onChange={(e) => this.setFacility(e)}
                       value={this.state.facilitySport}
+                      maxLength={50}
                     />
 
                     {/* Court/Field Description */}
@@ -188,6 +191,7 @@ class AddModal extends Component {
                       placeholder="Soccer Field #06A"
                       onChange={(e) => this.setFacility(e)}
                       value={this.state.facilityInfo}
+                      maxLength={150}
                     />
                   </form>
                   <button

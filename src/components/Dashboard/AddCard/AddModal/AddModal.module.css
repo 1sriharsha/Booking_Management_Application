@@ -171,11 +171,12 @@
 }
 
 .reservationContainer section {
-  height: 100px;
+  height: 150px;
   background-color: var(--color-tertiary);
   padding: 2em;
   display: flex;
   flex-direction: column;
+  
 }
 
 .reservationContainer span {
@@ -236,9 +237,9 @@
 }
 
 .sectionText {
-  width: 105px;
+  max-width: 50%;
+  overflow-wrap: break-word;
 }
-
 .sectionTitle {
   font-size: 0.8em;
   font-weight: 500;
