@@ -24,6 +24,11 @@ class AddModal extends Component {
     this.setPageNumber(this.state.sectionNumber + 1);
   }
 
+  setFacility = (e) => {
+    console.log("Facility Updated: " + e.target.name);
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
     const {
       props: {},
@@ -47,7 +52,12 @@ class AddModal extends Component {
                 <button
                   className={[
                     styles.statusSection,
-                    this.state.facilityName ? "completedSection" : "",
+                    this.state.facilityName &&
+                    this.state.facilityLocation &&
+                    this.state.facilitySport &&
+                    this.state.facilityInfo
+                      ? "completedSection"
+                      : "",
                   ].join(" ")}
                   onClick={() => this.setPageNumber(1)}
                 >
@@ -73,7 +83,14 @@ class AddModal extends Component {
                       : "",
                   ].join(" ")}
                   onClick={() => this.setPageNumber(2)}
-                  disabled={this.state.facilityName === ""}
+                  disabled={
+                    !(
+                      this.state.facilityName &&
+                      this.state.facilityLocation &&
+                      this.state.facilitySport &&
+                      this.state.facilityInfo
+                    )
+                  }
                 >
                   <div className={styles.sectionIcon}>
                     <FontAwesomeIcon icon="fa-solid fa-clock" />
@@ -101,37 +118,56 @@ class AddModal extends Component {
                 <div className={styles.container}>
                   <form>
                     {/* Facility Name */}
-                    <label htmlFor="name">Facility Name</label>
+                    <label htmlFor="facilityName">Facility Name</label>
                     <input
-                      name="name"
+                      name="facilityName"
                       type="text"
                       placeholder="Bloomington Recreation Center"
+                      onChange={(e) => this.setFacility(e)}
+                      value={this.state.facilityName}
                     />
 
                     {/* Facility Location */}
-                    <label htmlFor="location">Facility Location</label>
+                    <label htmlFor="facilityLocation">Facility Location</label>
                     <input
-                      name="location"
+                      name="facilityLocation"
                       type="text"
                       placeholder="Bloomington, IN"
+                      onChange={(e) => this.setFacility(e)}
+                      value={this.state.facilityLocation}
                     />
 
                     {/* Facility Sport */}
-                    <label htmlFor="sport">Facility Sport</label>
-                    <input name="sport" type="text" placeholder="Soccer" />
+                    <label htmlFor="facilitySport">Facility Sport</label>
+                    <input
+                      name="facilitySport"
+                      type="text"
+                      placeholder="Soccer"
+                      onChange={(e) => this.setFacility(e)}
+                      value={this.state.facilitySport}
+                    />
 
                     {/* Court/Field Description */}
-                    <label htmlFor="description">Court Description</label>
+                    <label htmlFor="facilityInfo">Court Description</label>
                     <input
-                      name="description"
+                      name="facilityInfo"
                       type="text"
                       placeholder="Soccer Field #06A"
+                      onChange={(e) => this.setFacility(e)}
+                      value={this.state.facilityInfo}
                     />
                   </form>
                   <button
                     className={[styles.button, styles.buttonPrimary].join(" ")}
                     onClick={() => this.nextPage()}
-                    disabled={this.state.reservedSlot === null}
+                    disabled={
+                      !(
+                        this.state.facilityName &&
+                        this.state.facilityLocation &&
+                        this.state.facilitySport &&
+                        this.state.facilityInfo
+                      )
+                    }
                   >
                     Next
                   </button>
