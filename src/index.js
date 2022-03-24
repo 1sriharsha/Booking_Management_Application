@@ -26,6 +26,7 @@ import {
   faBaseballBatBall,
   faMinus,
   faCircleInfo,
+  faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -47,7 +48,8 @@ library.add(
   faBaseballBatBall,
   faPlus,
   faMinus,
-  faCircleInfo
+  faCircleInfo,
+  faBuilding
 );
 
 ReactDOM.render(
