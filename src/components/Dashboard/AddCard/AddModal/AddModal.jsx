@@ -7,13 +7,14 @@ import NumberFormat from "react-number-format";
 
 class AddModal extends Component {
   state = {
-    sectionNumber: 2,
+    sectionNumber: 1,
     facilityName: "",
     facilityLocation: "",
     facilitySport: "",
     facilityInfo: "",
     reservationPeriodStart: null,
     reservationPeriodEnd: null,
+    isError: false,
   };
 
   setPageNumber(page) {
@@ -28,14 +29,38 @@ class AddModal extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  render() {
-    const {
-      props: {},
-    } = this;
+  setReservation = (e) => {
+    this.setState(
+      { [e.target.name]: e.target.value },
+      this.validateReservation
+    );
+  };
 
+  validateReservation = () => {
+    if (
+      parseInt(this.state.reservationPeriodEnd) <
+      parseInt(this.state.reservationPeriodStart)
+    ) {
+      this.setState({ isError: true });
+      console.log("Error");
+      console.log("Start: " + this.state.reservationPeriodStart);
+      console.log("End: " + this.state.reservationPeriodEnd);
+    } else {
+      this.setState({ isError: false });
+      console.log("No Error");
+      console.log("Start: " + this.state.reservationPeriodStart);
+      console.log("End: " + this.state.reservationPeriodEnd);
+    }
+  };
+
+  onSubmit = () => {
+    console.log("Submitted");
+  };
+
+  render() {
     let timeOptions = [];
     for (let index = 0; index < 24; index++) {
-      timeOptions.push(<option>{index + ":00"}</option>);
+      timeOptions.push(<option value={index}>{index + ":00"}</option>);
     }
 
     return (
@@ -82,7 +107,8 @@ class AddModal extends Component {
                   className={[
                     styles.statusSection,
                     this.state.reservationPeriodStart &&
-                    this.state.reservationPeriodEnd
+                    this.state.reservationPeriodEnd &&
+                    !this.state.isError
                       ? "completedSection"
                       : "",
                   ].join(" ")}
@@ -182,20 +208,51 @@ class AddModal extends Component {
             {this.state.sectionNumber === 2 && (
               <React.Fragment>
                 <div className={styles.reservationContainer}>
-                  <section>
-                    <div className={styles.subtitle}>
-                      What time does {this.state.facilityName}{" "}
-                      <span>begin</span> accepting reservations?
-                    </div>
-                    <select>{timeOptions}</select>
-                  </section>
-                  <section>
-                    <div className={styles.subtitle}>
-                      What time does {this.state.facilityName} <span>stop</span>{" "}
-                      accepting reservations?
-                    </div>
-                    <select>{timeOptions}</select>
-                  </section>
+                  <main>
+                    <section>
+                      <div className={styles.subtitle}>
+                        What time does {this.state.facilityName}{" "}
+                        <span>begin</span> accepting reservations?
+                      </div>
+                      <select
+                        name="reservationPeriodStart"
+                        onChange={this.setReservation}
+                      >
+                        {timeOptions}
+                      </select>
+                    </section>
+                    <section>
+                      <div className={styles.subtitle}>
+                        What time does {this.state.facilityName}{" "}
+                        <span>stop</span> accepting reservations?
+                      </div>
+                      <select
+                        name="reservationPeriodEnd"
+                        onChange={this.setReservation}
+                      >
+                        {timeOptions}
+                      </select>
+                      {this.state.isError && (
+                        <div className={styles.error}>
+                          Reservation period must end after{" "}
+                          {this.state.reservationPeriodStart + ":00"}.
+                        </div>
+                      )}
+                    </section>
+                  </main>
+                  <button
+                    className={[styles.button, styles.buttonPrimary].join(" ")}
+                    onClick={() => this.onSubmit()}
+                    disabled={
+                      !(
+                        this.state.reservationPeriodStart &&
+                        this.state.reservationPeriodEnd &&
+                        !this.state.isError
+                      )
+                    }
+                  >
+                    Submit
+                  </button>
                 </div>
               </React.Fragment>
             )}
