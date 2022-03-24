@@ -20,6 +20,10 @@ class AddModal extends Component {
     this.setState({ sectionNumber: page });
   }
 
+  nextPage() {
+    this.setPageNumber(this.state.sectionNumber + 1);
+  }
+
   render() {
     const {
       props: {},
@@ -94,35 +98,44 @@ class AddModal extends Component {
             {/* Section 1: Facility Information */}
             {this.state.sectionNumber === 1 && (
               <React.Fragment>
-                <form>
-                  {/* Facility Name */}
-                  <label htmlFor="name">Facility Name</label>
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Bloomington Recreation Center"
-                  />
+                <div className={styles.container}>
+                  <form>
+                    {/* Facility Name */}
+                    <label htmlFor="name">Facility Name</label>
+                    <input
+                      name="name"
+                      type="text"
+                      placeholder="Bloomington Recreation Center"
+                    />
 
-                  {/* Facility Location */}
-                  <label htmlFor="location">Facility Location</label>
-                  <input
-                    name="location"
-                    type="text"
-                    placeholder="Bloomington, IN"
-                  />
+                    {/* Facility Location */}
+                    <label htmlFor="location">Facility Location</label>
+                    <input
+                      name="location"
+                      type="text"
+                      placeholder="Bloomington, IN"
+                    />
 
-                  {/* Facility Sport */}
-                  <label htmlFor="sport">Facility Sport</label>
-                  <input name="sport" type="text" placeholder="Soccer" />
+                    {/* Facility Sport */}
+                    <label htmlFor="sport">Facility Sport</label>
+                    <input name="sport" type="text" placeholder="Soccer" />
 
-                  {/* Court/Field Description */}
-                  <label htmlFor="description">Court Description</label>
-                  <input
-                    name="description"
-                    type="text"
-                    placeholder="Soccer Field #06A"
-                  />
-                </form>
+                    {/* Court/Field Description */}
+                    <label htmlFor="description">Court Description</label>
+                    <input
+                      name="description"
+                      type="text"
+                      placeholder="Soccer Field #06A"
+                    />
+                  </form>
+                  <button
+                    className={[styles.button, styles.buttonPrimary].join(" ")}
+                    onClick={() => this.nextPage()}
+                    disabled={this.state.reservedSlot === null}
+                  >
+                    Next
+                  </button>
+                </div>
               </React.Fragment>
             )}
           </div>
