@@ -45,13 +45,13 @@
   font-size: 3em;
   width: 90px;
   height: 90px;
-border: none;
-background-color: var(--color-tertiary);
-border-radius: 50%;
-cursor: pointer;
-display: flex;
-justify-content: center;
-align-items: center;
+  border: none;
+  background-color: var(--color-tertiary);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Animations */
