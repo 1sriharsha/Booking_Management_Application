@@ -3,6 +3,15 @@ import styles from "./EditCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class EditCard extends Component {
+  state = {
+    isDeleted: false,
+  };
+
+  onDelete = () => {
+    // TODO Delete from Database
+    this.setState({ isDeleted: true });
+  };
+
   render() {
     const {
       props: {
@@ -34,46 +43,48 @@ class EditCard extends Component {
     return (
       <React.Fragment>
         {/* Facility Card */}
-        <div
-          className={[styles.card, styles.loadIn].join(" ")}
-          style={fadeDelay}
-        >
-          {/* Facility Image */}
-          <div className={styles.image}>
-            <img src={sportImage} alt={facilitySport} />
-          </div>
-          <div className={styles.content}>
-            <div title={facilityName} className={styles.title}>
-              {facilityLabel}
+        {!this.state.isDeleted && (
+          <div
+            className={[styles.card, styles.loadIn].join(" ")}
+            style={fadeDelay}
+          >
+            {/* Facility Image */}
+            <div className={styles.image}>
+              <img src={sportImage} alt={facilitySport} />
             </div>
-            <div className={styles.location}>
-              <i>
-                <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
-              </i>
-              {facilityLocation}
-            </div>
-            <div className={styles.description}>
-              <i>
-                <FontAwesomeIcon icon="fa-solid fa-circle-info" />
-              </i>
-              {facilityInfo}
-            </div>
-            {/* Delete Button */}
-            <button
-              className={[styles.button, styles.deleteButton].join(" ")}
-              onClick={() => this.onClickBook({ facilityID })}
-            >
-              Delete
-            </button>
-            {/* Edit Button */}
-            <button
+            <div className={styles.content}>
+              <div title={facilityName} className={styles.title}>
+                {facilityLabel}
+              </div>
+              <div className={styles.location}>
+                <i>
+                  <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
+                </i>
+                {facilityLocation}
+              </div>
+              <div className={styles.description}>
+                <i>
+                  <FontAwesomeIcon icon="fa-solid fa-circle-info" />
+                </i>
+                {facilityInfo}
+              </div>
+              {/* Delete Button */}
+              <button
+                className={[styles.button, styles.deleteButton].join(" ")}
+                onClick={this.onDelete}
+              >
+                Delete
+              </button>
+              {/* Edit Button */}
+              {/* <button
               className={[styles.button, styles.editButton].join(" ")}
               onClick={() => this.onClickBook({ facilityID })}
             >
               Edit
-            </button>
+            </button> */}
+            </div>
           </div>
-        </div>
+        )}
       </React.Fragment>
     );
   }

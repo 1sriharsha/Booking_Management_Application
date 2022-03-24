@@ -85,6 +85,45 @@ class Dashboard extends Component {
       }
     );
 
+    // Generates n EditCard components from Database
+    const nEditCards = FacilityData.map(
+      ({
+        id,
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        facilityInfo,
+        availableNow,
+        reservationPeriodStart,
+        reservationPeriodEnd,
+      }) => {
+        if (i >= 3) {
+          animationDelay += 0.05;
+          i = 0;
+        }
+        i += 1;
+
+        return (
+          <React.Fragment>
+            <EditCard
+              key={id}
+              facilityID={id}
+              facilityName={facilityName}
+              facilityLocation={facilityLocation}
+              facilitySport={facilitySport}
+              facilityInfo={facilityInfo}
+              availableNow={availableNow}
+              animationDelay={animationDelay}
+              reservationPeriodStart={reservationPeriodStart}
+              reservationPeriodEnd={reservationPeriodEnd}
+              isAuthenticated={this.props.isAuthenticated}
+              onShowModal={this.props.onShowModal}
+            />
+          </React.Fragment>
+        );
+      }
+    );
+
     return (
       <React.Fragment>
         {/* Top Navigation Bar */}
@@ -183,7 +222,8 @@ class Dashboard extends Component {
           {this.state.activeTab === "Edit Bookings" && (
             <div className={styles.bookContainer}>
               <AddCard animationDelay={animationDelay} />
-              <EditCard
+              {nEditCards}
+              {/* <EditCard
                 key={1}
                 facilityID={1}
                 facilityName={"SRSC"}
@@ -196,7 +236,7 @@ class Dashboard extends Component {
                 reservationPeriodEnd={8}
                 isAuthenticated={this.props.isAuthenticated}
                 onShowModal={this.props.onShowModal}
-              />
+              /> */}
             </div>
           )}
         </div>
