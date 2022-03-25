@@ -228,6 +228,7 @@ class AddModal extends Component {
                       <select
                         name="reservationPeriodStart"
                         onChange={this.setReservation}
+                        value={this.state.reservationPeriodStart}
                       >
                         {timeOptions}
                       </select>
@@ -244,6 +245,7 @@ class AddModal extends Component {
                       <select
                         name="reservationPeriodEnd"
                         onChange={this.setReservation}
+                        value={this.state.reservationPeriodEnd}
                       >
                         {timeOptions}
                       </select>
