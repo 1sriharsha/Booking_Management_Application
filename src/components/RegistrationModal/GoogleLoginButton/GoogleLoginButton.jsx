@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "production") {
   //console.log(REACT_APP_PRODUCTION_URL)
 }
 
-function GoogleLoginButton() {
+function GoogleLoginButton(props) {
   var navigate = useNavigate();
 
   //console.log(clientID)
@@ -46,6 +46,7 @@ function GoogleLoginButton() {
       .then((res) => {
         if (res.status === 200) {
           navigate("/dashboard"); // Redirect to Dashboard
+          props.onSignUp(res); // Send res to App.js for state change
           console.log("User Added to Database");
         }
       })

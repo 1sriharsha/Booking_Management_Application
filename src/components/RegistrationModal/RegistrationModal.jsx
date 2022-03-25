@@ -262,7 +262,7 @@ const RegistrationModal = (props) => {
                 <div className={styles.tab} id="login">
                   <div className={styles.thirdParty}>
                     {/* Google Sign-In Button */}
-                    <GoogleLoginButton />
+                    <GoogleLoginButton onSignUp={props.onSignUp} />
                   </div>
                   {/* Email Sign-In */}
                   <form
@@ -329,7 +329,7 @@ const RegistrationModal = (props) => {
               <div className={styles.tab} id="sign-up">
                 <div className={styles.thirdParty}>
                   {/* Google Sign-In Button */}
-                  <GoogleLoginButton />
+                  <GoogleLoginButton onSignUp={props.onSignUp} />
                 </div>
                 {/* Email Sign Up */}
                 <form
