@@ -35,6 +35,10 @@ class AddCard extends Component {
     } = this;
 
     let fadeDelay = { animationDelay: animationDelay + "s" };
+    let cardTitle =
+      "Add " +
+      this.props.type.charAt(0).toUpperCase() +
+      this.props.type.slice(1);
 
     return (
       <React.Fragment>
@@ -43,7 +47,7 @@ class AddCard extends Component {
           className={[styles.card, styles.loadIn].join(" ")}
           onClick={this.onClickAdd}
           style={fadeDelay}
-          title="Add Facility"
+          title={cardTitle}
         >
           <i>
             <FontAwesomeIcon icon="fa-solid fa-plus" />
@@ -52,7 +56,7 @@ class AddCard extends Component {
 
         {/* Add Modal */}
         {this.state.showAddModal && (
-          <AddModal onCloseModal={this.closeAddModal} />
+          <AddModal type={this.props.type} onCloseModal={this.closeAddModal} />
         )}
       </React.Fragment>
     );

@@ -221,22 +221,8 @@ class Dashboard extends Component {
           {/* Edit Bookings */}
           {this.state.activeTab === "Edit Bookings" && (
             <div className={styles.bookContainer}>
-              <AddCard animationDelay={animationDelay} />
+              <AddCard type={"facility"} animationDelay={animationDelay} />
               {nEditCards}
-              {/* <EditCard
-                key={1}
-                facilityID={1}
-                facilityName={"SRSC"}
-                facilityLocation={"Bloomington"}
-                facilitySport={"Soccer"}
-                facilityInfo={"Soccer Field #00"}
-                availableNow={true}
-                animationDelay={animationDelay}
-                reservationPeriodStart={6}
-                reservationPeriodEnd={8}
-                isAuthenticated={this.props.isAuthenticated}
-                onShowModal={this.props.onShowModal}
-              /> */}
             </div>
           )}
         </div>
