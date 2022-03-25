@@ -10,7 +10,7 @@ class App extends Component {
     isAuthenticated: false,
     userFirstName: "John",
     userLastName: "Smith",
-    userType: "guest", // Implemented Options: "guest", "customer", "manager", "employee"
+    userType: "manager", // Implemented Options: "guest", "customer", "manager", "employee"
     showModal: false,
     showModalLogin: false,
     showModalSignUp: false,
@@ -55,6 +55,7 @@ class App extends Component {
       .then((res) => {
         if (res.status === 200) {
           // TODO Redirect to Dashboard
+          this.setState({isAuthenticated:true,userFirstName:res.data.firstName,userLastName:res.data.lastName})
           console.log("Logged In Successfully");
         }
       })
