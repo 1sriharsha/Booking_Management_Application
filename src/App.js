@@ -51,7 +51,6 @@ class App extends Component {
       api_url = REACT_APP_LOCAL_URL;
       //console.log(api_url)
     }
-
     var loginData = {
       email: event.target.email.value,
       password: event.target.password.value,
@@ -65,12 +64,16 @@ class App extends Component {
       .then((res) => {
         if (res.status === 200) {
           // TODO Redirect to Dashboard
+          const type = res.data.userType;
           this.setState({
             isAuthenticated: true,
             userFirstName: res.data.firstName,
             userLastName: res.data.lastName,
+            showModal: false,
+            userType: type.toLowerCase(),
           });
           console.log("Logged In Successfully");
+          alert(this.state.userType);
         }
       })
       .catch(function (err) {
