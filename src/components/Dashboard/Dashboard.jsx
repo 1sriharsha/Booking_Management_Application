@@ -178,7 +178,7 @@ class Dashboard extends Component {
 
         {/* Tab Content */}
         <div className={styles.tabContainer}>
-          {/* Dashboard Content */}
+          {/* [Customer] Dashboard Content */}
           {this.state.activeTab === "Dashboard" && (
             <React.Fragment>
               {/* Data Visualization */}
@@ -213,16 +213,30 @@ class Dashboard extends Component {
               </div>
             </React.Fragment>
           )}
-          {/* Book Content */}
+          {/* [Guest/Customer/Employee] Book Content */}
           {this.state.activeTab === "Book" && (
             <div className={styles.bookContainer}>{nBookCards}</div>
           )}
 
-          {/* Edit Bookings */}
+          {/* [Manager] Edit Bookings */}
           {this.state.activeTab === "Edit Bookings" && (
             <div className={styles.bookContainer}>
               <AddCard type={"facility"} animationDelay={animationDelay} />
               {nEditCards}
+            </div>
+          )}
+
+          {/* [Manager] Edit Equipment */}
+          {this.state.activeTab === "Edit Equipment" && (
+            <div className={styles.bookContainer}>
+              <AddCard type={"equipment"} animationDelay={animationDelay} />
+            </div>
+          )}
+
+          {/* [Manager] Edit Promotions */}
+          {this.state.activeTab === "Edit Promotions" && (
+            <div className={styles.bookContainer}>
+              <AddCard type={"promotion"} animationDelay={animationDelay} />
             </div>
           )}
         </div>
