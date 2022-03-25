@@ -474,3 +474,18 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), transparent);
   display: none;
 }
+
+/* Responsive Layout */
+@media screen and (min-width: 1630px) {
+  .timeSlotContainer button {
+    width: 200px;
+  }
+
+  .sectionText {
+    width: 115px;
+  }
+
+  .summary {
+    width: 435px;
+  }
+}
