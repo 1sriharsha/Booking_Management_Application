@@ -218,8 +218,12 @@ class AddModal extends Component {
                   <main>
                     <section>
                       <div className={styles.subtitle}>
-                        What time does {this.state.facilityName}{" "}
-                        <span>begin</span> accepting reservations?
+                        What time does{" "}
+                        <span className={styles.bold}>
+                          {this.state.facilityName}
+                        </span>{" "}
+                        <span className={styles.underline}>begin</span>{" "}
+                        accepting reservations?
                       </div>
                       <select
                         name="reservationPeriodStart"
@@ -230,8 +234,12 @@ class AddModal extends Component {
                     </section>
                     <section>
                       <div className={styles.subtitle}>
-                        What time does {this.state.facilityName}{" "}
-                        <span>stop</span> accepting reservations?
+                        What time does{" "}
+                        <span className={styles.bold}>
+                          {this.state.facilityName}
+                        </span>{" "}
+                        <span className={styles.underline}>stop</span> accepting
+                        reservations?
                       </div>
                       <select
                         name="reservationPeriodEnd"

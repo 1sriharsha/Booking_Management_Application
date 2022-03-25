@@ -179,8 +179,12 @@
   
 }
 
-.reservationContainer span {
+.reservationContainer .underline {
   border-bottom: 1px solid var(--color-primary);
+}
+
+.reservationContainer .bold {
+  font-weight: 700;
 }
 
 .reservationContainer select {
