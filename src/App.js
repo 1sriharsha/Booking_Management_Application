@@ -32,6 +32,16 @@ class App extends Component {
     }
   };
 
+  onSignUp = (res) => {
+    this.setState({
+      isAuthenticated: true,
+      userFirstName: res.data.firstName,
+      userLastName: res.data.lastName,
+      showModal: false,
+      // Add userType
+    });
+  };
+
   onLogin = (event) => {
     var api_url;
     if (process.env.NODE_ENV === "production") {
@@ -55,7 +65,11 @@ class App extends Component {
       .then((res) => {
         if (res.status === 200) {
           // TODO Redirect to Dashboard
-          this.setState({isAuthenticated:true,userFirstName:res.data.firstName,userLastName:res.data.lastName})
+          this.setState({
+            isAuthenticated: true,
+            userFirstName: res.data.firstName,
+            userLastName: res.data.lastName,
+          });
           console.log("Logged In Successfully");
         }
       })
@@ -121,6 +135,7 @@ class App extends Component {
           <RegistrationModal
             isSignUpVisible={this.state.showModalSignUp}
             onLogin={this.onLogin}
+            onSignUp={this.onSignUp}
             onShowModal={this.showModal}
             onHideModal={this.hideModal}
             showModalLogin={this.state.showModalLogin}

@@ -47,6 +47,7 @@ const RegistrationModal = (props) => {
       .then((res) => {
         if (res.status === 200) {
           navigate("/dashboard"); // Redirect to Dashboard
+          props.onSignUp(res);
           console.log("User Added to Database");
         }
       })
