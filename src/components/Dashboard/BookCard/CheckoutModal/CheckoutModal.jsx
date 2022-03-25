@@ -28,9 +28,16 @@ class CheckoutModal extends Component {
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {
-      console.log(
-        `Reserved Slot: ${this.state.reservedSlot}\nReserved Gear: ${this.state.reservedGear}\nReserved Extras: ${this.state.reservedExtras}\nReservation Total: ${this.state.reservationTotal}`
-      );
+      var newReservationData = {
+        reservedSlot: this.state.reservedSlot,
+        reservedGear: this.state.reservedGear,
+        reservedExtras: this.state.reservedExtras,
+        reservationSubtotal: this.state.reservationSubtotal,
+        reservationTax: this.state.reservationTax,
+        reservationTotal: this.state.reservationTotal,
+      };
+      // TODO Connect to API
+      console.log(newReservationData);
     }
   };
 
