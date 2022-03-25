@@ -33,12 +33,13 @@ class App extends Component {
   };
 
   onSignUp = (res) => {
+    const type = res.data.userType;
     this.setState({
       isAuthenticated: true,
       userFirstName: res.data.firstName,
       userLastName: res.data.lastName,
       showModal: false,
-      // Add userType
+      userType: type.toLowerCase(),
     });
   };
 
