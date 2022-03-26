@@ -7,6 +7,7 @@ import Shortcut from "./Shortcut/Shortcut";
 import { FacilityData } from "../../data/";
 import EditCard from "./EditCard/EditCard";
 import AddCard from "./AddCard/AddCard";
+import Searchbar from "./Searchbar/Searchbar";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,27 +22,26 @@ class Dashboard extends Component {
     }
 
     this.state = {
-      showFilters: false,
       activeTab: defaultTab,
     };
   }
 
-  toggleFilters() {
-    this.setState({ showFilters: !this.state.showFilters });
-  }
+  // toggleFilters() {
+  //   this.setState({ showFilters: !this.state.showFilters });
+  // }
 
   onClickTabItem = (tab) => {
     this.setState({ activeTab: tab });
   };
 
   // Open "Book" tab when user types in search bar
-  onSearchChange = () => {
-    if (this.props.userType === "manager") {
-      this.onClickTabItem("Edit Bookings");
-    } else {
-      this.onClickTabItem("Book");
-    }
-  };
+  // onSearchChange = () => {
+  //   if (this.props.userType === "manager") {
+  //     this.onClickTabItem("Edit Bookings");
+  //   } else {
+  //     this.onClickTabItem("Book");
+  //   }
+  // };
 
   render() {
     var i = 0;
@@ -133,27 +133,11 @@ class Dashboard extends Component {
               {/* Navigation: Search Bar [Middle] */}
               <div className={styles.menu}>
                 <div className={styles.search}>
-                  <input
-                    id="searchBar"
-                    type="search"
-                    placeholder="Search Bookings..."
-                    onChange={this.onSearchChange}
+                  <Searchbar
+                    toggleFilters={this.toggleFilters}
+                    onSearchChange={this.onSearchChange}
+                    onClickTabItem={this.onClickTabItem}
                   />
-                  <button
-                    className={styles.filter}
-                    onClick={() => this.toggleFilters()}
-                  >
-                    <i>
-                      <FontAwesomeIcon icon="fa-solid fa-filter" />
-                    </i>
-                  </button>
-                  {this.state.showFilters ? (
-                    <div className={styles.filterOptions} id="filter-toggle">
-                      <div>Option 1</div>
-                      <div>Option 2</div>
-                      <div>Option 3</div>
-                    </div>
-                  ) : null}
                 </div>
               </div>
 

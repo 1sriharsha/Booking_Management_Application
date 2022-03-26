@@ -18,3 +18,4 @@ export { default as GoogleLoginButton } from "./RegistrationModal/GoogleLoginBut
 export { default as TimeSlot } from "./Dashboard/BookCard//CheckoutModal/TimeSlot/TimeSlot";
 export { default as Counters } from "./Dashboard/BookCard/CheckoutModal/Counters/Counters";
 export { default as Counter } from "./Dashboard/BookCard/CheckoutModal/Counter/Counter";
+export { default as Searchbar } from "./Dashboard/Searchbar/Searchbar";
