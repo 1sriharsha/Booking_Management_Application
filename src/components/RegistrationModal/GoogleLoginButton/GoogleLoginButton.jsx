@@ -55,6 +55,7 @@ function GoogleLoginButton(props) {
         if (err.response) {
           if (err.response.status === 409) {
             navigate("/dashboard"); // Redirect to Dashboard
+            props.onSignUp(err.response);
             console.log("User Already Exists in Database");
           }
         } else if (err.request) {
