@@ -10,7 +10,7 @@ class App extends Component {
     isAuthenticated: false,
     userFirstName: "John",
     userLastName: "Smith",
-    userType: "manager", // Implemented Options: "guest", "customer", "manager", "employee"
+    userType: "guest", // Implemented Options: "guest", "customer", "manager", "employee"
     showModal: false,
     showModalLogin: false,
     showModalSignUp: false,
@@ -32,7 +32,7 @@ class App extends Component {
     }
   };
 
-  onSignUp = (res) => {
+  handleAuthState = (res) => {
     const type = res.data.userType;
     this.setState({
       isAuthenticated: true,
@@ -97,7 +97,12 @@ class App extends Component {
   //this.setState({ isAuthenticated: true });
 
   onLogout = () => {
-    this.setState({ isAuthenticated: false });
+    this.setState({
+      isAuthenticated: false,
+      userFirstName: "",
+      userLastName: "",
+      userType: "guest",
+    });
   };
 
   hideModal = () => {
@@ -139,7 +144,7 @@ class App extends Component {
           <RegistrationModal
             isSignUpVisible={this.state.showModalSignUp}
             onLogin={this.onLogin}
-            onSignUp={this.onSignUp}
+            handleAuthState={this.handleAuthState}
             onShowModal={this.showModal}
             onHideModal={this.hideModal}
             showModalLogin={this.state.showModalLogin}

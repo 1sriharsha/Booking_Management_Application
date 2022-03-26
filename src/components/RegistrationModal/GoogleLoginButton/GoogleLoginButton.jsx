@@ -44,7 +44,7 @@ function GoogleLoginButton(props) {
       .then((res) => {
         if (res.status === 200) {
           navigate("/dashboard"); // Redirect to Dashboard
-          props.onSignUp(res); // Send res to App.js for state change
+          props.handleAuthState(res); // Send res to App.js for state change
           console.log("User Added to Database");
         }
       })
@@ -53,7 +53,7 @@ function GoogleLoginButton(props) {
         if (err.response) {
           if (err.response.status === 409) {
             navigate("/dashboard"); // Redirect to Dashboard
-            props.onSignUp(err.response);
+            props.handleAuthState(err.response);
             console.log("User Already Exists in Database");
           }
         } else if (err.request) {

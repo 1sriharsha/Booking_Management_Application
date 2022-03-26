@@ -47,7 +47,7 @@ const RegistrationModal = (props) => {
       .then((res) => {
         if (res.status === 200) {
           navigate("/dashboard"); // Redirect to Dashboard
-          props.onSignUp(res);
+          props.handleAuthState(res);
           console.log("User Added to Database");
         }
       })
@@ -262,7 +262,7 @@ const RegistrationModal = (props) => {
                 <div className={styles.tab} id="login">
                   <div className={styles.thirdParty}>
                     {/* Google Sign-In Button */}
-                    <GoogleLoginButton onSignUp={props.onSignUp} />
+                    <GoogleLoginButton handleAuthState={props.handleAuthState} />
                   </div>
                   {/* Email Sign-In */}
                   <form
@@ -329,7 +329,7 @@ const RegistrationModal = (props) => {
               <div className={styles.tab} id="sign-up">
                 <div className={styles.thirdParty}>
                   {/* Google Sign-In Button */}
-                  <GoogleLoginButton onSignUp={props.onSignUp} />
+                  <GoogleLoginButton handleAuthState={props.handleAuthState} />
                 </div>
                 {/* Email Sign Up */}
                 <form
