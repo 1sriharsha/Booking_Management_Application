@@ -48,6 +48,7 @@ app.use(bodyParser.json())
 app.use('/',require('./routes/index'))
 app.use('/auth',require('./routes/auth'))
 app.use('/users',require('./routes/users'))
+app.use('/book',require('./routes/book'))
 app.get('/logout', middleware.authorization, (req, res) => {
     return res.clearCookie("access_token").status(200).json({ message: "Successfully logged out 😏 🍀" });
   });  
