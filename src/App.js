@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home, Dashboard, RegistrationModal } from "./components";
+import axios from "axios";
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
+  process.env;
 
+var api_url;
+if (process.env.NODE_ENV === "production") {
+  api_url = REACT_APP_PRODUCTION_URL;
+} else {
+  api_url = REACT_APP_LOCAL_URL;
+}
 class App extends Component {
   state = {
     isAuthenticated: false,
@@ -41,11 +50,20 @@ class App extends Component {
   };
 
   onLogout = () => {
-    this.setState({
-      isAuthenticated: false,
-      userFirstName: "",
-      userLastName: "",
-      userType: "guest",
+    axios({
+      method: "GET",
+      url: api_url + "/logout",
+    }).then((res) => {
+      if (res.status === 200) {
+        // TODO Redirect
+        console.log("Logged Out");
+        this.setState({
+          isAuthenticated: false,
+          userFirstName: "",
+          userLastName: "",
+          userType: "guest",
+        });
+      }
     });
   };
 
