@@ -40,13 +40,12 @@ router.post('/google',(req,res)=>{
                 else{
                     if(user){
                         let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET,{expiresIn:'12h'});
-                        res.status(409).cookie("Access_Token",token,{httpOnly:true,secure:true}).json(
+                        res.cookie("Access_Token",token,{httpOnly:true,secure:true,expires:new Date(Date.now() + 900000)}).status(409).json(
                             {
                                 success: true,
                                 firstName:googleUser.firstName,
                                 lastName:googleUser.lastName,
                                 userType:googleUser.userType,
-                                token:token,
                                 message:'Authentication Successful!'
                             }
                         )
@@ -54,13 +53,12 @@ router.post('/google',(req,res)=>{
                     else{
                         let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET,{expiresIn:'12h'});
                         googleUser =GoogleUser.create(googleUser)
-                        res.cookie("Access_Token",token,{httpOnly:true,secure:true}).status(200).json(
+                        res.cookie("Access_Token",token,{httpOnly:true,secure:true,expires:new Date(Date.now() + 900000)}).status(200).json(
                             {
                                 success: true,
                                 firstName:response.payload.given_name,
                                 lastName:response.payload.family_name,
                                 profileType:'Customer',
-                                token:token,
                                 message:'Authentication Successful!'
                             }
                         )
