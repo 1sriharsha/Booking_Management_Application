@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./AddFacility.module.css";
+import "./AddFacility.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 const {
@@ -158,7 +159,7 @@ class AddFacility extends Component {
                 <input
                   name="facilityName"
                   type="text"
-                  placeholder="Bloomington Recreation Center"
+                  placeholder="Student Recreational Sports Center"
                   onChange={(e) => this.setFacility(e)}
                   value={this.state.facilityName}
                   maxLength={50}
@@ -166,15 +167,6 @@ class AddFacility extends Component {
 
                 {/* Facility Location */}
                 <label htmlFor="facilityLocation">Facility Location</label>
-                <input
-                  name="facilityLocation"
-                  type="text"
-                  placeholder="Bloomington, IN"
-                  onChange={(e) => this.setFacility(e)}
-                  value={this.state.facilityLocation}
-                  maxLength={50}
-                />
-
                 <GooglePlacesAutocomplete
                   apiKey={REACT_APP_API_KEY}
                   autocompletionRequest={{
@@ -183,7 +175,20 @@ class AddFacility extends Component {
                     },
                   }}
                   selectProps={{
+                    placeholder: "1601 Law Lane Bloomington, IN 47408",
                     onChange: this.setLocation,
+                    styles: {
+                      placeholder: (provided) => ({
+                        ...provided,
+                        fontStyle: "italic",
+                        color: "var(--color-gray)",
+                      }),
+                      input: (provided) => ({
+                        // Input
+                        ...provided,
+                        boxShadow: "none",
+                      }),
+                    },
                   }}
                 />
 
