@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import styles from "./AddFacility.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+const {
+  REACT_APP_LOCAL_URL,
+  REACT_APP_PRODUCTION_URL,
+  REACT_APP_CLIENT_ID,
+  REACT_APP_API_KEY,
+} = process.env;
 
 class AddFacility extends Component {
   state = {
@@ -24,6 +31,10 @@ class AddFacility extends Component {
 
   setFacility = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  setLocation = (location) => {
+    this.setState({ facilityLocation: location });
   };
 
   setReservation = (e) => {
@@ -162,6 +173,18 @@ class AddFacility extends Component {
                   onChange={(e) => this.setFacility(e)}
                   value={this.state.facilityLocation}
                   maxLength={50}
+                />
+
+                <GooglePlacesAutocomplete
+                  apiKey={REACT_APP_API_KEY}
+                  autocompletionRequest={{
+                    componentRestrictions: {
+                      country: ["us"],
+                    },
+                  }}
+                  selectProps={{
+                    onChange: this.setLocation,
+                  }}
                 />
 
                 {/* Facility Sport */}
