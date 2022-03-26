@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 var bodyParser = require('body-parser');
 const session = require('express-session')
 var cors = require('cors')
+const middleware = require('./middleware')
 const aliveTime = 1000 * 60 * 30
 
 //Load Configurations
@@ -47,7 +48,9 @@ app.use(bodyParser.json())
 app.use('/',require('./routes/index'))
 app.use('/auth',require('./routes/auth'))
 app.use('/users',require('./routes/users'))
-
+app.get('/logout', middleware.authorization, (req, res) => {
+    return res.clearCookie("access_token").status(200).json({ message: "Successfully logged out 😏 🍀" });
+  });  
 
 const PORT  = process.env.PORT || 5000
 

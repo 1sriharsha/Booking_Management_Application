@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken');
 const middleware = require('../middleware')
 
 
+
+
 router.post('/add',async function(req, res){
     const salt = await bcrypt.genSalt(10)
     var manualUser = {
@@ -65,20 +67,18 @@ router.post('/login',async function(req,res){
                   
 
                     //Check Hashed Passwords
-                    console.log(user.password)
-                    console.log(req.body.loginData.password)
+                    //console.log(user.password)
+                    //console.log(req.body.loginData.password)
                     const validPassword =await bcrypt.compare(req.body.loginData.password,user.password);
-                    console.log(validPassword)
+                    //console.log(validPassword)
                     if(validPassword){
                         let token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:'12h'});
 
                         console.log("User Login Successful")
-                        res.status(200).json({
-                            success: true,
+                        res.cookie("Access_Token",token,{httpOnly:true,secure:true}).status(200).json({
                             firstName:user.firstName,
                             lastName:user.lastName,
-                            profileType:user.profileType,
-                            token:token,
+                            userType:user.userType,
                             message:'Authentication Successful!'
                         })
 
@@ -101,6 +101,7 @@ router.post('/login',async function(req,res){
     }
 
 });
-      
+
+  
   
 module.exports = router;

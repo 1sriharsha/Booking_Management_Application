@@ -39,13 +39,13 @@ router.post('/google',(req,res)=>{
                 }
                 else{
                     if(user){
-                        
-                        res.status(409).json(
+                        let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET,{expiresIn:'12h'});
+                        res.status(409).cookie("Access_Token",token,{httpOnly:true,secure:true}).json(
                             {
                                 success: true,
                                 firstName:googleUser.firstName,
                                 lastName:googleUser.lastName,
-                                profileType:googleUser.userType,
+                                userType:googleUser.userType,
                                 token:token,
                                 message:'Authentication Successful!'
                             }
@@ -54,7 +54,7 @@ router.post('/google',(req,res)=>{
                     else{
                         let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET,{expiresIn:'12h'});
                         googleUser =GoogleUser.create(googleUser)
-                        res.status(200).json(
+                        res.cookie("Access_Token",token,{httpOnly:true,secure:true}).status(200).json(
                             {
                                 success: true,
                                 firstName:response.payload.given_name,
