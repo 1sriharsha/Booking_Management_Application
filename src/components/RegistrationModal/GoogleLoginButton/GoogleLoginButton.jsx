@@ -38,7 +38,11 @@ function GoogleLoginButton(props) {
     //console.log("[Login Successful] currentUser:", res.profileObj);
     axios({
       method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
       url: api_url + "/auth/google",
+      withCredentials: true,
       data: { tokenId: res.tokenId },
     })
       .then((res) => {
