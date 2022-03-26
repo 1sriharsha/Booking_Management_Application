@@ -19,12 +19,13 @@ require('./config/passport')(passport)
 connectDB()
 
 const app = express()
-app.use(cors())
 
+var origin="https://athlos-ui.herokuapp.com"
 if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
+    origin = "http://localhost:3001"   
 }
-
+app.use(cors({credentials:true,origin:true}))
 
 //Session Middleware
 app.use(session({   
@@ -34,7 +35,7 @@ app.use(session({
     resave:false,
     cookie:{maxAge:aliveTime}
 }))
-app.use(cookieParser('AllezAllezAllez'));
+app.use(cookieParser())
 
 
 //Passport Middle-ware
@@ -49,9 +50,6 @@ app.use('/',require('./routes/index'))
 app.use('/auth',require('./routes/auth'))
 app.use('/users',require('./routes/users'))
 app.use('/book',require('./routes/book'))
-app.get('/logout', middleware.authorization, (req, res) => {
-    return res.clearCookie("access_token").status(200).json({ message: "Successfully logged out 😏 🍀" });
-  });  
 
 const PORT  = process.env.PORT || 5000
 

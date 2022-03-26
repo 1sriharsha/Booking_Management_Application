@@ -39,27 +39,41 @@ router.post('/google',(req,res)=>{
                 }
                 else{
                     if(user){
-                        let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET,{expiresIn:'12h'});
-                        res.cookie("Access_Token",token,{httpOnly:true,secure:true,expires:new Date(Date.now() + 900000)}).status(409).json(
+                        let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET);
+                        console.log(token)
+                        res
+                        .cookie("access_token",token,{
+                            httpOnly:true,
+                            secure:process.env.NODE_ENV === 'production'? true: false,
+                            expires:new Date(Date.now() + 900000)})
+                        .status(409)
+                        .json(
                             {
                                 success: true,
                                 firstName:googleUser.firstName,
                                 lastName:googleUser.lastName,
                                 userType:googleUser.userType,
-                                message:'Authentication Successful!'
+                                message:'Authentication Successful!!'
                             }
                         )
                     }
                     else{
-                        let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET,{expiresIn:'12h'});
+
+                        let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET);
+                        console.log(token)
                         googleUser =GoogleUser.create(googleUser)
-                        res.cookie("Access_Token",token,{httpOnly:true,secure:true,expires:new Date(Date.now() + 900000)}).status(200).json(
+                        res.cookie("access_token",token,{
+                            httpOnly:true,
+                            secure:process.env.NODE_ENV === 'production'? true: false,
+                            expires:new Date(Date.now() + 900000)})
+                        .status(200)
+                        .json(
                             {
                                 success: true,
                                 firstName:response.payload.given_name,
                                 lastName:response.payload.family_name,
-                                profileType:'Customer',
-                                message:'Authentication Successful!'
+                                userType:'Customer',
+                                message:'Authentication Successful!!!'
                             }
                         )
                     }

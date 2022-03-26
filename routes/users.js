@@ -101,7 +101,9 @@ router.post('/login',async function(req,res){
     }
 
 });
-
+router.get('/logout', middleware.authorization, (req, res) => {
+    return res.clearCookie("access_token").status(200).json({ message: "Successfully logged out 😏 🍀" });
+  });  
   
   
 module.exports = router;
