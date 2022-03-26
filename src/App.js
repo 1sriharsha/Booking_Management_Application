@@ -53,6 +53,7 @@ class App extends Component {
     axios({
       method: "GET",
       url: api_url + "/logout",
+      withCredentials: true,
     }).then((res) => {
       if (res.status === 200) {
         // TODO Redirect
