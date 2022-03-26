@@ -39,7 +39,6 @@ const RegistrationModal = (props) => {
           navigate("/dashboard"); // Redirect to Dashboard
           props.handleAuthState(res);
           console.log("Logged In Successfully");
-          alert(this.state.userType);
         }
       })
       .catch(function (err) {
