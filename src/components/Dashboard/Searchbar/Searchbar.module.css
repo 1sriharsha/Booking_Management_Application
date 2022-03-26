@@ -15,8 +15,19 @@
 
 /* Search Bar */
 .search {
-  width: 80%;
+  width: 85%;
   position: relative;
+}
+
+.searchOptions {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right:5%;
+  background-color: var(--color-background);
+  box-shadow: 0 2px 3px rgba(34, 25, 25, 0.2);
+  border-radius: var(--default-border-radius);
+
 }
 
 .search input {
@@ -55,11 +66,18 @@
 }
 
 .filterOptions {
+  width:30px;
   position: absolute;
-  right: -85px;
+  padding: 0.7em 2em;
+  top: 39px;
+  right: -57px;
   list-style: none;
   background-color: var(--color-tertiary);
   border-radius: var(--default-border-radius);
   padding: 0.7em 2em;
   box-shadow: 0 1px 3px rgba(34, 25, 25, 0.2);
+}
+
+.listOptions {
+  list-style: none;
 }

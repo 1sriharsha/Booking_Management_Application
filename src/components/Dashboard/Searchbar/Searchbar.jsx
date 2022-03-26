@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import styles from "./Searchbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FacilityData } from "../../../data";
 
 class Searchbar extends Component {
   state = {
     showFilters: false,
+    showOptions: false,
   };
 
   toggleFilters() {
@@ -21,30 +23,47 @@ class Searchbar extends Component {
   };
 
   render() {
+    // Mapping function to loop through the Facility Data
+    const nOptions = FacilityData.map(
+      ({
+        id,
+        facilityLocation
+      }) => {
+        return(
+         <li className = {styles.listOptions} key = {id}>{facilityLocation}</li>
+        );
+      }
+    );
     return (
       <React.Fragment>
         <div className={styles.search}>
-          <input
-            id="searchBar"
-            type="search"
-            placeholder="Search Bookings..."
-            onChange={this.onSearchChange}
-          />
-          <button
-            className={styles.filter}
-            onClick={() => this.toggleFilters()}
-          >
-            <i>
-              <FontAwesomeIcon icon="fa-solid fa-filter" />
-            </i>
-          </button>
-          {this.state.showFilters ? (
-            <div className={styles.filterOptions} id="filter-toggle">
-              <div>Option 1</div>
-              <div>Option 2</div>
-              <div>Option 3</div>
-            </div>
-          ) : null}
+          <div>
+            <input
+              onFocus={() => this.setState({showOptions: true})}
+              onBlur= {() => this.setState({showOptions: true})}
+              id="searchBar"
+              type="search"
+              placeholder="Search Bookings..."
+              onChange={this.onSearchChange}
+            />
+            <button
+              className={styles.filter}
+              onClick={() => this.toggleFilters()}
+            >
+              <i>
+                <FontAwesomeIcon icon="fa-solid fa-filter" />
+              </i>
+            </button>
+            {this.state.showFilters ? (
+              <div className={styles.filterOptions} id="filter-toggle">
+                <div>Time</div>
+                <div>Sports</div>
+              </div>
+            ) : null}
+          </div>
+          {this.state.showOptions && (<div className={styles.searchOptions}>
+          <ul className={styles.listOptions}>{nOptions}</ul>
+          </div>)}
         </div>
       </React.Fragment>
     );
