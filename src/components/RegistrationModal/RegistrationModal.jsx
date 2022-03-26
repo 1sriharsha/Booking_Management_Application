@@ -102,6 +102,7 @@ const onSignUp = (event) => {
       if (err.response) {
         if (err.response.status === 409) {
           navigate("/dashboard"); // Redirect to Dashboard
+          props.handleAuthState(err);
           console.log("User Already Exists in Database");
         }
       } else if (err.request) {
