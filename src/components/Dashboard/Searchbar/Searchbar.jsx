@@ -30,18 +30,26 @@ class Searchbar extends Component {
   }
 
   render() {
-    // Mapping function to loop through the Facility Data
-    const nOptions = FacilityData.map(({ id, facilityLocation }) => {
+    // Array of Facility Locations
+    const locations = FacilityData.map(({ facilityLocation }) => {
+      return facilityLocation;
+    });
+
+    // Set of Unique Locations
+    const uniqueLocations = [...new Set(locations)];
+
+    // Map Unique Locations to buttons
+    const nOptions = uniqueLocations.map((facilityLocation) => {
       return (
         <button
           onClick={() => this.setSearchValue(facilityLocation)}
           className={styles.listOptions}
-          key={id}
         >
           {facilityLocation}
         </button>
       );
     });
+
     return (
       <React.Fragment>
         <div className={styles.search}>
