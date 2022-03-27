@@ -70,6 +70,7 @@ class Searchbar extends Component {
             <input
               value={this.state.searchValue}
               onFocus={() => this.setState({ showOptions: true })}
+              // TODO Fix Close onBlur
               // onBlur={() => this.setState({ showOptions: false })}
               id="searchBar"
               type="search"
@@ -84,6 +85,7 @@ class Searchbar extends Component {
                 <FontAwesomeIcon icon="fa-solid fa-filter" />
               </i>
             </button>
+            {/* TODO Add filter functionality */}
             {this.state.showFilters ? (
               <div className={styles.filterOptions} id="filter-toggle">
                 <div>Time</div>
@@ -91,6 +93,8 @@ class Searchbar extends Component {
               </div>
             ) : null}
           </div>
+
+          {/* Autocomplete Options */}
           {this.state.showOptions && (
             <div className={styles.searchOptions}>{nOptions}</div>
           )}

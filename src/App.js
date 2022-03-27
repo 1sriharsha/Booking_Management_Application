@@ -13,8 +13,8 @@ if (process.env.NODE_ENV === "production") {
 }
 class App extends Component {
   state = {
-    isAuthenticated: false,
-    userFirstName: "John",
+    isAuthenticated: false, // TODO Check cookie for Authentication
+    userFirstName: "John", // TODO Store state values in local storage for persistance
     userLastName: "Smith",
     userType: "guest", // Implemented Options: "guest", "customer", "manager", "employee"
     showModal: false,
@@ -22,6 +22,7 @@ class App extends Component {
     showModalSignUp: false,
   };
 
+  // TODO Simplify
   showModal = (tab) => {
     if (tab === "login") {
       this.setState({
@@ -49,6 +50,7 @@ class App extends Component {
     });
   };
 
+  // TODO Move onLogout to functional component for redirect routing
   onLogout = () => {
     axios({
       method: "GET",
