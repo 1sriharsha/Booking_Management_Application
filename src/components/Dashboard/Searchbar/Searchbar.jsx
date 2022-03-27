@@ -25,18 +25,22 @@ class Searchbar extends Component {
 
   // Open "Book" tab when user types in search bar
   onSearchChange = (e) => {
+    let searchValue = e.target.value;
+
     if (this.props.userType === "manager") {
       this.props.onClickTabItem("Edit Bookings");
     } else {
       this.props.onClickTabItem("Book");
     }
 
-    this.setState({ searchValue: e.target.value });
+    this.props.handleSearchValue(searchValue);
+    this.setState({ searchValue: searchValue });
   };
 
-  setSearchValue(value) {
+  setSearchValue = (value) => {
+    this.props.handleSearchValue(value);
     this.setState({ searchValue: value, showOptions: false });
-  }
+  };
 
   render() {
     // Filter Unique Locations by Search Value

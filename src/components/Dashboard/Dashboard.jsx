@@ -23,31 +23,32 @@ class Dashboard extends Component {
 
     this.state = {
       activeTab: defaultTab,
+      searchValue: "",
     };
   }
-
-  // toggleFilters() {
-  //   this.setState({ showFilters: !this.state.showFilters });
-  // }
 
   onClickTabItem = (tab) => {
     this.setState({ activeTab: tab });
   };
 
-  // Open "Book" tab when user types in search bar
-  // onSearchChange = () => {
-  //   if (this.props.userType === "manager") {
-  //     this.onClickTabItem("Edit Bookings");
-  //   } else {
-  //     this.onClickTabItem("Book");
-  //   }
-  // };
+  handleSearchValue = (value) => {
+    this.setState({ searchValue: value });
+  };
 
   render() {
     var i = 0;
     var animationDelay = 0;
-    // Generates n BookCard components from Database
-    const nBookCards = FacilityData.map(
+    // Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
+    const nBookCards = FacilityData.filter((facility) => {
+      return (
+        facility.facilityLocation
+          .toLowerCase()
+          .includes(this.state.searchValue.toLowerCase()) ||
+        facility.facilityName
+          .toLowerCase()
+          .includes(this.state.searchValue.toLowerCase())
+      );
+    }).map(
       ({
         id,
         facilityName,
@@ -85,8 +86,17 @@ class Dashboard extends Component {
       }
     );
 
-    // Generates n EditCard components from Database
-    const nEditCards = FacilityData.map(
+    // Generates n EditCard components from Database (filtered by facilityLocation & facilityName)
+    const nEditCards = FacilityData.filter((facility) => {
+      return (
+        facility.facilityLocation
+          .toLowerCase()
+          .includes(this.state.searchValue.toLowerCase()) ||
+        facility.facilityName
+          .toLowerCase()
+          .includes(this.state.searchValue.toLowerCase())
+      );
+    }).map(
       ({
         id,
         facilityName,
@@ -134,9 +144,8 @@ class Dashboard extends Component {
               <div className={styles.menu}>
                 <div className={styles.search}>
                   <Searchbar
-                    toggleFilters={this.toggleFilters}
-                    onSearchChange={this.onSearchChange}
                     onClickTabItem={this.onClickTabItem}
+                    handleSearchValue={this.handleSearchValue}
                   />
                 </div>
               </div>
