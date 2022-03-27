@@ -4,6 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FacilityData } from "../../../data";
 import uniqid from "uniqid";
 
+// Array of Facility Locations
+const locations = FacilityData.map(({ facilityLocation }) => {
+  return facilityLocation;
+});
+
+// Set of Unique Locations
+const uniqueLocations = [...new Set(locations)];
+
 class Searchbar extends Component {
   state = {
     showFilters: false,
@@ -31,14 +39,6 @@ class Searchbar extends Component {
   }
 
   render() {
-    // Array of Facility Locations
-    const locations = FacilityData.map(({ facilityLocation }) => {
-      return facilityLocation;
-    });
-
-    // Set of Unique Locations
-    const uniqueLocations = [...new Set(locations)];
-
     // Filter Unique Locations by Search Value
     let filteredLocations = uniqueLocations.filter((uniqueLocation) =>
       uniqueLocation
