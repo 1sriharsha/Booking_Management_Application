@@ -78,7 +78,6 @@ router.post('/login',async function(req,res){
                         res.cookie("access_token",token,{
                             httpOnly:true,
                             secure:process.env.NODE_ENV === 'production'? true: false,
-                            sameSite:None,
                             expires:new Date(Date.now() + 900000)})
                         .status(200)
                         .json({
