@@ -101,6 +101,16 @@ const FacilityData = [
     reservationPeriodStart: 15,
     reservationPeriodEnd: 18,
   },
+  {
+    id: 11,
+    facilityName: "UCLA REC",
+    facilityLocation: "Los Angeles, CA",
+    facilitySport: "Badminton",
+    facilityInfo: "Badminton Court #004",
+    availableNow: false,
+    reservationPeriodStart: 15,
+    reservationPeriodEnd: 18,
+  },
 ];
 
 export default FacilityData;

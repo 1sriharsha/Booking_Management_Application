@@ -20,19 +20,21 @@
 }
 
 .searchOptions {
+  height: 100px;
   position: absolute;
   top: 35px;
   left: 0;
-  right:5%;
+  right: 5%;
   background-color: var(--color-background);
   box-shadow: 0 2px 3px rgba(34, 25, 25, 0.2);
-  border-radius:  0 0 var(--default-border-radius) var(--default-border-radius);
-display: flex;
-flex-flow: column nowrap;
-overflow: hidden;
+  border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: scroll;
 }
 
 .searchOptions button {
+  height: 25px;
   letter-spacing: 0.5px;
   background-color: var(--color-background);
   border: none;
@@ -84,7 +86,7 @@ overflow: hidden;
 }
 
 .filterOptions {
-  width:30px;
+  width: 30px;
   position: absolute;
   padding: 0.7em 2em;
   top: 39px;
