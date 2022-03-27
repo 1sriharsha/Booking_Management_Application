@@ -26,7 +26,7 @@ class Searchbar extends Component {
   };
 
   setSearchValue(value) {
-    this.setState({ searchValue: value });
+    this.setState({ searchValue: value, showOptions: false });
   }
 
   render() {
