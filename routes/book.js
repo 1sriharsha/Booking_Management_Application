@@ -14,7 +14,7 @@ const Booking = require("../models/Booking");
 // });
 
 router.post("/add", async (req,res)=>{
-    console.log("error1")
+    
     try{
         Booking.create(req.body).then(function(){
             res.status(200).json({
