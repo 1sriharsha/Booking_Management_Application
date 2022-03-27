@@ -18,11 +18,11 @@ const SupportedSports = [
   },
   {
     sportName: "Squash",
-    sportIcon: "",
+    sportIcon: "fa-solid fa-table-tennis-paddle-ball",
   },
   {
     sportName: "Badminton",
-    sportIcon: "",
+    sportIcon: "fa-solid fa-table-tennis-paddle-ball",
   },
 ];
 

@@ -29,11 +29,23 @@ class SportFilter extends Component {
       );
     });
 
+    let filterIcon = SupportedSports.filter((sport) => {
+      return sport.sportName === this.props.sportFilterValue;
+    }).map(({ sportIcon }) => {
+      return sportIcon;
+    });
+
+    if (filterIcon.length === 0) {
+      filterIcon = "fa-solid fa-filter";
+    } else {
+      filterIcon = filterIcon[0];
+    }
+
     return (
       <div className={styles.sportFilter}>
         <button onClick={this.toggleSportFilters} title="Filter by Sport">
           <i>
-            <FontAwesomeIcon icon="fa-solid fa-futbol" />
+            <FontAwesomeIcon icon={filterIcon} />
           </i>
         </button>
         {this.state.showSportFilters && (
