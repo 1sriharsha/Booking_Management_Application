@@ -7,6 +7,7 @@ class Searchbar extends Component {
   state = {
     showFilters: false,
     showOptions: false,
+    searchValue: "",
   };
 
   toggleFilters() {
@@ -14,37 +15,45 @@ class Searchbar extends Component {
   }
 
   // Open "Book" tab when user types in search bar
-  onSearchChange = () => {
+  onSearchChange = (e) => {
     if (this.props.userType === "manager") {
       this.props.onClickTabItem("Edit Bookings");
     } else {
       this.props.onClickTabItem("Book");
     }
+
+    this.setState({ searchValue: e.target.value });
   };
+
+  setSearchValue(value) {
+    this.setState({ searchValue: value });
+  }
 
   render() {
     // Mapping function to loop through the Facility Data
-    const nOptions = FacilityData.map(
-      ({
-        id,
-        facilityLocation
-      }) => {
-        return(
-         <li className = {styles.listOptions} key = {id}>{facilityLocation}</li>
-        );
-      }
-    );
+    const nOptions = FacilityData.map(({ id, facilityLocation }) => {
+      return (
+        <button
+          onClick={() => this.setSearchValue(facilityLocation)}
+          className={styles.listOptions}
+          key={id}
+        >
+          {facilityLocation}
+        </button>
+      );
+    });
     return (
       <React.Fragment>
         <div className={styles.search}>
           <div>
             <input
-              onFocus={() => this.setState({showOptions: true})}
-              onBlur= {() => this.setState({showOptions: true})}
+              value={this.state.searchValue}
+              onFocus={() => this.setState({ showOptions: true })}
+              // onBlur={() => this.setState({ showOptions: false })}
               id="searchBar"
               type="search"
               placeholder="Search Bookings..."
-              onChange={this.onSearchChange}
+              onChange={(e) => this.onSearchChange(e)}
             />
             <button
               className={styles.filter}
@@ -61,9 +70,9 @@ class Searchbar extends Component {
               </div>
             ) : null}
           </div>
-          {this.state.showOptions && (<div className={styles.searchOptions}>
-          <ul className={styles.listOptions}>{nOptions}</ul>
-          </div>)}
+          {this.state.showOptions && (
+            <div className={styles.searchOptions}>{nOptions}</div>
+          )}
         </div>
       </React.Fragment>
     );
