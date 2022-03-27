@@ -3,6 +3,7 @@ import styles from "./AddFacility.module.css";
 import "./AddFacility.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import axios from "axios";
 const {
   REACT_APP_LOCAL_URL,
   REACT_APP_PRODUCTION_URL,
@@ -35,7 +36,11 @@ class AddFacility extends Component {
   };
 
   setLocation = (location) => {
-    this.setState({ facilityLocation: location });
+    //console.log(location)
+    this.setState({ facilityLocation:{
+      place_id:location.value.place_id,
+      address:location.value.description
+    } });
   };
 
   setReservation = (e) => {
@@ -57,6 +62,14 @@ class AddFacility extends Component {
   };
 
   onSubmit = () => {
+    var api_url;
+  if (process.env.NODE_ENV === "production") {
+    api_url = REACT_APP_PRODUCTION_URL;
+    //console.log(api_url)
+  } else {
+    api_url = REACT_APP_LOCAL_URL;
+    //console.log(api_url)
+  }
     var newFacilityData = {
       facilityName: this.state.facilityName,
       facilityLocation: this.state.facilityLocation,
@@ -67,6 +80,35 @@ class AddFacility extends Component {
     };
     // TODO Connect to Database
     console.log(newFacilityData);
+    axios({
+      method:"POST",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials:true,
+      url: api_url + "/facilities/add",
+      data:{newFacilityData}
+    }).then((res) => {
+      if (res.status === 200) {
+        console.log("Facility Added Sucessfully");
+      }
+    })
+    .catch(function (err) {
+      console.log(err);
+      if (err.response) {
+        if (err.response.status === 404) {
+          console.log("Couldn't add Facility");
+         
+        }
+      } else if (err.request) {
+        //Response not received from API
+        console.log("Error: ", err.request);
+      } else {
+        //Unexpected Error
+        console.log("Error", err.message);
+      }
+    });
+
 
     this.props.onCloseModal();
   };
