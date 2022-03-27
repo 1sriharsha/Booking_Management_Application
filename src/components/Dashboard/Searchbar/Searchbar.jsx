@@ -3,6 +3,7 @@ import styles from "./Searchbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FacilityData } from "../../../data";
 import uniqid from "uniqid";
+import SportFilter from "./SportFilter/SportFilter";
 
 // Array of Facility Locations
 const locations = FacilityData.map(({ facilityLocation }) => {
@@ -85,19 +86,7 @@ class Searchbar extends Component {
             <main className={styles.searchDropdown}>
               <section className={styles.searchOptions}>{nOptions}</section>
               <section className={styles.filterOptions}>
-                <div className={styles.sportFilter}>
-                  <button
-                    onClick={this.toggleSportFilters}
-                    title="Filter by Sport"
-                  >
-                    <i>
-                      <FontAwesomeIcon icon="fa-solid fa-futbol" />
-                    </i>
-                  </button>
-                  {this.state.showSportFilters && (
-                    <div className={styles.sportOptions}>Soccer</div>
-                  )}
-                </div>
+                <SportFilter />
               </section>
             </main>
           )}
