@@ -3,6 +3,7 @@ import styles from "./Searchbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FacilityData } from "../../../data";
 import uniqid from "uniqid";
+import SportFilter from "./SportFilter/SportFilter";
 
 // Array of Facility Locations
 const locations = FacilityData.map(({ facilityLocation }) => {
@@ -14,20 +15,16 @@ const uniqueLocations = [...new Set(locations)];
 
 class Searchbar extends Component {
   state = {
-    showFilters: false,
     showOptions: false,
     searchValue: "",
   };
-
-  toggleFilters() {
-    this.setState({ showFilters: !this.state.showFilters });
-  }
 
   // Open "Book" tab when user types in search bar
   onSearchChange = (e) => {
     let searchValue = e.target.value;
 
     if (this.props.userType === "manager") {
+
       this.props.onClickTabItem("Edit Bookings");
     } else {
       this.props.onClickTabItem("Book");
@@ -40,6 +37,11 @@ class Searchbar extends Component {
   setSearchValue = (value) => {
     this.props.handleSearchValue(value);
     this.setState({ searchValue: value, showOptions: false });
+  };
+
+  onResetSearch = () => {
+    this.setState({ showOptions: false, searchValue: "" });
+    this.props.onResetSearch();
   };
 
   render() {
@@ -78,25 +80,25 @@ class Searchbar extends Component {
               onChange={(e) => this.onSearchChange(e)}
             />
             <button
-              className={styles.filter}
-              onClick={() => this.toggleFilters()}
+              className={styles.clear}
+              onClick={this.onResetSearch}
+              title="Reset Search"
             >
-              <i>
-                <FontAwesomeIcon icon="fa-solid fa-filter" />
-              </i>
+              <FontAwesomeIcon icon={"fa-solid fa-circle-xmark"} />
             </button>
-            {/* TODO Add filter functionality */}
-            {this.state.showFilters ? (
-              <div className={styles.filterOptions} id="filter-toggle">
-                <div>Time</div>
-                <div>Sports</div>
-              </div>
-            ) : null}
           </div>
 
           {/* Autocomplete Options */}
           {this.state.showOptions && (
-            <div className={styles.searchOptions}>{nOptions}</div>
+            <main className={styles.searchDropdown}>
+              <section className={styles.searchOptions}>{nOptions}</section>
+              <section className={styles.filterOptions}>
+                <SportFilter
+                  handleSportFilter={this.props.handleSportFilter}
+                  sportFilterValue={this.props.sportFilterValue}
+                />
+              </section>
+            </main>
           )}
         </div>
       </React.Fragment>

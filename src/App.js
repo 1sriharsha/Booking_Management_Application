@@ -60,7 +60,7 @@ class App extends Component {
       if (res.status === 200) {
         // TODO Redirect
         console.log("Logged Out");
-        
+
         this.setState({
           isAuthenticated: false,
           userFirstName: "",

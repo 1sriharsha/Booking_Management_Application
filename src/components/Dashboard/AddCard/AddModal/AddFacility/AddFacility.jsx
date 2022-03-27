@@ -21,6 +21,7 @@ class AddFacility extends Component {
     reservationPeriodStart: null,
     reservationPeriodEnd: null,
     isError: false,
+    locationPlaceholder: "1601 Law Lane Bloomington, IN 47408",
   };
 
   setPageNumber(page) {
@@ -36,11 +37,18 @@ class AddFacility extends Component {
   };
 
   setLocation = (location) => {
+<<<<<<< HEAD
     //console.log(location)
     this.setState({ facilityLocation:{
       place_id:location.value.place_id,
       address:location.value.description
     } });
+=======
+    this.setState({
+      facilityLocation: location,
+      locationPlaceholder: location.label,
+    });
+>>>>>>> fa325cd6620868d4e5f15bbdb524e59227607ac6
   };
 
   setReservation = (e) => {
@@ -217,7 +225,7 @@ class AddFacility extends Component {
                     },
                   }}
                   selectProps={{
-                    placeholder: "1601 Law Lane Bloomington, IN 47408",
+                    placeholder: this.state.locationPlaceholder,
                     onChange: this.setLocation,
                     styles: {
                       placeholder: (provided) => ({

@@ -24,6 +24,7 @@ class Dashboard extends Component {
     this.state = {
       activeTab: defaultTab,
       searchValue: "",
+      sportFilterValue: "",
     };
   }
 
@@ -31,8 +32,16 @@ class Dashboard extends Component {
     this.setState({ activeTab: tab });
   };
 
+  onResetSearch = () => {
+    this.setState({ searchValue: "", sportFilterValue: "" });
+  };
+
   handleSearchValue = (value) => {
     this.setState({ searchValue: value });
+  };
+
+  handleSportFilter = (value) => {
+    this.setState({ sportFilterValue: value });
   };
 
   render() {
@@ -41,12 +50,15 @@ class Dashboard extends Component {
     // Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
     const nBookCards = FacilityData.filter((facility) => {
       return (
-        facility.facilityLocation
+        (facility.facilityLocation
           .toLowerCase()
           .includes(this.state.searchValue.toLowerCase()) ||
-        facility.facilityName
+          facility.facilityName
+            .toLowerCase()
+            .includes(this.state.searchValue.toLowerCase())) &&
+        facility.facilitySport
           .toLowerCase()
-          .includes(this.state.searchValue.toLowerCase())
+          .includes(this.state.sportFilterValue.toLowerCase())
       );
     }).map(
       ({
@@ -89,12 +101,15 @@ class Dashboard extends Component {
     // Generates n EditCard components from Database (filtered by facilityLocation & facilityName)
     const nEditCards = FacilityData.filter((facility) => {
       return (
-        facility.facilityLocation
+        (facility.facilityLocation
           .toLowerCase()
           .includes(this.state.searchValue.toLowerCase()) ||
-        facility.facilityName
+          facility.facilityName
+            .toLowerCase()
+            .includes(this.state.searchValue.toLowerCase())) &&
+        facility.facilitySport
           .toLowerCase()
-          .includes(this.state.searchValue.toLowerCase())
+          .includes(this.state.sportFilterValue.toLowerCase())
       );
     }).map(
       ({
@@ -144,8 +159,12 @@ class Dashboard extends Component {
               <div className={styles.menu}>
                 <div className={styles.search}>
                   <Searchbar
+                    userType={this.props.userType}
                     onClickTabItem={this.onClickTabItem}
+                    onResetSearch={this.onResetSearch}
                     handleSearchValue={this.handleSearchValue}
+                    handleSportFilter={this.handleSportFilter}
+                    sportFilterValue={this.state.sportFilterValue}
                   />
                 </div>
               </div>

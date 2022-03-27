@@ -27,6 +27,12 @@ import {
   faMinus,
   faCircleInfo,
   faBuilding,
+  faFutbol,
+  faBasketball,
+  faVolleyball,
+  faTableTennis,
+  faTableTennisPaddleBall,
+  faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -49,7 +55,12 @@ library.add(
   faPlus,
   faMinus,
   faCircleInfo,
-  faBuilding
+  faBuilding,
+  faFutbol,
+  faBasketball,
+  faVolleyball,
+  faTableTennisPaddleBall,
+  faCircleXmark
 );
 
 ReactDOM.render(

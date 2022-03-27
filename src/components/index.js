@@ -19,3 +19,4 @@ export { default as TimeSlot } from "./Dashboard/BookCard//CheckoutModal/TimeSlo
 export { default as Counters } from "./Dashboard/BookCard/CheckoutModal/Counters/Counters";
 export { default as Counter } from "./Dashboard/BookCard/CheckoutModal/Counter/Counter";
 export { default as Searchbar } from "./Dashboard/Searchbar/Searchbar";
+export { default as SportFilter } from "./Dashboard/Searchbar/SportFilter/SportFilter";
