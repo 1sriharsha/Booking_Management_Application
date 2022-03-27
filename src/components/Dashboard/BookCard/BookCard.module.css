@@ -130,11 +130,14 @@ input[type]:focus,
 }
 
 .card .title {
+  height: 50px;
   font-family: var(--font-title);
   font-size: 1.4em;
   font-weight: 500;
   margin-bottom: 0.4em;
   word-wrap: break-word;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-tertiary);
 }
 
 .card .content {
