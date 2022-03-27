@@ -25,7 +25,7 @@ if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
     origin = "http://localhost:3001"   
 }
-app.use(cors({credentials:true,origin:true}))
+app.use(cors({credentials:true,origin:origin}))
 
 //Session Middleware
 app.use(session({   
