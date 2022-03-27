@@ -15,14 +15,8 @@ const uniqueLocations = [...new Set(locations)];
 
 class Searchbar extends Component {
   state = {
-    showSportFilters: false,
     showOptions: false,
     searchValue: "",
-  };
-
-  toggleSportFilters = () => {
-    console.log("click");
-    this.setState({ showSportFilters: !this.state.showSportFilters });
   };
 
   // Open "Book" tab when user types in search bar
@@ -86,7 +80,7 @@ class Searchbar extends Component {
             <main className={styles.searchDropdown}>
               <section className={styles.searchOptions}>{nOptions}</section>
               <section className={styles.filterOptions}>
-                <SportFilter />
+                <SportFilter handleSportFilter={this.props.handleSportFilter} />
               </section>
             </main>
           )}

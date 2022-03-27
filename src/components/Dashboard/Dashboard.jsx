@@ -24,6 +24,7 @@ class Dashboard extends Component {
     this.state = {
       activeTab: defaultTab,
       searchValue: "",
+      sportFilter: "",
     };
   }
 
@@ -35,18 +36,22 @@ class Dashboard extends Component {
     this.setState({ searchValue: value });
   };
 
+  handleSportFilter = (value) => {
+    this.setState({ sportFilter: value });
+  }
+
   render() {
     var i = 0;
     var animationDelay = 0;
     // Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
     const nBookCards = FacilityData.filter((facility) => {
       return (
-        facility.facilityLocation
+        (facility.facilityLocation
           .toLowerCase()
           .includes(this.state.searchValue.toLowerCase()) ||
         facility.facilityName
           .toLowerCase()
-          .includes(this.state.searchValue.toLowerCase())
+          .includes(this.state.searchValue.toLowerCase())) && facility.facilitySport.toLowerCase().includes(this.state.sportFilter.toLowerCase())
       );
     }).map(
       ({
@@ -89,12 +94,15 @@ class Dashboard extends Component {
     // Generates n EditCard components from Database (filtered by facilityLocation & facilityName)
     const nEditCards = FacilityData.filter((facility) => {
       return (
-        facility.facilityLocation
+        (facility.facilityLocation
           .toLowerCase()
           .includes(this.state.searchValue.toLowerCase()) ||
-        facility.facilityName
+          facility.facilityName
+            .toLowerCase()
+            .includes(this.state.searchValue.toLowerCase())) &&
+        facility.facilitySport
           .toLowerCase()
-          .includes(this.state.searchValue.toLowerCase())
+          .includes(this.state.sportFilter.toLowerCase())
       );
     }).map(
       ({
@@ -146,6 +154,7 @@ class Dashboard extends Component {
                   <Searchbar
                     onClickTabItem={this.onClickTabItem}
                     handleSearchValue={this.handleSearchValue}
+                    handleSportFilter={this.handleSportFilter}
                   />
                 </div>
               </div>

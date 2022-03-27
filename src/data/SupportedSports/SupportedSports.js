@@ -25,3 +25,5 @@ const SupportedSports = [
     sportIcon: "",
   },
 ];
+
+export default SupportedSports;
