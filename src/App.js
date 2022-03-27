@@ -16,7 +16,7 @@ class App extends Component {
     isAuthenticated: false, // TODO Check cookie for Authentication
     userFirstName: "John", // TODO Store state values in local storage for persistance
     userLastName: "Smith",
-    userType: "guest", // Implemented Options: "guest", "customer", "manager", "employee"
+    userType: "manager", // Implemented Options: "guest", "customer", "manager", "employee"
     showModal: false,
     showModalLogin: false,
     showModalSignUp: false,
@@ -60,7 +60,7 @@ class App extends Component {
       if (res.status === 200) {
         // TODO Redirect
         console.log("Logged Out");
-        
+
         this.setState({
           isAuthenticated: false,
           userFirstName: "",

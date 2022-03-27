@@ -159,6 +159,7 @@ class Dashboard extends Component {
               <div className={styles.menu}>
                 <div className={styles.search}>
                   <Searchbar
+                    userType={this.props.userType}
                     onClickTabItem={this.onClickTabItem}
                     onResetSearch={this.onResetSearch}
                     handleSearchValue={this.handleSearchValue}
