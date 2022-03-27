@@ -37,18 +37,13 @@ class AddFacility extends Component {
   };
 
   setLocation = (location) => {
-<<<<<<< HEAD
     //console.log(location)
     this.setState({ facilityLocation:{
       place_id:location.value.place_id,
-      address:location.value.description
+      address:location.value.description,
+      locationPlaceholder:location.label
     } });
-=======
-    this.setState({
-      facilityLocation: location,
-      locationPlaceholder: location.label,
-    });
->>>>>>> fa325cd6620868d4e5f15bbdb524e59227607ac6
+  
   };
 
   setReservation = (e) => {
