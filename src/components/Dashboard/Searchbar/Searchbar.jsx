@@ -14,14 +14,15 @@ const uniqueLocations = [...new Set(locations)];
 
 class Searchbar extends Component {
   state = {
-    showFilters: false,
+    showSportFilters: false,
     showOptions: false,
     searchValue: "",
   };
 
-  toggleFilters() {
-    this.setState({ showFilters: !this.state.showFilters });
-  }
+  toggleSportFilters = () => {
+    console.log("click");
+    this.setState({ showSportFilters: !this.state.showSportFilters });
+  };
 
   // Open "Book" tab when user types in search bar
   onSearchChange = (e) => {
@@ -77,26 +78,28 @@ class Searchbar extends Component {
               placeholder="Search Bookings..."
               onChange={(e) => this.onSearchChange(e)}
             />
-            <button
-              className={styles.filter}
-              onClick={() => this.toggleFilters()}
-            >
-              <i>
-                <FontAwesomeIcon icon="fa-solid fa-filter" />
-              </i>
-            </button>
-            {/* TODO Add filter functionality */}
-            {this.state.showFilters ? (
-              <div className={styles.filterOptions} id="filter-toggle">
-                <div>Time</div>
-                <div>Sports</div>
-              </div>
-            ) : null}
           </div>
 
           {/* Autocomplete Options */}
           {this.state.showOptions && (
-            <div className={styles.searchOptions}>{nOptions}</div>
+            <main className={styles.searchDropdown}>
+              <section className={styles.searchOptions}>{nOptions}</section>
+              <section className={styles.filterOptions}>
+                <div className={styles.sportFilter}>
+                  <button
+                    onClick={this.toggleSportFilters}
+                    title="Filter by Sport"
+                  >
+                    <i>
+                      <FontAwesomeIcon icon="fa-solid fa-futbol" />
+                    </i>
+                  </button>
+                  {this.state.showSportFilters && (
+                    <div className={styles.sportOptions}>Soccer</div>
+                  )}
+                </div>
+              </section>
+            </main>
           )}
         </div>
       </React.Fragment>
