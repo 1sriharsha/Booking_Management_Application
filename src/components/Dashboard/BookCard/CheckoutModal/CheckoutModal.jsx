@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFormat from "react-number-format";
 import Counters from "./Counters/Counters";
 import { ExtrasData, GearData } from "../../../../data";
+import uniqid from "uniqid";
 
 class CheckoutModal extends Component {
   state = {
@@ -208,6 +209,7 @@ class CheckoutModal extends Component {
 
       nTimeSlots.push(
         <TimeSlot
+          key={uniqid("", "-timeslot")}
           reservationID={reservationSlotStart}
           reservationSlotStart={reservationSlotStart}
           reservationSlotEnd={reservationSlotEnd}
