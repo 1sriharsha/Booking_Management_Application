@@ -45,6 +45,7 @@ axios({
       FacilityData2.push(facData)
     }
   }
+  console.log(FacilityData2)
 })
 .catch(function (err) {
   console.log(err);
