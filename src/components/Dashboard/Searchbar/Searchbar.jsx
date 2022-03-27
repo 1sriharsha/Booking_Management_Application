@@ -80,7 +80,10 @@ class Searchbar extends Component {
             <main className={styles.searchDropdown}>
               <section className={styles.searchOptions}>{nOptions}</section>
               <section className={styles.filterOptions}>
-                <SportFilter handleSportFilter={this.props.handleSportFilter} />
+                <SportFilter
+                  handleSportFilter={this.props.handleSportFilter}
+                  sportFilterValue={this.props.sportFilterValue}
+                />
               </section>
             </main>
           )}

@@ -24,7 +24,7 @@ class Dashboard extends Component {
     this.state = {
       activeTab: defaultTab,
       searchValue: "",
-      sportFilter: "",
+      sportFilterValue: "",
     };
   }
 
@@ -37,7 +37,7 @@ class Dashboard extends Component {
   };
 
   handleSportFilter = (value) => {
-    this.setState({ sportFilter: value });
+    this.setState({ sportFilterValue: value });
   }
 
   render() {
@@ -51,7 +51,7 @@ class Dashboard extends Component {
           .includes(this.state.searchValue.toLowerCase()) ||
         facility.facilityName
           .toLowerCase()
-          .includes(this.state.searchValue.toLowerCase())) && facility.facilitySport.toLowerCase().includes(this.state.sportFilter.toLowerCase())
+          .includes(this.state.searchValue.toLowerCase())) && facility.facilitySport.toLowerCase().includes(this.state.sportFilterValue.toLowerCase())
       );
     }).map(
       ({
@@ -102,7 +102,7 @@ class Dashboard extends Component {
             .includes(this.state.searchValue.toLowerCase())) &&
         facility.facilitySport
           .toLowerCase()
-          .includes(this.state.sportFilter.toLowerCase())
+          .includes(this.state.sportFilterValue.toLowerCase())
       );
     }).map(
       ({
@@ -155,6 +155,7 @@ class Dashboard extends Component {
                     onClickTabItem={this.onClickTabItem}
                     handleSearchValue={this.handleSearchValue}
                     handleSportFilter={this.handleSportFilter}
+                    sportFilterValue={this.state.sportFilterValue}
                   />
                 </div>
               </div>

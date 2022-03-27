@@ -20,6 +20,7 @@ class SportFilter extends Component {
     const nSportOptions = SupportedSports.map(({ sportName }) => {
       return (
         <button
+          className={this.props.sportFilterValue === sportName ? "active" : ""}
           key={uniqid("", "-filter")}
           onClick={() => this.setFilter(sportName)}
         >
