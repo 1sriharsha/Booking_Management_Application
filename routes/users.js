@@ -59,7 +59,7 @@ router.post('/login',async function(req,res){
         let user =await User.findOne({email:req.body.loginData.email}).exec(async (err,user)=>{
             if(err){
                 console.log(err)
-                //googleUser =GoogleUser.create(googleUser).exec()
+                
             }
             else{
                 if(user){
@@ -72,10 +72,15 @@ router.post('/login',async function(req,res){
                     const validPassword =await bcrypt.compare(req.body.loginData.password,user.password);
                     //console.log(validPassword)
                     if(validPassword){
-                        let token = jwt.sign({email:user.email},process.env.JWT_SECRET,{expiresIn:'12h'});
+                        let token = jwt.sign({email:user.email},process.env.JWT_SECRET);
 
                         console.log("User Login Successful")
-                        res.cookie("Access_Token",token,{httpOnly:true,secure:true}).status(200).json({
+                        res.cookie("access_token",token,{
+                            httpOnly:true,
+                            secure:process.env.NODE_ENV === 'production'? true: false,
+                            expires:new Date(Date.now() + 900000)})
+                        .status(200)
+                        .json({
                             firstName:user.firstName,
                             lastName:user.lastName,
                             userType:user.userType,

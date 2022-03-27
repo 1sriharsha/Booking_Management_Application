@@ -40,7 +40,7 @@ router.post('/google',(req,res)=>{
                 else{
                     if(user){
                         let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET);
-                        console.log(token)
+                        //console.log(token)
                         res
                         .cookie("access_token",token,{
                             httpOnly:true,
