@@ -39,8 +39,15 @@ class Searchbar extends Component {
     // Set of Unique Locations
     const uniqueLocations = [...new Set(locations)];
 
+    // Filter Unique Locations by Search Value
+    let filteredLocations = uniqueLocations.filter((uniqueLocation) =>
+      uniqueLocation
+        .toLowerCase()
+        .includes(this.state.searchValue.toLowerCase())
+    );
+
     // Map Unique Locations to buttons
-    const nOptions = uniqueLocations.map((facilityLocation) => {
+    const nOptions = filteredLocations.map((facilityLocation) => {
       return (
         <button
           key={uniqid("", "-option")}
