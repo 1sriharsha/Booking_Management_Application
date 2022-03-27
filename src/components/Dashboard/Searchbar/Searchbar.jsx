@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Searchbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FacilityData } from "../../../data";
+import uniqid from "uniqid";
 
 class Searchbar extends Component {
   state = {
@@ -42,6 +43,7 @@ class Searchbar extends Component {
     const nOptions = uniqueLocations.map((facilityLocation) => {
       return (
         <button
+          key={uniqid("", "-option")}
           onClick={() => this.setSearchValue(facilityLocation)}
           className={styles.listOptions}
         >
