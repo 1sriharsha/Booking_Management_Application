@@ -54,12 +54,13 @@ class App extends Component {
   onLogout = () => {
     axios({
       method: "GET",
-      url: api_url + "/logout",
+      url: api_url + "/users/logout",
       withCredentials: true,
     }).then((res) => {
       if (res.status === 200) {
         // TODO Redirect
         console.log("Logged Out");
+        
         this.setState({
           isAuthenticated: false,
           userFirstName: "",
