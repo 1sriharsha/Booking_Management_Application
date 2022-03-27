@@ -38,6 +38,11 @@ class Searchbar extends Component {
     this.setState({ searchValue: value, showOptions: false });
   };
 
+  onResetSearch = () => {
+    this.setState({ showOptions: false, searchValue: "" });
+    this.props.onResetSearch();
+  };
+
   render() {
     // Filter Unique Locations by Search Value
     let filteredLocations = uniqueLocations.filter((uniqueLocation) =>
@@ -73,6 +78,13 @@ class Searchbar extends Component {
               placeholder="Search Bookings..."
               onChange={(e) => this.onSearchChange(e)}
             />
+            <button
+              className={styles.clear}
+              onClick={this.onResetSearch}
+              title="Reset Search"
+            >
+              <FontAwesomeIcon icon={"fa-solid fa-circle-xmark"} />
+            </button>
           </div>
 
           {/* Autocomplete Options */}
