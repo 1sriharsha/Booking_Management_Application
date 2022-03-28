@@ -44,6 +44,10 @@ class Dashboard extends Component {
     this.setState({ sportFilterValue: value });
   };
 
+  componentDidMount() {
+    document.body.style.backgroundColor = "var(--color-tertiary)";
+  }
+
   render() {
     var i = 0;
     var animationDelay = 0;
