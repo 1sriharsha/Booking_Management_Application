@@ -38,12 +38,13 @@ class AddFacility extends Component {
 
   setLocation = (location) => {
     //console.log(location)
-    this.setState({ facilityLocation:{
-      place_id:location.value.place_id,
-      address:location.value.description,
-      locationPlaceholder:location.label
-    } });
-  
+    this.setState({
+      facilityLocation: {
+        place_id: location.value.place_id,
+        address: location.value.description,
+        locationPlaceholder: location.label,
+      },
+    });
   };
 
   setReservation = (e) => {
@@ -66,13 +67,13 @@ class AddFacility extends Component {
 
   onSubmit = () => {
     var api_url;
-  if (process.env.NODE_ENV === "production") {
-    api_url = REACT_APP_PRODUCTION_URL;
-    //console.log(api_url)
-  } else {
-    api_url = REACT_APP_LOCAL_URL;
-    //console.log(api_url)
-  }
+    if (process.env.NODE_ENV === "production") {
+      api_url = REACT_APP_PRODUCTION_URL;
+      //console.log(api_url)
+    } else {
+      api_url = REACT_APP_LOCAL_URL;
+      //console.log(api_url)
+    }
     var newFacilityData = {
       facilityName: this.state.facilityName,
       facilityLocation: this.state.facilityLocation,
@@ -84,34 +85,33 @@ class AddFacility extends Component {
     // TODO Connect to Database
     console.log(newFacilityData);
     axios({
-      method:"POST",
+      method: "POST",
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials:true,
+      withCredentials: true,
       url: api_url + "/facilities/add",
-      data:{newFacilityData}
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log("Facility Added Sucessfully");
-      }
+      data: { newFacilityData },
     })
-    .catch(function (err) {
-      console.log(err);
-      if (err.response) {
-        if (err.response.status === 404) {
-          console.log("Couldn't add Facility");
-         
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("Facility Added Sucessfully");
         }
-      } else if (err.request) {
-        //Response not received from API
-        console.log("Error: ", err.request);
-      } else {
-        //Unexpected Error
-        console.log("Error", err.message);
-      }
-    });
-
+      })
+      .catch(function (err) {
+        console.log(err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            console.log("Couldn't add Facility");
+          }
+        } else if (err.request) {
+          //Response not received from API
+          console.log("Error: ", err.request);
+        } else {
+          //Unexpected Error
+          console.log("Error", err.message);
+        }
+      });
 
     this.props.onCloseModal();
   };

@@ -30,13 +30,13 @@
   transition: all 0.2s ease-in-out;
 }
 
- .sportFilter > button:hover {
+.sportFilter > button:hover {
   color: var(--color-gray);
   background-color: var(--color-tertiary);
 }
 
 .sportFilter .sportOptions {
-    width: 115px;
+  width: 115px;
   position: absolute;
   top: 0;
   left: 0;
@@ -44,32 +44,29 @@
   box-shadow: 0 0px 4px rgba(34, 25, 25, 0.3);
   background-color: var(--color-background);
   border-radius: var(--default-border-radius);
-  /* padding: 0.5em; */
   overflow: hidden;
 }
 
 .sportOptions button {
-    height: 25px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    background-color: var(--color-background);
-    cursor: pointer;
-    padding: 0.2em 0.2em 0.2em 0.4em;
-    transition: all 0.1s ease-in-out;
+  height: 25px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background-color: var(--color-background);
+  cursor: pointer;
+  padding: 0.2em 0.2em 0.2em 0.4em;
+  transition: all 0.1s ease-in-out;
 }
 
 .sportOptions button:hover {
-    font-weight: 600;
-    /* border-left: 2px solid var(--color-gray); */
-    background-color: var(--color-tertiary);
+  font-weight: 600;
+  background-color: var(--color-tertiary);
 }
 
 .close {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .close:hover {
-    color: var(--color-red);
+  color: var(--color-red);
 }
-
