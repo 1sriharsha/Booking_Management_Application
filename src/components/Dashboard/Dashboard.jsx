@@ -8,6 +8,7 @@ import { FacilityData } from "../../data/";
 import EditCard from "./EditCard/EditCard";
 import AddCard from "./AddCard/AddCard";
 import Searchbar from "./Searchbar/Searchbar";
+import ErrorCard from "./ErrorCard/ErrorCard";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -104,6 +105,8 @@ class Dashboard extends Component {
         );
       }
     );
+
+    console.log(nBookCards);
 
     // Generates n EditCard components from Database (filtered by facilityLocation & facilityName)
     const nEditCards = FacilityData.filter((facility) => {
@@ -234,14 +237,28 @@ class Dashboard extends Component {
           )}
           {/* [Guest/Customer/Employee] Book Content */}
           {this.state.activeTab === "Book" && (
-            <div className={styles.bookContainer}>{nBookCards}</div>
+            <div className={styles.bookContainer}>
+              {nBookCards && nBookCards}
+              {nBookCards.length === 0 && (
+                <ErrorCard
+                  userType={this.props.userType}
+                  onClickTabItem={this.onClickTabItem}
+                />
+              )}
+            </div>
           )}
 
           {/* [Manager] Edit Bookings */}
           {this.state.activeTab === "Edit Bookings" && (
             <div className={styles.bookContainer}>
               <AddCard type={"facility"} animationDelay={animationDelay} />
-              {nEditCards}
+              {nEditCards && nEditCards}
+              {nEditCards.length === 0 && (
+                <ErrorCard
+                  userType={this.props.userType}
+                  onClickTabItem={this.onClickTabItem}
+                />
+              )}
             </div>
           )}
 

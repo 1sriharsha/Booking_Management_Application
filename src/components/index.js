@@ -20,3 +20,4 @@ export { default as Counters } from "./Dashboard/BookCard/CheckoutModal/Counters
 export { default as Counter } from "./Dashboard/BookCard/CheckoutModal/Counter/Counter";
 export { default as Searchbar } from "./Dashboard/Searchbar/Searchbar";
 export { default as SportFilter } from "./Dashboard/Searchbar/SportFilter/SportFilter";
+export { default as ErrorCard } from "./Dashboard/ErrorCard/ErrorCard";

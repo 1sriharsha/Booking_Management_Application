@@ -6,64 +6,64 @@ const {
   REACT_APP_CLIENT_ID,
   REACT_APP_API_KEY,
 } = process.env;
-var FacilityData2=[]
+var FacilityData = [];
 var api_url;
 if (process.env.NODE_ENV === "production") {
   api_url = REACT_APP_PRODUCTION_URL;
-    //console.log(api_url)
-  } else {
-    api_url = REACT_APP_LOCAL_URL;
-    //console.log(api_url)
-  }
+  //console.log(api_url)
+} else {
+  api_url = REACT_APP_LOCAL_URL;
+  //console.log(api_url)
+}
+
 axios({
-  method:"GET",
+  method: "GET",
   headers: {
     "Access-Control-Allow-Origin": api_url,
   },
-  withCredentials:true,
-  url:api_url+"/facilities/"
-  
+  withCredentials: true,
+  url: api_url + "/facilities/",
 })
-.then((res) => {
-  if (res.status === 200 || res.status=== 304) {
-    //console.log(res.data)
-    let counter=1
-    for(let temp of res.data){
-      //console.log(temp)
-      const facData={
-        id:counter,
-        facilityName:temp.facilityName,
-        facilityLocation:temp.facilityLocation.city+","+temp.facilityLocation.state,
-        facilitySport:temp.facilitySports,
-        facilityInfo:temp.facilityInformation,
-        availableNow:false,
-        reservationPeriodStart:parseInt(temp.reservationPeriodStart),
-        reservationPeriodEnd:parseInt(temp.reservationPeriodEnd),
+  .then((res) => {
+    if (res.status === 200 || res.status === 304) {
+      //console.log(res.data)
+      let counter = 1;
+      for (let temp of res.data) {
+        //console.log(temp)
+        const facData = {
+          id: counter,
+          facilityName: temp.facilityName,
+          facilityLocation:
+            temp.facilityLocation.city + "," + temp.facilityLocation.state,
+          facilitySport: temp.facilitySports,
+          facilityInfo: temp.facilityInformation,
+          availableNow: false,
+          reservationPeriodStart: parseInt(temp.reservationPeriodStart),
+          reservationPeriodEnd: parseInt(temp.reservationPeriodEnd),
+        };
+        counter = counter + 1;
+        //console.log(facData)
+        FacilityData.push(facData);
       }
-      counter=counter+1
-      //console.log(facData)
-      FacilityData2.push(facData)
     }
-  }
-  console.log(FacilityData2)
-})
-.catch(function (err) {
-  console.log(err);
-  if (err.response) {
-    if (err.response.status === 404) {
-      console.log("Couldn't retrieve facilities");
-     
+    console.log(FacilityData);
+  })
+  .catch(function (err) {
+    console.log(err);
+    if (err.response) {
+      if (err.response.status === 404) {
+        console.log("Couldn't retrieve facilities");
+      }
+    } else if (err.request) {
+      //Response not received from API
+      console.log("Error: ", err.request);
+    } else {
+      //Unexpected Error
+      console.log("Error", err.message);
     }
-  } else if (err.request) {
-    //Response not received from API
-    console.log("Error: ", err.request);
-  } else {
-    //Unexpected Error
-    console.log("Error", err.message);
-  }
-});
+  });
 
-const FacilityData = [
+const FacilityData3 = [
   {
     id: 1, // Primary Key
     facilityName: "Student Recreational Sports Center", // Recreation Center Name
@@ -175,5 +175,7 @@ const FacilityData = [
     reservationPeriodEnd: 18,
   },
 ];
+
+console.log(FacilityData3);
 
 export default FacilityData;

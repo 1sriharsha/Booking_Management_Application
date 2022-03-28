@@ -33,6 +33,7 @@ import {
   faTableTennis,
   faTableTennisPaddleBall,
   faCircleXmark,
+  faRotateRight,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -60,7 +61,8 @@ library.add(
   faBasketball,
   faVolleyball,
   faTableTennisPaddleBall,
-  faCircleXmark
+  faCircleXmark,
+  faRotateRight
 );
 
 ReactDOM.render(
