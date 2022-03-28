@@ -4,11 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BookCard, Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 import Shortcut from "./Shortcut/Shortcut";
-import { FacilityData } from "../../data/";
 import EditCard from "./EditCard/EditCard";
 import AddCard from "./AddCard/AddCard";
 import Searchbar from "./Searchbar/Searchbar";
 import ErrorCard from "./ErrorCard/ErrorCard";
+import axios from "axios";
+
+const {
+  REACT_APP_LOCAL_URL,
+  REACT_APP_PRODUCTION_URL,
+  REACT_APP_CLIENT_ID,
+  REACT_APP_API_KEY,
+} = process.env;
+
+var api_url;
+if (process.env.NODE_ENV === "production") {
+  api_url = REACT_APP_PRODUCTION_URL;
+} else {
+  api_url = REACT_APP_LOCAL_URL;
+}
 
 class Dashboard extends Component {
   constructor(props) {
@@ -26,6 +40,7 @@ class Dashboard extends Component {
       activeTab: defaultTab,
       searchValue: "",
       sportFilterValue: "",
+      facilityData: [],
     };
   }
 
@@ -47,117 +62,171 @@ class Dashboard extends Component {
 
   componentDidMount() {
     document.body.style.backgroundColor = "var(--color-tertiary)";
+
+    // Get Facilities from API
+    axios({
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      url: api_url + "/facilities/",
+    })
+      .then((res) => {
+        if (res.status === 200 || res.status === 304) {
+          let counter = 1;
+
+          for (let temp of res.data) {
+            const facData = {
+              id: counter,
+              facilityName: temp.facilityName,
+              facilityLocation: (
+                temp.facilityLocation.city +
+                "," +
+                temp.facilityLocation.state
+              ).trim(),
+              facilitySport: temp.facilitySports,
+              facilityInfo: temp.facilityInformation,
+              availableNow: false,
+              reservationPeriodStart: parseInt(temp.reservationPeriodStart),
+              reservationPeriodEnd: parseInt(temp.reservationPeriodEnd),
+            };
+            counter = counter + 1;
+
+            this.setState((prevState) => ({
+              facilityData: [facData, ...prevState.facilityData],
+            }));
+          }
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            console.log("Couldn't retrieve facilities");
+          }
+        } else if (err.request) {
+          //Response not received from API
+          console.log("Error: ", err.request);
+        } else {
+          //Unexpected Error
+          console.log("Error", err.message);
+        }
+      });
   }
 
   render() {
     var i = 0;
     var animationDelay = 0;
+
     // Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
-    const nBookCards = FacilityData.filter((facility) => {
-      return (
-        (facility.facilityLocation
-          .toLowerCase()
-          .includes(this.state.searchValue.toLowerCase()) ||
-          facility.facilityName
-            .toLowerCase()
-            .includes(this.state.searchValue.toLowerCase())) &&
-        facility.facilitySport
-          .toLowerCase()
-          .includes(this.state.sportFilterValue.toLowerCase())
-      );
-    }).map(
-      ({
-        id,
-        facilityName,
-        facilityLocation,
-        facilitySport,
-        facilityInfo,
-        availableNow,
-        reservationPeriodStart,
-        reservationPeriodEnd,
-      }) => {
-        if (i >= 3) {
-          animationDelay += 0.05;
-          i = 0;
-        }
-        i += 1;
-
+    const nBookCards = this.state.facilityData
+      .filter((facility) => {
         return (
-          <React.Fragment>
-            <BookCard
-              key={id}
-              facilityID={id}
-              facilityName={facilityName}
-              facilityLocation={facilityLocation}
-              facilitySport={facilitySport}
-              facilityInfo={facilityInfo}
-              availableNow={availableNow}
-              animationDelay={animationDelay}
-              reservationPeriodStart={reservationPeriodStart}
-              reservationPeriodEnd={reservationPeriodEnd}
-              isAuthenticated={this.props.isAuthenticated}
-              onShowModal={this.props.onShowModal}
-              userFirstName={this.props.userFirstName}
-              userLastName={this.props.userLastName}
-              userEmail={this.props.userEmail}
-            />
-          </React.Fragment>
+          (facility.facilityLocation
+            .toLowerCase()
+            .includes(this.state.searchValue.toLowerCase()) ||
+            facility.facilityName
+              .toLowerCase()
+              .includes(this.state.searchValue.toLowerCase())) &&
+          facility.facilitySport
+            .toLowerCase()
+            .includes(this.state.sportFilterValue.toLowerCase())
         );
-      }
-    );
+      })
+      .map(
+        ({
+          id,
+          facilityName,
+          facilityLocation,
+          facilitySport,
+          facilityInfo,
+          availableNow,
+          reservationPeriodStart,
+          reservationPeriodEnd,
+        }) => {
+          if (i >= 3) {
+            animationDelay += 0.05;
+            i = 0;
+          }
+          i += 1;
 
-    console.log(nBookCards);
+          return (
+            <React.Fragment>
+              <BookCard
+                key={id}
+                facilityID={id}
+                facilityName={facilityName}
+                facilityLocation={facilityLocation}
+                facilitySport={facilitySport}
+                facilityInfo={facilityInfo}
+                availableNow={availableNow}
+                animationDelay={animationDelay}
+                reservationPeriodStart={reservationPeriodStart}
+                reservationPeriodEnd={reservationPeriodEnd}
+                isAuthenticated={this.props.isAuthenticated}
+                onShowModal={this.props.onShowModal}
+                userFirstName={this.props.userFirstName}
+                userLastName={this.props.userLastName}
+                userEmail={this.props.userEmail}
+              />
+            </React.Fragment>
+          );
+        }
+      );
 
     // Generates n EditCard components from Database (filtered by facilityLocation & facilityName)
-    const nEditCards = FacilityData.filter((facility) => {
-      return (
-        (facility.facilityLocation
-          .toLowerCase()
-          .includes(this.state.searchValue.toLowerCase()) ||
-          facility.facilityName
-            .toLowerCase()
-            .includes(this.state.searchValue.toLowerCase())) &&
-        facility.facilitySport
-          .toLowerCase()
-          .includes(this.state.sportFilterValue.toLowerCase())
-      );
-    }).map(
-      ({
-        id,
-        facilityName,
-        facilityLocation,
-        facilitySport,
-        facilityInfo,
-        availableNow,
-        reservationPeriodStart,
-        reservationPeriodEnd,
-      }) => {
-        if (i >= 3) {
-          animationDelay += 0.05;
-          i = 0;
-        }
-        i += 1;
-
+    const nEditCards = this.state.facilityData
+      .filter((facility) => {
         return (
-          <React.Fragment>
-            <EditCard
-              key={id}
-              facilityID={id}
-              facilityName={facilityName}
-              facilityLocation={facilityLocation}
-              facilitySport={facilitySport}
-              facilityInfo={facilityInfo}
-              availableNow={availableNow}
-              animationDelay={animationDelay}
-              reservationPeriodStart={reservationPeriodStart}
-              reservationPeriodEnd={reservationPeriodEnd}
-              isAuthenticated={this.props.isAuthenticated}
-              onShowModal={this.props.onShowModal}
-            />
-          </React.Fragment>
+          (facility.facilityLocation
+            .toLowerCase()
+            .includes(this.state.searchValue.toLowerCase()) ||
+            facility.facilityName
+              .toLowerCase()
+              .includes(this.state.searchValue.toLowerCase())) &&
+          facility.facilitySport
+            .toLowerCase()
+            .includes(this.state.sportFilterValue.toLowerCase())
         );
-      }
-    );
+      })
+      .map(
+        ({
+          id,
+          facilityName,
+          facilityLocation,
+          facilitySport,
+          facilityInfo,
+          availableNow,
+          reservationPeriodStart,
+          reservationPeriodEnd,
+        }) => {
+          if (i >= 3) {
+            animationDelay += 0.05;
+            i = 0;
+          }
+          i += 1;
+
+          return (
+            <React.Fragment>
+              <EditCard
+                key={id}
+                facilityID={id}
+                facilityName={facilityName}
+                facilityLocation={facilityLocation}
+                facilitySport={facilitySport}
+                facilityInfo={facilityInfo}
+                availableNow={availableNow}
+                animationDelay={animationDelay}
+                reservationPeriodStart={reservationPeriodStart}
+                reservationPeriodEnd={reservationPeriodEnd}
+                isAuthenticated={this.props.isAuthenticated}
+                onShowModal={this.props.onShowModal}
+              />
+            </React.Fragment>
+          );
+        }
+      );
 
     return (
       <React.Fragment>

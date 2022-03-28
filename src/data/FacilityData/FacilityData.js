@@ -33,8 +33,11 @@ axios({
         const facData = {
           id: counter,
           facilityName: temp.facilityName,
-          facilityLocation:
-            temp.facilityLocation.city + "," + temp.facilityLocation.state,
+          facilityLocation: (
+            temp.facilityLocation.city +
+            "," +
+            temp.facilityLocation.state
+          ).trim(),
           facilitySport: temp.facilitySports,
           facilityInfo: temp.facilityInformation,
           availableNow: false,
@@ -171,8 +174,8 @@ const FacilityData3 = [
     facilitySport: "Badminton",
     facilityInfo: "Badminton Court #004",
     availableNow: false,
-    reservationPeriodStart: 15,
-    reservationPeriodEnd: 18,
+    reservationPeriodStart: 0,
+    reservationPeriodEnd: 6,
   },
 ];
 

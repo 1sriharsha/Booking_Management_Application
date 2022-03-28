@@ -82,7 +82,6 @@ class AddFacility extends Component {
       reservationPeriodStart: this.state.reservationPeriodStart,
       reservationPeriodEnd: this.state.reservationPeriodEnd,
     };
-    // TODO Connect to Database
     console.log(newFacilityData);
     axios({
       method: "POST",
