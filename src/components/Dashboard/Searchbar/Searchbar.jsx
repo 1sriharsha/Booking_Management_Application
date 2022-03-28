@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import styles from "./Searchbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FacilityData } from "../../../data";
 import uniqid from "uniqid";
 import SportFilter from "./SportFilter/SportFilter";
-
-// Array of Facility Locations
-const locations = FacilityData.map(({ facilityLocation }) => {
-  return facilityLocation;
-});
-
-// Set of Unique Locations
-const uniqueLocations = [...new Set(locations)];
 
 class Searchbar extends Component {
   state = {
@@ -44,25 +35,33 @@ class Searchbar extends Component {
   };
 
   render() {
-    // Filter Unique Locations by Search Value
-    let filteredLocations = uniqueLocations.filter((uniqueLocation) =>
-      uniqueLocation
-        .toLowerCase()
-        .includes(this.state.searchValue.toLowerCase())
-    );
-
-    // Map Unique Locations to buttons
-    const nOptions = filteredLocations.map((facilityLocation) => {
-      return (
-        <button
-          key={uniqid("", "-option")}
-          onClick={() => this.setSearchValue(facilityLocation)}
-          className={styles.listOptions}
-        >
-          {facilityLocation}
-        </button>
-      );
-    });
+    // Location Autocomplete Buttons
+    const nOptions = [
+      // Get Unique Locations
+      ...new Set(
+        this.props.facilityData.map(({ facilityLocation }) => {
+          return facilityLocation;
+        })
+      ),
+    ]
+      // Filter Locations by searchValue
+      .filter((uniqueLocation) =>
+        uniqueLocation
+          .toLowerCase()
+          .includes(this.state.searchValue.toLowerCase())
+      )
+      // Map Locations to Buttons
+      .map((facilityLocation) => {
+        return (
+          <button
+            key={uniqid("", "-option")}
+            onClick={() => this.setSearchValue(facilityLocation)}
+            className={styles.listOptions}
+          >
+            {facilityLocation}
+          </button>
+        );
+      });
 
     return (
       <React.Fragment>

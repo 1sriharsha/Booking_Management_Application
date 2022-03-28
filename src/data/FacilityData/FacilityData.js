@@ -49,7 +49,7 @@ axios({
         FacilityData.push(facData);
       }
     }
-    console.log(FacilityData);
+    // console.log(FacilityData);
   })
   .catch(function (err) {
     console.log(err);
@@ -179,6 +179,6 @@ const FacilityData3 = [
   },
 ];
 
-console.log(FacilityData3);
+// console.log(FacilityData3);
 
 export default FacilityData;

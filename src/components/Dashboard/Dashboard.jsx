@@ -244,6 +244,7 @@ class Dashboard extends Component {
                     handleSearchValue={this.handleSearchValue}
                     handleSportFilter={this.handleSportFilter}
                     sportFilterValue={this.state.sportFilterValue}
+                    facilityData={this.state.facilityData}
                   />
                 </div>
               </div>
