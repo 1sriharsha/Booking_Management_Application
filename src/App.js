@@ -29,7 +29,7 @@ class App extends Component {
     );
 
     this.state = {
-      isAuthenticated: localStorage.getItem('isAuthenticated') === 'true', // TODO Check cookie for Authentication
+      isAuthenticated: localStorage.getItem("isAuthenticated") === "true", // TODO Check cookie for Authentication
       user: userData,
       userFirstName: userData.firstName,
       userLastName: userData.lastName,
@@ -59,21 +59,21 @@ class App extends Component {
   };
 
   handleAuthState = (res) => {
-    // console.log(res);
-    const type = res.data.userType;
+    // const type = res.data.userType;
     this.setState({
       isAuthenticated: true,
       userFirstName: res.data.firstName,
       userLastName: res.data.lastName,
+      userType: res.data.type,
       showModal: false,
-      userType: type.toLowerCase(),
     });
 
     localStorage.setItem("isAuthenticated", true);
     localStorage.setItem("user", JSON.stringify(res.data));
+
+    window.location.href = "/dashboard"; // Redirect to Dashboard
   };
 
-  // TODO Move onLogout to functional component for redirect routing
   onLogout = () => {
     axios({
       method: "GET",

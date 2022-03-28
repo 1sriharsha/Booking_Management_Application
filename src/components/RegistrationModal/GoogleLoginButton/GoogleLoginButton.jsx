@@ -4,7 +4,6 @@ import { GoogleLogin } from "react-google-login";
 import styles from "./GoogleLoginButton.module.css";
 import "./GoogleLoginButton.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 //Import Environment Variables
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
@@ -29,8 +28,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 function GoogleLoginButton(props) {
-  var navigate = useNavigate();
-
   //console.log(clientID)
   const onSuccess = (res) => {
     console.log(process.env.NODE_ENV);
@@ -47,7 +44,6 @@ function GoogleLoginButton(props) {
     })
       .then((res) => {
         if (res.status === 200) {
-          navigate("/dashboard"); // Redirect to Dashboard
           props.handleAuthState(res); // Send res to App.js for state change
           console.log("User Added to Database");
         }
@@ -56,7 +52,6 @@ function GoogleLoginButton(props) {
         console.log(err);
         if (err.response) {
           if (err.response.status === 409) {
-            navigate("/dashboard"); // Redirect to Dashboard
             props.handleAuthState(err.response);
             console.log("User Already Exists in Database");
           }
