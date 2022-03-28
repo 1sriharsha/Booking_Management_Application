@@ -16,7 +16,7 @@ class Sidebar extends Component {
           </div>
 
           {/* Guest View Tabs */}
-          {this.props.userType === "guest" && (
+          {this.props.userType === "Guest" && (
             <GuestTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}
@@ -24,7 +24,7 @@ class Sidebar extends Component {
           )}
 
           {/* Customer View Tabs */}
-          {this.props.userType === "customer" && (
+          {this.props.userType === "Customer" && (
             <UserTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}
@@ -32,7 +32,7 @@ class Sidebar extends Component {
           )}
 
           {/* Manager View Tabs */}
-          {this.props.userType === "manager" && (
+          {this.props.userType === "Manager" && (
             <ManagementTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}
@@ -40,7 +40,7 @@ class Sidebar extends Component {
           )}
 
           {/* On-Site Employee View Tabs */}
-          {this.props.userType === "employee" && (
+          {this.props.userType === "Employee" && (
             <EmployeeTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}

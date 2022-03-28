@@ -23,8 +23,7 @@ class Searchbar extends Component {
   onSearchChange = (e) => {
     let searchValue = e.target.value;
 
-    if (this.props.userType === "manager") {
-
+    if (this.props.userType === "Manager") {
       this.props.onClickTabItem("Edit Bookings");
     } else {
       this.props.onClickTabItem("Book");

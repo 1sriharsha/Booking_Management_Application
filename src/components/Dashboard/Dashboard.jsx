@@ -15,9 +15,9 @@ class Dashboard extends Component {
 
     // Set default tab by user type
     let defaultTab = "Book";
-    if (props.userType === "customer") {
+    if (props.userType === "Customer") {
       defaultTab = "Dashboard";
-    } else if (props.userType === "manager") {
+    } else if (props.userType === "Manager") {
       defaultTab = "Edit Bookings";
     }
 

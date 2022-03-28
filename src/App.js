@@ -12,16 +12,34 @@ if (process.env.NODE_ENV === "production") {
   api_url = REACT_APP_LOCAL_URL;
 }
 class App extends Component {
-  state = {
-    isAuthenticated: false, // TODO Check cookie for Authentication
-    userFirstName: "", // TODO Store state values in local storage for persistance
-    userLastName: "",
-    userEmail: "",
-    userType: "guest", // Implemented Options: "guest", "customer", "manager", "employee"
-    showModal: false,
-    showModalLogin: false,
-    showModalSignUp: false,
-  };
+  constructor() {
+    super();
+
+    let userData = this.getUser();
+
+    console.log(
+      " fname: " +
+        userData.firstName +
+        " lname: " +
+        userData.lastName +
+        " email: " +
+        userData.email +
+        " type: " +
+        userData.userType
+    );
+
+    this.state = {
+      isAuthenticated: false, // TODO Check cookie for Authentication
+      user: userData,
+      userFirstName: userData.firstName,
+      userLastName: userData.lastName,
+      userEmail: userData.email, // TODO Get email from API
+      userType: userData.userType,
+      showModal: false,
+      showModalLogin: false,
+      showModalSignUp: false,
+    };
+  }
 
   // TODO Simplify
   showModal = (tab) => {
@@ -50,6 +68,8 @@ class App extends Component {
       showModal: false,
       userType: type.toLowerCase(),
     });
+
+    localStorage.setItem("user", JSON.stringify(res.data));
   };
 
   // TODO Move onLogout to functional component for redirect routing
@@ -69,12 +89,31 @@ class App extends Component {
           userLastName: "",
           userType: "guest",
         });
+
+        localStorage.clear();
       }
     });
   };
 
   hideModal = () => {
     this.setState({ showModal: false });
+  };
+
+  getUser = () => {
+    let user = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
+    };
+
+    var storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser) {
+      user = storedUser;
+    }
+
+    return user;
   };
 
   render() {
