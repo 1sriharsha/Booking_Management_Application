@@ -29,7 +29,7 @@ class App extends Component {
     );
 
     this.state = {
-      isAuthenticated: false, // TODO Check cookie for Authentication
+      isAuthenticated: localStorage.getItem('isAuthenticated') === 'true', // TODO Check cookie for Authentication
       user: userData,
       userFirstName: userData.firstName,
       userLastName: userData.lastName,
@@ -69,6 +69,7 @@ class App extends Component {
       userType: type.toLowerCase(),
     });
 
+    localStorage.setItem("isAuthenticated", true);
     localStorage.setItem("user", JSON.stringify(res.data));
   };
 
@@ -80,7 +81,7 @@ class App extends Component {
       withCredentials: true,
     }).then((res) => {
       if (res.status === 200) {
-        // TODO Redirect
+        window.location.href = "/"; // Redirect to Home
         console.log("Logged Out");
 
         this.setState({
