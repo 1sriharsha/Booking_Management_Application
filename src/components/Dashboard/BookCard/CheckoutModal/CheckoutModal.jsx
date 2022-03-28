@@ -30,6 +30,9 @@ class CheckoutModal extends Component {
       this.props.onShowModal("login");
     } else {
       var newReservationData = {
+        userFirstName: this.props.userFirstName,
+        userLastName: this.props.userLastName,
+        userEmail: this.props.userEmail,
         reservedSlot: this.state.reservedSlot,
         reservedGear: this.state.reservedGear,
         reservedExtras: this.state.reservedExtras,

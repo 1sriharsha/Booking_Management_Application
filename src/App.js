@@ -14,9 +14,10 @@ if (process.env.NODE_ENV === "production") {
 class App extends Component {
   state = {
     isAuthenticated: false, // TODO Check cookie for Authentication
-    userFirstName: "John", // TODO Store state values in local storage for persistance
-    userLastName: "Smith",
-    userType: "manager", // Implemented Options: "guest", "customer", "manager", "employee"
+    userFirstName: "", // TODO Store state values in local storage for persistance
+    userLastName: "",
+    userEmail: "",
+    userType: "guest", // Implemented Options: "guest", "customer", "manager", "employee"
     showModal: false,
     showModalLogin: false,
     showModalSignUp: false,
@@ -40,6 +41,7 @@ class App extends Component {
   };
 
   handleAuthState = (res) => {
+    // console.log(res);
     const type = res.data.userType;
     this.setState({
       isAuthenticated: true,
@@ -99,6 +101,7 @@ class App extends Component {
                 isAuthenticated={this.state.isAuthenticated}
                 userFirstName={this.state.userFirstName}
                 userLastName={this.state.userLastName}
+                userEmail={this.state.userEmail}
                 userType={this.state.userType}
                 onShowModal={this.showModal}
                 onLogout={this.onLogout}

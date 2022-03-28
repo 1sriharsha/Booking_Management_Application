@@ -99,6 +99,9 @@ class BookCard extends Component {
             reservationPeriodEnd={reservationPeriodEnd}
             isAuthenticated={isAuthenticated}
             onShowModal={this.props.onShowModal}
+            userFirstName={this.props.userFirstName}
+            userLastName={this.props.userLastName}
+            userEmail={this.props.userEmail}
           />
         )}
       </React.Fragment>
