@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./Dashboard.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BookCard, Sidebar } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 import Shortcut from "./Shortcut/Shortcut";
@@ -8,6 +7,7 @@ import EditCard from "./EditCard/EditCard";
 import AddCard from "./AddCard/AddCard";
 import Searchbar from "./Searchbar/Searchbar";
 import ErrorCard from "./ErrorCard/ErrorCard";
+import uniqid from "uniqid";
 import axios from "axios";
 
 const {
@@ -154,7 +154,7 @@ class Dashboard extends Component {
           return (
             <React.Fragment>
               <BookCard
-                key={id}
+                key={uniqid("", "-bookcard")}
                 facilityID={id}
                 facilityName={facilityName}
                 facilityLocation={facilityLocation}
@@ -210,7 +210,7 @@ class Dashboard extends Component {
           return (
             <React.Fragment>
               <EditCard
-                key={id}
+                key={uniqid("", "-editcard")}
                 facilityID={id}
                 facilityName={facilityName}
                 facilityLocation={facilityLocation}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Counter from "../Counter/Counter";
+import uniqid from "uniqid";
 
 class Counters extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Counters extends Component {
       <React.Fragment>
         {this.props.counters.map((counters) => (
           <Counter
-            key={counters.id}
+            key={uniqid("", "-counter")}
             onIncrement={this.props.onIncrement}
             onDecrement={this.props.onDecrement}
             counter={counters}
