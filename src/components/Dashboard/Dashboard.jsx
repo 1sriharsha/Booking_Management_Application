@@ -238,6 +238,7 @@ class Dashboard extends Component {
               <div className={styles.menu}>
                 <div className={styles.search}>
                   <Searchbar
+                    key={uniqid("", "-searchbar")}
                     userType={this.props.userType}
                     onClickTabItem={this.onClickTabItem}
                     onResetSearch={this.onResetSearch}
@@ -251,6 +252,7 @@ class Dashboard extends Component {
 
               {/* Navigation: User Login/Sign Up Buttons [Right] */}
               <NavProfile
+                key={uniqid("", "-navprofile")}
                 isAuthenticated={this.props.isAuthenticated}
                 userFirstName={this.props.userFirstName}
                 userLastName={this.props.userLastName}
@@ -263,6 +265,7 @@ class Dashboard extends Component {
 
         {/* Side Navigation Bar */}
         <Sidebar
+          key={uniqid("", "-sidebar")}
           userType={this.props.userType}
           activeTab={this.state.activeTab}
           onClick={this.onClickTabItem}
@@ -279,6 +282,7 @@ class Dashboard extends Component {
               {/* Shortcuts */}
               <div className={styles.shortcutContainer}>
                 <Shortcut
+                  key={uniqid("", "-shortcut")}
                   shortcutTo="Book"
                   title="Book"
                   description="Book A Facility"
@@ -287,6 +291,7 @@ class Dashboard extends Component {
                   onClick={this.onClickTabItem}
                 />
                 <Shortcut
+                  key={uniqid("", "-shortcut")}
                   shortcutTo="My Bookings"
                   title="Bookings"
                   description="My Bookings"
@@ -295,6 +300,7 @@ class Dashboard extends Component {
                   onClick={this.onClickTabItem}
                 />
                 <Shortcut
+                  key={uniqid("", "-shortcut")}
                   shortcutTo="Notifications"
                   title="Notifications"
                   description="My Notifications"
@@ -311,6 +317,7 @@ class Dashboard extends Component {
               {nBookCards && nBookCards}
               {nBookCards.length === 0 && (
                 <ErrorCard
+                  key={uniqid("", "-errorcard")}
                   userType={this.props.userType}
                   onClickTabItem={this.onClickTabItem}
                 />
@@ -321,10 +328,15 @@ class Dashboard extends Component {
           {/* [Manager] Edit Bookings */}
           {this.state.activeTab === "Edit Bookings" && (
             <div className={styles.bookContainer}>
-              <AddCard type={"facility"} animationDelay={animationDelay} />
+              <AddCard
+                key={uniqid("", "-addcard")}
+                type={"facility"}
+                animationDelay={animationDelay}
+              />
               {nEditCards && nEditCards}
               {nEditCards.length === 0 && (
                 <ErrorCard
+                  key={uniqid("", "-errorcard")}
                   userType={this.props.userType}
                   onClickTabItem={this.onClickTabItem}
                 />
@@ -335,14 +347,22 @@ class Dashboard extends Component {
           {/* [Manager] Edit Equipment */}
           {this.state.activeTab === "Edit Equipment" && (
             <div className={styles.bookContainer}>
-              <AddCard type={"equipment"} animationDelay={animationDelay} />
+              <AddCard
+                key={uniqid("", "-addcard")}
+                type={"equipment"}
+                animationDelay={animationDelay}
+              />
             </div>
           )}
 
           {/* [Manager] Edit Promotions */}
           {this.state.activeTab === "Edit Promotions" && (
             <div className={styles.bookContainer}>
-              <AddCard type={"promotion"} animationDelay={animationDelay} />
+              <AddCard
+                key={uniqid("", "-addcard")}
+                type={"promotion"}
+                animationDelay={animationDelay}
+              />
             </div>
           )}
         </div>

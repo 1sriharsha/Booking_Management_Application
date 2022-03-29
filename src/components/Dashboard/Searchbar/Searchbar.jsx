@@ -54,7 +54,7 @@ class Searchbar extends Component {
       .map((facilityLocation) => {
         return (
           <button
-            key={uniqid("", "-option")}
+            key={uniqid("", "-searchoption")}
             onClick={() => this.setSearchValue(facilityLocation)}
             className={styles.listOptions}
           >
@@ -92,6 +92,7 @@ class Searchbar extends Component {
               <section className={styles.searchOptions}>{nOptions}</section>
               <section className={styles.filterOptions}>
                 <SportFilter
+                  key={uniqid("", "-sportfilter")}
                   handleSportFilter={this.props.handleSportFilter}
                   sportFilterValue={this.props.sportFilterValue}
                 />

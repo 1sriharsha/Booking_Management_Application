@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./AddCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddModal from "./AddModal/AddModal";
+import uniqid from "uniqid";
 
 class AddCard extends Component {
   state = {
@@ -56,7 +57,11 @@ class AddCard extends Component {
 
         {/* Add Modal */}
         {this.state.showAddModal && (
-          <AddModal type={this.props.type} onCloseModal={this.closeAddModal} />
+          <AddModal
+            key={uniqid("", "-addmodal")}
+            type={this.props.type}
+            onCloseModal={this.closeAddModal}
+          />
         )}
       </React.Fragment>
     );

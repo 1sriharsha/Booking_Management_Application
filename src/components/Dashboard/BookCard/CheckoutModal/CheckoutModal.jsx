@@ -231,7 +231,7 @@ class CheckoutModal extends Component {
       ({ itemName, value, itemPrice }) => {
         return (
           <React.Fragment>
-            <div>
+            <div key={uniqid("", "-optionslist")}>
               <div className={styles.itemName}>{itemName}</div>
               <div className={styles.itemCount}>x{value}</div>
               <div className={styles.itemsTotal}>

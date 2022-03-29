@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./UserTabs.module.css";
 import { Tab } from "../../..";
+import uniqid from "uniqid";
 
 class UserTabs extends Component {
   render() {
@@ -8,6 +9,7 @@ class UserTabs extends Component {
       <React.Fragment>
         {/* Dashboard Section */}
         <Tab
+          key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
           tabLabel="Dashboard"
@@ -17,12 +19,14 @@ class UserTabs extends Component {
         {/* Bookings Section */}
         <div className={styles.title}>BOOKINGS</div>
         <Tab
+          key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
           tabLabel="Book"
           icon="fa-solid fa-bookmark"
         ></Tab>
         <Tab
+          key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
           tabLabel="My Bookings"
@@ -32,12 +36,14 @@ class UserTabs extends Component {
         {/* Account Section */}
         <div className={styles.title}>ACCOUNT</div>
         <Tab
+          key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
           tabLabel="Notifications"
           icon="fa-solid fa-bell"
         ></Tab>
         <Tab
+          key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
           tabLabel="Settings"

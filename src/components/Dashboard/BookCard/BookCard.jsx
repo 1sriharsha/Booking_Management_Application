@@ -3,6 +3,7 @@ import styles from "./BookCard.module.css";
 import "./BookCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CheckoutModal } from "../..";
+import uniqid from "uniqid";
 
 class BookCard extends Component {
   state = {
@@ -88,6 +89,7 @@ class BookCard extends Component {
 
         {this.state.showCheckoutModal && (
           <CheckoutModal
+            key={uniqid("", "-checkoutmodal")}
             facilityID={facilityID}
             facilityName={facilityName}
             facilityLocation={facilityLocation}

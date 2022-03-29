@@ -21,7 +21,7 @@ class SportFilter extends Component {
       return (
         <button
           className={this.props.sportFilterValue === sportName ? "active" : ""}
-          key={uniqid("", "-filter")}
+          key={uniqid("", "-filterbutton")}
           onClick={() => this.setFilter(sportName)}
         >
           {sportName}
