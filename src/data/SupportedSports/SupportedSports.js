@@ -24,6 +24,26 @@ const SupportedSports = [
     sportName: "Badminton",
     sportIcon: "fa-solid fa-table-tennis-paddle-ball",
   },
+  {
+    sportName: "Frisbee",
+    sportIcon: "fa-solid fa-compact-disc",
+  },
+  {
+    sportName: "Cricket",
+    sportIcon: "fa-solid fa-baseball-bat-ball",
+  },
+  {
+    sportName: "Football",
+    sportIcon: "fa-solid fa-football",
+  },
+  {
+    sportName: "Baseball",
+    sportIcon: "fa-solid fa-baseball",
+  },
+  {
+    sportName: "Bowling",
+    sportIcon: "fa-solid fa-bowling-ball",
+  },
 ];
 
 export default SupportedSports;
