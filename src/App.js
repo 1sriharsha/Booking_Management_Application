@@ -81,7 +81,6 @@ class App extends Component {
       withCredentials: true,
     }).then((res) => {
       if (res.status === 200) {
-        window.location.href = "/"; // Redirect to Home
         console.log("Logged Out");
 
         this.setState({
@@ -90,10 +89,11 @@ class App extends Component {
           userLastName: "",
           userType: "guest",
         });
-
-        localStorage.clear();
       }
     });
+
+    window.location.href = "/"; // Redirect to Home
+    localStorage.clear();
   };
 
   hideModal = () => {
