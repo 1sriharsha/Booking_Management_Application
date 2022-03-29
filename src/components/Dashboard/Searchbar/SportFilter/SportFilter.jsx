@@ -17,7 +17,17 @@ class SportFilter extends Component {
   };
 
   render() {
-    const nSportOptions = SupportedSports.map(({ sportName }) => {
+    const nSportOptions = SupportedSports.sort(function (a, b) {
+      var sportA = a.sportName.toLowerCase(),
+        sportB = b.sportName.toLowerCase();
+      if (sportA < sportB) {
+        return -1;
+      }
+      if (sportB > sportA) {
+        return 1;
+      }
+      return 0;
+    }).map(({ sportName }) => {
       return (
         <button
           className={this.props.sportFilterValue === sportName ? "active" : ""}
