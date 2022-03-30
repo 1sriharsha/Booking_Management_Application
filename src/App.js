@@ -59,7 +59,6 @@ class App extends Component {
   };
 
   handleAuthState = (res) => {
-    // const type = res.data.userType;
     this.setState({
       isAuthenticated: true,
       userFirstName: res.data.firstName,
@@ -105,7 +104,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
+      userType: "Manager", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
     };
 
     var storedUser = JSON.parse(localStorage.getItem("user"));

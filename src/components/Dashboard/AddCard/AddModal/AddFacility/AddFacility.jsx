@@ -37,7 +37,6 @@ class AddFacility extends Component {
   };
 
   setLocation = (location) => {
-    //console.log(location)
     this.setState({
       facilityLocation: {
         place_id: location.value.place_id,
@@ -69,10 +68,8 @@ class AddFacility extends Component {
     var api_url;
     if (process.env.NODE_ENV === "production") {
       api_url = REACT_APP_PRODUCTION_URL;
-      //console.log(api_url)
     } else {
       api_url = REACT_APP_LOCAL_URL;
-      //console.log(api_url)
     }
     var newFacilityData = {
       facilityName: this.state.facilityName,

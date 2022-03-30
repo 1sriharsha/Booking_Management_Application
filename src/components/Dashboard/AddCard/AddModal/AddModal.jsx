@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styles from "./AddModal.module.css";
 import "./AddModal.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddFacility from "./AddFacility/AddFacility";
+import AddPromotion from "./AddPromotion/AddPromotion";
 import uniqid from "uniqid";
 
 class AddModal extends Component {
@@ -14,6 +14,12 @@ class AddModal extends Component {
             {this.props.type === "facility" && (
               <AddFacility
                 key={uniqid("", "-addfacility")}
+                onCloseModal={this.props.onCloseModal}
+              />
+            )}
+            {this.props.type === "promotion" && (
+              <AddPromotion
+                key={uniqid("", "-addpromotion")}
                 onCloseModal={this.props.onCloseModal}
               />
             )}
