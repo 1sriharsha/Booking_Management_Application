@@ -21,13 +21,40 @@ class AddPromotion extends Component {
     promotionName: "",
     promotionCode: "",
     promotionStart: currentDate,
-    promotionEnd: 0,
+    promotionEnd: "",
     promotionPercentage: null,
     promotionInfo: "",
+    isError: false,
   };
 
   setPromotion = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    let targetName = e.target.name;
+    let targetValue = e.target.value;
+
+    if (targetName === "promotionCode") {
+      targetValue = targetValue.replace(/\s/g, "");
+    }
+
+    if (
+      targetName === "promotionPercentage" &&
+      targetValue !== "" &&
+      (targetValue < 1 || targetValue > 100)
+    ) {
+      return;
+    }
+
+    this.setState({ [targetName]: targetValue }, this.validateDate);
+  };
+
+  validateDate = () => {
+    if (
+      new Date(this.state.promotionStart) > new Date(this.state.promotionEnd)
+    ) {
+      console.log("Start after End");
+      this.setState({ isError: true });
+    } else {
+      this.setState({ isError: false });
+    }
   };
 
   onSubmit = () => {
@@ -100,7 +127,7 @@ class AddPromotion extends Component {
                 this.state.promotionStart &&
                 this.state.promotionEnd &&
                 this.state.promotionPercentage &&
-                this.state.promotionInfo
+                !this.state.isError
                   ? "completedSection"
                   : "",
               ].join(" ")}
@@ -166,6 +193,12 @@ class AddPromotion extends Component {
                       value={this.state.promotionEnd}
                       min={this.state.promotionStart}
                     />
+                    {this.state.isError && (
+                      <div className={styles.error}>
+                        Reservation period must end after{" "}
+                        {this.state.promotionStart}.
+                      </div>
+                    )}
                   </section>
                 </div>
 
@@ -207,7 +240,7 @@ class AddPromotion extends Component {
                     this.state.promotionStart &&
                     this.state.promotionEnd &&
                     this.state.promotionPercentage &&
-                    this.state.promotionInfo
+                    !this.state.isError
                   )
                 }
               >

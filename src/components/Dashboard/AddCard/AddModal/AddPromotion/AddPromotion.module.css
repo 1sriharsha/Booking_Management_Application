@@ -82,7 +82,10 @@
 
 .error {
   color: red;
-  margin-top: 0.5em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: -150px;
 }
 
 /* Add Form */
@@ -104,6 +107,7 @@
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
+  position: relative;
 }
 
 /* Navigation */
