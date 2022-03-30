@@ -50,7 +50,6 @@ class AddPromotion extends Component {
     if (
       new Date(this.state.promotionStart) > new Date(this.state.promotionEnd)
     ) {
-      console.log("Start after End");
       this.setState({ isError: true });
     } else {
       this.setState({ isError: false });

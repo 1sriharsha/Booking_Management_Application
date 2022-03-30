@@ -86,7 +86,7 @@ class App extends Component {
           isAuthenticated: false,
           userFirstName: "",
           userLastName: "",
-          userType: "guest",
+          userType: "Guest",
         });
       }
     });
@@ -104,7 +104,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      userType: "Manager", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
+      userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
     };
 
     var storedUser = JSON.parse(localStorage.getItem("user"));
