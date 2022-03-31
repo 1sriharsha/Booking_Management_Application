@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home, Dashboard, RegistrationModal } from "./components";
 import axios from "axios";
-const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
-  process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 var api_url;
 if (process.env.NODE_ENV === "production") {
@@ -104,7 +103,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      userType: "Customer", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
+      userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
     };
 
     var storedUser = JSON.parse(localStorage.getItem("user"));

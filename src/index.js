@@ -30,7 +30,6 @@ import {
   faFutbol,
   faBasketball,
   faVolleyball,
-  faTableTennis,
   faTableTennisPaddleBall,
   faCircleXmark,
   faRotateRight,
