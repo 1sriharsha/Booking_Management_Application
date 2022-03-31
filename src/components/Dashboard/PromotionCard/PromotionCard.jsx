@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import styles from "./PromotionCard.module.css";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import uniqid from "uniqid";
 
 class PromotionCard extends Component {
   state = {
@@ -11,25 +8,13 @@ class PromotionCard extends Component {
     buttonLabel: "Copy Code",
   };
 
-  onClickBook = () => {
-    document.querySelector("body").style.overflow = "hidden";
-    this.setState({ showCheckoutModal: true });
-  };
-
-  closeCheckoutModal = () => {
-    document.querySelector("body").style.overflow = "auto";
-    this.setState({ showCheckoutModal: false });
-  };
-
   render() {
     const {
       props: {
-        id,
         promotionName,
         promotionCode,
         promotionStart,
         promotionEnd,
-        promotionPercentage,
         promotionInfo,
         animationDelay,
       },
@@ -76,7 +61,10 @@ class PromotionCard extends Component {
             </div>
             <button
               className={[styles.button, styles.buttonPrimary].join(" ")}
-              onClick={() => this.setState({ buttonLabel: "Copied" })}
+              onClick={() => {
+                this.setState({ buttonLabel: "Copied" });
+                navigator.clipboard.writeText(promotionCode);
+              }}
             >
               {this.state.buttonLabel}
             </button>
