@@ -70,12 +70,14 @@ class PromotionCard extends Component {
               </i>
               Code: <span>{promotionCode}</span>
             </div>
-            <div className={styles.description}>
-              <i>
-                <FontAwesomeIcon icon="fa-solid fa-circle-info" />
-              </i>
-              {promotionInfo}
-            </div>
+            {promotionInfo && (
+              <div className={styles.description}>
+                <i>
+                  <FontAwesomeIcon icon="fa-solid fa-circle-info" />
+                </i>
+                {promotionInfo}
+              </div>
+            )}
             <button
               title={promotionCode}
               className={[styles.button, styles.buttonPrimary].join(" ")}
