@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Dashboard.module.css";
-import { BookCard, Sidebar } from "..";
+import { BookCard, Sidebar, PromotionCard } from "..";
 import NavProfile from "../NavProfile/NavProfile";
 import Shortcut from "./Shortcut/Shortcut";
 import EditCard from "./EditCard/EditCard";
@@ -9,6 +9,7 @@ import Searchbar from "./Searchbar/Searchbar";
 import ErrorCard from "./ErrorCard/ErrorCard";
 import uniqid from "uniqid";
 import axios from "axios";
+import { TestPromotionData } from "../../data";
 
 const {
   REACT_APP_LOCAL_URL,
@@ -228,6 +229,41 @@ class Dashboard extends Component {
         }
       );
 
+    // Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
+    const nPromotionCards = TestPromotionData.map(
+      ({
+        id,
+        promotionName,
+        promotionCode,
+        promotionStart,
+        promotionEnd,
+        promotionPercentage,
+        promotionInfo,
+      }) => {
+        if (i >= 3) {
+          animationDelay += 0.05;
+          i = 0;
+        }
+        i += 1;
+
+        return (
+          <React.Fragment>
+            <PromotionCard
+              key={uniqid("", "-promotioncard")}
+              promotionID={id}
+              promotionName={promotionName}
+              promotionCode={promotionCode}
+              promotionStart={promotionStart}
+              promotionEnd={promotionEnd}
+              promotionPercentage={promotionPercentage}
+              promotionInfo={promotionInfo}
+              animationDelay={animationDelay}
+            />
+          </React.Fragment>
+        );
+      }
+    );
+
     return (
       <React.Fragment>
         {/* Top Navigation Bar */}
@@ -323,6 +359,11 @@ class Dashboard extends Component {
                 />
               )}
             </div>
+          )}
+
+          {/* [Customer] Notifications */}
+          {this.state.activeTab === "Notifications" && (
+            <div className={styles.bookContainer}>{nPromotionCards}</div>
           )}
 
           {/* [Manager] Edit Bookings */}

@@ -39,6 +39,8 @@ import {
   faBaseball,
   faBowlingBall,
   faPercent,
+  faCalendarCheck,
+  faBarcode,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -72,7 +74,9 @@ library.add(
   faFootball,
   faBaseball,
   faBowlingBall,
-  faPercent
+  faPercent,
+  faCalendarCheck,
+  faBarcode
 );
 
 ReactDOM.render(

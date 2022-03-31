@@ -104,7 +104,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
+      userType: "Customer", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
     };
 
     var storedUser = JSON.parse(localStorage.getItem("user"));
