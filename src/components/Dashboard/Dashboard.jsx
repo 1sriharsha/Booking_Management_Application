@@ -269,7 +269,6 @@ class Dashboard extends Component {
               <div className={styles.menu}>
                 <div className={styles.search}>
                   <Searchbar
-                    key={uniqid("", "-searchbar")}
                     userType={this.props.userType}
                     onClickTabItem={this.onClickTabItem}
                     onResetSearch={this.onResetSearch}
