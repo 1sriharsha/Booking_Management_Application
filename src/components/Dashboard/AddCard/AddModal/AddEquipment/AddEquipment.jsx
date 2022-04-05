@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styles from "./AddEquipment.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { SupportedSports } from "../../../../../data";
+
 const {
   REACT_APP_LOCAL_URL,
   REACT_APP_PRODUCTION_URL,
@@ -19,10 +21,30 @@ class AddEquipment extends Component {
   };
 
   setEquipment = (e) => {
-    this.setState(
-      { [e.target.name]: e.target.value },
-      this.validateReservation
-    );
+    let targetName = e.target.name;
+    let targetValue = e.target.value;
+
+    if (targetName === "itemCategory" && targetValue === "-") {
+      return;
+    }
+
+    if (
+      targetName === "itemPrice" &&
+      targetValue !== "" &&
+      (targetValue < 1 || targetValue > 100)
+    ) {
+      return;
+    }
+
+    if (
+      targetName === "maxItems" &&
+      targetValue !== "" &&
+      (targetValue < 1 || targetValue > 50)
+    ) {
+      return;
+    }
+
+    this.setState({ [targetName]: targetValue });
   };
 
   onSubmit = () => {
@@ -32,6 +54,7 @@ class AddEquipment extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
+
     var newEquipmentData = {
       itemName: this.state.itemName,
       itemCategory: this.state.itemCategory,
@@ -39,6 +62,7 @@ class AddEquipment extends Component {
       maxItems: this.state.maxItems,
     };
     console.log(newEquipmentData);
+
     axios({
       method: "POST",
       headers: {
@@ -72,6 +96,21 @@ class AddEquipment extends Component {
   };
 
   render() {
+    // Map supported sports to category options
+    const nSportOptions = SupportedSports.sort(function (a, b) {
+      var sportA = a.sportName.toLowerCase(),
+        sportB = b.sportName.toLowerCase();
+      if (sportA < sportB) {
+        return -1;
+      }
+      if (sportB > sportA) {
+        return 1;
+      }
+      return 0;
+    }).map(({ sportName }) => {
+      return <option>{sportName}</option>;
+    });
+
     return (
       <React.Fragment>
         <div className={styles.navigation}>
@@ -126,32 +165,41 @@ class AddEquipment extends Component {
 
                 {/* Item Category */}
                 <label htmlFor="itemCategory">Item Category</label>
-                <input
+                <select
                   name="itemCategory"
                   type="text"
                   placeholder="Soccer"
                   onChange={(e) => this.setEquipment(e)}
                   value={this.state.itemCategory}
-                />
+                >
+                  <option>-</option>
+                  {nSportOptions}
+                </select>
 
                 {/* Item Price */}
                 <label htmlFor="itemPrice">Item Price</label>
                 <input
                   name="itemPrice"
-                  type="text"
+                  type="number"
                   placeholder="$1.75"
                   onChange={(e) => this.setEquipment(e)}
                   value={this.state.itemPrice}
+                  min={1}
+                  max={100}
+                  step={0.01}
                 />
 
                 {/* Max Items */}
                 <label htmlFor="maxItems">Max Items per Reservation</label>
                 <input
                   name="maxItems"
-                  type="text"
+                  type="number"
                   placeholder="5"
                   onChange={(e) => this.setEquipment(e)}
                   value={this.state.maxItems}
+                  min={1}
+                  max={50}
+                  step={1}
                 />
               </form>
               <button
