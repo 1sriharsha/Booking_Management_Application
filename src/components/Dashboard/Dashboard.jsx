@@ -26,11 +26,9 @@ class Dashboard extends Component {
 
     // Set default tab by user type
     let defaultTab = "Book";
-    if (props.userType === "Customer") {
+    if (props.userType === "Customer" || props.userType === "Manager") {
       defaultTab = "Dashboard";
-    } else if (props.userType === "Manager") {
-      defaultTab = "Edit Bookings";
-    }
+    } 
 
     this.state = {
       activeTab: defaultTab,
@@ -309,36 +307,38 @@ class Dashboard extends Component {
               {/* Data Visualization */}
               <section className={styles.dataVisualContainer}></section>
 
-              {/* Shortcuts */}
-              <div className={styles.shortcutContainer}>
-                <Shortcut
-                  key={uniqid("", "-shortcut")}
-                  shortcutTo="Book"
-                  title="Book"
-                  description="Book A Facility"
-                  icon="fa-solid fa-bookmark"
-                  iconClass="icon iconBlue"
-                  onClick={this.onClickTabItem}
-                />
-                <Shortcut
-                  key={uniqid("", "-shortcut")}
-                  shortcutTo="My Bookings"
-                  title="Bookings"
-                  description="My Bookings"
-                  icon="fa-solid fa-layer-group"
-                  iconClass="icon iconPurple"
-                  onClick={this.onClickTabItem}
-                />
-                <Shortcut
-                  key={uniqid("", "-shortcut")}
-                  shortcutTo="Notifications"
-                  title="Notifications"
-                  description="My Notifications"
-                  icon="fa-solid fa-bell"
-                  iconClass="icon iconOrange"
-                  onClick={this.onClickTabItem}
-                />
-              </div>
+              {/* [Customer] Shortcuts */}
+              {this.props.userType === "Customer" && (
+                <div className={styles.shortcutContainer}>
+                  <Shortcut
+                    key={uniqid("", "-shortcut")}
+                    shortcutTo="Book"
+                    title="Book"
+                    description="Book A Facility"
+                    icon="fa-solid fa-bookmark"
+                    iconClass="icon iconBlue"
+                    onClick={this.onClickTabItem}
+                  />
+                  <Shortcut
+                    key={uniqid("", "-shortcut")}
+                    shortcutTo="My Bookings"
+                    title="Bookings"
+                    description="My Bookings"
+                    icon="fa-solid fa-layer-group"
+                    iconClass="icon iconPurple"
+                    onClick={this.onClickTabItem}
+                  />
+                  <Shortcut
+                    key={uniqid("", "-shortcut")}
+                    shortcutTo="Notifications"
+                    title="Notifications"
+                    description="My Notifications"
+                    icon="fa-solid fa-bell"
+                    iconClass="icon iconOrange"
+                    onClick={this.onClickTabItem}
+                  />
+                </div>
+              )}
             </React.Fragment>
           )}
           {/* [Guest/Customer/Employee] Book Content */}

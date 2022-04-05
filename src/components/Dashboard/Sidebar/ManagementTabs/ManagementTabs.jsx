@@ -6,9 +6,17 @@ class ManagementTabs extends Component {
   render() {
     return (
       <React.Fragment>
+        {/* Dashboard Section */}
+        <Tab
+          key={uniqid("", "-tab")}
+          activeTab={this.props.activeTab}
+          onClick={this.props.onClick}
+          tabLabel="Dashboard"
+          icon="fa-solid fa-house-user"
+        ></Tab>
+
         {/* Management Section */}
         <div className={styles.title}>MANAGEMENT</div>
-
         <Tab
           key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
