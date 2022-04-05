@@ -10,7 +10,20 @@ const {
 } = process.env;
 
 class AddEquipment extends Component {
-  state = {};
+  state = {
+    sectionNumber: 1,
+    itemName: "",
+    itemCategory: "",
+    itemPrice: null,
+    maxItems: null,
+  };
+
+  setEquipment = (e) => {
+    this.setState(
+      { [e.target.name]: e.target.value },
+      this.validateReservation
+    );
+  };
 
   onSubmit = () => {
     var api_url;
@@ -19,7 +32,12 @@ class AddEquipment extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
-    var newEquipmentData = {};
+    var newEquipmentData = {
+      itemName: this.state.itemName,
+      itemCategory: this.state.itemCategory,
+      itemPrice: this.state.itemPrice,
+      maxItems: this.state.maxItems,
+    };
     console.log(newEquipmentData);
     axios({
       method: "POST",
@@ -28,7 +46,7 @@ class AddEquipment extends Component {
       },
       withCredentials: true,
       url: api_url + "/promotions/add",
-      data: { newPromotionData },
+      data: { newEquipmentData },
     })
       .then((res) => {
         if (res.status === 200) {
@@ -66,116 +84,74 @@ class AddEquipment extends Component {
           </button>
           {/* Status Bar */}
           <nav className={styles.statusBar}>
-            {/* Status Bar: Promotion Information */}
+            {/* Status Bar: Item Information */}
             <button
               className={[
                 styles.statusSection,
-                this.state.promotionName &&
-                this.state.promotionCode &&
-                this.state.promotionStart &&
-                this.state.promotionEnd &&
-                this.state.promotionPercentage &&
-                !this.state.isError
+                this.state.itemName &&
+                this.state.itemCategory &&
+                this.state.itemPrice &&
+                this.state.maxItems
                   ? "completedSection"
                   : "",
               ].join(" ")}
             >
               <div className={styles.sectionIcon}>
-                <FontAwesomeIcon icon="fa-solid fa-percent" />
+                <FontAwesomeIcon icon="fa-solid fa-medal" />
               </div>
               <div className={styles.sectionText}>
                 <div className={styles.sectionSelection}>
-                  {this.state.promotionName ? this.state.promotionName : "-"}
+                  {this.state.itemName ? this.state.itemName : "-"}
                 </div>
-                <div className={styles.sectionTitle}>Promotion Information</div>
+                <div className={styles.sectionTitle}>Equipment Information</div>
               </div>
             </button>
           </nav>
         </div>
-        {/* Section 1: Promotion Information */}
+        {/* Section 1: Equipment Information */}
         {this.state.sectionNumber === 1 && (
           <React.Fragment>
             <div className={styles.container}>
               <form>
-                {/* Promotion Name */}
-                <label htmlFor="promotionName">Promotion Name</label>
+                {/* Item Name */}
+                <label htmlFor="itemName">Item Name</label>
                 <input
-                  name="promotionName"
+                  name="itemName"
                   type="text"
-                  placeholder="10% Off Equipment Rentals"
-                  onChange={(e) => this.setPromotion(e)}
-                  value={this.state.promotionName}
+                  placeholder="Soccer Ball"
+                  onChange={(e) => this.setEquipment(e)}
+                  value={this.state.itemName}
                   maxLength={50}
                 />
 
-                {/* Promotion Code */}
-                <label htmlFor="promotionCode">Promotion Code</label>
+                {/* Item Category */}
+                <label htmlFor="itemCategory">Item Category</label>
                 <input
-                  name="promotionCode"
+                  name="itemCategory"
                   type="text"
-                  placeholder="ATHLOS10"
-                  onChange={(e) => this.setPromotion(e)}
-                  value={this.state.promotionCode}
-                  maxLength={25}
+                  placeholder="Soccer"
+                  onChange={(e) => this.setEquipment(e)}
+                  value={this.state.itemCategory}
                 />
 
-                {/* Promotion Duration */}
-                <div className={styles.duration}>
-                  <section>
-                    <label htmlFor="promotionStart">Promotion Start</label>
-                    <input
-                      name="promotionStart"
-                      type="date"
-                      onChange={(e) => this.setPromotion(e)}
-                      value={this.state.promotionStart}
-                      min={currentDate}
-                    />
-                  </section>
-
-                  <section>
-                    <label htmlFor="promotionEnd">Promotion End</label>
-                    <input
-                      name="promotionEnd"
-                      type="date"
-                      onChange={(e) => this.setPromotion(e)}
-                      value={this.state.promotionEnd}
-                      min={this.state.promotionStart}
-                    />
-                    {this.state.isError && (
-                      <div className={styles.error}>
-                        Reservation period must end after{" "}
-                        {this.state.promotionStart}.
-                      </div>
-                    )}
-                  </section>
-                </div>
-
-                {/* Promotion Percentage */}
-                <label htmlFor="promotionPercentage">
-                  Promotion Percentage
-                </label>
+                {/* Item Price */}
+                <label htmlFor="itemPrice">Item Price</label>
                 <input
-                  name="promotionPercentage"
-                  type="number"
-                  placeholder="10%"
-                  onChange={(e) => this.setPromotion(e)}
-                  value={this.state.promotionPercentage}
-                  step={5}
-                  min={5}
-                  max={100}
+                  name="itemPrice"
+                  type="text"
+                  placeholder="$1.75"
+                  onChange={(e) => this.setEquipment(e)}
+                  value={this.state.itemPrice}
                 />
 
-                {/* Promotion Description */}
-                <label htmlFor="promotionInfo">
-                  Promotion Description (optional)
-                </label>
+                {/* Max Items */}
+                <label htmlFor="maxItems">Max Items per Reservation</label>
                 <input
-                  name="promotionInfo"
+                  name="maxItems"
                   type="text"
-                  placeholder="Enjoy 10% off equipment rentals for the month of April"
-                  onChange={(e) => this.setPromotion(e)}
-                  value={this.state.promotionInfo}
-                  maxLength={150}
+                  placeholder="5"
+                  onChange={(e) => this.setEquipment(e)}
+                  value={this.state.maxItems}
                 />
               </form>
               <button
@@ -183,12 +159,10 @@ class AddEquipment extends Component {
                 onClick={() => this.onSubmit()}
                 disabled={
                   !(
-                    this.state.promotionName &&
-                    this.state.promotionCode &&
-                    this.state.promotionStart &&
-                    this.state.promotionEnd &&
-                    this.state.promotionPercentage &&
-                    !this.state.isError
+                    this.state.itemName &&
+                    this.state.itemCategory &&
+                    this.state.itemPrice &&
+                    this.state.maxItems
                   )
                 }
               >
