@@ -484,15 +484,10 @@ body {
 
 /* Data Visualization */
 .dataVisualContainer {
-  height: 450px;
   margin-right: 22px;
   background-color: white;
   border-radius: var(--default-border-radius);
   box-shadow: 0 1px 5px rgba(41, 41, 41, 0.3);
-  background-image: url(../../../public/images/tmp/visualization.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 }
 
 /* Animations */

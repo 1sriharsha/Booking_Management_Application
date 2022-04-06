@@ -10,6 +10,7 @@ import ErrorCard from "./ErrorCard/ErrorCard";
 import uniqid from "uniqid";
 import axios from "axios";
 import { TestPromotionData } from "../../data";
+import Visualization from "./Visualization/Visualization";
 
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
@@ -28,7 +29,7 @@ class Dashboard extends Component {
     let defaultTab = "Book";
     if (props.userType === "Customer" || props.userType === "Manager") {
       defaultTab = "Dashboard";
-    } 
+    }
 
     this.state = {
       activeTab: defaultTab,
@@ -305,7 +306,9 @@ class Dashboard extends Component {
           {this.state.activeTab === "Dashboard" && (
             <React.Fragment>
               {/* Data Visualization */}
-              <section className={styles.dataVisualContainer}></section>
+              <section className={styles.dataVisualContainer}>
+                <Visualization userType={this.props.userType} />
+              </section>
 
               {/* [Customer] Shortcuts */}
               {this.props.userType === "Customer" && (
