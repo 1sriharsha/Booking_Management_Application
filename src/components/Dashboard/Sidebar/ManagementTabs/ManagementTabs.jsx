@@ -21,7 +21,7 @@ class ManagementTabs extends Component {
           key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
-          tabLabel="Edit Bookings"
+          tabLabel="Edit Facilities"
           icon="fa-solid fa-pen-to-square"
         ></Tab>
         <Tab

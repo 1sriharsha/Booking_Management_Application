@@ -107,7 +107,7 @@ class App extends Component {
     };
 
     var storedUser = JSON.parse(localStorage.getItem("user"));
-
+0
     if (storedUser) {
       user = storedUser;
     }
