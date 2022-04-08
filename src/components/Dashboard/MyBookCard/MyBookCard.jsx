@@ -52,8 +52,9 @@ class MyBookCard extends Component {
               </i>
               {facilityInfo}
             </div>
+            {/* Cancel Button */}
             <button
-              className={[styles.button, styles.buttonPrimary].join(" ")}
+              className={[styles.button, styles.cancelButton].join(" ")}
               onClick={() => console.log("Cancel Booking")}
             >
               Cancel
