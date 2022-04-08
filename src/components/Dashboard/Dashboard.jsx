@@ -434,7 +434,7 @@ class Dashboard extends Component {
                   shortcutTo="interests"
                   behavior={"showModal"}
                   title="Interests"
-                  description="My Interests"
+                  description="Select Interests"
                   icon="fa-solid fa-medal"
                   iconClass="icon iconOrange"
                   onClick={this.onClickTabItem}
