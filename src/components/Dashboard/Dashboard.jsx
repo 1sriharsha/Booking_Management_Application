@@ -398,6 +398,7 @@ class Dashboard extends Component {
           {/* [Guest] My Bookings Content */}
           {this.state.activeTab === "My Bookings" && (
             <div className={styles.bookContainer}>
+              {/* TODO Replace with nMyBookCards */}
               <MyBookCard
                 key={uniqid("", "-mybookcard")}
                 facilityID={0}
@@ -416,6 +417,9 @@ class Dashboard extends Component {
           {this.state.activeTab === "Notifications" && (
             <div className={styles.bookContainer}>{nPromotionCards}</div>
           )}
+
+          {/* [Customer] Settings */}
+          {this.state.activeTab === "Settings" && <div>Settings</div>}
 
           {/* [Manager] Edit Bookings */}
           {this.state.activeTab === "Edit Bookings" && (
