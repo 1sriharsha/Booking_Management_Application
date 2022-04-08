@@ -46,7 +46,7 @@ class UserTabs extends Component {
           key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
-          tabLabel="Settings"
+          tabLabel="Account"
           icon="fa-solid fa-gears"
         ></Tab>
       </React.Fragment>

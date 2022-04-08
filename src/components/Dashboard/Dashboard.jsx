@@ -419,7 +419,11 @@ class Dashboard extends Component {
           )}
 
           {/* [Customer] Settings */}
-          {this.state.activeTab === "Settings" && <div>Settings</div>}
+          {this.state.activeTab === "Account" && (
+            <section className={styles.settingsImageContainer}>
+              Reward Points
+            </section>
+          )}
 
           {/* [Manager] Edit Bookings */}
           {this.state.activeTab === "Edit Bookings" && (
