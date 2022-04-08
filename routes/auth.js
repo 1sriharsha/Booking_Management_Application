@@ -53,6 +53,7 @@ router.post('/google',(req,res)=>{
                                 firstName:googleUser.firstName,
                                 lastName:googleUser.lastName,
                                 userType:googleUser.userType,
+                                email:googleUser.email,
                                 message:'Authentication Successful!!'
                             }
                         )
@@ -72,6 +73,7 @@ router.post('/google',(req,res)=>{
                                 success: true,
                                 firstName:response.payload.given_name,
                                 lastName:response.payload.family_name,
+                                email:googleUser.email,
                                 userType:'Customer',
                                 message:'Authentication Successful!!!'
                             }
