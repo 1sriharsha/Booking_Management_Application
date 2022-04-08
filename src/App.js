@@ -16,17 +16,6 @@ class App extends Component {
 
     let userData = this.getUser();
 
-    console.log(
-      " fname: " +
-        userData.firstName +
-        " lname: " +
-        userData.lastName +
-        " email: " +
-        userData.email +
-        " type: " +
-        userData.userType
-    );
-
     this.state = {
       isAuthenticated: localStorage.getItem("isAuthenticated") === "true", // TODO Check cookie for Authentication
       user: userData,
