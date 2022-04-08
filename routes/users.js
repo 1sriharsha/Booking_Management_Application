@@ -75,17 +75,23 @@ router.post('/login',async function(req,res){
                         let token = jwt.sign({email:user.email},process.env.JWT_SECRET);
 
                         console.log("User Login Successful")
-                        res.cookie("access_token",token,{
-                            httpOnly:true,
-                            secure:process.env.NODE_ENV === 'production'? true: false,
-                            expires:new Date(Date.now() + 900000)})
-                        .status(200)
-                        .json({
-                            firstName:user.firstName,
-                            lastName:user.lastName,
-                            userType:user.userType,
-                            message:'Authentication Successful!'
-                        })
+                        res
+                          .cookie("access_token", token, {
+                            httpOnly: true,
+                            secure:
+                              process.env.NODE_ENV === "production"
+                                ? true
+                                : false,
+                            expires: new Date(Date.now() + 900000),
+                          })
+                          .status(200)
+                          .json({
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            email: user.email,
+                            userType: user.userType,
+                            message: "Authentication Successful!",
+                          });
 
                        
                     }
