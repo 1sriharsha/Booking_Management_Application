@@ -2,11 +2,25 @@ import React, { Component } from "react";
 import styles from "./Shortcut.module.css";
 import "./Shortcut.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ShortcutModal from "./ShortcutModal/ShortcutModal";
 
 class Shortcut extends Component {
+  state = {
+    showModal: false,
+  };
   onClick = () => {
     const { shortcutTo, onClick } = this.props;
-    onClick(shortcutTo);
+    if (this.props.behavior === "switchTab") {
+      onClick(shortcutTo);
+    } else if (this.props.behavior === "showModal") {
+      document.querySelector("body").style.overflow = "hidden";
+      this.setState({ showModal: true });
+    }
+  };
+
+  onCloseModal = () => {
+    document.querySelector("body").style.overflow = "auto";
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -30,6 +44,12 @@ class Shortcut extends Component {
             </div>
           </button>
         </div>
+        {this.state.showModal && (
+          <ShortcutModal
+            shortcutTo={this.props.shortcutTo}
+            onCloseModal={this.onCloseModal}
+          />
+        )}
       </React.Fragment>
     );
   }

@@ -26,3 +26,5 @@ export { default as SportFilter } from "./Dashboard/Searchbar/SportFilter/SportF
 export { default as ErrorCard } from "./Dashboard/ErrorCard/ErrorCard";
 export { default as PromotionCard } from "./Dashboard/PromotionCard/PromotionCard";
 export { default as Visualization } from "./Dashboard/Visualization/Visualization";
+export { default as ShortcutModal } from "./Dashboard/Shortcut/ShortcutModal/ShortcutModal";
+export { default as InterestModal } from "./Dashboard/Shortcut/ShortcutModal/InterestModal/InterestModal";

@@ -353,6 +353,7 @@ class Dashboard extends Component {
                   <Shortcut
                     key={uniqid("", "-shortcut")}
                     shortcutTo="Book"
+                    behavior={"switchTab"}
                     title="Book"
                     description="Book A Facility"
                     icon="fa-solid fa-bookmark"
@@ -362,6 +363,7 @@ class Dashboard extends Component {
                   <Shortcut
                     key={uniqid("", "-shortcut")}
                     shortcutTo="My Bookings"
+                    behavior={"switchTab"}
                     title="Bookings"
                     description="My Bookings"
                     icon="fa-solid fa-layer-group"
@@ -371,6 +373,7 @@ class Dashboard extends Component {
                   <Shortcut
                     key={uniqid("", "-shortcut")}
                     shortcutTo="Notifications"
+                    behavior={"switchTab"}
                     title="Notifications"
                     description="My Notifications"
                     icon="fa-solid fa-bell"
@@ -420,9 +423,35 @@ class Dashboard extends Component {
 
           {/* [Customer] Settings */}
           {this.state.activeTab === "Account" && (
-            <section className={styles.settingsImageContainer}>
-              Reward Points
-            </section>
+            <React.Fragment>
+              <section className={styles.settingsImageContainer}>
+                Reward Points
+              </section>
+              {/* Interest Shortcut */}
+              <div className={styles.shortcutContainer}>
+                <Shortcut
+                  key={uniqid("", "-shortcut")}
+                  shortcutTo="interests"
+                  behavior={"showModal"}
+                  title="Interests"
+                  description="My Interests"
+                  icon="fa-solid fa-medal"
+                  iconClass="icon iconOrange"
+                  onClick={this.onClickTabItem}
+                />
+                {/* Payment Shortcut */}
+                <Shortcut
+                  key={uniqid("", "-shortcut")}
+                  shortcutTo="payments"
+                  behavior={"showModal"}
+                  title="Payments"
+                  description="Update Payment"
+                  icon="fa-solid fa-credit-card"
+                  iconClass="icon iconGreen"
+                  onClick={this.onClickTabItem}
+                />
+              </div>
+            </React.Fragment>
           )}
 
           {/* [Manager] Edit Bookings */}
