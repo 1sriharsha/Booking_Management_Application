@@ -16,23 +16,12 @@ class App extends Component {
 
     let userData = this.getUser();
 
-    console.log(
-      " fname: " +
-        userData.firstName +
-        " lname: " +
-        userData.lastName +
-        " email: " +
-        userData.email +
-        " type: " +
-        userData.userType
-    );
-
     this.state = {
       isAuthenticated: localStorage.getItem("isAuthenticated") === "true", // TODO Check cookie for Authentication
       user: userData,
       userFirstName: userData.firstName,
       userLastName: userData.lastName,
-      userEmail: userData.email, // TODO Get email from API
+      userEmail: userData.email,
       userType: userData.userType,
       showModal: false,
       showModalLogin: false,
@@ -62,6 +51,7 @@ class App extends Component {
       isAuthenticated: true,
       userFirstName: res.data.firstName,
       userLastName: res.data.lastName,
+      userEmail: res.data.email,
       userType: res.data.type,
       showModal: false,
     });
@@ -103,7 +93,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      userType: "Manager", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
+      userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
     };
 
     var storedUser = JSON.parse(localStorage.getItem("user"));

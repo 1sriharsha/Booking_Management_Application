@@ -8,6 +8,13 @@ import NumberFormat from "react-number-format";
 import Counters from "./Counters/Counters";
 import { ExtrasData, GearData } from "../../../../data";
 import uniqid from "uniqid";
+import axios from "axios";
+const {
+  REACT_APP_LOCAL_URL,
+  REACT_APP_PRODUCTION_URL,
+  REACT_APP_CLIENT_ID,
+  REACT_APP_API_KEY,
+} = process.env;
 
 class CheckoutModal extends Component {
   state = {
@@ -29,18 +36,62 @@ class CheckoutModal extends Component {
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {
+      var api_url;
+      if (process.env.NODE_ENV === "production") {
+        api_url = REACT_APP_PRODUCTION_URL;
+      } else {
+        api_url = REACT_APP_LOCAL_URL;
+      }
       var newReservationData = {
-        userFirstName: this.props.userFirstName,
-        userLastName: this.props.userLastName,
-        userEmail: this.props.userEmail,
-        reservedSlot: this.state.reservedSlot,
-        reservedGear: this.state.reservedGear,
-        reservedExtras: this.state.reservedExtras,
-        reservationSubtotal: this.state.reservationSubtotal,
-        reservationTax: this.state.reservationTax,
-        reservationTotal: this.state.reservationTotal,
+        firstName: this.props.userFirstName,
+        lastName: this.props.userLastName,
+        email: this.props.userEmail,
+        gear: this.state.reservedGear,
+        intime: this.state.reservedSlot,
+        outtime: this.state.reservedSlot + 1,
+        upgrade: this.state.reservedExtras,
+        // reservationSubtotal: this.state.reservationSubtotal,
+        // reservationTax: this.state.reservationTax,
+        // reservationTotal: this.state.reservationTotal,
       };
-      // TODO Connect to API
+
+      axios({
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": api_url,
+        },
+        withCredentials: true,
+        url: api_url + "/book/add",
+        data: {
+          firstName: this.props.userFirstName,
+          lastName: this.props.userLastName,
+          email: this.props.userEmail,
+          gear: this.state.reservedGear,
+          intime: this.state.reservedSlot,
+          outtime: this.state.reservedSlot + 1,
+          upgrade: this.state.reservedExtras,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("Booked Successfully");
+          }
+        })
+        .catch(function (err) {
+          console.log(err);
+          if (err.response) {
+            if (err.response.status === 404) {
+              console.log("Couldn't Book");
+            }
+          } else if (err.request) {
+            //Response not received from API
+            console.log("Error: ", err.request);
+          } else {
+            //Unexpected Error
+            console.log("Error", err.message);
+          }
+        });
+
       console.log(newReservationData);
     }
   };

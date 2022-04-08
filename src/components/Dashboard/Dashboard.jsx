@@ -11,6 +11,7 @@ import uniqid from "uniqid";
 import axios from "axios";
 import { TestPromotionData } from "../../data";
 import Visualization from "./Visualization/Visualization";
+import MyBookCard from "./MyBookCard/MyBookCard";
 
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
@@ -36,6 +37,7 @@ class Dashboard extends Component {
       searchValue: "",
       sportFilterValue: "",
       facilityData: [],
+      myBookData: [],
     };
   }
 
@@ -223,7 +225,7 @@ class Dashboard extends Component {
         }
       );
 
-    // Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
+    // Generates n PromotionCard components from Database
     const nPromotionCards = TestPromotionData.map(
       ({
         id,
@@ -252,6 +254,41 @@ class Dashboard extends Component {
               promotionPercentage={promotionPercentage}
               promotionInfo={promotionInfo}
               animationDelay={animationDelay}
+            />
+          </React.Fragment>
+        );
+      }
+    );
+
+    // Generates n PromotionCard components from Database
+    const nMyBookCards = this.state.myBookData.map(
+      ({
+        id,
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        facilityInfo,
+        promotionPercentage,
+        promotionInfo,
+      }) => {
+        if (i >= 3) {
+          animationDelay += 0.05;
+          i = 0;
+        }
+        i += 1;
+
+        return (
+          <React.Fragment>
+            <MyBookCard
+              key={uniqid("", "-mybookcard")}
+              facilityID={id}
+              facilityName={facilityName}
+              facilityLocation={facilityLocation}
+              facilitySport={facilitySport}
+              facilityInfo={facilityInfo}
+              userFirstName={this.props.userFirstName}
+              userLastName={this.props.userLastName}
+              userEmail={this.props.userEmail}
             />
           </React.Fragment>
         );
@@ -358,9 +395,34 @@ class Dashboard extends Component {
             </div>
           )}
 
+          {/* [Guest] My Bookings Content */}
+          {this.state.activeTab === "My Bookings" && (
+            <div className={styles.bookContainer}>
+              {/* TODO Replace with nMyBookCards */}
+              <MyBookCard
+                key={uniqid("", "-mybookcard")}
+                facilityID={0}
+                facilityName={"SRSC"}
+                facilityLocation={"Bloomington"}
+                facilitySport={"Soccer"}
+                facilityInfo={"Soccer Field #01"}
+                userFirstName={this.props.userFirstName}
+                userLastName={this.props.userLastName}
+                userEmail={this.props.userEmail}
+              />
+            </div>
+          )}
+
           {/* [Customer] Notifications */}
           {this.state.activeTab === "Notifications" && (
             <div className={styles.bookContainer}>{nPromotionCards}</div>
+          )}
+
+          {/* [Customer] Settings */}
+          {this.state.activeTab === "Account" && (
+            <section className={styles.settingsImageContainer}>
+              Reward Points
+            </section>
           )}
 
           {/* [Manager] Edit Bookings */}

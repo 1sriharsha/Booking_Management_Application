@@ -18,8 +18,6 @@
   --default-border-radius: 5px;
 }
 
-/* TODO Remove CSS Not Needed For Component  */
-
 a:link,
 a:visited {
   text-decoration: none;
