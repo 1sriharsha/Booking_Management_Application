@@ -62,6 +62,7 @@ class App extends Component {
       isAuthenticated: true,
       userFirstName: res.data.firstName,
       userLastName: res.data.lastName,
+      userEmail: res.data.email,
       userType: res.data.type,
       showModal: false,
     });
@@ -103,7 +104,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      userType: "Manager", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
+      userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee"
     };
 
     var storedUser = JSON.parse(localStorage.getItem("user"));
