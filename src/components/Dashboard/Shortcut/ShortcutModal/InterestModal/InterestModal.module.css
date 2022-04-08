@@ -98,3 +98,41 @@
   background-color: var(--color-tertiary);
   color: red;
 }
+
+.title {
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+/* Interests */
+.sportName {
+  font-size: 1.4em;
+}
+
+.checkbox {
+  margin-right: 5px;
+}
+
+.interestBox {
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.interests {
+  width: 60%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-flow: row wrap;
+  gap: 3em;
+}
+
+.interestContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 7em;
+}
