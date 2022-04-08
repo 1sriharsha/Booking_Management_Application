@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import InterestModal from "./InterestModal/InterestModal";
+import PaymentModal from "./PaymentModal/PaymentModal";
 
 class ShortcutModal extends Component {
   // state = { showModal: false };
@@ -14,7 +15,9 @@ class ShortcutModal extends Component {
         )}
 
         {this.props.shortcutTo === "payments" && (
-          <React.Fragment>payments</React.Fragment>
+          <React.Fragment>
+            <PaymentModal onCloseModal={this.props.onCloseModal} />
+          </React.Fragment>
         )}
       </React.Fragment>
     );

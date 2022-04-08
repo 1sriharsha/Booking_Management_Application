@@ -28,3 +28,4 @@ export { default as PromotionCard } from "./Dashboard/PromotionCard/PromotionCar
 export { default as Visualization } from "./Dashboard/Visualization/Visualization";
 export { default as ShortcutModal } from "./Dashboard/Shortcut/ShortcutModal/ShortcutModal";
 export { default as InterestModal } from "./Dashboard/Shortcut/ShortcutModal/InterestModal/InterestModal";
+export { default as PaymentModal } from "./Dashboard/Shortcut/ShortcutModal/PaymentModal/PaymentModal";
