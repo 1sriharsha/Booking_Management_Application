@@ -11,6 +11,7 @@ import uniqid from "uniqid";
 import axios from "axios";
 import { TestPromotionData } from "../../data";
 import Visualization from "./Visualization/Visualization";
+import MyBookCard from "./MyBookCard/MyBookCard";
 
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
@@ -355,6 +356,24 @@ class Dashboard extends Component {
                   onClickTabItem={this.onClickTabItem}
                 />
               )}
+            </div>
+          )}
+
+          {this.state.activeTab === "My Bookings" && (
+            <div className={styles.bookContainer}>
+              <MyBookCard
+                key={uniqid("", "-mybookcard")}
+                facilityID={0}
+                facilityName={"SRSC"}
+                facilityLocation={"Bloomington"}
+                facilitySport={"Soccer"}
+                facilityInfo={"Soccer Field #01"}
+                isAuthenticated={this.props.isAuthenticated}
+                onShowModal={this.props.onShowModal}
+                userFirstName={this.props.userFirstName}
+                userLastName={this.props.userLastName}
+                userEmail={this.props.userEmail}
+              />
             </div>
           )}
 

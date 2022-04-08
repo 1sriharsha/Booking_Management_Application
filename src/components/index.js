@@ -10,6 +10,7 @@ export { default as EmployeeTabs } from "./Dashboard/Sidebar/EmployeeTabs/Employ
 export { default as NavProfile } from "./NavProfile/NavProfile";
 export { default as Tab } from "./Dashboard/Sidebar/Tab/Tab";
 export { default as BookCard } from "./Dashboard/BookCard/BookCard";
+export { default as MyBookCard } from "./Dashboard/MyBookCard/MyBookCard";
 export { default as EditCard } from "./Dashboard/EditCard/EditCard";
 export { default as AddCard } from "./Dashboard/AddCard/AddCard";
 export { default as AddFacility } from "./Dashboard/AddCard/AddModal/AddFacility/AddFacility";
