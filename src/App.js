@@ -32,7 +32,7 @@ class App extends Component {
       user: userData,
       userFirstName: userData.firstName,
       userLastName: userData.lastName,
-      userEmail: userData.email, // TODO Get email from API
+      userEmail: userData.email,
       userType: userData.userType,
       showModal: false,
       showModalLogin: false,
