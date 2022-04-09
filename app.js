@@ -41,7 +41,10 @@ app.use(cookieParser())
 //Passport Middle-ware
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.get("/api", function(req,res){
+    console.log('Get Request');
+    res.send({name: 'harsha'});
+});
 
 
 app.use(bodyParser.json())
