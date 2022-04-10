@@ -59,7 +59,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     document.body.style.backgroundColor = "var(--color-tertiary)";
-
+    var tempFacData=[]
     // Get Facilities from API
     axios({
       method: "GET",
@@ -76,6 +76,7 @@ class Dashboard extends Component {
           for (let temp of res.data) {
             const facData = {
               id: counter,
+              uniqFacId:temp.facilityId,
               facilityName: temp.facilityName,
               facilityLocation: (
                 temp.facilityLocation.city +
@@ -89,12 +90,19 @@ class Dashboard extends Component {
               reservationPeriodEnd: parseInt(temp.reservationPeriodEnd),
             };
             counter = counter + 1;
-
-            this.setState((prevState) => ({
-              facilityData: [facData, ...prevState.facilityData],
-            }));
+            tempFacData.push(facData)
+            //console.log(facData)
+            
           }
+          console.log(tempFacData)
+          
+          
         }
+        this.setState((prevState) => ({
+            
+          facilityData: tempFacData,
+          
+        }));
       })
       .catch(function (err) {
         console.log(err);
@@ -110,6 +118,7 @@ class Dashboard extends Component {
           console.log("Error", err.message);
         }
       });
+      
   }
 
   render() {
@@ -119,6 +128,7 @@ class Dashboard extends Component {
     // [Guest/Customer/Employee] Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
     const nBookCards = this.state.facilityData
       .filter((facility) => {
+        console.log(facility)
         return (
           (facility.facilityLocation
             .toLowerCase()
@@ -134,6 +144,7 @@ class Dashboard extends Component {
       .map(
         ({
           id,
+          uniqFacId,
           facilityName,
           facilityLocation,
           facilitySport,
@@ -151,8 +162,9 @@ class Dashboard extends Component {
           return (
             <React.Fragment>
               <BookCard
-                key={uniqid("", "-bookcard")}
+                key={uniqid(id, "-bookcard")}
                 facilityID={id}
+                uniqFacId={uniqFacId}
                 facilityName={facilityName}
                 facilityLocation={facilityLocation}
                 facilitySport={facilitySport}
@@ -190,6 +202,7 @@ class Dashboard extends Component {
       .map(
         ({
           id,
+          uniqFacId,
           facilityName,
           facilityLocation,
           facilitySport,
@@ -207,8 +220,9 @@ class Dashboard extends Component {
           return (
             <React.Fragment>
               <EditCard
-                key={uniqid("", "-editcard")}
+                key={uniqid(id, "-editcard")}
                 facilityID={id}
+                uniqFacId={uniqFacId}
                 facilityName={facilityName}
                 facilityLocation={facilityLocation}
                 facilitySport={facilitySport}
@@ -245,7 +259,7 @@ class Dashboard extends Component {
         return (
           <React.Fragment>
             <PromotionCard
-              key={uniqid("", "-promotioncard")}
+              key={uniqid(id, "-promotioncard")}
               promotionID={id}
               promotionName={promotionName}
               promotionCode={promotionCode}
@@ -262,7 +276,7 @@ class Dashboard extends Component {
 
     // [Customer] Generates n MyBookCards components from Database
     const nMyBookCards = this.state.myBookData.map(
-      ({ id, facilityName, facilityLocation, facilitySport, facilityInfo }) => {
+      ({ id,uniqFacId, facilityName, facilityLocation, facilitySport, facilityInfo }) => {
         if (i >= 3) {
           animationDelay += 0.05;
           i = 0;
@@ -274,6 +288,7 @@ class Dashboard extends Component {
             <MyBookCard
               key={uniqid("", "-mybookcard")}
               facilityID={id}
+              uniqFacId={uniqFacId}
               facilityName={facilityName}
               facilityLocation={facilityLocation}
               facilitySport={facilitySport}
