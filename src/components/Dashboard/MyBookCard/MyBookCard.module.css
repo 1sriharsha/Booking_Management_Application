@@ -133,9 +133,15 @@ input[type]:focus,
   background-color: rgba(0, 0, 0, 1);
 }
 
-.card button {
+.card .cancelButton {
   position: absolute;
   bottom: 1em;
+}
+
+.card .buttonPrimary {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
 }
 
 .card .title {

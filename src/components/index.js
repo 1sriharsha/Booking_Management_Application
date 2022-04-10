@@ -29,3 +29,4 @@ export { default as Visualization } from "./Dashboard/Visualization/Visualizatio
 export { default as ShortcutModal } from "./Dashboard/Shortcut/ShortcutModal/ShortcutModal";
 export { default as InterestModal } from "./Dashboard/Shortcut/ShortcutModal/InterestModal/InterestModal";
 export { default as PaymentModal } from "./Dashboard/Shortcut/ShortcutModal/PaymentModal/PaymentModal";
+export { default as ConfirmationModal } from "./Dashboard/MyBookCard/ConfirmationModal/ConfirmationModal";

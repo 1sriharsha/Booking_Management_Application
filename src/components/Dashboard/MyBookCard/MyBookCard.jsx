@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import styles from "./MyBookCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
 
 class MyBookCard extends Component {
   state = {
     isDeleted: false,
+    showModal: false,
   };
 
   onDelete = () => {
     // TODO Delete from Database
     this.setState({ isDeleted: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -63,6 +69,7 @@ class MyBookCard extends Component {
                 </i>
                 {facilityInfo}
               </div>
+
               {/* Cancel Button */}
               <button
                 className={[styles.button, styles.cancelButton].join(" ")}
@@ -70,8 +77,26 @@ class MyBookCard extends Component {
               >
                 Cancel
               </button>
+
+              {/* View Button */}
+              <button
+                className={[styles.button, styles.buttonPrimary].join(" ")}
+                onClick={() => this.setState({ showModal: true })}
+              >
+                View
+              </button>
             </div>
           </div>
+        )}
+        {this.state.showModal && (
+          <ConfirmationModal
+            confirmationCode={"261B7FCF0"}
+            onCloseModal={this.onCloseModal}
+            facilityName={facilityName}
+            facilityLocation={facilityLocation}
+            facilitySport={facilitySport}
+            facilityInfo={facilityInfo}
+          />
         )}
       </React.Fragment>
     );
