@@ -24,6 +24,7 @@ class BookCard extends Component {
     const {
       props: {
         facilityID,
+        uniqFacId,
         facilityName,
         facilityLocation,
         facilitySport,
@@ -91,6 +92,7 @@ class BookCard extends Component {
           <CheckoutModal
             key={uniqid("", "-checkoutmodal")}
             facilityID={facilityID}
+            uniqFacId={uniqFacId}
             facilityName={facilityName}
             facilityLocation={facilityLocation}
             facilitySport={facilitySport}

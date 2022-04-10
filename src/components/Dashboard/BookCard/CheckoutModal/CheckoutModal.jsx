@@ -19,6 +19,7 @@ const {
 class CheckoutModal extends Component {
   state = {
     facilityID:this.props.facilityID,
+    uniqFacId:this.props.uniqFacId,
     facilityName:this.props.facilityName,
     facilityLocation:this.props.facilityLocation,
     facilitySport:this.props.facilitySport,
@@ -37,7 +38,7 @@ class CheckoutModal extends Component {
   };
 
   onPay = () => {
-    console.log(this.state.facilityLocation)
+    console.log(this.state.uniqFacId)
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {
@@ -47,18 +48,18 @@ class CheckoutModal extends Component {
       } else {
         api_url = REACT_APP_LOCAL_URL;
       }
-      var newReservationData = {
-        firstName: this.props.userFirstName,
-        lastName: this.props.userLastName,
-        email: this.props.userEmail,
-        gear: this.state.reservedGear,
-        intime: this.state.reservedSlot,
-        outtime: this.state.reservedSlot + 1,
-        upgrade: this.state.reservedExtras,
-        // reservationSubtotal: this.state.reservationSubtotal,
-        // reservationTax: this.state.reservationTax,
-        // reservationTotal: this.state.reservationTotal,
-      };
+      // var newReservationData = {
+      //   firstName: this.props.userFirstName,
+      //   lastName: this.props.userLastName,
+      //   email: this.props.userEmail,
+      //   gear: this.state.reservedGear,
+      //   intime: this.state.reservedSlot,
+      //   outtime: this.state.reservedSlot + 1,
+      //   upgrade: this.state.reservedExtras,
+      //   // reservationSubtotal: this.state.reservationSubtotal,
+      //   // reservationTax: this.state.reservationTax,
+      //   // reservationTotal: this.state.reservationTotal,
+      // };
 
       axios({
         method: "POST",
@@ -68,7 +69,7 @@ class CheckoutModal extends Component {
         withCredentials: true,
         url: api_url + "/book/add",
         data: {
-          facilityID:this.props.facilityId,
+          facilityID:this.state.uniqFacId,
           firstName: this.props.userFirstName,
           lastName: this.props.userLastName,
           email: this.props.userEmail,
@@ -98,7 +99,7 @@ class CheckoutModal extends Component {
           }
         });
 
-      console.log(newReservationData);
+      //console.log(newReservationData);
     }
   };
 
@@ -242,6 +243,7 @@ class CheckoutModal extends Component {
     const {
       props: {
         facilityID,
+        uniqFacId,
         facilityName,
         facilityLocation,
         facilitySport,
@@ -259,17 +261,18 @@ class CheckoutModal extends Component {
     var nTimeSlots = [];
     var reservationSlotStart = reservationPeriodStart;
     var reservationSlotEnd;
-
+    var key=0
     for (
       let index = 0;
       index < reservationPeriodEnd - reservationPeriodStart;
       index++
     ) {
+
       reservationSlotEnd = reservationSlotStart + 1;
 
       nTimeSlots.push(
         <TimeSlot
-          key={uniqid("", "-timeslot")}
+          key={uniqid(key, "-timeslot")}
           reservationID={reservationSlotStart}
           reservationSlotStart={reservationSlotStart}
           reservationSlotEnd={reservationSlotEnd}
