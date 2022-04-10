@@ -20,11 +20,7 @@ class EditCard extends Component {
         facilityLocation,
         facilitySport,
         facilityInfo,
-        availableNow,
         animationDelay,
-        reservationPeriodStart,
-        reservationPeriodEnd,
-        isAuthenticated,
       },
     } = this;
 

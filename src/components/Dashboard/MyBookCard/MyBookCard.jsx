@@ -3,6 +3,15 @@ import styles from "./MyBookCard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class MyBookCard extends Component {
+  state = {
+    isDeleted: false,
+  };
+
+  onDelete = () => {
+    // TODO Delete from Database
+    this.setState({ isDeleted: true });
+  };
+
   render() {
     const {
       props: {
@@ -29,38 +38,41 @@ class MyBookCard extends Component {
 
     return (
       <React.Fragment>
-        <div
-          className={[styles.card, styles.loadIn].join(" ")}
-          style={fadeDelay}
-        >
-          <div className={styles.image}>
-            <img src={sportImage} alt={facilitySport} />
+        {/* My Bookings Card */}
+        {!this.state.isDeleted && (
+          <div
+            className={[styles.card, styles.loadIn].join(" ")}
+            style={fadeDelay}
+          >
+            <div className={styles.image}>
+              <img src={sportImage} alt={facilitySport} />
+            </div>
+            <div className={styles.content}>
+              <div title={facilityName} className={styles.title}>
+                {facilityLabel}
+              </div>
+              <div className={styles.location}>
+                <i>
+                  <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
+                </i>
+                {facilityLocation}
+              </div>
+              <div className={styles.description}>
+                <i>
+                  <FontAwesomeIcon icon="fa-solid fa-circle-info" />
+                </i>
+                {facilityInfo}
+              </div>
+              {/* Cancel Button */}
+              <button
+                className={[styles.button, styles.cancelButton].join(" ")}
+                onClick={this.onDelete}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-          <div className={styles.content}>
-            <div title={facilityName} className={styles.title}>
-              {facilityLabel}
-            </div>
-            <div className={styles.location}>
-              <i>
-                <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
-              </i>
-              {facilityLocation}
-            </div>
-            <div className={styles.description}>
-              <i>
-                <FontAwesomeIcon icon="fa-solid fa-circle-info" />
-              </i>
-              {facilityInfo}
-            </div>
-            {/* Cancel Button */}
-            <button
-              className={[styles.button, styles.cancelButton].join(" ")}
-              onClick={() => console.log("Cancel Booking")}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
+        )}
       </React.Fragment>
     );
   }
