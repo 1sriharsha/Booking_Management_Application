@@ -455,7 +455,7 @@ class Dashboard extends Component {
           )}
 
           {/* [Manager] Edit Bookings */}
-          {this.state.activeTab === "Edit Bookings" && (
+          {this.state.activeTab === "Edit Facilities" && (
             <div className={styles.bookContainer}>
               <AddCard
                 key={uniqid("", "-addcard")}
