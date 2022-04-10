@@ -19,6 +19,7 @@
     "react-google-places-autocomplete": "^3.3.4",
     "react-input-mask": "^2.0.4",
     "react-number-format": "^4.9.1",
+    "react-qr-code": "^2.0.5",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
     "serve": "^13.0.2",
