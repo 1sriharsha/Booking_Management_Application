@@ -346,13 +346,15 @@ class Dashboard extends Component {
 
         {/* Tab Content */}
         <div className={styles.tabContainer}>
-          {/* [Customer] Dashboard Content */}
+          {/* [Customer/Manager] Dashboard Content */}
           {this.state.activeTab === "Dashboard" && (
             <React.Fragment>
               {/* Data Visualization */}
-              <section className={styles.dataVisualContainer}>
-                <Visualization userType={this.props.userType} />
-              </section>
+              {this.props.userType === "Manager" && (
+                <section className={styles.dataVisualContainer}>
+                  <Visualization userType={this.props.userType} />
+                </section>
+              )}
 
               {/* [Customer] Shortcuts */}
               {this.props.userType === "Customer" && (

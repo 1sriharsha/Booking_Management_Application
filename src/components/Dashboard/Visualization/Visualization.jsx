@@ -8,6 +8,7 @@ import {
   VictoryZoomContainer,
 } from "victory";
 import EarningsGraph from "./EarningsGraph/EarningsGraph";
+import FavoriteSportsGraph from "./FavoriteSportsGraph/FavoriteSportsGraph";
 
 const earningsData = [
   { x: new Date(2022, 0, 1), y: 42.79 },
@@ -20,10 +21,13 @@ class Visualization extends Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.userType === "Manager" && (
-          <section className={styles.container}>
-            <EarningsGraph />
-          </section>
+        <section className={styles.container}>
+          {this.props.userType === "Manager" && <EarningsGraph />}
+          {this.props.userType === "Customer" && <FavoriteSportsGraph />}
+        </section>
+
+        {this.props.userType === "Customer" && (
+          <React.Fragment></React.Fragment>
         )}
       </React.Fragment>
     );
