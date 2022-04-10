@@ -22,6 +22,11 @@ class MyBookCard extends Component {
     const {
       props: {
         facilityID,
+        uniqBookingId,
+        gear,
+        upgrade,
+        intime,
+        outtime,
         facilityName,
         facilityLocation,
         facilitySport,
@@ -29,6 +34,8 @@ class MyBookCard extends Component {
         animationDelay,
       },
     } = this;
+
+
 
     let facilityLabel = facilityName;
     const maxLabelLength = 35;

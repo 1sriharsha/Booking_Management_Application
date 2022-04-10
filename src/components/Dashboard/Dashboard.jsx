@@ -60,6 +60,7 @@ class Dashboard extends Component {
   componentDidMount() {
     document.body.style.backgroundColor = "var(--color-tertiary)";
     var tempFacData=[]
+    var tempBookData=[]
     // Get Facilities from API
     axios({
       method: "GET",
@@ -94,7 +95,7 @@ class Dashboard extends Component {
             //console.log(facData)
             
           }
-          console.log(tempFacData)
+          //console.log(tempFacData)
           
           
         }
@@ -118,6 +119,48 @@ class Dashboard extends Component {
           console.log("Error", err.message);
         }
       });
+
+      axios({
+        method:"POST",
+        headers: {
+          "Access-Control-Allow-Origin": api_url,
+        },
+        withCredentials: true,
+        url: api_url + "/book/userbookings",
+        data:{
+          email:this.props.userEmail
+        }
+      }).then((res)=>{
+        if(res.status===200 || res.status ===304){
+          let counter = 1;
+          for(let temp of res.data){
+            const bookData={
+              id:counter,
+              uniqBookingId:temp._id,
+              gear:temp.gear,
+              upgrade:temp.upgrade,
+              intime:temp.intime,
+              outime:temp.outtime,
+              facilityLocation:temp.facility_info.facilityLocation.city+", "+temp.facility_info.facilityLocation.state,
+              facilitySport:temp.facility_info.facilitySports,
+              facilityName:temp.facility_info.facilityName,
+              faciliityInfo:temp.facility_info.facilityInformation,
+
+            }
+            counter=counter+1
+            tempBookData.push(bookData)
+
+          }
+          //console.log(tempBookData)
+
+        }
+        this.setState((prevState) => ({
+            
+          myBookData: tempBookData,
+          
+        }));
+
+      })
       
   }
 
@@ -128,7 +171,7 @@ class Dashboard extends Component {
     // [Guest/Customer/Employee] Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
     const nBookCards = this.state.facilityData
       .filter((facility) => {
-        console.log(facility)
+        //console.log(facility)
         return (
           (facility.facilityLocation
             .toLowerCase()
@@ -275,8 +318,9 @@ class Dashboard extends Component {
     );
 
     // [Customer] Generates n MyBookCards components from Database
+    console.log(this.state.myBookData)
     const nMyBookCards = this.state.myBookData.map(
-      ({ id,uniqFacId, facilityName, facilityLocation, facilitySport, facilityInfo }) => {
+      ({ id,uniqBookingId,gear,upgrade,intime,outtime, facilityName, facilityLocation, facilitySport, facilityInfo }) => {
         if (i >= 3) {
           animationDelay += 0.05;
           i = 0;
@@ -288,7 +332,11 @@ class Dashboard extends Component {
             <MyBookCard
               key={uniqid("", "-mybookcard")}
               facilityID={id}
-              uniqFacId={uniqFacId}
+              uniqBookingId={uniqBookingId}
+              gear={gear}
+              upgrade={upgrade}
+              intime={intime}
+              outtime={outtime}
               facilityName={facilityName}
               facilityLocation={facilityLocation}
               facilitySport={facilitySport}
