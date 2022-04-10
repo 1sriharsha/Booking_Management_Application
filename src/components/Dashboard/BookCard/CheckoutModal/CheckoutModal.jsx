@@ -18,6 +18,10 @@ const {
 
 class CheckoutModal extends Component {
   state = {
+    facilityID:this.props.facilityID,
+    facilityName:this.props.facilityName,
+    facilityLocation:this.props.facilityLocation,
+    facilitySport:this.props.facilitySport,
     sectionNumber: 1,
     reservedSlot: null,
     reservedGear: [],
@@ -33,6 +37,7 @@ class CheckoutModal extends Component {
   };
 
   onPay = () => {
+    console.log(this.state.facilityLocation)
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {
@@ -63,6 +68,7 @@ class CheckoutModal extends Component {
         withCredentials: true,
         url: api_url + "/book/add",
         data: {
+          facilityID:this.props.facilityId,
           firstName: this.props.userFirstName,
           lastName: this.props.userLastName,
           email: this.props.userEmail,
