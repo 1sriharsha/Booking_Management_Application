@@ -134,19 +134,21 @@ class Dashboard extends Component {
         if(res.status===200 || res.status ===304){
           let counter = 1;
           for(let temp of res.data){
-            const bookData={
-              id:counter,
-              uniqBookingId:temp._id,
-              gear:temp.gear,
-              upgrade:temp.upgrade,
-              intime:temp.intime,
-              outime:temp.outtime,
-              facilityLocation:temp.facility_info.facilityLocation.city+", "+temp.facility_info.facilityLocation.state,
-              facilitySport:temp.facility_info.facilitySports,
-              facilityName:temp.facility_info.facilityName,
-              faciliityInfo:temp.facility_info.facilityInformation,
-
-            }
+            const bookData = {
+              id: counter,
+              uniqBookingId: temp._id,
+              gear: temp.gear,
+              upgrade: temp.upgrade,
+              intime: temp.intime,
+              outtime: temp.outtime,
+              facilityLocation:
+                temp.facility_info.facilityLocation.city +
+                ", " +
+                temp.facility_info.facilityLocation.state,
+              facilitySport: temp.facility_info.facilitySports,
+              facilityName: temp.facility_info.facilityName,
+              facilityInfo: temp.facility_info.facilityInformation,
+            };
             counter=counter+1
             tempBookData.push(bookData)
 
@@ -457,20 +459,7 @@ class Dashboard extends Component {
 
           {/* [Guest] My Bookings Content */}
           {this.state.activeTab === "My Bookings" && (
-            <div className={styles.bookContainer}>
-              {/* TODO Replace with nMyBookCards */}
-              <MyBookCard
-                key={uniqid("", "-mybookcard")}
-                facilityID={0}
-                facilityName={"SRSC"}
-                facilityLocation={"Bloomington"}
-                facilitySport={"Soccer"}
-                facilityInfo={"Soccer Field #01"}
-                userFirstName={this.props.userFirstName}
-                userLastName={this.props.userLastName}
-                userEmail={this.props.userEmail}
-              />
-            </div>
+            <div className={styles.bookContainer}>{nMyBookCards}</div>
           )}
 
           {/* [Customer] Notifications */}

@@ -169,6 +169,15 @@ input[type]:focus,
   margin-right: 0.3em;
 }
 
+.card .time {
+  border-bottom: 1px solid var(--color-tertiary);
+  padding-bottom: 6px;
+}
+
+.card .time > span {
+  font-weight: 700 !important;
+}
+
 /* Animations */
 .fadeIn {
   animation: fade-in 3s ease forwards;

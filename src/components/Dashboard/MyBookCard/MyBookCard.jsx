@@ -64,6 +64,15 @@ class MyBookCard extends Component {
               <div title={facilityName} className={styles.title}>
                 {facilityLabel}
               </div>
+              <div className={styles.time}>
+                <i>
+                  <FontAwesomeIcon icon="fa-solid fa-clock" />
+                </i>
+                Time Slot:{" "}
+                <span>
+                  {intime}:00 - {outtime}:00
+                </span>
+              </div>
               <div className={styles.location}>
                 <i>
                   <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
