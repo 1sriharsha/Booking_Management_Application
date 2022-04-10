@@ -116,7 +116,7 @@ class Dashboard extends Component {
     var i = 0;
     var animationDelay = 0;
 
-    // Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
+    // [Guest/Customer/Employee] Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
     const nBookCards = this.state.facilityData
       .filter((facility) => {
         return (
@@ -172,7 +172,7 @@ class Dashboard extends Component {
         }
       );
 
-    // Generates n EditCard components from Database (filtered by facilityLocation & facilityName)
+    // [Manager] Generates n EditCard components from Database (filtered by facilityLocation & facilityName)
     const nEditCards = this.state.facilityData
       .filter((facility) => {
         return (
@@ -225,7 +225,7 @@ class Dashboard extends Component {
         }
       );
 
-    // Generates n PromotionCard components from Database
+    // [Customer] Generates n PromotionCard components from Database
     const nPromotionCards = TestPromotionData.map(
       ({
         id,
@@ -260,17 +260,9 @@ class Dashboard extends Component {
       }
     );
 
-    // Generates n PromotionCard components from Database
+    // [Customer] Generates n MyBookCards components from Database
     const nMyBookCards = this.state.myBookData.map(
-      ({
-        id,
-        facilityName,
-        facilityLocation,
-        facilitySport,
-        facilityInfo,
-        promotionPercentage,
-        promotionInfo,
-      }) => {
+      ({ id, facilityName, facilityLocation, facilitySport, facilityInfo }) => {
         if (i >= 3) {
           animationDelay += 0.05;
           i = 0;
@@ -455,7 +447,7 @@ class Dashboard extends Component {
           )}
 
           {/* [Manager] Edit Bookings */}
-          {this.state.activeTab === "Edit Bookings" && (
+          {this.state.activeTab === "Edit Facilities" && (
             <div className={styles.bookContainer}>
               <AddCard
                 key={uniqid("", "-addcard")}
@@ -492,6 +484,7 @@ class Dashboard extends Component {
                 type={"promotion"}
                 animationDelay={animationDelay}
               />
+              {nPromotionCards}
             </div>
           )}
         </div>

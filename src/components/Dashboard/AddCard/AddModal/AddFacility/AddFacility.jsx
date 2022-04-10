@@ -4,6 +4,7 @@ import "./AddFacility.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import axios from "axios";
+import { SupportedSports } from "../../../../../data";
 const {
   REACT_APP_LOCAL_URL,
   REACT_APP_PRODUCTION_URL,
@@ -33,7 +34,14 @@ class AddFacility extends Component {
   }
 
   setFacility = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    let targetName = e.target.name;
+    let targetValue = e.target.value;
+
+    if (targetName === "facilitySport" && targetValue === "-") {
+      return;
+    }
+
+    this.setState({ [targetName]: targetValue });
   };
 
   setLocation = (location) => {
@@ -117,6 +125,22 @@ class AddFacility extends Component {
     for (let index = 0; index < 24; index++) {
       timeOptions.push(<option value={index}>{index + ":00"}</option>);
     }
+
+    // Map supported sports to options
+    const nSportOptions = SupportedSports.sort(function (a, b) {
+      var sportA = a.sportName.toLowerCase(),
+        sportB = b.sportName.toLowerCase();
+      if (sportA < sportB) {
+        return -1;
+      }
+      if (sportB > sportA) {
+        return 1;
+      }
+      return 0;
+    }).map(({ sportName }) => {
+      return <option>{sportName}</option>;
+    });
+
     return (
       <React.Fragment>
         <div className={styles.navigation}>
@@ -235,14 +259,17 @@ class AddFacility extends Component {
 
                 {/* Facility Sport */}
                 <label htmlFor="facilitySport">Facility Sport</label>
-                <input
+
+                <select
                   name="facilitySport"
                   type="text"
                   placeholder="Soccer"
                   onChange={(e) => this.setFacility(e)}
                   value={this.state.facilitySport}
-                  maxLength={50}
-                />
+                >
+                  <option>-</option>
+                  {nSportOptions}
+                </select>
 
                 {/* Court/Field Description */}
                 <label htmlFor="facilityInfo">Court Description</label>
