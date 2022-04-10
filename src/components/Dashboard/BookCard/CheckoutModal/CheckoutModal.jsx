@@ -82,6 +82,7 @@ class CheckoutModal extends Component {
         .then((res) => {
           if (res.status === 200) {
             console.log("Booked Successfully");
+            this.props.onCloseModal;
           }
         })
         .catch(function (err) {
