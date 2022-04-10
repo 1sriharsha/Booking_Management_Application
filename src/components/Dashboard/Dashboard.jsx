@@ -428,11 +428,12 @@ class Dashboard extends Component {
             <div className={styles.bookContainer}>{nPromotionCards}</div>
           )}
 
-          {/* [Customer] Settings */}
+          {/* [Customer] Account */}
           {this.state.activeTab === "Account" && (
             <React.Fragment>
               <section className={styles.settingsImageContainer}>
-                Reward Points
+                154 Reward Points
+                <Visualization userType={this.props.userType} />
               </section>
               {/* Interest Shortcut */}
               <div className={styles.shortcutContainer}>
