@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Booking = require("../models/Booking");
-
+const Facility = require("../models/Facility")
 
 
 // router.post('/', function(req, res, next){
@@ -37,6 +37,68 @@ router.get("/booked_slots",async function (req,res){
     })
 })
 
+router.post("/userbookings",async function(req,res){
+    Booking.aggregate([
+        {
+            $lookup:{
+                from:"facilities",
+                localField:"facilityID",
+                foreignField:"facilityId",
+                as:"facility_info"
+            }
+        },
+        {
+            $unwind:"$facility_info"
+        }
+
+    ]).then((result)=>{
+        console.log(result)
+        res.status(200).send(result)
+    }).catch((err)=>{
+        console.log(err)
+        res.status(404).send("Error while retrieving booking")
+    })
+
+    //console.log(req.body)
+    // Booking.find({email:req.body.email}).exec(async (err,bookings)=>{
+    //     if(err){
+    //         console.log(err)
+    //         res.status(404).send("Error Retrieving Booking")
+    //     }
+    //     else{
+    //         let data=[]
+    //         if(bookings){
+                
+    //             for(let booking of bookings){
+    //                 //console.log(booking)
+    //                 Facility.find({facilityId:booking.facilityID}).exec(async (error,facility)=>{
+    //                     if(error){
+    //                         console.log(error)
+    //                         res.status(404).send("Could not find Facility")
+                            
+    //                     }
+    //                     else{
+    //                         if(facility){
+    //                             //console.log(facility)
+    //                             data.push({booking:booking,facility:facility[0]})
+    //                             //console.log(data)
+    //                         }
+    //                         else{
+    //                             res.status(404).send("Could not find Facility")
+    //                         }
+    //                     }
+    //                 })
+    //             }
+    //             console.log(data)
+                
+    //         }
+    //         else{
+    //             res.status(204).send("No Bookings found")
+    //         }
+    //     }
+
+    // })
+})
 // router.put("/:id", async(req,res)=>{
 //     if(req.body.bookId === req.params.id || req.user.isAdmin){
 //         if( req.body.password){
