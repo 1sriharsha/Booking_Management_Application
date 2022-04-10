@@ -99,6 +99,39 @@ router.post("/userbookings",async function(req,res){
 
     // })
 })
+
+
+
+
+router.put("/:id", async(req,res)=>{
+    try{
+        const modify = await Booking.findById(req.params.id);
+        if(modify.email === req.body.email){
+            await modify.updateOne({$set:req.body})
+            res.status(200).json("booking has been updated");
+        }else{
+            res.status(403).json("You cannot modify this booking");
+        }
+    }catch(err){
+        res.status(500).json(err);
+    } 
+});
+
+router.delete("/delete/:id", async(req,res)=>{
+    console.log(req.params.id)
+    Booking.findByIdAndDelete(req.params.id).then((booking)=>{
+        
+        if(!booking){
+            return res.status(404).send("Booking ID Invalid")
+        }
+        res.status(200).send("Booking Deleted")
+    }).catch((err)=>{
+        res.status(500).send(err)
+    })
+});
+
+module.exports = router;
+
 // router.put("/:id", async(req,res)=>{
 //     if(req.body.bookId === req.params.id || req.user.isAdmin){
 //         if( req.body.password){
@@ -121,33 +154,3 @@ router.post("/userbookings",async function(req,res){
 //         return res.status(403).json("You can update only your account!");
 //     }
 // });
-
-router.put("/:id", async(req,res)=>{
-    try{
-        const modify = await Booking.findById(req.params.id);
-        if(modify.email === req.body.email){
-            await modify.updateOne({$set:req.body})
-            res.status(200).json("booking has been updated");
-        }else{
-            res.status(403).json("You cannot modify this booking");
-        }
-    }catch(err){
-        res.status(500).json(err);
-    } 
-});
-
-router.delete("/:id", async(req,res)=>{
-    try{
-        const bookedslot = await Booking.findById(req.params.id);
-        if(bookedslot.email === req.body.email){
-            await bookedslot.deleteOne();
-            res.status(200).json("Booking has been deleted");
-        }else{
-            res.status(403).json("This Booking cannot be deleted");
-        }
-    }catch(err){
-        res.status(500).json(err);
-    }
-});
-
-module.exports = router;

@@ -25,6 +25,7 @@ if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
     origin = "http://localhost:3001"   
 }
+console.log(origin)
 app.use(cors({credentials:true,origin:origin}))
 
 //Session Middleware
@@ -33,7 +34,12 @@ app.use(session({
     secret:'mySecretKeylxinseqgh21sas98yhb',
     saveUninitialized:false,
     resave:false,
-    cookie:{maxAge:aliveTime}
+    cookie:{
+        maxAge:aliveTime,
+        secure:true,
+        httpOnly:true,
+        sameSite:"None"
+    }
 }))
 app.use(cookieParser())
 
