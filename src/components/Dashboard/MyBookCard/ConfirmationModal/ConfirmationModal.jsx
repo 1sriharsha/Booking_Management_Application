@@ -29,8 +29,6 @@ class ConfirmationModal extends Component {
       props: {},
     } = this;
 
-    const codeValue = "ATHLOS" + this.hashCode(this.props.confirmationCode);
-
     return (
       <React.Fragment>
         <div className={styles.modal}>
@@ -48,7 +46,7 @@ class ConfirmationModal extends Component {
               <div>
                 <QRCode
                   title="Check-In Code"
-                  value={codeValue}
+                  value={this.hashCode(this.props.qrValue)}
                   bgColor="#FFFFFF"
                   fgColor="#000000"
                   level="L"

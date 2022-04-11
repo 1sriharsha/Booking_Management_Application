@@ -48,18 +48,6 @@ class CheckoutModal extends Component {
       } else {
         api_url = REACT_APP_LOCAL_URL;
       }
-      // var newReservationData = {
-      //   firstName: this.props.userFirstName,
-      //   lastName: this.props.userLastName,
-      //   email: this.props.userEmail,
-      //   gear: this.state.reservedGear,
-      //   intime: this.state.reservedSlot,
-      //   outtime: this.state.reservedSlot + 1,
-      //   upgrade: this.state.reservedExtras,
-      //   // reservationSubtotal: this.state.reservationSubtotal,
-      //   // reservationTax: this.state.reservationTax,
-      //   // reservationTotal: this.state.reservationTotal,
-      // };
 
       axios({
         method: "POST",
@@ -69,7 +57,7 @@ class CheckoutModal extends Component {
         withCredentials: true,
         url: api_url + "/book/add",
         data: {
-          facilityID:this.state.uniqFacId,
+          facilityID: this.state.uniqFacId,
           firstName: this.props.userFirstName,
           lastName: this.props.userLastName,
           email: this.props.userEmail,
@@ -82,7 +70,7 @@ class CheckoutModal extends Component {
         .then((res) => {
           if (res.status === 200) {
             console.log("Booked Successfully");
-            this.props.onCloseModal;
+            this.props.onCloseModal();
           }
         })
         .catch(function (err) {
@@ -99,8 +87,6 @@ class CheckoutModal extends Component {
             console.log("Error", err.message);
           }
         });
-
-      //console.log(newReservationData);
     }
   };
 
