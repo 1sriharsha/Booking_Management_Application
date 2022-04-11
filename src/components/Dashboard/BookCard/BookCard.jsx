@@ -106,6 +106,7 @@ class BookCard extends Component {
             userFirstName={this.props.userFirstName}
             userLastName={this.props.userLastName}
             userEmail={this.props.userEmail}
+            handleRefresh={this.props.handleRefresh}
           />
         )}
       </React.Fragment>

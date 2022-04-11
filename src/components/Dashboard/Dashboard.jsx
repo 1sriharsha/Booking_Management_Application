@@ -222,6 +222,7 @@ class Dashboard extends Component {
                 userFirstName={this.props.userFirstName}
                 userLastName={this.props.userLastName}
                 userEmail={this.props.userEmail}
+                handleRefresh={this.handleRefresh}
               />
             </React.Fragment>
           );
