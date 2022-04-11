@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styles from "./ConfirmationModal.module.css";
 import QRCode from "react-qr-code";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NumberFormat from "react-number-format";
+import uniqid from "uniqid";
 
 class ConfirmationModal extends Component {
   state = {
@@ -29,10 +31,80 @@ class ConfirmationModal extends Component {
     return String(hash);
   }
 
+  // Summary Details Scroll Shadow
+  createScrollShadow() {
+    const summaryDetails = this.refDetails;
+    const content = this.refContent;
+    const shadowTop = this.refShadowTop;
+    const shadowBottom = this.refShadowBottom;
+
+    // Only show shadow if content is scrollable
+    if (content.scrollHeight > summaryDetails.clientHeight) {
+      shadowTop.style.display = "block";
+      shadowBottom.style.display = "block";
+      let contentScrollHeight =
+        content.scrollHeight - summaryDetails.offsetHeight;
+
+      content.addEventListener("scroll", function () {
+        var currentScroll = this.scrollTop / contentScrollHeight;
+        shadowTop.style.opacity = currentScroll;
+        shadowBottom.style.opacity = 1 - currentScroll;
+      });
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.sectionNumber === 1) {
+      this.createScrollShadow();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.sectionNumber === 1) {
+      this.createScrollShadow();
+    }
+  }
+
   render() {
     const {
-      props: {},
+      props: {
+        facilityID,
+        uniqFacId,
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        facilityInfo,
+      },
     } = this;
+
+    let sportImage =
+      "images/" +
+      facilitySport.toString().toLowerCase().replace(/ /g, "") +
+      ".jpg";
+
+    // List of Selected Gear & Extras
+    const combinedOptions = this.props.gear.concat(this.props.upgrade);
+
+    const optionsList = combinedOptions.map(
+      ({ itemName, value, itemPrice }) => {
+        return (
+          <React.Fragment>
+            <div key={uniqid("", "-optionslist")}>
+              <div className={styles.itemName}>{itemName}</div>
+              <div className={styles.itemCount}>x{value}</div>
+              <div className={styles.itemsTotal}>
+                <NumberFormat
+                  prefix="$"
+                  value={(itemPrice * value).toFixed(2)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                />
+              </div>
+            </div>
+          </React.Fragment>
+        );
+      }
+    );
 
     return (
       <React.Fragment>
@@ -48,7 +120,7 @@ class ConfirmationModal extends Component {
               </button>
               {/* Status Bar */}
               <nav className={styles.statusBar}>
-                {/* Status Bar: */}
+                {/* Status Bar: Reservation Summary */}
                 <button
                   className={[
                     styles.statusSection,
@@ -64,7 +136,7 @@ class ConfirmationModal extends Component {
                     <div className={styles.sectionTitle}>Summary</div>
                   </div>
                 </button>
-                {/* Status Bar:  */}
+                {/* Status Bar: Check In Information  */}
                 <button
                   className={[
                     styles.statusSection,
@@ -82,6 +154,113 @@ class ConfirmationModal extends Component {
                 </button>
               </nav>
             </div>
+
+            {/* Reservation Summary */}
+            {this.state.sectionNumber === 1 && (
+              <React.Fragment>
+                <section className={styles.container}>
+                  <main className={styles.checkout}>
+                    {/* Google Map Integration */}
+                    <aside className={styles.mapContainer}>
+                      <section className={styles.title}>Directions</section>
+                      <section>Map Integration</section>
+                    </aside>
+
+                    {/* Summary */}
+                    <aside className={styles.summary}>
+                      {/* Summary Title */}
+                      <div className={styles.title}>Summary</div>
+                      {/* Summary Image */}
+                      <div className={styles.image}>
+                        <img src={sportImage} alt={facilitySport} />
+                      </div>
+                      {/* Summary Details */}
+                      <div
+                        className={styles.summaryDetails}
+                        ref={(refDetails) => {
+                          this.refDetails = refDetails;
+                        }}
+                      >
+                        <div
+                          className={styles.summaryContent}
+                          ref={(refContent) => {
+                            this.refContent = refContent;
+                          }}
+                        >
+                          <div
+                            className={styles.shadowTop}
+                            ref={(refShadowTop) => {
+                              this.refShadowTop = refShadowTop;
+                            }}
+                          ></div>
+                          <div
+                            className={styles.shadowBottom}
+                            ref={(refShadowBottom) => {
+                              this.refShadowBottom = refShadowBottom;
+                            }}
+                          ></div>
+                          {/* Facility Name */}
+                          <div className={styles.name}>{facilityName}</div>
+                          {/* Facility Location */}
+                          <div className={styles.location}>
+                            <i>
+                              <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
+                            </i>
+                            {facilityLocation}
+                          </div>
+                          {/* Facility Description */}
+                          <div className={styles.description}>
+                            <i>
+                              <FontAwesomeIcon icon="fa-solid fa-circle-info" />
+                            </i>
+                            {facilityInfo}
+                          </div>
+                          {/* Reserved Gear & Extras */}
+                          {(this.props.gear.length > 0 ||
+                            this.props.upgrade.length > 0) && (
+                            <React.Fragment>
+                              <div className={styles.reservedOptions}>
+                                {optionsList}
+                              </div>
+                            </React.Fragment>
+                          )}
+                          {/* Subtotal, Tax, & Total */}
+                          {/* <div className={styles.reservedPricing}>
+                      <div>
+                        Subtotal:
+                        <NumberFormat
+                          prefix="$"
+                          value={this.state.reservationSubtotal.toFixed(2)}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                        />
+                      </div>
+                      <div>
+                        Tax:
+                        <NumberFormat
+                          prefix="$"
+                          value={this.state.reservationTax.toFixed(2)}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                        />
+                      </div>
+                      <div className={styles.reservationTotal}>
+                        Total:
+                        <NumberFormat
+                          prefix="$"
+                          value={this.state.reservationTotal.toFixed(2)}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                        />
+                      </div>
+                    </div> */}
+                        </div>
+                      </div>
+                    </aside>
+                  </main>
+                </section>
+              </React.Fragment>
+            )}
 
             {this.state.sectionNumber === 2 && (
               <section className={styles.container}>

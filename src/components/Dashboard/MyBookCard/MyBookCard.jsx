@@ -9,36 +9,45 @@ class MyBookCard extends Component {
     isDeleted: false,
     showModal: false,
   };
-  
 
   onDelete = () => {
-    let isExecuted = window.confirm("Are you sure you want to delete this booking ?");
-    if(isExecuted){
-    var api_url;
-    if (process.env.NODE_ENV === "production") {
-      api_url = REACT_APP_PRODUCTION_URL;
-    } else {
-      api_url = REACT_APP_LOCAL_URL;
-    }
+    let isExecuted = window.confirm(
+      "Are you sure you want to delete this booking ?"
+    );
+    if (isExecuted) {
+      var api_url;
+      if (process.env.NODE_ENV === "production") {
+        api_url = REACT_APP_PRODUCTION_URL;
+      } else {
+        api_url = REACT_APP_LOCAL_URL;
+      }
 
-    axios({
-      method:"DELETE",
-      headers: {
-        "Access-Control-Allow-Origin": api_url,
-      },
-      withCredentials: true,
-      url: api_url + "/book/delete/"+this.props.uniqBookingId,
-    }).then((res)=>{
-      console.log("Deleted Successfully")
-      //Add redirect to Dashboard
-    }).catch((err)=>{
-      console.log(err)
-    })
-    this.setState({ isDeleted: true });
-  }
+      axios({
+        method: "DELETE",
+        headers: {
+          "Access-Control-Allow-Origin": api_url,
+        },
+        withCredentials: true,
+        url: api_url + "/book/delete/" + this.props.uniqBookingId,
+      })
+        .then((res) => {
+          console.log("Deleted Successfully");
+          //Add redirect to Dashboard
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.setState({ isDeleted: true });
+    }
+  };
+
+  onOpenModal = () => {
+    document.querySelector("body").style.overflow = "hidden";
+    this.setState({ showModal: true });
   };
 
   onCloseModal = () => {
+    document.querySelector("body").style.overflow = "auto";
     this.setState({ showModal: false });
   };
 
@@ -58,8 +67,6 @@ class MyBookCard extends Component {
         animationDelay,
       },
     } = this;
-
-
 
     let facilityLabel = facilityName;
     const maxLabelLength = 35;
@@ -121,7 +128,7 @@ class MyBookCard extends Component {
               {/* View Button */}
               <button
                 className={[styles.button, styles.buttonPrimary].join(" ")}
-                onClick={() => this.setState({ showModal: true })}
+                onClick={() => this.onOpenModal()}
               >
                 View
               </button>
@@ -136,6 +143,10 @@ class MyBookCard extends Component {
             facilityLocation={facilityLocation}
             facilitySport={facilitySport}
             facilityInfo={facilityInfo}
+            gear={gear}
+            upgrade={upgrade}
+            intime={intime}
+            outtime={outtime}
           />
         )}
       </React.Fragment>
