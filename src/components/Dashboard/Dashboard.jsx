@@ -57,10 +57,14 @@ class Dashboard extends Component {
     this.setState({ sportFilterValue: value });
   };
 
+  handleRefresh = () => {
+    this.getMyBookings();
+  };
+
   componentDidMount() {
     document.body.style.backgroundColor = "var(--color-tertiary)";
-    var tempFacData=[]
-    var tempBookData=[]
+    var tempFacData = [];
+
     // Get Facilities from API
     axios({
       method: "GET",
@@ -77,7 +81,7 @@ class Dashboard extends Component {
           for (let temp of res.data) {
             const facData = {
               id: counter,
-              uniqFacId:temp.facilityId,
+              uniqFacId: temp.facilityId,
               facilityName: temp.facilityName,
               facilityLocation: (
                 temp.facilityLocation.city +
@@ -91,18 +95,13 @@ class Dashboard extends Component {
               reservationPeriodEnd: parseInt(temp.reservationPeriodEnd),
             };
             counter = counter + 1;
-            tempFacData.push(facData)
+            tempFacData.push(facData);
             //console.log(facData)
-            
           }
           //console.log(tempFacData)
-          
-          
         }
         this.setState((prevState) => ({
-            
           facilityData: tempFacData,
-          
         }));
       })
       .catch(function (err) {
@@ -120,50 +119,50 @@ class Dashboard extends Component {
         }
       });
 
-      axios({
-        method:"POST",
-        headers: {
-          "Access-Control-Allow-Origin": api_url,
-        },
-        withCredentials: true,
-        url: api_url + "/book/userbookings",
-        data:{
-          email:this.props.userEmail
+    this.getMyBookings();
+  }
+
+  getMyBookings() {
+    var tempBookData = [];
+
+    axios({
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      url: api_url + "/book/userbookings",
+      data: {
+        email: this.props.userEmail,
+      },
+    }).then((res) => {
+      if (res.status === 200 || res.status === 304) {
+        let counter = 1;
+        for (let temp of res.data) {
+          const bookData = {
+            id: counter,
+            uniqBookingId: temp._id,
+            gear: temp.gear,
+            upgrade: temp.upgrade,
+            intime: temp.intime,
+            outtime: temp.outtime,
+            facilityLocation:
+              temp.facility_info.facilityLocation.city +
+              ", " +
+              temp.facility_info.facilityLocation.state,
+            facilitySport: temp.facility_info.facilitySports,
+            facilityName: temp.facility_info.facilityName,
+            facilityInfo: temp.facility_info.facilityInformation,
+          };
+          counter = counter + 1;
+          tempBookData.push(bookData);
         }
-      }).then((res)=>{
-        if(res.status===200 || res.status ===304){
-          let counter = 1;
-          for(let temp of res.data){
-            const bookData = {
-              id: counter,
-              uniqBookingId: temp._id,
-              gear: temp.gear,
-              upgrade: temp.upgrade,
-              intime: temp.intime,
-              outtime: temp.outtime,
-              facilityLocation:
-                temp.facility_info.facilityLocation.city +
-                ", " +
-                temp.facility_info.facilityLocation.state,
-              facilitySport: temp.facility_info.facilitySports,
-              facilityName: temp.facility_info.facilityName,
-              facilityInfo: temp.facility_info.facilityInformation,
-            };
-            counter=counter+1
-            tempBookData.push(bookData)
-
-          }
-          //console.log(tempBookData)
-
-        }
-        this.setState((prevState) => ({
-            
-          myBookData: tempBookData,
-          
-        }));
-
-      })
-      
+        //console.log(tempBookData)
+      }
+      this.setState((prevState) => ({
+        myBookData: tempBookData,
+      }));
+    });
   }
 
   render() {
@@ -320,9 +319,20 @@ class Dashboard extends Component {
     );
 
     // [Customer] Generates n MyBookCards components from Database
-    console.log(this.state.myBookData)
+    console.log(this.state.myBookData);
     const nMyBookCards = this.state.myBookData.map(
-      ({ id,uniqBookingId,gear,upgrade,intime,outtime, facilityName, facilityLocation, facilitySport, facilityInfo }) => {
+      ({
+        id,
+        uniqBookingId,
+        gear,
+        upgrade,
+        intime,
+        outtime,
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        facilityInfo,
+      }) => {
         if (i >= 3) {
           animationDelay += 0.05;
           i = 0;
@@ -346,6 +356,7 @@ class Dashboard extends Component {
               userFirstName={this.props.userFirstName}
               userLastName={this.props.userLastName}
               userEmail={this.props.userEmail}
+              handleRefresh={this.handleRefresh}
             />
           </React.Fragment>
         );

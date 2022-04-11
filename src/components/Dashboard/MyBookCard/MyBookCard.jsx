@@ -32,7 +32,8 @@ class MyBookCard extends Component {
       })
         .then((res) => {
           console.log("Deleted Successfully");
-          //Add redirect to Dashboard
+          // Refresh My Bookings Data
+          this.props.handleRefresh();
         })
         .catch((err) => {
           console.log(err);
