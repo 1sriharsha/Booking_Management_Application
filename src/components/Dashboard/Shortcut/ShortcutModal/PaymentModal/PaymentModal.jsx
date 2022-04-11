@@ -36,9 +36,7 @@ class PaymentModal extends Component {
             </button>
             <div className={styles.container}>
               <aside className={styles.payment}>
-                <div className={styles.title}>
-                  Enter your payment details
-                </div>
+                <div className={styles.title}>Enter your payment details</div>
                 <form>
                   <input
                     id="name"
@@ -84,11 +82,7 @@ class PaymentModal extends Component {
                     placeholder="Apt, unit, suite, etc. (optional)"
                     autoComplete={"address-line2"}
                   />
-                  <select
-                    name="country"
-                    id="country"
-                    autoComplete={"country"}
-                  >
+                  <select name="country" id="country" autoComplete={"country"}>
                     <option value="-">-</option>
                     <option value="United States">United States</option>
                   </select>

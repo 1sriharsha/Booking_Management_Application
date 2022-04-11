@@ -18,11 +18,11 @@ const {
 
 class CheckoutModal extends Component {
   state = {
-    facilityID:this.props.facilityID,
-    uniqFacId:this.props.uniqFacId,
-    facilityName:this.props.facilityName,
-    facilityLocation:this.props.facilityLocation,
-    facilitySport:this.props.facilitySport,
+    facilityID: this.props.facilityID,
+    uniqFacId: this.props.uniqFacId,
+    facilityName: this.props.facilityName,
+    facilityLocation: this.props.facilityLocation,
+    facilitySport: this.props.facilitySport,
     sectionNumber: 1,
     reservedSlot: null,
     reservedGear: [],
@@ -38,7 +38,8 @@ class CheckoutModal extends Component {
   };
 
   onPay = () => {
-    console.log(this.state.uniqFacId)
+    console.log(this.state.uniqFacId);
+    
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {
@@ -249,13 +250,12 @@ class CheckoutModal extends Component {
     var nTimeSlots = [];
     var reservationSlotStart = reservationPeriodStart;
     var reservationSlotEnd;
-    var key=0
+    var key = 0;
     for (
       let index = 0;
       index < reservationPeriodEnd - reservationPeriodStart;
       index++
     ) {
-
       reservationSlotEnd = reservationSlotStart + 1;
 
       nTimeSlots.push(

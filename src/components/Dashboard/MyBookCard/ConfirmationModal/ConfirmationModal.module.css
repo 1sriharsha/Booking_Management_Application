@@ -12,7 +12,6 @@
   --default-border-radius: 5px;
 }
 
-
 /* Modal */
 .modal {
   position: fixed;
@@ -39,7 +38,6 @@
   overflow: hidden;
 }
 
-
 .close {
   height: 70px;
   width: 70px;
@@ -57,7 +55,6 @@
   color: red;
 }
 
-
 .container {
   padding: 0 4em;
   display: flex;
@@ -71,7 +68,6 @@
   text-align: center;
   margin: 1em 0;
 }
-
 
 /* Navigation */
 .navigation {
@@ -156,7 +152,6 @@
   align-items: center;
   gap: 1.5em;
 }
-
 
 /* Checkout */
 .checkout {
@@ -325,8 +320,6 @@
 
 /* Responsive Layout */
 @media screen and (min-width: 1630px) {
- 
-
   .sectionText {
     width: 115px;
   }
