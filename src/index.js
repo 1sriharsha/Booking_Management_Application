@@ -44,6 +44,8 @@ import {
   faKey,
   faCreditCard,
   faHeart,
+  faQrcode,
+  faBarsProgress,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -83,7 +85,9 @@ library.add(
   faMedal,
   faKey,
   faCreditCard,
-  faHeart
+  faHeart,
+  faQrcode,
+  faBarsProgress
 );
 
 ReactDOM.render(
