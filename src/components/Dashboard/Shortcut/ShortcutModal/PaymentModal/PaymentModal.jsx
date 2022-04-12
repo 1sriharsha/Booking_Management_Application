@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { SupportedSports } from "../../../../../data";
 import styles from "./PaymentModal.module.css";
 import InputMask from "react-input-mask";
 

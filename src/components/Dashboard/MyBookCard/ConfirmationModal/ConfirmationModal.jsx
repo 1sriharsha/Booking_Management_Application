@@ -67,14 +67,7 @@ class ConfirmationModal extends Component {
 
   render() {
     const {
-      props: {
-        facilityID,
-        uniqFacId,
-        facilityName,
-        facilityLocation,
-        facilitySport,
-        facilityInfo,
-      },
+      props: { facilityName, facilityLocation, facilitySport, facilityInfo },
     } = this;
 
     let sportImage =
