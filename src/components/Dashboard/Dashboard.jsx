@@ -30,6 +30,8 @@ class Dashboard extends Component {
     let defaultTab = "Book";
     if (props.userType === "Customer" || props.userType === "Manager") {
       defaultTab = "Dashboard";
+    } else if(props.userType === 'Support') {
+      defaultTab = 'Chat Support'
     }
 
     this.state = {
@@ -561,6 +563,11 @@ class Dashboard extends Component {
               />
               {nPromotionCards}
             </div>
+          )}
+
+          {/* [Support] Chat Support */}
+          {this.state.activeTab === "Chat Support" && (
+            <div className={styles.bookContainer}>Chat Support</div>
           )}
         </div>
       </React.Fragment>

@@ -38,13 +38,6 @@ class ManagementTabs extends Component {
           tabLabel="Edit Promotions"
           icon="fa-solid fa-receipt"
         ></Tab>
-        <Tab
-          key={uniqid("", "-tab")}
-          activeTab={this.props.activeTab}
-          onClick={this.props.onClick}
-          tabLabel="Chat Support"
-          icon="fa-solid fa-headset"
-        ></Tab>
       </React.Fragment>
     );
   }
