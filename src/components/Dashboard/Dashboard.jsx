@@ -407,9 +407,22 @@ class Dashboard extends Component {
           {this.state.activeTab === "Dashboard" && (
             <React.Fragment>
               {/* Data Visualization */}
-              {this.props.userType === "Manager" && (
+              {(this.props.userType === "Manager" ||
+                this.props.userType === "Customer") && (
                 <section className={styles.dataVisualContainer}>
-                  <Visualization userType={this.props.userType} />
+                  {this.props.userType === "Manager" && (
+                    <Visualization userType={this.props.userType} />
+                  )}
+
+                  {this.props.userType === "Customer" && (
+                    <section className={styles.promoContainer}>
+                      <img
+                        className={styles.promoImage}
+                        src="images/shoes.jpg"
+                        alt=""
+                      />
+                    </section>
+                  )}
                 </section>
               )}
 
