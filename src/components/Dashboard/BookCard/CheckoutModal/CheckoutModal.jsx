@@ -530,27 +530,36 @@ class CheckoutModal extends Component {
                 <section className={styles.container}>
                   <div className={styles.title}>Guest Information</div>
                   <div className={styles.onsiteForm}>
-                    <input
-                      type="text"
-                      name="reservationFirstName"
-                      placeholder="First Name"
-                      value={this.state.reservationFirstName}
-                      onChange={(e) => this.setStateValue(e)}
-                    />
-                    <input
-                      type="text"
-                      name="reservationLastName"
-                      placeholder="Last Name"
-                      value={this.state.reservationLastName}
-                      onChange={(e) => this.setStateValue(e)}
-                    />
-                    <input
-                      type="text"
-                      name="reservationEmail"
-                      placeholder="Email"
-                      value={this.state.reservationEmail}
-                      onChange={(e) => this.setStateValue(e)}
-                    />
+                    <div>
+                      <label htmlFor="reservationFirstName">First Name</label>
+                      <input
+                        type="text"
+                        name="reservationFirstName"
+                        value={this.state.reservationFirstName}
+                        onChange={(e) => this.setStateValue(e)}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="reservationLastName">Last Name</label>
+                      <input
+                        type="text"
+                        name="reservationLastName"
+                        value={this.state.reservationLastName}
+                        onChange={(e) => this.setStateValue(e)}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="reservationLastName">Email</label>
+                      <input
+                        type="text"
+                        name="reservationEmail"
+                        value={this.state.reservationEmail}
+                        onChange={(e) => this.setStateValue(e)}
+                      />
+                      {this.state.isEmailValid && (
+                        <div className={styles.error}>Enter a valid email.</div>
+                      )}
+                    </div>
                   </div>
                   <div>
                     <button

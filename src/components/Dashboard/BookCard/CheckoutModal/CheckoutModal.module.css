@@ -261,6 +261,18 @@
   color: var(--color-gray);
 }
 
+.onsiteForm > div {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: baseline;
+  gap: 0.2em;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5em;
+}
+
 
 /* Gear Selection */
 .gearContainer {
