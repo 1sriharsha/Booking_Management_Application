@@ -370,17 +370,19 @@ class Dashboard extends Component {
             <div className={styles.navigation}>
               {/* Navigation: Search Bar [Middle] */}
               <div className={styles.menu}>
-                <div className={styles.search}>
-                  <Searchbar
-                    userType={this.props.userType}
-                    onClickTabItem={this.onClickTabItem}
-                    onResetSearch={this.onResetSearch}
-                    handleSearchValue={this.handleSearchValue}
-                    handleSportFilter={this.handleSportFilter}
-                    sportFilterValue={this.state.sportFilterValue}
-                    facilityData={this.state.facilityData}
-                  />
-                </div>
+                {this.props.userType !== "Support" && (
+                  <div className={styles.search}>
+                    <Searchbar
+                      userType={this.props.userType}
+                      onClickTabItem={this.onClickTabItem}
+                      onResetSearch={this.onResetSearch}
+                      handleSearchValue={this.handleSearchValue}
+                      handleSportFilter={this.handleSportFilter}
+                      sportFilterValue={this.state.sportFilterValue}
+                      facilityData={this.state.facilityData}
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Navigation: User Login/Sign Up Buttons [Right] */}
