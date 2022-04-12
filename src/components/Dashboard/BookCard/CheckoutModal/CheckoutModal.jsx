@@ -41,6 +41,7 @@ class CheckoutModal extends Component {
       reservationFirstName: this.props.userFirstName,
       reservationLastName: this.props.userLastName,
       reservationEmail: this.props.userEmail,
+      isEmailValid: false,
 
       // Checkout Modal Properties
       sectionNumber: startSection,
@@ -208,8 +209,24 @@ class CheckoutModal extends Component {
     const targetName = e.target.name;
     const targetValue = e.target.value;
 
+    if (targetName === "reservationEmail") {
+      if (targetValue.trim() === "") {
+        this.setState({ isEmailValid: false });
+      } else if (this.isEmail(targetValue.trim())) {
+        this.setState({ isEmailValid: false });
+      } else {
+        this.setState({ isEmailValid: true });
+      }
+    }
+
     this.setState({ [targetName]: targetValue });
   };
+
+  isEmail(email) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
 
   validatePromotion = (code) => {
     const codeInput = code.target;
@@ -512,7 +529,7 @@ class CheckoutModal extends Component {
               <React.Fragment>
                 <section className={styles.container}>
                   <div className={styles.title}>Guest Information</div>
-                  <div>
+                  <div className={styles.onsiteForm}>
                     <input
                       type="text"
                       name="reservationFirstName"
@@ -545,7 +562,8 @@ class CheckoutModal extends Component {
                         !(
                           this.state.reservationFirstName &&
                           this.state.reservationLastName &&
-                          this.state.reservationEmail
+                          this.state.reservationEmail &&
+                          !this.state.isEmailValid
                         )
                       }
                     >
