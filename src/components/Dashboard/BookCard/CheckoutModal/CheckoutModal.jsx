@@ -29,6 +29,7 @@ class CheckoutModal extends Component {
     taxRate: 0.07,
     promotionCode: "",
     promotionPercentage: null,
+    promotionName: "",
     isPromotionValid: false,
     gearCounters: GearData,
     extrasCounters: ExtrasData,
@@ -200,6 +201,7 @@ class CheckoutModal extends Component {
           {
             isPromotionValid: true,
             promotionPercentage: promotionPercentage,
+            promotionName: matchObj[0].promotionName,
           },
           () => {
             this.updateCosts(0);
@@ -257,6 +259,8 @@ class CheckoutModal extends Component {
         reservationSubtotal * this.state.promotionPercentage;
 
       this.setState({ reservationDiscount });
+    } else {
+      this.setState({ reservationDiscount: null });
     }
 
     // Calculate Tax & Total
@@ -734,6 +738,20 @@ class CheckoutModal extends Component {
                                 thousandSeparator={true}
                               />
                             </div>
+                            {this.state.reservationDiscount && (
+                              <div>
+                                {this.state.promotionName + ":"}
+
+                                <NumberFormat
+                                  prefix="-$"
+                                  value={this.state.reservationDiscount.toFixed(
+                                    2
+                                  )}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                />
+                              </div>
+                            )}
                             <div>
                               Tax:
                               <NumberFormat
