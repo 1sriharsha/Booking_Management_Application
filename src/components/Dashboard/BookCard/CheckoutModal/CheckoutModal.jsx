@@ -38,8 +38,6 @@ class CheckoutModal extends Component {
   };
 
   onPay = () => {
-    console.log(this.state.uniqFacId);
-
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {

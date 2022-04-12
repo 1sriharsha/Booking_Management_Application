@@ -58,6 +58,7 @@ class AddPromotion extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
+
     var newPromotionData = {
       promotionName: this.state.promotionName,
       promotionCode: this.state.promotionCode,
@@ -66,7 +67,9 @@ class AddPromotion extends Component {
       promotionPercentage: this.state.promotionPercentage / 100, // Convert to value between 0.0 - 1.0
       promotionInfo: this.state.promotionInfo,
     };
-    console.log(newPromotionData);
+
+    console.log(newPromotionData); // TODO Remove
+
     axios({
       method: "POST",
       headers: {
@@ -97,7 +100,7 @@ class AddPromotion extends Component {
       });
 
     this.props.onCloseModal();
-  };
+  };;
 
   render() {
     return (

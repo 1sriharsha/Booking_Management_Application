@@ -79,6 +79,7 @@ class AddFacility extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
+
     var newFacilityData = {
       facilityName: this.state.facilityName,
       facilityLocation: this.state.facilityLocation,
@@ -87,7 +88,7 @@ class AddFacility extends Component {
       reservationPeriodStart: this.state.reservationPeriodStart,
       reservationPeriodEnd: this.state.reservationPeriodEnd,
     };
-    console.log(newFacilityData);
+
     axios({
       method: "POST",
       headers: {

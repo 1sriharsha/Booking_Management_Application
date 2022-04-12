@@ -14,25 +14,12 @@ const clientID = REACT_APP_CLIENT_ID;
 var api_url;
 if (process.env.NODE_ENV === "production") {
   api_url = REACT_APP_PRODUCTION_URL;
-  //console.log(process.env.NODE_ENV)
-  //console.log(clientID)
-  //console.log(REACT_APP_LOCAL_URL)
-  //console.log(REACT_APP_PRODUCTION_URL)
 } else {
   api_url = REACT_APP_LOCAL_URL;
-  //console.log(process.env.NODE_ENV)
-  //console.log(REACT_APP_LOCAL_URL)
-  //console.log(clientID)
-
-  //console.log(REACT_APP_PRODUCTION_URL)
 }
 
 function GoogleLoginButton(props) {
-  //console.log(clientID)
   const onSuccess = (res) => {
-    console.log(process.env.NODE_ENV);
-    //console.log(api_url)
-    //console.log("[Login Successful] currentUser:", res.profileObj);
     axios({
       method: "POST",
       headers: {

@@ -96,9 +96,7 @@ class Dashboard extends Component {
             };
             counter = counter + 1;
             tempFacData.push(facData);
-            //console.log(facData)
           }
-          //console.log(tempFacData)
         }
         this.setState((prevState) => ({
           facilityData: tempFacData,
@@ -157,7 +155,6 @@ class Dashboard extends Component {
           counter = counter + 1;
           tempBookData.push(bookData);
         }
-        //console.log(tempBookData)
       }
       this.setState((prevState) => ({
         myBookData: tempBookData,
@@ -172,7 +169,6 @@ class Dashboard extends Component {
     // [Guest/Customer/Employee] Generates n BookCard components from Database (filtered by facilityLocation & facilityName)
     const nBookCards = this.state.facilityData
       .filter((facility) => {
-        //console.log(facility)
         return (
           (facility.facilityLocation
             .toLowerCase()
@@ -320,7 +316,6 @@ class Dashboard extends Component {
     );
 
     // [Customer] Generates n MyBookCards components from Database
-    console.log(this.state.myBookData);
     const nMyBookCards = this.state.myBookData.map(
       ({
         id,
