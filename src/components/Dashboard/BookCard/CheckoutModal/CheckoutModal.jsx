@@ -6,15 +6,10 @@ import TimeSlot from "./TimeSlot/TimeSlot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFormat from "react-number-format";
 import Counters from "./Counters/Counters";
-import { ExtrasData, GearData } from "../../../../data";
+import { ExtrasData, GearData, TestPromotionData } from "../../../../data";
 import uniqid from "uniqid";
 import axios from "axios";
-const {
-  REACT_APP_LOCAL_URL,
-  REACT_APP_PRODUCTION_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_API_KEY,
-} = process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 class CheckoutModal extends Component {
   state = {
@@ -28,9 +23,13 @@ class CheckoutModal extends Component {
     reservedGear: [],
     reservedExtras: [],
     reservationSubtotal: 0,
+    reservationDiscount: null,
     reservationTax: 0,
     reservationTotal: 0,
     taxRate: 0.07,
+    promotionCode: "",
+    promotionPercentage: null,
+    isPromotionValid: false,
     gearCounters: GearData,
     extrasCounters: ExtrasData,
     isGearSelected: false,
@@ -39,7 +38,7 @@ class CheckoutModal extends Component {
 
   onPay = () => {
     console.log(this.state.uniqFacId);
-    
+
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {
@@ -184,14 +183,86 @@ class CheckoutModal extends Component {
     this.setState({ extrasCounters });
   };
 
+  validatePromotion = (code) => {
+    const codeInput = code.target;
+    let codeValue = code.target.value;
+
+    // Promotion objects that match exact codeValue
+    let matchObj = TestPromotionData.filter(function (el) {
+      return el.promotionCode.toLowerCase() === codeValue.toLowerCase();
+    });
+
+    if (codeValue.length > 0) {
+      if (matchObj.length > 0) {
+        let promotionPercentage = matchObj[0].promotionPercentage;
+
+        this.setState(
+          {
+            isPromotionValid: true,
+            promotionPercentage: promotionPercentage,
+          },
+          () => {
+            this.updateCosts(0);
+          }
+        );
+
+        // Correct Code Styling
+        codeInput.style.boxShadow = "0 0 8px rgba(0, 255, 0, 0.7)";
+        codeInput.style.border = "1px solid green";
+        codeInput.style.color = "green";
+      } else {
+        this.setState(
+          { isPromotionValid: false, promotionPercentage: null },
+          () => {
+            this.updateCosts(0);
+          }
+        );
+
+        // Incorrect Code Styling
+        codeInput.style.boxShadow = "0 0 8px rgba(255, 0, 0, 0.7)";
+        codeInput.style.border = "1px solid red";
+        codeInput.style.color = "red";
+      }
+    } else {
+      this.setState(
+        { isPromotionValid: false, promotionPercentage: null },
+        () => {
+          this.updateCosts(0);
+        }
+      );
+
+      // Default Styling
+      codeInput.style.boxShadow = "unset";
+      codeInput.style.border = "1px solid var(--color-gray)";
+      codeInput.style.color = "black";
+    }
+
+    this.setState({ promotionCode: codeValue }, () => {
+      this.updateCosts(0);
+    });
+  };
+
   updateCosts = (change) => {
     var reservationSubtotal = this.state.reservationSubtotal;
     var reservationTax;
     var reservationTotal;
+    var reservationDiscount = 0;
 
+    // Calculate Subtotal
     reservationSubtotal += change;
+
+    // Calculate Discount
+    if (this.state.promotionPercentage) {
+      reservationDiscount =
+        reservationSubtotal * this.state.promotionPercentage;
+
+      this.setState({ reservationDiscount });
+    }
+
+    // Calculate Tax & Total
     reservationTax = reservationSubtotal * this.state.taxRate;
-    reservationTotal = reservationSubtotal + reservationTax;
+    reservationTotal =
+      reservationSubtotal - reservationDiscount + reservationTax;
 
     this.setState({
       reservationSubtotal,
@@ -581,6 +652,14 @@ class CheckoutModal extends Component {
                             autoComplete={"postal-code"}
                           />
                         </div>
+                        <input
+                          type="text"
+                          id="promo"
+                          name="promo"
+                          placeholder="Promotion Code"
+                          value={this.state.promotionCode}
+                          onChange={this.validatePromotion}
+                        />
                       </form>
                     </aside>
                     {/* Checkout Summary */}
