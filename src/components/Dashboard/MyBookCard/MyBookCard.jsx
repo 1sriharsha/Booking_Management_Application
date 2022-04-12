@@ -55,7 +55,6 @@ class MyBookCard extends Component {
   render() {
     const {
       props: {
-        facilityID,
         uniqBookingId,
         gear,
         upgrade,

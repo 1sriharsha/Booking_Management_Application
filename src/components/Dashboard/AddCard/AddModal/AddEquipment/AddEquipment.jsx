@@ -4,12 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { SupportedSports } from "../../../../../data";
 
-const {
-  REACT_APP_LOCAL_URL,
-  REACT_APP_PRODUCTION_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_API_KEY,
-} = process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 class AddEquipment extends Component {
   state = {

@@ -6,23 +6,6 @@ import InputMask from "react-input-mask";
 class PaymentModal extends Component {
   state = {};
   render() {
-    const nInterests = SupportedSports.map(({ sportName }) => {
-      return (
-        <React.Fragment>
-          <section className={styles.interestBox}>
-            <input
-              className={styles.checkbox}
-              type={"checkbox"}
-              value={sportName}
-            />
-            <label className={styles.sportName} htmlFor={sportName}>
-              {sportName}
-            </label>
-          </section>
-        </React.Fragment>
-      );
-    });
-
     return (
       <React.Fragment>
         <div className={styles.modal}>

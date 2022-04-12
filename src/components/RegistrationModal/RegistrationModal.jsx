@@ -4,8 +4,7 @@ import "./RegistrationModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLoginButton } from "..";
 import axios from "axios";
-const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
-  process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 const RegistrationModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,7 +62,7 @@ const RegistrationModal = (props) => {
 
   const onSignUp = (event) => {
     var api_url;
-    const clientID = REACT_APP_CLIENT_ID;
+
     if (process.env.NODE_ENV === "production") {
       //console.log(process.env.NODE_ENV)
       //console.log(REACT_APP_LOCAL_URL)

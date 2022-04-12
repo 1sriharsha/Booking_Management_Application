@@ -8,7 +8,7 @@ import { SupportedSports } from "../../../../../data";
 const {
   REACT_APP_LOCAL_URL,
   REACT_APP_PRODUCTION_URL,
-  REACT_APP_CLIENT_ID,
+
   REACT_APP_API_KEY,
 } = process.env;
 
