@@ -260,7 +260,8 @@ class CheckoutModal extends Component {
     }
 
     // Calculate Tax & Total
-    reservationTax = reservationSubtotal * this.state.taxRate;
+    reservationTax =
+      (reservationSubtotal - reservationDiscount) * this.state.taxRate;
     reservationTotal =
       reservationSubtotal - reservationDiscount + reservationTax;
 
