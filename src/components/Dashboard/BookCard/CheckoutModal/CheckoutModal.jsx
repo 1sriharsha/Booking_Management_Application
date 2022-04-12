@@ -11,31 +11,53 @@ import uniqid from "uniqid";
 import axios from "axios";
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
+let startSection = 1;
+
 class CheckoutModal extends Component {
-  state = {
-    facilityID: this.props.facilityID,
-    uniqFacId: this.props.uniqFacId,
-    facilityName: this.props.facilityName,
-    facilityLocation: this.props.facilityLocation,
-    facilitySport: this.props.facilitySport,
-    sectionNumber: 1,
-    reservedSlot: null,
-    reservedGear: [],
-    reservedExtras: [],
-    reservationSubtotal: 0,
-    reservationDiscount: null,
-    reservationTax: 0,
-    reservationTotal: 0,
-    taxRate: 0.07,
-    promotionCode: "",
-    promotionPercentage: null,
-    promotionName: "",
-    isPromotionValid: false,
-    gearCounters: GearData,
-    extrasCounters: ExtrasData,
-    isGearSelected: false,
-    isExtrasSelected: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // Facility Data
+      facilityID: this.props.facilityID,
+      uniqFacId: this.props.uniqFacId,
+      facilityName: this.props.facilityName,
+      facilityLocation: this.props.facilityLocation,
+      facilitySport: this.props.facilitySport,
+
+      // Reservation Data
+      reservedSlot: null,
+      reservedGear: [],
+      reservedExtras: [],
+      reservationSubtotal: 0,
+      reservationDiscount: null,
+      reservationTax: 0,
+      reservationTotal: 0,
+      taxRate: 0.07,
+      promotionCode: "",
+      promotionPercentage: null,
+      promotionName: "",
+
+      reservationFirstName: this.props.userFirstName,
+      reservationLastName: this.props.userLastName,
+      reservationEmail: this.props.userEmail,
+
+      // Checkout Modal Properties
+      sectionNumber: startSection,
+      gearCounters: GearData,
+      extrasCounters: ExtrasData,
+      isPromotionValid: false,
+      isGearSelected: false,
+      isExtrasSelected: false,
+    };
+
+    if (this.props.userType === "Employee") {
+      startSection = 0;
+      this.state.reservationFirstName = null;
+      this.state.reservationLastName = null;
+      this.state.reservationEmail = null;
+    }
+  }
 
   onPay = () => {
     if (!this.props.isAuthenticated) {
@@ -57,9 +79,9 @@ class CheckoutModal extends Component {
         url: api_url + "/book/add",
         data: {
           facilityID: this.state.uniqFacId,
-          firstName: this.props.userFirstName,
-          lastName: this.props.userLastName,
-          email: this.props.userEmail,
+          firstName: this.state.reservationFirstName,
+          lastName: this.state.reservationLastName,
+          email: this.state.reservationEmail,
           gear: this.state.reservedGear,
           intime: this.state.reservedSlot,
           outtime: this.state.reservedSlot + 1,
@@ -180,6 +202,13 @@ class CheckoutModal extends Component {
       this.updateCosts(-extrasCounters[index].itemPrice);
     }
     this.setState({ extrasCounters });
+  };
+
+  setStateValue = (e) => {
+    const targetName = e.target.name;
+    const targetValue = e.target.value;
+
+    this.setState({ [targetName]: targetValue });
   };
 
   validatePromotion = (code) => {
@@ -389,6 +418,7 @@ class CheckoutModal extends Component {
                     this.state.reservedSlot ? "completedSection" : "",
                   ].join(" ")}
                   onClick={() => this.setPageNumber(1)}
+                  disabled={this.state.sectionNumber === 0}
                 >
                   <div className={styles.sectionIcon}>
                     <FontAwesomeIcon icon="fa-solid fa-clock" />
@@ -476,6 +506,55 @@ class CheckoutModal extends Component {
                 <div className={styles.statusIndicator}></div>
               </nav>
             </div>
+
+            {/* [Employee] Section 0: Guest Information */}
+            {this.state.sectionNumber === 0 && (
+              <React.Fragment>
+                <section className={styles.container}>
+                  <div className={styles.title}>Guest Information</div>
+                  <div>
+                    <input
+                      type="text"
+                      name="reservationFirstName"
+                      placeholder="First Name"
+                      value={this.state.reservationFirstName}
+                      onChange={(e) => this.setStateValue(e)}
+                    />
+                    <input
+                      type="text"
+                      name="reservationLastName"
+                      placeholder="Last Name"
+                      value={this.state.reservationLastName}
+                      onChange={(e) => this.setStateValue(e)}
+                    />
+                    <input
+                      type="text"
+                      name="reservationEmail"
+                      placeholder="Email"
+                      value={this.state.reservationEmail}
+                      onChange={(e) => this.setStateValue(e)}
+                    />
+                  </div>
+                  <div>
+                    <button
+                      className={[styles.button, styles.buttonPrimary].join(
+                        " "
+                      )}
+                      onClick={() => this.nextPage()}
+                      disabled={
+                        !(
+                          this.state.reservationFirstName &&
+                          this.state.reservationLastName &&
+                          this.state.reservationEmail
+                        )
+                      }
+                    >
+                      Next
+                    </button>
+                  </div>
+                </section>
+              </React.Fragment>
+            )}
 
             {/* Section 1: Select Time Slot */}
             {this.state.sectionNumber === 1 && (
@@ -568,8 +647,6 @@ class CheckoutModal extends Component {
             {this.state.sectionNumber === 4 && (
               <React.Fragment>
                 <section className={styles.container}>
-                  {/* <div className={styles.title}>Checkout</div> */}
-
                   <main className={styles.checkout}>
                     {/* Checkout Payment Information */}
                     <aside className={styles.payment}>
