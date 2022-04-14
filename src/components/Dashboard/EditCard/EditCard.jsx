@@ -9,7 +9,7 @@ class EditCard extends Component {
   };
 
   onDelete = () => {
-    let isExecuted = window.confirm("Are you sure you want to delete this booking ?");
+    let isExecuted = window.confirm("Are you sure you want to delete this facility ?");
     if(isExecuted){
     var api_url;
     if (process.env.NODE_ENV === "production") {
