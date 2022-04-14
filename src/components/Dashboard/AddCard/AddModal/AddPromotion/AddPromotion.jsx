@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import styles from "./AddPromotion.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-const {
-  REACT_APP_LOCAL_URL,
-  REACT_APP_PRODUCTION_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_API_KEY,
-} = process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 let currentDate = new Date()
   .toLocaleDateString("en-GB")
@@ -63,6 +58,7 @@ class AddPromotion extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
+
     var newPromotionData = {
       promotionName: this.state.promotionName,
       promotionCode: this.state.promotionCode,
@@ -71,7 +67,9 @@ class AddPromotion extends Component {
       promotionPercentage: this.state.promotionPercentage / 100, // Convert to value between 0.0 - 1.0
       promotionInfo: this.state.promotionInfo,
     };
-    console.log(newPromotionData);
+
+    console.log(newPromotionData); // TODO Remove
+
     axios({
       method: "POST",
       headers: {
@@ -102,7 +100,7 @@ class AddPromotion extends Component {
       });
 
     this.props.onCloseModal();
-  };
+  };;
 
   render() {
     return (

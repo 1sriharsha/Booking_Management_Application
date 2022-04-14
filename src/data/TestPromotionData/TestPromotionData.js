@@ -1,12 +1,13 @@
 const TestPromotionData = [
   {
     id: 1,
-    promotionName: "10% Off Equipment Rentals",
+    promotionName: "Spring 10% Off",
     promotionCode: "ATHLOS10",
     promotionStart: "2022-04-01",
     promotionEnd: "2022-04-30",
     promotionPercentage: 0.1,
-    promotionInfo: "Enjoy 10% off equipment rentals for the month of April.",
+    promotionInfo:
+      "Enjoy 10% off your next reservation for the month of April.",
   },
   {
     id: 2,

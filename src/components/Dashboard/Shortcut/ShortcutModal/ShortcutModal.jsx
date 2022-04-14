@@ -5,7 +5,6 @@ import PaymentModal from "./PaymentModal/PaymentModal";
 class ShortcutModal extends Component {
   // state = { showModal: false };
   render() {
-    console.log(this.props.shortcutTo);
     return (
       <React.Fragment>
         {this.props.shortcutTo === "interests" && (

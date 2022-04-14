@@ -4,8 +4,7 @@ import "./RegistrationModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLoginButton } from "..";
 import axios from "axios";
-const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_CLIENT_ID } =
-  process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 const RegistrationModal = (props) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,10 +16,8 @@ const RegistrationModal = (props) => {
     var api_url;
     if (process.env.NODE_ENV === "production") {
       api_url = REACT_APP_PRODUCTION_URL;
-      //console.log(api_url)
     } else {
       api_url = REACT_APP_LOCAL_URL;
-      //console.log(api_url)
     }
 
     var loginData = {
@@ -41,7 +38,6 @@ const RegistrationModal = (props) => {
         if (res.status === 200) {
           props.handleAuthState(res);
           console.log("Logged In Successfully");
-          //alert(this.state.userType);
         }
       })
       .catch(function (err) {
@@ -63,19 +59,11 @@ const RegistrationModal = (props) => {
 
   const onSignUp = (event) => {
     var api_url;
-    const clientID = REACT_APP_CLIENT_ID;
+
     if (process.env.NODE_ENV === "production") {
-      //console.log(process.env.NODE_ENV)
-      //console.log(REACT_APP_LOCAL_URL)
-      //console.log(REACT_APP_PRODUCTION_URL)
       api_url = REACT_APP_PRODUCTION_URL;
-      console.log(api_url);
     } else {
-      //console.log(process.env.NODE_ENV)
-      //console.log(REACT_APP_LOCAL_URL)
       api_url = REACT_APP_LOCAL_URL;
-      console.log(api_url);
-      //console.log(REACT_APP_PRODUCTION_URL)
     }
 
     var newUserData = {
@@ -85,7 +73,6 @@ const RegistrationModal = (props) => {
       password: event.target.password.value,
     };
 
-    //alert(api_url)
     axios({
       method: "POST",
       url: api_url + "/users/add",

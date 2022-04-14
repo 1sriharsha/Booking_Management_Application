@@ -81,60 +81,6 @@
   overflow: hidden;
 }
 
-/* 
-.image {
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
-  position: relative;
-}
-
-.image img {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
-.modal .gradient {
-  width: 100%;
-  background: linear-gradient(
-    0deg,
-    var(--color-tertiary) 55%,
-    rgba(239, 242, 241, 0) 70%
-  );
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.modal .title {
-  font-size: 3em;
-}
-
-.modal .content {
-  margin: 2em;
-  position: absolute;
-  top: 45%;
-} */
-
-/* .close {
-  height: 1em;
-  width: 1em;
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 45px;
-  padding: 0.1em;
-  line-height: 0.7;
-  text-align: center;
-  color: var(--color-background);
-  border-radius: var(--default-border-radius);
-  transition: all 0.2s ease-in-out;
-} */
 
 .close {
   height: 70px;
@@ -180,7 +126,6 @@
   border: 2px solid var(--color-primary-dark);
 
   background-color: var(--color-background);
-  /* box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.6); */
 }
 
 /* Navigation */
@@ -194,7 +139,6 @@
 .statusBar {
   width: 100%;
   display: flex;
-  /* flex: 1 1 0; */
   flex-grow: 1;
   flex-flow: row nowrap;
   justify-content: space-around;
@@ -202,7 +146,6 @@
 }
 
 .statusSection {
-  /* height: 70px; */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -280,16 +223,6 @@
   font-weight: 800;
 }
 
-/* .statusIndicator::after {
-  content: "";
-  height: 4px;
-  width: 325px;
-  background-color: var(--color-primary);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  box-shadow: 0 2px 4px rgba(33, 146, 146, 0.7);
-} */
 
 .container {
   padding: 0 4em;
@@ -304,6 +237,42 @@
   text-align: center;
   margin-top: 1em;
 }
+
+/* Onsite */
+.onsiteForm {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 3em;
+}
+
+.onsiteForm input,
+.onsiteForm select {
+  height: 45px;
+  border: 1px solid var(--color-gray);
+  background-color: white;
+  padding: 0 15px;
+  flex-grow: 1;
+}
+
+.onsiteForm ::placeholder {
+  color: var(--color-gray);
+}
+
+.onsiteForm > div {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: baseline;
+  gap: 0.2em;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5em;
+}
+
 
 /* Gear Selection */
 .gearContainer {

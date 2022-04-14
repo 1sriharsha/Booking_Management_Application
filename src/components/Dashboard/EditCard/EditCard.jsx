@@ -9,6 +9,7 @@ class EditCard extends Component {
   };
 
   onDelete = () => {
+<<<<<<< HEAD
     let isExecuted = window.confirm("Are you sure you want to delete this facility ?");
     if(isExecuted){
     var api_url;
@@ -17,22 +18,36 @@ class EditCard extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
+=======
+    let isExecuted = window.confirm(
+      "Are you sure you want to delete this booking ?"
+    );
+    if (isExecuted) {
+      var api_url;
+      if (process.env.NODE_ENV === "production") {
+        api_url = REACT_APP_PRODUCTION_URL;
+      } else {
+        api_url = REACT_APP_LOCAL_URL;
+      }
+>>>>>>> dd432f8bc38618df34d98d77ceb2a9786203d2fd
 
-    axios({
-      method:"DELETE",
-      headers: {
-        "Access-Control-Allow-Origin": api_url,
-      },
-      withCredentials: true,
-      url: api_url + "/facilities/delete/"+this.props.uniqFacId,
-    }).then((res)=>{
-      console.log("Deleted Successfully")
-      //Add redirect to Dashboard
-    }).catch((err)=>{
-      console.log(err)
-    })
-    this.setState({ isDeleted: true });
-  }
+      axios({
+        method: "DELETE",
+        headers: {
+          "Access-Control-Allow-Origin": api_url,
+        },
+        withCredentials: true,
+        url: api_url + "/facilities/delete/" + this.props.uniqFacId,
+      })
+        .then((res) => {
+          console.log("Deleted Successfully");
+          //Add redirect to Dashboard
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.setState({ isDeleted: true });
+    }
   };
 
   render() {

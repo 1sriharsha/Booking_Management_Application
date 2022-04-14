@@ -4,6 +4,7 @@ import UserTabs from "./UserTabs/UserTabs";
 import ManagementTabs from "./ManagementTabs/ManagementTabs";
 import GuestTabs from "./GuestTabs/GuestTabs";
 import EmployeeTabs from "./EmployeeTabs/EmployeeTabs";
+import SupportTabs from "./SupportTabs/SupportTabs";
 
 class Sidebar extends Component {
   render() {
@@ -42,6 +43,14 @@ class Sidebar extends Component {
           {/* On-Site Employee View Tabs */}
           {this.props.userType === "Employee" && (
             <EmployeeTabs
+              activeTab={this.props.activeTab}
+              onClick={this.props.onClick}
+            />
+          )}
+
+          {/* Customer Support View Tabs */}
+          {this.props.userType === "Support" && (
+            <SupportTabs
               activeTab={this.props.activeTab}
               onClick={this.props.onClick}
             />

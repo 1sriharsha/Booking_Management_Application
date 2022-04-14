@@ -484,10 +484,25 @@ body {
 
 /* Data Visualization */
 .dataVisualContainer {
+  /* height: 570px; */
   margin-right: 22px;
   background-color: white;
   border-radius: var(--default-border-radius);
   box-shadow: 0 1px 5px rgba(41, 41, 41, 0.3);
+  /* overflow: hidden; */
+}
+
+/* Promotion Image */
+.promoContainer {
+  height: 570px;
+  width: 100%;
+  border-radius: var(--default-border-radius);
+  overflow: hidden;
+}
+
+.promoImage {
+  height: 100%;
+  min-width: 100%;
 }
 
 .settingsImageContainer {

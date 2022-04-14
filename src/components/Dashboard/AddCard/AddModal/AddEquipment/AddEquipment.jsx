@@ -4,12 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { SupportedSports } from "../../../../../data";
 
-const {
-  REACT_APP_LOCAL_URL,
-  REACT_APP_PRODUCTION_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_API_KEY,
-} = process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 class AddEquipment extends Component {
   state = {
@@ -61,7 +56,7 @@ class AddEquipment extends Component {
       itemPrice: this.state.itemPrice,
       maxItems: this.state.maxItems,
     };
-    console.log(newEquipmentData);
+    console.log(newEquipmentData); // TODO Remove
 
     axios({
       method: "POST",
@@ -93,7 +88,7 @@ class AddEquipment extends Component {
       });
 
     this.props.onCloseModal();
-  };
+  };;
 
   render() {
     // Map supported sports to category options

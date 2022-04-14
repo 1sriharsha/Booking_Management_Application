@@ -3,10 +3,6 @@ import Counter from "../Counter/Counter";
 import uniqid from "uniqid";
 
 class Counters extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <React.Fragment>

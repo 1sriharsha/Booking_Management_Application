@@ -21,18 +21,7 @@ class AddCard extends Component {
 
   render() {
     const {
-      props: {
-        facilityID,
-        facilityName,
-        facilityLocation,
-        facilitySport,
-        facilityInfo,
-        availableNow,
-        animationDelay,
-        reservationPeriodStart,
-        reservationPeriodEnd,
-        isAuthenticated,
-      },
+      props: { animationDelay },
     } = this;
 
     let fadeDelay = { animationDelay: animationDelay + "s" };

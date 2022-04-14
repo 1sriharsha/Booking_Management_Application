@@ -6,39 +6,61 @@ import TimeSlot from "./TimeSlot/TimeSlot";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFormat from "react-number-format";
 import Counters from "./Counters/Counters";
-import { ExtrasData, GearData } from "../../../../data";
+import { ExtrasData, GearData, TestPromotionData } from "../../../../data";
 import uniqid from "uniqid";
 import axios from "axios";
-const {
-  REACT_APP_LOCAL_URL,
-  REACT_APP_PRODUCTION_URL,
-  REACT_APP_CLIENT_ID,
-  REACT_APP_API_KEY,
-} = process.env;
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
+
+let startSection = 1;
 
 class CheckoutModal extends Component {
-  state = {
-    facilityID:this.props.facilityID,
-    uniqFacId:this.props.uniqFacId,
-    facilityName:this.props.facilityName,
-    facilityLocation:this.props.facilityLocation,
-    facilitySport:this.props.facilitySport,
-    sectionNumber: 1,
-    reservedSlot: null,
-    reservedGear: [],
-    reservedExtras: [],
-    reservationSubtotal: 0,
-    reservationTax: 0,
-    reservationTotal: 0,
-    taxRate: 0.07,
-    gearCounters: GearData,
-    extrasCounters: ExtrasData,
-    isGearSelected: false,
-    isExtrasSelected: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // Facility Data
+      facilityID: this.props.facilityID,
+      uniqFacId: this.props.uniqFacId,
+      facilityName: this.props.facilityName,
+      facilityLocation: this.props.facilityLocation,
+      facilitySport: this.props.facilitySport,
+
+      // Reservation Data
+      reservedSlot: null,
+      reservedGear: [],
+      reservedExtras: [],
+      reservationSubtotal: 0,
+      reservationDiscount: null,
+      reservationTax: 0,
+      reservationTotal: 0,
+      taxRate: 0.07,
+      promotionCode: "",
+      promotionPercentage: null,
+      promotionName: "",
+
+      reservationFirstName: this.props.userFirstName,
+      reservationLastName: this.props.userLastName,
+      reservationEmail: this.props.userEmail,
+      isEmailValid: false,
+
+      // Checkout Modal Properties
+      sectionNumber: startSection,
+      gearCounters: GearData,
+      extrasCounters: ExtrasData,
+      isPromotionValid: false,
+      isGearSelected: false,
+      isExtrasSelected: false,
+    };
+
+    if (this.props.userType === "Employee") {
+      startSection = 0;
+      this.state.reservationFirstName = null;
+      this.state.reservationLastName = null;
+      this.state.reservationEmail = null;
+    }
+  }
 
   onPay = () => {
-    console.log(this.state.uniqFacId)
     if (!this.props.isAuthenticated) {
       this.props.onShowModal("login");
     } else {
@@ -48,18 +70,6 @@ class CheckoutModal extends Component {
       } else {
         api_url = REACT_APP_LOCAL_URL;
       }
-      // var newReservationData = {
-      //   firstName: this.props.userFirstName,
-      //   lastName: this.props.userLastName,
-      //   email: this.props.userEmail,
-      //   gear: this.state.reservedGear,
-      //   intime: this.state.reservedSlot,
-      //   outtime: this.state.reservedSlot + 1,
-      //   upgrade: this.state.reservedExtras,
-      //   // reservationSubtotal: this.state.reservationSubtotal,
-      //   // reservationTax: this.state.reservationTax,
-      //   // reservationTotal: this.state.reservationTotal,
-      // };
 
       axios({
         method: "POST",
@@ -69,10 +79,10 @@ class CheckoutModal extends Component {
         withCredentials: true,
         url: api_url + "/book/add",
         data: {
-          facilityID:this.state.uniqFacId,
-          firstName: this.props.userFirstName,
-          lastName: this.props.userLastName,
-          email: this.props.userEmail,
+          facilityID: this.state.uniqFacId,
+          firstName: this.state.reservationFirstName,
+          lastName: this.state.reservationLastName,
+          email: this.state.reservationEmail,
           gear: this.state.reservedGear,
           intime: this.state.reservedSlot,
           outtime: this.state.reservedSlot + 1,
@@ -82,6 +92,8 @@ class CheckoutModal extends Component {
         .then((res) => {
           if (res.status === 200) {
             console.log("Booked Successfully");
+            this.props.handleRefresh();
+            this.props.onCloseModal();
           }
         })
         .catch(function (err) {
@@ -98,8 +110,6 @@ class CheckoutModal extends Component {
             console.log("Error", err.message);
           }
         });
-
-      //console.log(newReservationData);
     }
   };
 
@@ -195,14 +205,113 @@ class CheckoutModal extends Component {
     this.setState({ extrasCounters });
   };
 
+  setStateValue = (e) => {
+    const targetName = e.target.name;
+    const targetValue = e.target.value;
+
+    if (targetName === "reservationEmail") {
+      if (targetValue.trim() === "") {
+        this.setState({ isEmailValid: false });
+      } else if (this.isEmail(targetValue.trim())) {
+        this.setState({ isEmailValid: false });
+      } else {
+        this.setState({ isEmailValid: true });
+      }
+    }
+
+    this.setState({ [targetName]: targetValue });
+  };
+
+  isEmail(email) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  validatePromotion = (code) => {
+    const codeInput = code.target;
+    let codeValue = code.target.value;
+
+    // Promotion objects that match exact codeValue
+    let matchObj = TestPromotionData.filter(function (el) {
+      return el.promotionCode.toLowerCase() === codeValue.toLowerCase();
+    });
+
+    if (codeValue.length > 0) {
+      if (matchObj.length > 0) {
+        let promotionPercentage = matchObj[0].promotionPercentage;
+
+        this.setState(
+          {
+            isPromotionValid: true,
+            promotionPercentage: promotionPercentage,
+            promotionName: matchObj[0].promotionName,
+          },
+          () => {
+            this.updateCosts(0);
+          }
+        );
+
+        // Correct Code Styling
+        codeInput.style.boxShadow = "0 0 8px rgba(0, 255, 0, 0.7)";
+        codeInput.style.border = "1px solid green";
+        codeInput.style.color = "green";
+      } else {
+        this.setState(
+          { isPromotionValid: false, promotionPercentage: null },
+          () => {
+            this.updateCosts(0);
+          }
+        );
+
+        // Incorrect Code Styling
+        codeInput.style.boxShadow = "0 0 8px rgba(255, 0, 0, 0.7)";
+        codeInput.style.border = "1px solid red";
+        codeInput.style.color = "red";
+      }
+    } else {
+      this.setState(
+        { isPromotionValid: false, promotionPercentage: null },
+        () => {
+          this.updateCosts(0);
+        }
+      );
+
+      // Default Styling
+      codeInput.style.boxShadow = "unset";
+      codeInput.style.border = "1px solid var(--color-gray)";
+      codeInput.style.color = "black";
+    }
+
+    this.setState({ promotionCode: codeValue }, () => {
+      this.updateCosts(0);
+    });
+  };
+
   updateCosts = (change) => {
     var reservationSubtotal = this.state.reservationSubtotal;
     var reservationTax;
     var reservationTotal;
+    var reservationDiscount = 0;
 
+    // Calculate Subtotal
     reservationSubtotal += change;
-    reservationTax = reservationSubtotal * this.state.taxRate;
-    reservationTotal = reservationSubtotal + reservationTax;
+
+    // Calculate Discount
+    if (this.state.promotionPercentage) {
+      reservationDiscount =
+        reservationSubtotal * this.state.promotionPercentage;
+
+      this.setState({ reservationDiscount });
+    } else {
+      this.setState({ reservationDiscount: null });
+    }
+
+    // Calculate Tax & Total
+    reservationTax =
+      (reservationSubtotal - reservationDiscount) * this.state.taxRate;
+    reservationTotal =
+      reservationSubtotal - reservationDiscount + reservationTax;
 
     this.setState({
       reservationSubtotal,
@@ -242,8 +351,6 @@ class CheckoutModal extends Component {
   render() {
     const {
       props: {
-        facilityID,
-        uniqFacId,
         facilityName,
         facilityLocation,
         facilitySport,
@@ -261,13 +368,12 @@ class CheckoutModal extends Component {
     var nTimeSlots = [];
     var reservationSlotStart = reservationPeriodStart;
     var reservationSlotEnd;
-    var key=0
+    var key = 0;
     for (
       let index = 0;
       index < reservationPeriodEnd - reservationPeriodStart;
       index++
     ) {
-
       reservationSlotEnd = reservationSlotStart + 1;
 
       nTimeSlots.push(
@@ -329,6 +435,7 @@ class CheckoutModal extends Component {
                     this.state.reservedSlot ? "completedSection" : "",
                   ].join(" ")}
                   onClick={() => this.setPageNumber(1)}
+                  disabled={this.state.sectionNumber === 0}
                 >
                   <div className={styles.sectionIcon}>
                     <FontAwesomeIcon icon="fa-solid fa-clock" />
@@ -416,6 +523,65 @@ class CheckoutModal extends Component {
                 <div className={styles.statusIndicator}></div>
               </nav>
             </div>
+
+            {/* [Employee] Section 0: Guest Information */}
+            {this.state.sectionNumber === 0 && (
+              <React.Fragment>
+                <section className={styles.container}>
+                  <div className={styles.title}>Guest Information</div>
+                  <div className={styles.onsiteForm}>
+                    <div>
+                      <label htmlFor="reservationFirstName">First Name</label>
+                      <input
+                        type="text"
+                        name="reservationFirstName"
+                        value={this.state.reservationFirstName}
+                        onChange={(e) => this.setStateValue(e)}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="reservationLastName">Last Name</label>
+                      <input
+                        type="text"
+                        name="reservationLastName"
+                        value={this.state.reservationLastName}
+                        onChange={(e) => this.setStateValue(e)}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="reservationLastName">Email</label>
+                      <input
+                        type="text"
+                        name="reservationEmail"
+                        value={this.state.reservationEmail}
+                        onChange={(e) => this.setStateValue(e)}
+                      />
+                      {this.state.isEmailValid && (
+                        <div className={styles.error}>Enter a valid email.</div>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <button
+                      className={[styles.button, styles.buttonPrimary].join(
+                        " "
+                      )}
+                      onClick={() => this.nextPage()}
+                      disabled={
+                        !(
+                          this.state.reservationFirstName &&
+                          this.state.reservationLastName &&
+                          this.state.reservationEmail &&
+                          !this.state.isEmailValid
+                        )
+                      }
+                    >
+                      Next
+                    </button>
+                  </div>
+                </section>
+              </React.Fragment>
+            )}
 
             {/* Section 1: Select Time Slot */}
             {this.state.sectionNumber === 1 && (
@@ -508,8 +674,6 @@ class CheckoutModal extends Component {
             {this.state.sectionNumber === 4 && (
               <React.Fragment>
                 <section className={styles.container}>
-                  {/* <div className={styles.title}>Checkout</div> */}
-
                   <main className={styles.checkout}>
                     {/* Checkout Payment Information */}
                     <aside className={styles.payment}>
@@ -593,6 +757,14 @@ class CheckoutModal extends Component {
                             autoComplete={"postal-code"}
                           />
                         </div>
+                        <input
+                          type="text"
+                          id="promo"
+                          name="promo"
+                          placeholder="Promotion Code"
+                          value={this.state.promotionCode}
+                          onChange={this.validatePromotion}
+                        />
                       </form>
                     </aside>
                     {/* Checkout Summary */}
@@ -666,6 +838,20 @@ class CheckoutModal extends Component {
                                 thousandSeparator={true}
                               />
                             </div>
+                            {this.state.reservationDiscount && (
+                              <div>
+                                {this.state.promotionName + ":"}
+
+                                <NumberFormat
+                                  prefix="-$"
+                                  value={this.state.reservationDiscount.toFixed(
+                                    2
+                                  )}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                />
+                              </div>
+                            )}
                             <div>
                               Tax:
                               <NumberFormat

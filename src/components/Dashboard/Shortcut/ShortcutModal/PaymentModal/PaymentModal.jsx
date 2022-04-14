@@ -1,28 +1,10 @@
 import React, { Component } from "react";
-import { SupportedSports } from "../../../../../data";
 import styles from "./PaymentModal.module.css";
 import InputMask from "react-input-mask";
 
 class PaymentModal extends Component {
   state = {};
   render() {
-    const nInterests = SupportedSports.map(({ sportName }) => {
-      return (
-        <React.Fragment>
-          <section className={styles.interestBox}>
-            <input
-              className={styles.checkbox}
-              type={"checkbox"}
-              value={sportName}
-            />
-            <label className={styles.sportName} htmlFor={sportName}>
-              {sportName}
-            </label>
-          </section>
-        </React.Fragment>
-      );
-    });
-
     return (
       <React.Fragment>
         <div className={styles.modal}>
@@ -36,9 +18,7 @@ class PaymentModal extends Component {
             </button>
             <div className={styles.container}>
               <aside className={styles.payment}>
-                <div className={styles.title}>
-                  Enter your payment details
-                </div>
+                <div className={styles.title}>Enter your payment details</div>
                 <form>
                   <input
                     id="name"
@@ -84,11 +64,7 @@ class PaymentModal extends Component {
                     placeholder="Apt, unit, suite, etc. (optional)"
                     autoComplete={"address-line2"}
                   />
-                  <select
-                    name="country"
-                    id="country"
-                    autoComplete={"country"}
-                  >
+                  <select name="country" id="country" autoComplete={"country"}>
                     <option value="-">-</option>
                     <option value="United States">United States</option>
                   </select>
