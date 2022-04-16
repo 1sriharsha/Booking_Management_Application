@@ -4,12 +4,18 @@ import QRCode from "react-qr-code";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFormat from "react-number-format";
 import uniqid from "uniqid";
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import MapSection from './Map/Map'
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL,REACT_APP_API_KEY } = process.env;
+
 
 class ConfirmationModal extends Component {
+
+  
   state = {
     sectionNumber: 1,
   };
-
+ 
   setPageNumber(page) {
     this.setState({ sectionNumber: page });
   }
@@ -54,8 +60,12 @@ class ConfirmationModal extends Component {
   }
 
   componentDidMount() {
+    
+
+
     if (this.state.sectionNumber === 1) {
       this.createScrollShadow();
+      
     }
   }
 
@@ -66,9 +76,15 @@ class ConfirmationModal extends Component {
   }
 
   render() {
+    const location = {
+      address: '1600 Amphitheatre Parkway, Mountain View, california.',
+      lat: 37.42216,
+      lng: -122.08427,
+    } // our location object from earlier
     const {
       props: { facilityName, facilityLocation, facilitySport, facilityInfo },
     } = this;
+    
 
     let sportImage =
       "images/" +
@@ -156,6 +172,7 @@ class ConfirmationModal extends Component {
                     {/* Google Map Integration */}
                     <aside className={styles.mapContainer}>
                       <section className={styles.title}>Directions</section>
+                          <MapSection location={location} zoomLevel={17} /> 
                       <section>Map Integration</section>
                     </aside>
 
