@@ -108,7 +108,7 @@ class MyBookCard extends Component {
                 <i>
                   <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
                 </i>
-                {facilityLocation}
+                {facilityLocation.city + ", " + facilityLocation.state}
               </div>
               <div className={styles.description}>
                 <i>

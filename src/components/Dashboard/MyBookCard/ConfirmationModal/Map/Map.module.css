@@ -1,4 +1,4 @@
-.map-h2 {
+.h2 {
     text-transform: uppercase;
     font-size: 1rem;
     padding: 20px;
@@ -6,7 +6,7 @@
     text-align: center;
   }
   
-  .google-map {
+  .map {
     width: 100%;
     height: 60vh;
   }
@@ -18,21 +18,21 @@
     color: var(--main-blue);
   }
   
-  .pin-icon {
+  .pin .icon {
     font-size: 4rem;
   }
   
-  .pin-text {
+  .pin .text {
     font-size: 1.3em;
   }
   
   @media screen and (min-width: 799px) {
-    .google-map {
+    .map {
       height: 40vh;
       width: 100vh;
     }
   
-    .map-h2 {
+    .h2 {
       font-size: 1.3rem;
       font-weight: 400;
     }
@@ -41,7 +41,7 @@
       width: 10vw;
     }
   
-    .pin-icon {
+    .icon {
       font-size: 5vw;
     }
 }

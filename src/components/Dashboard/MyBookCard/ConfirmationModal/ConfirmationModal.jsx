@@ -10,12 +10,10 @@ const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL,REACT_APP_API_KEY } = proc
 
 
 class ConfirmationModal extends Component {
-
-  
   state = {
     sectionNumber: 1,
   };
- 
+
   setPageNumber(page) {
     this.setState({ sectionNumber: page });
   }
@@ -60,12 +58,8 @@ class ConfirmationModal extends Component {
   }
 
   componentDidMount() {
-    
-
-
     if (this.state.sectionNumber === 1) {
       this.createScrollShadow();
-      
     }
   }
 
@@ -77,14 +71,15 @@ class ConfirmationModal extends Component {
 
   render() {
     const location = {
-      address: '1600 Amphitheatre Parkway, Mountain View, california.',
+      address: "1600 Amphitheatre Parkway, Mountain View, california.",
       lat: 37.42216,
       lng: -122.08427,
-    } // our location object from earlier
+    }; // our location object from earlier
+
     const {
       props: { facilityName, facilityLocation, facilitySport, facilityInfo },
     } = this;
-    
+    console.log(facilityLocation); // TODO Remove
 
     let sportImage =
       "images/" +
@@ -172,8 +167,13 @@ class ConfirmationModal extends Component {
                     {/* Google Map Integration */}
                     <aside className={styles.mapContainer}>
                       <section className={styles.title}>Directions</section>
-                          <MapSection location={location} zoomLevel={17} /> 
-                      <section>Map Integration</section>
+
+                      <section>
+                        <MapSection
+                          facilityLocation={facilityLocation}
+                          zoomLevel={17}
+                        />
+                      </section>
                     </aside>
 
                     {/* Summary */}
@@ -216,7 +216,9 @@ class ConfirmationModal extends Component {
                             <i>
                               <FontAwesomeIcon icon="fa-solid fa-location-arrow" />
                             </i>
-                            {facilityLocation}
+                            {facilityLocation.city +
+                              ", " +
+                              facilityLocation.state}
                           </div>
                           {/* Facility Description */}
                           <div className={styles.description}>

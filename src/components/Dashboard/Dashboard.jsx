@@ -146,10 +146,7 @@ class Dashboard extends Component {
             upgrade: temp.upgrade,
             intime: temp.intime,
             outtime: temp.outtime,
-            facilityLocation:
-              temp.facility_info.facilityLocation.city +
-              ", " +
-              temp.facility_info.facilityLocation.state,
+            facilityLocation: temp.facility_info.facilityLocation,
             facilitySport: temp.facility_info.facilitySports,
             facilityName: temp.facility_info.facilityName,
             facilityInfo: temp.facility_info.facilityInformation,

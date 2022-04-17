@@ -70,8 +70,6 @@ class Searchbar extends Component {
             <input
               value={this.state.searchValue}
               onFocus={() => this.setState({ showOptions: true })}
-              // TODO Fix Close onBlur
-              // onBlur={() => this.setState({ showOptions: false })}
               id="searchBar"
               type="search"
               placeholder="Search Bookings..."
