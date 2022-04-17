@@ -218,6 +218,7 @@ class Dashboard extends Component {
                 userLastName={this.props.userLastName}
                 userEmail={this.props.userEmail}
                 userType={this.props.userType}
+                userRewardPoints={this.props.userRewardPoints}
                 handleRefresh={this.handleRefresh}
               />
             </React.Fragment>
@@ -493,7 +494,7 @@ class Dashboard extends Component {
           {this.state.activeTab === "Account" && (
             <React.Fragment>
               <section className={styles.settingsImageContainer}>
-                154 Reward Points
+                {this.props.userRewardPoints} Reward Points
                 <Visualization userType={this.props.userType} />
               </section>
               {/* Interest Shortcut */}

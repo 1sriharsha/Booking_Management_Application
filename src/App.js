@@ -23,6 +23,7 @@ class App extends Component {
       userLastName: userData.lastName,
       userEmail: userData.email,
       userType: userData.userType,
+      userRewardPoints: localStorage.getItem("rewardPoints"),
       showModal: false,
       showModalLogin: false,
       showModalSignUp: false,
@@ -47,12 +48,15 @@ class App extends Component {
   };
 
   handleAuthState = (res) => {
+    localStorage.setItem("rewardPoints", 100); // tmp
+
     this.setState({
       isAuthenticated: true,
       userFirstName: res.data.firstName,
       userLastName: res.data.lastName,
       userEmail: res.data.email,
       userType: res.data.type,
+      userRewardPoints: localStorage.getItem("rewardPoints"),
       showModal: false,
     });
 
@@ -60,7 +64,7 @@ class App extends Component {
     localStorage.setItem("user", JSON.stringify(res.data));
 
     window.location.href = "/dashboard"; // Redirect to Dashboard
-  };
+  };;
 
   onLogout = () => {
     axios({
@@ -131,6 +135,7 @@ class App extends Component {
                 userLastName={this.state.userLastName}
                 userEmail={this.state.userEmail}
                 userType={this.state.userType}
+                userRewardPoints={this.state.userRewardPoints}
                 onShowModal={this.showModal}
                 onLogout={this.onLogout}
               />

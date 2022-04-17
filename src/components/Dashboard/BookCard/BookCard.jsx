@@ -107,6 +107,7 @@ class BookCard extends Component {
             userLastName={this.props.userLastName}
             userEmail={this.props.userEmail}
             userType={this.props.userType}
+            userRewardPoints={this.props.userRewardPoints}
             handleRefresh={this.props.handleRefresh}
           />
         )}

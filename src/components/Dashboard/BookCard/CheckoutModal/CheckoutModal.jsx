@@ -12,6 +12,7 @@ import axios from "axios";
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 let startSection = 1;
+let userRewardPoints = localStorage.getItem("rewardPoints");
 
 class CheckoutModal extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class CheckoutModal extends Component {
       promotionCode: "",
       promotionPercentage: null,
       promotionName: "",
+      redeemedPoints: null,
 
       reservationFirstName: this.props.userFirstName,
       reservationLastName: this.props.userLastName,
@@ -92,6 +94,13 @@ class CheckoutModal extends Component {
         .then((res) => {
           if (res.status === 200) {
             console.log("Booked Successfully");
+
+            // Decrement redeemed points (tmp)
+            localStorage.setItem(
+              "rewardPoints",
+              userRewardPoints - this.state.redeemedPoints
+            );
+
             this.props.handleRefresh();
             this.props.onCloseModal();
           }
@@ -288,11 +297,43 @@ class CheckoutModal extends Component {
     });
   };
 
+  validatePoints = (points) => {
+    const pointInput = points.target;
+    let pointValue = points.target.value;
+
+    if (pointValue.length > 0) {
+      pointValue = parseInt(pointValue);
+
+      if (!isNaN(pointValue)) {
+        if (pointValue < 0 || pointValue > userRewardPoints) {
+          // Invalid Styling
+          pointInput.style.boxShadow = "0 0 8px rgba(255, 0, 0, 0.7)";
+          pointInput.style.border = "1px solid red";
+          pointInput.style.color = "red";
+
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+
+    // Default Styling
+    pointInput.style.boxShadow = "unset";
+    pointInput.style.border = "1px solid var(--color-gray)";
+    pointInput.style.color = "black";
+
+    this.setState({ redeemedPoints: pointValue }, () => {
+      this.updateCosts(0);
+    });
+  };
+
   updateCosts = (change) => {
     var reservationSubtotal = this.state.reservationSubtotal;
     var reservationTax;
     var reservationTotal;
     var reservationDiscount = 0;
+    var rewardPointDiscount = 0;
 
     // Calculate Subtotal
     reservationSubtotal += change;
@@ -307,11 +348,24 @@ class CheckoutModal extends Component {
       this.setState({ reservationDiscount: null });
     }
 
+    // Calculate Redeemed Points
+    if (this.state.redeemedPoints) {
+      rewardPointDiscount = this.state.redeemedPoints * 0.1; // 1 reward point = 10 cents
+    }
+
     // Calculate Tax & Total
     reservationTax =
-      (reservationSubtotal - reservationDiscount) * this.state.taxRate;
+      (reservationSubtotal - (reservationDiscount + rewardPointDiscount)) *
+      this.state.taxRate;
     reservationTotal =
-      reservationSubtotal - reservationDiscount + reservationTax;
+      reservationSubtotal -
+      (reservationDiscount + rewardPointDiscount) +
+      reservationTax;
+
+    if (reservationTotal < 0) {
+      reservationTotal = 0;
+      reservationTax = 0;
+    }
 
     this.setState({
       reservationSubtotal,
@@ -349,6 +403,8 @@ class CheckoutModal extends Component {
   }
 
   render() {
+    userRewardPoints = localStorage.getItem("rewardPoints"); // tmp
+
     const {
       props: {
         facilityName,
@@ -770,14 +826,37 @@ class CheckoutModal extends Component {
                             </div>
                           </React.Fragment>
                         )}
-                        <input
-                          type="text"
-                          id="promo"
-                          name="promo"
-                          placeholder="Promotion Code"
-                          value={this.state.promotionCode}
-                          onChange={this.validatePromotion}
-                        />
+
+                        <div className={styles.discounts}>
+                          {/* Promotion Code */}
+                          <section>
+                            <label htmlFor="promo">Promotion Code</label>
+                            <input
+                              type="text"
+                              id="promo"
+                              name="promo"
+                              value={this.state.promotionCode}
+                              onChange={this.validatePromotion}
+                            />
+                          </section>
+                          {/* Reward Points */}
+                          <section>
+                            <label htmlFor="rewards">
+                              Reward Points -{" "}
+                              {userRewardPoints - this.state.redeemedPoints}{" "}
+                              remaining
+                            </label>
+                            <input
+                              type="number"
+                              id="rewards"
+                              name="rewards"
+                              value={this.state.redeemedPoints}
+                              onChange={this.validatePoints}
+                              min={0}
+                              max={userRewardPoints}
+                            />
+                          </section>
+                        </div>
                       </form>
                     </aside>
                     {/* Checkout Summary */}
@@ -851,7 +930,7 @@ class CheckoutModal extends Component {
                                 thousandSeparator={true}
                               />
                             </div>
-                            {this.state.reservationDiscount && (
+                            {this.state.reservationDiscount > 0 && (
                               <div>
                                 {this.state.promotionName + ":"}
 
@@ -860,6 +939,20 @@ class CheckoutModal extends Component {
                                   value={this.state.reservationDiscount.toFixed(
                                     2
                                   )}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                />
+                              </div>
+                            )}
+                            {this.state.redeemedPoints > 0 && (
+                              <div>
+                                {this.state.redeemedPoints + " Points:"}
+
+                                <NumberFormat
+                                  prefix="-$"
+                                  value={(
+                                    this.state.redeemedPoints * 0.1
+                                  ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
                                 />
