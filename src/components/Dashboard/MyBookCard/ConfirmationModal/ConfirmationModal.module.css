@@ -56,7 +56,6 @@
 }
 
 .container {
-  padding: 0 4em;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -138,6 +137,7 @@
 
 /* Map */
 .mapContainer {
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,7 +156,8 @@
 /* Checkout */
 .checkout {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-items: flex-start;
   margin-top: 2em;
 }
 

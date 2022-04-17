@@ -7,8 +7,6 @@ const { REACT_APP_API_KEY } = process.env;
 
 const Map = ({ facilityLocation, zoomLevel }) => (
   <div>
-    <h2 className={styles.h2}></h2>
-
     <div className={styles.map}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: REACT_APP_API_KEY }}
