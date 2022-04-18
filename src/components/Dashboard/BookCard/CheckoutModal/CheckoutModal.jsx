@@ -9,7 +9,12 @@ import Counters from "./Counters/Counters";
 import { ExtrasData, GearData, TestPromotionData } from "../../../../data";
 import uniqid from "uniqid";
 import axios from "axios";
-const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+const {
+  REACT_APP_LOCAL_URL,
+  REACT_APP_PRODUCTION_URL,
+  REACT_APP_PAYPAL_CLIENT_ID,
+} = process.env;
 
 let startSection = 1;
 let userRewardPoints = localStorage.getItem("rewardPoints");
@@ -46,7 +51,7 @@ class CheckoutModal extends Component {
       isEmailValid: false,
 
       // Checkout Modal Properties
-      sectionNumber: startSection,
+      sectionNumber: 4, // TODO reset to startSection
       gearCounters: GearData,
       extrasCounters: ExtrasData,
       isPromotionValid: false,
@@ -90,6 +95,7 @@ class CheckoutModal extends Component {
           intime: this.state.reservedSlot,
           outtime: this.state.reservedSlot + 1,
           upgrade: this.state.reservedExtras,
+          totalAmount: this.state.reservationTotal,
         },
       })
         .then((res) => {
@@ -990,25 +996,61 @@ class CheckoutModal extends Component {
                         </div>
                       </div>
                       {/* Payment Button */}
-                      <button
-                        onClick={this.onPay}
-                        className={[styles.button, styles.buttonPrimary].join(
-                          " "
+                      {!this.state.isPaid &&
+                        this.props.userType === "Employee" && (
+                          <button
+                            onClick={this.onPay}
+                            className={[
+                              styles.button,
+                              styles.buttonPrimary,
+                            ].join(" ")}
+                          >
+                            <React.Fragment>
+                              Pay
+                              <NumberFormat
+                                prefix="$"
+                                value={this.state.reservationTotal.toFixed(2)}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                              />
+                            </React.Fragment>
+
+                            {/* {this.state.isPaid && <div>Submit</div>} */}
+                          </button>
                         )}
-                      >
-                        {!this.state.isPaid && (
-                          <React.Fragment>
-                            Pay
-                            <NumberFormat
-                              prefix="$"
-                              value={this.state.reservationTotal.toFixed(2)}
-                              displayType={"text"}
-                              thousandSeparator={true}
+                      {this.state.reservationTotal > 0 && (
+                        <div className={styles.paypal}>
+                          <PayPalScriptProvider
+                            options={{
+                              "client-id": REACT_APP_PAYPAL_CLIENT_ID,
+                            }}
+                          >
+                            <PayPalButtons
+                              style={{ layout: "horizontal" }}
+                              createOrder={(data, actions) => {
+                                return actions.order.create({
+                                  purchase_units: [
+                                    {
+                                      amount: {
+                                        value: this.state.reservationTotal,
+                                      },
+                                    },
+                                  ],
+                                });
+                              }}
+                              onApprove={(data, actions) => {
+                                return actions.order
+                                  .capture()
+                                  .then((details) => {
+                                    const name = details.payer.name.given_name;
+                                    this.onPay();
+                                    alert(`Transaction completed by ${name}`);
+                                  });
+                              }}
                             />
-                          </React.Fragment>
-                        )}
-                        {this.state.isPaid && <div>Submit</div>}
-                      </button>
+                          </PayPalScriptProvider>
+                        </div>
+                      )}
                     </aside>
                   </main>
                 </section>
