@@ -51,7 +51,7 @@ class CheckoutModal extends Component {
       isEmailValid: false,
 
       // Checkout Modal Properties
-      sectionNumber: 4, // TODO reset to startSection
+      sectionNumber: startSection,
       gearCounters: GearData,
       extrasCounters: ExtrasData,
       isPromotionValid: false,
