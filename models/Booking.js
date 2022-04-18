@@ -21,6 +21,7 @@ const BookingSchema = mongoose.Schema({
     min: 0,
     max: 23,
   },
+  totalAmount: {type: Number, required: true}
 });
 
 const Booking = mongoose.model("bookings", BookingSchema);
