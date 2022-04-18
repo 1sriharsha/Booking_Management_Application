@@ -52,6 +52,7 @@ class CheckoutModal extends Component {
       isPromotionValid: false,
       isGearSelected: false,
       isExtrasSelected: false,
+      isPaid: true,
     };
 
     if (this.props.userType === "Employee") {
@@ -840,22 +841,31 @@ class CheckoutModal extends Component {
                             />
                           </section>
                           {/* Reward Points */}
-                          <section>
-                            <label htmlFor="rewards">
-                              Reward Points -{" "}
-                              {userRewardPoints - this.state.redeemedPoints}{" "}
-                              remaining
-                            </label>
-                            <input
-                              type="number"
-                              id="rewards"
-                              name="rewards"
-                              value={this.state.redeemedPoints}
-                              onChange={this.validatePoints}
-                              min={0}
-                              max={userRewardPoints}
-                            />
-                          </section>
+                          {this.props.userType !== "Employee" && (
+                            <section>
+                              <label htmlFor="rewards">
+                                Reward Points -{" "}
+                                {userRewardPoints - this.state.redeemedPoints}{" "}
+                                remaining
+                              </label>
+                              <input
+                                type="number"
+                                id="rewards"
+                                name="rewards"
+                                value={this.state.redeemedPoints}
+                                onChange={this.validatePoints}
+                                min={0}
+                                max={userRewardPoints}
+                              />
+                            </section>
+                          )}
+                          {/* [Employee] Cash Option */}
+                          {this.props.userType === "Employee" && (
+                            <section className={styles.cash}>
+                              <input type="checkbox" />
+                              <div>Paid in cash</div>
+                            </section>
+                          )}
                         </div>
                       </form>
                     </aside>
@@ -986,13 +996,18 @@ class CheckoutModal extends Component {
                           " "
                         )}
                       >
-                        Pay
-                        <NumberFormat
-                          prefix="$"
-                          value={this.state.reservationTotal.toFixed(2)}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                        />
+                        {!this.state.isPaid && (
+                          <React.Fragment>
+                            Pay
+                            <NumberFormat
+                              prefix="$"
+                              value={this.state.reservationTotal.toFixed(2)}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                            />
+                          </React.Fragment>
+                        )}
+                        {this.state.isPaid && <div>Submit</div>}
                       </button>
                     </aside>
                   </main>

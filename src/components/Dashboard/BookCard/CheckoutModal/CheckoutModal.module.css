@@ -425,6 +425,17 @@
   gap: 3px;
 }
 
+/* Cash Checkbox */
+.cash {
+  flex-flow: row nowrap !important;
+  align-items: center  !important;
+}
+
+.cash > input {
+  margin: 0;
+  margin-right: 3px;
+}
+
 /* Scroll Shadows */
 .summaryContent {
   height: 250px;
