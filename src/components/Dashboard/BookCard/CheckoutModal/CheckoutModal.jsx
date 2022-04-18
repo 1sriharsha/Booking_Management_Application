@@ -361,13 +361,19 @@ class CheckoutModal extends Component {
     }
 
     // Calculate Tax & Total
-    reservationTax =
-      (reservationSubtotal - (reservationDiscount + rewardPointDiscount)) *
-      this.state.taxRate;
-    reservationTotal =
-      reservationSubtotal -
-      (reservationDiscount + rewardPointDiscount) +
-      reservationTax;
+    reservationTax = parseFloat(
+      (
+        (reservationSubtotal - (reservationDiscount + rewardPointDiscount)) *
+        this.state.taxRate
+      ).toFixed(2)
+    );
+    reservationTotal = parseFloat(
+      (
+        reservationSubtotal -
+        (reservationDiscount + rewardPointDiscount) +
+        reservationTax
+      ).toFixed(2)
+    );
 
     if (reservationTotal < 0) {
       reservationTotal = 0;
