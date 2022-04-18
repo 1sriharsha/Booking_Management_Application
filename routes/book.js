@@ -49,6 +49,10 @@ router.post("/userbookings",async function(req,res){
         },
         {
             $unwind:"$facility_info"
+        },{
+            $match:{
+                "email":req.body.email
+            }
         }
 
     ]).then((result)=>{

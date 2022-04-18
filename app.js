@@ -9,6 +9,8 @@ const session = require('express-session')
 var cors = require('cors')
 const middleware = require('./middleware')
 const aliveTime = 1000 * 60 * 30
+var io = require('socket.io')(3002);
+
 
 //Load Configurations
 dotenv.config({path:'./config/config.env'})
@@ -38,7 +40,8 @@ app.use(session({
         maxAge:aliveTime,
         secure:true,
         httpOnly:true,
-        sameSite:"None"
+        sameSite:false
+        
     }
 }))
 app.use(cookieParser())
@@ -52,6 +55,10 @@ app.get("/api", function(req,res){
     res.send({name: 'harsha'});
 });
 
+io.on('connection',socket=>{
+    socket.emit('chat-message',"Hello, Welcome to Athlos Chat Support!!")
+})
+
 
 app.use(bodyParser.json())
 //Routes
@@ -60,6 +67,7 @@ app.use('/auth',require('./routes/auth'))
 app.use('/users',require('./routes/users'))
 app.use('/book',require('./routes/book'))
 app.use('/facilities',require('./routes/facilities'))
+
 const PORT  = process.env.PORT || 5000
 
 app.listen(PORT,console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${PORT}`))  
