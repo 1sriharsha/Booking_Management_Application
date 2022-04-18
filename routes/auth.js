@@ -40,6 +40,7 @@ router.post('/google',(req,res)=>{
                 else{
                     if(user){
                         let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET);
+                        console.log(user)
                         //console.log(token)
                         res
                         .cookie("access_token",token,{
@@ -50,10 +51,10 @@ router.post('/google',(req,res)=>{
                         .json(
                             {
                                 success: true,
-                                firstName:googleUser.firstName,
-                                lastName:googleUser.lastName,
-                                userType:googleUser.userType,
-                                email:googleUser.email,
+                                firstName:user.firstName,
+                                lastName:user.lastName,
+                                userType:user.userType,
+                                email:user.email,
                                 message:'Authentication Successful!!'
                             }
                         )

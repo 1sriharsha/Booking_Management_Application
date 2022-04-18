@@ -71,4 +71,18 @@ router.post("/add",async function (req,res){
         console.log(err)
     }
 });
+
+router.delete("/delete/:id", async(req,res)=>{
+    console.log(req.params.id)
+    Facility.deleteOne({facilityID:req.params.id}).then((facility)=>{
+        
+        if(!facility){
+            return res.status(404).send("Facility ID Invalid")
+        }
+        res.status(200).send("Facility Deleted")
+    }).catch((err)=>{
+        res.status(500).send(err)
+    })
+});
+
 module.exports = router
