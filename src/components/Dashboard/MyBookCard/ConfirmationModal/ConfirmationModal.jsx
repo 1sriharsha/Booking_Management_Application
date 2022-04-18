@@ -110,6 +110,7 @@ class ConfirmationModal extends Component {
       }
     );
 
+    const qrValue = `Facility Name: ${this.props.facilityName}\nFacility Location: ${this.props.facilityLocation.city}, ${this.props.facilityLocation.state}\nIntime: ${this.props.intime}\nOuttime: ${this.props.outtime}\nBooking ID: ${this.props.bookingID}`;
     return (
       <React.Fragment>
         <div className={styles.modal}>
@@ -280,7 +281,7 @@ class ConfirmationModal extends Component {
                 <div className={styles.code}>
                   <QRCode
                     title="Check In Code"
-                    value={this.hashCode(this.props.qrValue)}
+                    value={qrValue}
                     bgColor="#FFFFFF"
                     fgColor="#000000"
                     level="L"

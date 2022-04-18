@@ -137,7 +137,7 @@ class MyBookCard extends Component {
         )}
         {this.state.showModal && (
           <ConfirmationModal
-            qrValue={uniqBookingId}
+            bookingID={uniqBookingId}
             onCloseModal={this.onCloseModal}
             facilityName={facilityName}
             facilityLocation={facilityLocation}
