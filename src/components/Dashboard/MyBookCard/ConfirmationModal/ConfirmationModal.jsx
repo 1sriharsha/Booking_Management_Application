@@ -77,7 +77,17 @@ class ConfirmationModal extends Component {
     }; // our location object from earlier
 
     const {
-      props: { facilityName, facilityLocation, facilitySport, facilityInfo },
+      props: {
+        facilityName,
+        facilityLocation,
+        facilitySport,
+        facilityInfo,
+        intime,
+        outtime,
+        bookingID,
+        gear,
+        upgrade,
+      },
     } = this;
     console.log(facilityLocation); // TODO Remove
 
@@ -86,8 +96,11 @@ class ConfirmationModal extends Component {
       facilitySport.toString().toLowerCase().replace(/ /g, "") +
       ".jpg";
 
+    // QR Code Value
+    const qrValue = `Facility Name: ${facilityName} \nFacility Location: ${facilityLocation.city}, ${facilityLocation.state} \nTime Slot: ${intime}:00 - ${outtime}:00 \nBooking ID: ${bookingID}`;
+
     // List of Selected Gear & Extras
-    const combinedOptions = this.props.gear.concat(this.props.upgrade);
+    const combinedOptions = gear.concat(upgrade);
 
     const optionsList = combinedOptions.map(
       ({ itemName, value, itemPrice }) => {
@@ -110,7 +123,6 @@ class ConfirmationModal extends Component {
       }
     );
 
-    const qrValue = `Facility Name: ${this.props.facilityName} \nFacility Location: ${this.props.facilityLocation.city}, ${this.props.facilityLocation.state} \nTime Slot: ${this.props.intime}:00 - ${this.props.outtime}:00 \nBooking ID: ${this.props.bookingID}`;
     return (
       <React.Fragment>
         <div className={styles.modal}>
@@ -229,8 +241,7 @@ class ConfirmationModal extends Component {
                             {facilityInfo}
                           </div>
                           {/* Reserved Gear & Extras */}
-                          {(this.props.gear.length > 0 ||
-                            this.props.upgrade.length > 0) && (
+                          {(gear.length > 0 || upgrade.length > 0) && (
                             <React.Fragment>
                               <div className={styles.reservedOptions}>
                                 {optionsList}

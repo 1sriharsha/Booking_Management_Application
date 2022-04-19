@@ -426,6 +426,7 @@ class CheckoutModal extends Component {
         facilityInfo,
         reservationPeriodStart,
         reservationPeriodEnd,
+        isAuthenticated,
       },
     } = this;
 
@@ -1001,8 +1002,20 @@ class CheckoutModal extends Component {
                           </div>
                         </div>
                       </div>
-                      {/* Payment Button */}
-                      {this.state.reservationTotal === 0 && (
+                      {/* Payment Buttons */}
+                      {!isAuthenticated && (
+                        <button
+                          type="button"
+                          onClick={() => this.props.onShowModal("login")}
+                          className={[styles.button, styles.buttonPrimary].join(
+                            " "
+                          )}
+                        >
+                          <React.Fragment>Login</React.Fragment>
+                        </button>
+                      )}
+
+                      {isAuthenticated && this.state.reservationTotal === 0 && (
                         <button
                           onClick={this.onPay}
                           className={[styles.button, styles.buttonPrimary].join(
@@ -1021,7 +1034,7 @@ class CheckoutModal extends Component {
                         </button>
                       )}
 
-                      {this.state.reservationTotal > 0 && (
+                      {isAuthenticated && this.state.reservationTotal > 0 && (
                         <div className={styles.paypal}>
                           <PayPalScriptProvider
                             options={{
