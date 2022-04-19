@@ -110,7 +110,7 @@ class ConfirmationModal extends Component {
       }
     );
 
-    const qrValue = `Facility Name: ${this.props.facilityName}\nFacility Location: ${this.props.facilityLocation.city}, ${this.props.facilityLocation.state}\nIntime: ${this.props.intime}\nOuttime: ${this.props.outtime}\nBooking ID: ${this.props.bookingID}`;
+    const qrValue = `Facility Name: ${this.props.facilityName} \nFacility Location: ${this.props.facilityLocation.city}, ${this.props.facilityLocation.state} \nTime Slot: ${this.props.intime}:00 - ${this.props.outtime}:00 \nBooking ID: ${this.props.bookingID}`;
     return (
       <React.Fragment>
         <div className={styles.modal}>
