@@ -81,7 +81,6 @@
   overflow: hidden;
 }
 
-
 .close {
   height: 70px;
   width: 70px;
@@ -223,7 +222,6 @@
   font-weight: 800;
 }
 
-
 .container {
   padding: 0 4em;
   display: flex;
@@ -272,7 +270,6 @@
   color: red;
   margin-top: 0.5em;
 }
-
 
 /* Gear Selection */
 .gearContainer {
@@ -345,14 +342,8 @@
   margin-left: 5px;
 }
 
-.summary .buttonPrimary {
-  width: calc(100% - 3em);
-  position: absolute;
-  bottom: 1.5em;
-  margin: 0;
-}
-
-.paypal {
+.summary .buttonPrimary,
+.summary .paypal {
   width: calc(100% - 3em);
   position: absolute;
   bottom: 1.5em;
@@ -435,7 +426,7 @@
 /* Cash Checkbox */
 .cash {
   flex-flow: row nowrap !important;
-  align-items: center  !important;
+  align-items: center !important;
 }
 
 .cash > input {

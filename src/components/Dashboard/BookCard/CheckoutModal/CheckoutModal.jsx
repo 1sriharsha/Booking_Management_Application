@@ -1002,28 +1002,25 @@ class CheckoutModal extends Component {
                         </div>
                       </div>
                       {/* Payment Button */}
-                      {!this.state.isPaid &&
-                        this.props.userType === "Employee" && (
-                          <button
-                            onClick={this.onPay}
-                            className={[
-                              styles.button,
-                              styles.buttonPrimary,
-                            ].join(" ")}
-                          >
-                            <React.Fragment>
-                              Pay
-                              <NumberFormat
-                                prefix="$"
-                                value={this.state.reservationTotal.toFixed(2)}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                              />
-                            </React.Fragment>
+                      {this.state.reservationTotal === 0 && (
+                        <button
+                          onClick={this.onPay}
+                          className={[styles.button, styles.buttonPrimary].join(
+                            " "
+                          )}
+                        >
+                          <React.Fragment>
+                            Pay
+                            <NumberFormat
+                              prefix="$"
+                              value={this.state.reservationTotal.toFixed(2)}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                            />
+                          </React.Fragment>
+                        </button>
+                      )}
 
-                            {/* {this.state.isPaid && <div>Submit</div>} */}
-                          </button>
-                        )}
                       {this.state.reservationTotal > 0 && (
                         <div className={styles.paypal}>
                           <PayPalScriptProvider
@@ -1032,7 +1029,14 @@ class CheckoutModal extends Component {
                             }}
                           >
                             <PayPalButtons
-                              style={{ layout: "horizontal" }}
+                              style={{
+                                color: "blue",
+                                label: "pay",
+                                layout: "horizontal",
+                                tagline: false,
+                                shape: "rect",
+                              }}
+                              fundingSource="paypal"
                               createOrder={(data, actions) => {
                                 return actions.order.create({
                                   purchase_units: [
