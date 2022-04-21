@@ -64,6 +64,8 @@ class MyBookCard extends Component {
         facilityLocation,
         facilitySport,
         facilityInfo,
+        latitude,
+        longitude,
         animationDelay,
       },
     } = this;
@@ -143,6 +145,8 @@ class MyBookCard extends Component {
             facilityLocation={facilityLocation}
             facilitySport={facilitySport}
             facilityInfo={facilityInfo}
+            latitude={latitude}
+            longitude={longitude}
             gear={gear}
             upgrade={upgrade}
             intime={intime}

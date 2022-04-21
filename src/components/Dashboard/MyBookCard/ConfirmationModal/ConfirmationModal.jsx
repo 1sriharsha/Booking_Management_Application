@@ -70,18 +70,14 @@ class ConfirmationModal extends Component {
   }
 
   render() {
-    const location = {
-      address: "1600 Amphitheatre Parkway, Mountain View, california.",
-      lat: 37.42216,
-      lng: -122.08427,
-    }; // our location object from earlier
-
     const {
       props: {
         facilityName,
         facilityLocation,
         facilitySport,
         facilityInfo,
+        latitude,
+        longitude,
         intime,
         outtime,
         bookingID,
@@ -89,7 +85,12 @@ class ConfirmationModal extends Component {
         upgrade,
       },
     } = this;
-    console.log(facilityLocation); // TODO Remove
+
+    const location = {
+      address: facilityLocation.street,
+      lat: latitude,
+      lng: longitude,
+    };
 
     let sportImage =
       "images/" +
@@ -183,7 +184,10 @@ class ConfirmationModal extends Component {
 
                       <section>
                         <MapSection
+                          location={location}
                           facilityLocation={facilityLocation}
+                          latitude={latitude}
+                          longitude={longitude}
                           zoomLevel={17}
                         />
                       </section>

@@ -150,6 +150,8 @@ class Dashboard extends Component {
             intime: temp.intime,
             outtime: temp.outtime,
             facilityLocation: temp.facility_info.facilityLocation,
+            latitude: temp.facility_info.latitude,
+            longitude: temp.facility_info.longitude,
             facilitySport: temp.facility_info.facilitySports,
             facilityName: temp.facility_info.facilityName,
             facilityInfo: temp.facility_info.facilityInformation,
@@ -332,6 +334,8 @@ class Dashboard extends Component {
         facilityLocation,
         facilitySport,
         facilityInfo,
+        latitude,
+        longitude,
       }) => {
         if (i >= 3) {
           animationDelay += 0.05;
@@ -353,6 +357,8 @@ class Dashboard extends Component {
               facilityLocation={facilityLocation}
               facilitySport={facilitySport}
               facilityInfo={facilityInfo}
+              latitude={latitude}
+              longitude={longitude}
               userFirstName={this.props.userFirstName}
               userLastName={this.props.userLastName}
               userEmail={this.props.userEmail}
