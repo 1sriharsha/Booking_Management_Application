@@ -44,7 +44,9 @@ router.post("/add",async function (req,res){
         facilitySports:req.body.newFacilityData.facilitySport,
         facilityInformation:req.body.newFacilityData.facilityInfo,
         reservationPeriodStart:req.body.newFacilityData.reservationPeriodStart,
-        reservationPeriodEnd:req.body.newFacilityData.reservationPeriodEnd
+        reservationPeriodEnd:req.body.newFacilityData.reservationPeriodEnd,
+        latitude:req.body.newFacilityData.latitude,
+        longitude:req.body.newFacilityData.longitude,
     }
     //console.log(manualFacility)
     try{
@@ -74,7 +76,7 @@ router.post("/add",async function (req,res){
 
 router.delete("/delete/:id", async(req,res)=>{
     console.log(req.params.id)
-    Facility.deleteOne({facilityID:req.params.id}).then((facility)=>{
+    Facility.deleteOne({facilityId:req.params.id}).then((facility)=>{
         
         if(!facility){
             return res.status(404).send("Facility ID Invalid")
