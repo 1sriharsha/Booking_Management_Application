@@ -81,6 +81,7 @@ class Dashboard extends Component {
           let counter = 1;
 
           for (let temp of res.data) {
+
             const facData = {
               id: counter,
               uniqFacId: temp.facilityId,
@@ -95,6 +96,8 @@ class Dashboard extends Component {
               availableNow: false,
               reservationPeriodStart: parseInt(temp.reservationPeriodStart),
               reservationPeriodEnd: parseInt(temp.reservationPeriodEnd),
+              latitude:temp.latitude,
+              longitude:temp.longitude
             };
             counter = counter + 1;
             tempFacData.push(facData);

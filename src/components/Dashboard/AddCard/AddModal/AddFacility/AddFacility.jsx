@@ -3,6 +3,7 @@ import styles from "./AddFacility.module.css";
 import "./AddFacility.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { geocodeByPlaceId } from 'react-google-places-autocomplete';
 import axios from "axios";
 import { SupportedSports } from "../../../../../data";
 const {
@@ -79,44 +80,67 @@ class AddFacility extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
-
-    var newFacilityData = {
-      facilityName: this.state.facilityName,
-      facilityLocation: this.state.facilityLocation,
-      facilitySport: this.state.facilitySport,
-      facilityInfo: this.state.facilityInfo,
-      reservationPeriodStart: this.state.reservationPeriodStart,
-      reservationPeriodEnd: this.state.reservationPeriodEnd,
-    };
-
-    axios({
-      method: "POST",
-      headers: {
-        "Access-Control-Allow-Origin": api_url,
-      },
-      withCredentials: true,
-      url: api_url + "/facilities/add",
-      data: { newFacilityData },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          console.log("Facility Added Sucessfully");
-        }
+    console.log(this.state.facilityLocation.place_id)
+    var lat,long;
+    var newFacilityData;
+    geocodeByPlaceId(this.state.facilityLocation.place_id)
+    .then(results =>{ 
+      
+      //console.log(results)
+      lat=results[0].geometry.location.lat()
+      long=results[0].geometry.location.lng()
+      console.log(lat)
+      console.log(long)
+    }).then( () => {
+      newFacilityData = {
+        facilityName: this.state.facilityName,
+        facilityLocation: this.state.facilityLocation,
+        facilitySport: this.state.facilitySport,
+        latitude:lat,
+        longitude:long,
+        facilityInfo: this.state.facilityInfo,
+        reservationPeriodStart: this.state.reservationPeriodStart,
+        reservationPeriodEnd: this.state.reservationPeriodEnd,
+      };
+      console.log(newFacilityData)
+      axios({
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": api_url,
+        },
+        withCredentials: true,
+        url: api_url + "/facilities/add",
+        data: { newFacilityData },
       })
-      .catch(function (err) {
-        console.log(err);
-        if (err.response) {
-          if (err.response.status === 404) {
-            console.log("Couldn't add Facility");
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("Facility Added Sucessfully");
           }
-        } else if (err.request) {
-          //Response not received from API
-          console.log("Error: ", err.request);
-        } else {
-          //Unexpected Error
-          console.log("Error", err.message);
-        }
-      });
+        })
+        .catch(function (err) {
+          console.log(err);
+          if (err.response) {
+            if (err.response.status === 404) {
+              console.log("Couldn't add Facility");
+            }
+          } else if (err.request) {
+            //Response not received from API
+            console.log("Error: ", err.request);
+          } else {
+            //Unexpected Error
+            console.log("Error", err.message);
+          }
+        });
+
+    }).catch((err)=>{
+      console.log(err)
+    })
+      
+      
+   
+    
+
+    
 
     this.props.onCloseModal();
   };
@@ -140,9 +164,10 @@ class AddFacility extends Component {
       return 0;
     }).map(({ sportName }) => {
       return <option>{sportName}</option>;
-    });
+    }); 
 
     return (
+      
       <React.Fragment>
         <div className={styles.navigation}>
           <button
@@ -218,6 +243,10 @@ class AddFacility extends Component {
         {/* Section 1: Facility Information */}
         {this.state.sectionNumber === 1 && (
           <React.Fragment>
+            <script
+            type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPmwX1ecQUXqTSgFa0mQKS8SGISlINC9I&libraries=places"
+            />
             <div className={styles.container}>
               <form>
                 {/* Facility Name */}
