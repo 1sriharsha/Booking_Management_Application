@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./EarningsGraph.module.css";
+import styles from "./LossGraph.module.css";
 import {
   VictoryAxis,
   VictoryBrushContainer,
@@ -8,18 +8,18 @@ import {
   VictoryZoomContainer,
 } from "victory";
 
-const earningsData = [
-  { x: new Date(2022, 0, 1), y: 42.79 },
-  { x: new Date(2022, 0, 15), y: 61.22 },
-  { x: new Date(2022, 1, 1), y: 150.19 },
-  { x: new Date(2022, 1, 15), y: 184.06 },
-  { x: new Date(2022, 2, 1), y: 382.71 },
-  { x: new Date(2022, 2, 15), y: 442.11 },
-  { x: new Date(2022, 3, 1), y: 559.39 },
-  { x: new Date(2022, 3, 15), y: 601.2 },
+const lossData = [
+  { x: new Date(2022, 0, 1), y: 2.74 },
+  { x: new Date(2022, 0, 15), y: 4.01 },
+  { x: new Date(2022, 1, 1), y: 12.29 },
+  { x: new Date(2022, 1, 15), y: 13.94 },
+  { x: new Date(2022, 2, 1), y: 27.42 },
+  { x: new Date(2022, 2, 15), y: 23.55 },
+  { x: new Date(2022, 3, 1), y: 20.98 },
+  { x: new Date(2022, 3, 15), y: 21.32 },
 ];
 
-class EarningsGraph extends Component {
+class LossGraph extends Component {
   state = {};
 
   handleZoom(domain) {
@@ -33,8 +33,8 @@ class EarningsGraph extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* Earnings Data */}
-        <h1 className={styles.title}>Athlos Earnings</h1>
+        {/* Loss Data */}
+        <h1 className={styles.title}>Athlos Losses</h1>
         <VictoryChart
           width={1130}
           height={450}
@@ -54,9 +54,9 @@ class EarningsGraph extends Component {
           <VictoryAxis crossAxis />
           <VictoryLine
             style={{
-              data: { stroke: "green" },
+              data: { stroke: "tomato" },
             }}
-            data={earningsData}
+            data={lossData}
           />
         </VictoryChart>
         <VictoryChart
@@ -85,9 +85,9 @@ class EarningsGraph extends Component {
           {/* Secondary Graph */}
           <VictoryLine
             style={{
-              data: { stroke: "green" },
+              data: { stroke: "tomato" },
             }}
-            data={earningsData}
+            data={lossData}
           />
         </VictoryChart>
       </React.Fragment>
@@ -95,4 +95,4 @@ class EarningsGraph extends Component {
   }
 }
 
-export default EarningsGraph;
+export default LossGraph;
