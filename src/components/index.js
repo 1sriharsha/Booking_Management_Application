@@ -32,7 +32,6 @@ export { default as PaymentModal } from "./Dashboard/Shortcut/ShortcutModal/Paym
 export { default as ConfirmationModal } from "./Dashboard/MyBookCard/ConfirmationModal/ConfirmationModal";
 export { default as EarningsGraph } from "./Dashboard/Visualization/EarningsGraph/EarningsGraph";
 export { default as FavoriteSportsGraph } from "./Dashboard/Visualization/FavoriteSportsGraph/FavoriteSportsGraph";
-export { default as LossGraph } from "./Dashboard/Visualization/LossGraph/LossGraph";
 export { default as SalesGraph } from "./Dashboard/Visualization/SalesGraph/SalesGraph";
 export { default as ExpensesGraph } from "./Dashboard/Visualization/ExpensesGraph/ExpensesGraph";
 export { default as Map } from "./Dashboard/MyBookCard/ConfirmationModal/Map/Map";

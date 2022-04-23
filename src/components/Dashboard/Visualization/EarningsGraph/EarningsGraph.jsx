@@ -2,92 +2,88 @@ import React, { Component } from "react";
 import styles from "./EarningsGraph.module.css";
 import {
   VictoryAxis,
+  VictoryBar,
   VictoryBrushContainer,
   VictoryChart,
+  VictoryGroup,
+  VictoryLegend,
   VictoryLine,
+  VictoryTheme,
   VictoryZoomContainer,
 } from "victory";
 
 const earningsData = [
-  { x: new Date(2022, 0, 1), y: 42.79 },
-  { x: new Date(2022, 0, 15), y: 61.22 },
-  { x: new Date(2022, 1, 1), y: 150.19 },
-  { x: new Date(2022, 1, 15), y: 184.06 },
-  { x: new Date(2022, 2, 1), y: 382.71 },
-  { x: new Date(2022, 2, 15), y: 442.11 },
-  { x: new Date(2022, 3, 1), y: 559.39 },
-  { x: new Date(2022, 3, 15), y: 601.2 },
+  { date: new Date(2022, 0, 1), revenue: 54.78, net: 20.43 },
+  { date: new Date(2022, 1, 1), revenue: 129.46, net: 70.94 },
+  { date: new Date(2022, 2, 1), revenue: 101.65, net: 33.91 },
+  { date: new Date(2022, 3, 1), revenue: 167.11, net: 92.39 },
 ];
 
 class EarningsGraph extends Component {
-  state = {};
-
-  handleZoom(domain) {
-    this.setState({ selectedDomain: domain });
-  }
-
-  handleBrush(domain) {
-    this.setState({ zoomDomain: domain });
-  }
-
   render() {
     return (
       <React.Fragment>
         {/* Earnings Data */}
         <h1 className={styles.title}>Athlos Earnings</h1>
+
         <VictoryChart
           width={1130}
           height={450}
           padding={80}
           scale={{ x: "time" }}
-          containerComponent={
-            <VictoryZoomContainer
-              responsive={false}
-              zoomDimension="x"
-              zoomDomain={this.state.zoomDomain}
-              onZoomDomainChange={this.handleZoom.bind(this)}
-            />
-          }
         >
-          {/* Primary Graph */}
-          <VictoryAxis dependentAxis tickFormat={(x) => `$${x}`} />
-          <VictoryAxis crossAxis />
-          <VictoryLine
-            style={{
-              data: { stroke: "green" },
-            }}
-            data={earningsData}
-          />
-        </VictoryChart>
-        <VictoryChart
-          width={550}
-          height={90}
-          scale={{ x: "time" }}
-          padding={{ top: 0, left: 50, right: 50, bottom: 30 }}
-          containerComponent={
-            <VictoryBrushContainer
-              responsive={false}
-              brushDimension="x"
-              brushDomain={this.state.selectedDomain}
-              onBrushDomainChange={this.handleBrush.bind(this)}
+          <VictoryGroup offset={61}>
+            <VictoryBar
+              data={earningsData}
+              colorScale={"blue"}
+              x={"date"}
+              y={"revenue"}
+              barRatio={0.2}
+              animate={{
+                duration: 2000,
+                onLoad: { duration: 1000 },
+              }}
             />
-          }
-        >
+            <VictoryBar
+              data={earningsData}
+              colorScale={"red"}
+              x={"date"}
+              y={"net"}
+              barRatio={0.2}
+              animate={{
+                duration: 2000,
+                onLoad: { duration: 1000 },
+              }}
+            />
+          </VictoryGroup>
+
           <VictoryAxis
-            tickValues={[
-              new Date(2022, 0, 1),
-              new Date(2022, 1, 1),
-              new Date(2022, 2, 1),
-              new Date(2022, 3, 1),
-            ]}
-            tickFormat={(x) => new Date(x).getMonth()}
+            tickValues={0}
+            tickFormat={(t) =>
+              `${new Date(t).toLocaleString("en-us", { month: "long" })}`
+            }
           />
-          {/* Secondary Graph */}
+          <VictoryAxis dependentAxis tickFormat={(t) => `$${t}`} />
+
           <VictoryLine
-            style={{
-              data: { stroke: "green" },
-            }}
             data={earningsData}
+            style={{ data: { stroke: "green" } }}
+            x={"date"}
+            y={(datum) => (datum.net / datum.revenue) * 100}
+          />
+
+          <VictoryLegend
+            x={125}
+            y={25}
+            title="Legend"
+            centerTitle
+            orientation="horizontal"
+            gutter={20}
+            data={[
+              { name: "Revenue", symbol: { fill: "#0E2B5D" } },
+              { name: "Net Income", symbol: { fill: "#EA7354" } },
+              { name: "Profit Margin", symbol: { fill: "#377E22" } },
+            ]}
           />
         </VictoryChart>
       </React.Fragment>
