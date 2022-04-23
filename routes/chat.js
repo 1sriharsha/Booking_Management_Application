@@ -3,7 +3,11 @@ const express = require('express');
 const { head } = require('./facilities');
 const router = express.Router();
 const url = process.env.chat_api_url
-const chat_headers=process.env.chat_api_headers
+const chat_headers={
+    'Content-Type': 'application/json',
+    appid: process.env.appId,
+    apikey: process.env.apiKey,
+}
 
 
 router.get('/auth', (req, res) => {
