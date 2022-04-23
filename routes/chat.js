@@ -1,6 +1,5 @@
 const { default: axios } = require('axios');
 const express = require('express');
-const { head } = require('./facilities');
 const router = express.Router();
 const url = process.env.chat_api_url
 const chat_headers={
