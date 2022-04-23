@@ -12,6 +12,7 @@ import axios from "axios";
 import { TestPromotionData } from "../../data";
 import Visualization from "./Visualization/Visualization";
 import MyBookCard from "./MyBookCard/MyBookCard";
+import Chat from "./Chat/Chat";
 
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
@@ -576,10 +577,7 @@ class Dashboard extends Component {
             </div>
           )}
 
-          {/* [Support] Chat Support */}
-          {this.state.activeTab === "Chat Support" && (
-            <div className={styles.bookContainer}>Chat Support</div>
-          )}
+          <Chat userType={this.props.userType}/>
         </div>
       </React.Fragment>
     );
