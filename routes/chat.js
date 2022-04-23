@@ -3,7 +3,7 @@ const express = require('express');
 const { head } = require('./facilities');
 const router = express.Router();
 const url = process.env.chat_api_url
-const headers=process.env.chat_api_headers
+const chat_headers=process.env.chat_api_headers
 
 
 router.get('/auth', (req, res) => {
@@ -43,9 +43,9 @@ router.get('/create',(req,res)=>{
     };
     
     console.log(url)
-    console.log(headers)
+    console.log(chat_headers)
     axios.post(url+"/users",JSON.stringify(data),{
-        headers
+        chat_headers
     }).then(response=>{
 
         requestAuthToken(response.data.data.uid).then(

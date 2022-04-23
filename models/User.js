@@ -8,7 +8,8 @@ const UserSchema = new mongoose.Schema({
 	email: {type: String, required: true},
 	password: {type: String, required: true},
 	profileType:{type:String,required:true,default:"Manual"},
-	userType:{type:String,required:true,default:"Customer"}
+	userType:{type:String,required:true,default:"Customer"},
+	rewardPoints:{type:Number,default:100}
 });
 
 const User = mongoose.model('Users', UserSchema,'users');
