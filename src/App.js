@@ -56,7 +56,7 @@ class App extends Component {
       userLastName: res.data.lastName,
       userEmail: res.data.email,
       userType: res.data.type,
-      userRewardPoints: 0,
+      userRewardPoints: localStorage.getItem("rewardPoints"),
       showModal: false,
     });
 

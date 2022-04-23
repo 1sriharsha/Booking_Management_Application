@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import styles from "./FavoriteSportsGraph.module.css";
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from "victory";
+import axios from "axios";
 
-const favoritesData = [
-  { sport: "Soccer", totalBookings: 7 },
-  { sport: "Basketball", totalBookings: 3 },
-  { sport: "Volleyball", totalBookings: 1 },
-];
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
+
+var api_url;
+if (process.env.NODE_ENV === "production") {
+  api_url = REACT_APP_PRODUCTION_URL;
+} else {
+  api_url = REACT_APP_LOCAL_URL;
+}
 
 class FavoriteSportsGraph extends Component {
-  state = {};
+  state = { myBookData: [] };
 
   handleZoom(domain) {
     this.setState({ selectedDomain: domain });
@@ -19,7 +23,84 @@ class FavoriteSportsGraph extends Component {
     this.setState({ zoomDomain: domain });
   }
 
+  getMyBookings() {
+    var tempBookData = [];
+
+    axios({
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      url: api_url + "/book/userbookings",
+      data: {
+        email: this.props.userEmail,
+      },
+    }).then((res) => {
+      if (res.status === 200 || res.status === 304) {
+        let counter = 1;
+        for (let temp of res.data) {
+          const bookData = {
+            id: counter,
+            uniqBookingId: temp._id,
+            gear: temp.gear,
+            upgrade: temp.upgrade,
+            intime: temp.intime,
+            outtime: temp.outtime,
+            facilityLocation: temp.facility_info.facilityLocation,
+            latitude: temp.facility_info.latitude,
+            longitude: temp.facility_info.longitude,
+            facilitySport: temp.facility_info.facilitySports,
+            facilityName: temp.facility_info.facilityName,
+            facilityInfo: temp.facility_info.facilityInformation,
+          };
+          counter = counter + 1;
+          tempBookData.push(bookData);
+        }
+      }
+
+      console.log("fav");
+      console.log(tempBookData);
+
+      this.setState((prevState) => ({
+        myBookData: tempBookData,
+      }));
+    });
+  }
+
+  findOcc(arr, key) {
+    let arr2 = [];
+
+    arr.forEach((x) => {
+      if (
+        arr2.some((val) => {
+          return val[key] === x[key];
+        })
+      ) {
+        arr2.forEach((k) => {
+          if (k[key] === x[key]) {
+            k["totalBookings"]++;
+          }
+        });
+      } else {
+        let a = {};
+        a[key] = x[key];
+        a["totalBookings"] = 1;
+        arr2.push(a);
+      }
+    });
+
+    return arr2;
+  }
+
+  componentDidMount() {
+    this.getMyBookings();
+  }
+
   render() {
+    let favoritesData = this.findOcc(this.state.myBookData, "facilitySport");
+    console.log(favoritesData);
+
     return (
       <React.Fragment>
         {/* Earnings Data */}
@@ -34,10 +115,10 @@ class FavoriteSportsGraph extends Component {
           <VictoryBar
             horizontal
             data={favoritesData}
-            labels={({ datum }) => `${datum.sport}`}
-            x="sport"
+            labels={({ datum }) => `${datum.facilitySport}`}
+            x="facilitySport"
             y="totalBookings"
-            alignment="start"
+            alignment="middle"
             barRatio={0.2}
             animate={{
               duration: 2000,

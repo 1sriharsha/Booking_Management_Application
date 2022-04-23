@@ -425,7 +425,10 @@ class Dashboard extends Component {
                 this.props.userType === "Customer") && (
                 <section className={styles.dataVisualContainer}>
                   {this.props.userType === "Manager" && (
-                    <Visualization userType={this.props.userType} />
+                    <Visualization
+                      userType={this.props.userType}
+                      userEmail={this.props.userEmail}
+                    />
                   )}
 
                   {this.props.userType === "Customer" && (
@@ -506,7 +509,10 @@ class Dashboard extends Component {
             <React.Fragment>
               <section className={styles.settingsImageContainer}>
                 {this.props.userRewardPoints} Reward Points
-                <Visualization userType={this.props.userType} />
+                <Visualization
+                  userType={this.props.userType}
+                  userEmail={this.props.userEmail}
+                />
               </section>
               {/* Interest Shortcut */}
               <div className={styles.shortcutContainer}>
