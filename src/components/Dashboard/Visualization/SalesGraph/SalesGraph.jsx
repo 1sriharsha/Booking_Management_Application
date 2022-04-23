@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import styles from "./SalesGraph.module.css";
-import {
-  VictoryAxis,
-  VictoryBar,
-  VictoryChart,
-  VictoryLabel,
-  VictoryTheme,
-} from "victory";
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryTheme } from "victory";
 
 const salesData = [
   { item: "Training Cones", sales: 294 },

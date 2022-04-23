@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import styles from "./ExpensesGraph.module.css";
-import {
-  VictoryAxis,
-  VictoryBar,
-  VictoryChart,
-  VictoryLabel,
-  VictoryPie,
-  VictoryTheme,
-} from "victory";
+import { VictoryPie } from "victory";
 
 const expenseData = [
   { x: 1, y: 50, label: "Salaries" },

@@ -61,6 +61,7 @@ class Dashboard extends Component {
 
   handleRefresh = () => {
     this.getMyBookings();
+    this.props.handleRefresh();
   };
 
   componentDidMount() {

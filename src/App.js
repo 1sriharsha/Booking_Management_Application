@@ -56,7 +56,7 @@ class App extends Component {
       userLastName: res.data.lastName,
       userEmail: res.data.email,
       userType: res.data.type,
-      userRewardPoints: localStorage.getItem("rewardPoints"),
+      userRewardPoints: 0,
       showModal: false,
     });
 
@@ -64,7 +64,7 @@ class App extends Component {
     localStorage.setItem("user", JSON.stringify(res.data));
 
     window.location.href = "/dashboard"; // Redirect to Dashboard
-  };;
+  };
 
   onLogout = () => {
     axios({
@@ -109,6 +109,10 @@ class App extends Component {
     return user;
   };
 
+  handleRefresh = () => {
+    this.setState({ userRewardPoints: localStorage.getItem("rewardPoints") });
+  };
+
   render() {
     return (
       <Router>
@@ -138,6 +142,7 @@ class App extends Component {
                 userRewardPoints={this.state.userRewardPoints}
                 onShowModal={this.showModal}
                 onLogout={this.onLogout}
+                handleRefresh={this.handleRefresh}
               />
             }
           />

@@ -359,7 +359,7 @@ class CheckoutModal extends Component {
 
     // Calculate Redeemed Points
     if (this.state.redeemedPoints) {
-      rewardPointDiscount = this.state.redeemedPoints * 0.1; // 1 reward point = $1
+      rewardPointDiscount = this.state.redeemedPoints * 0.1; // 1 reward point = 10 cents
     }
 
     // Calculate Tax & Total

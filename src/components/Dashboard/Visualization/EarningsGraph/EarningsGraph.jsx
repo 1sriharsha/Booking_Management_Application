@@ -3,13 +3,10 @@ import styles from "./EarningsGraph.module.css";
 import {
   VictoryAxis,
   VictoryBar,
-  VictoryBrushContainer,
   VictoryChart,
   VictoryGroup,
   VictoryLegend,
   VictoryLine,
-  VictoryTheme,
-  VictoryZoomContainer,
 } from "victory";
 
 const earningsData = [
