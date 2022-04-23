@@ -108,6 +108,13 @@ class CheckoutModal extends Component {
               userRewardPoints - this.state.redeemedPoints
             );
 
+            // Calculate points (2% back)
+            localStorage.setItem(
+              "rewardPoints",
+              parseInt(userRewardPoints) +
+                parseInt(this.state.reservationTotal * 0.02)
+            );
+
             this.props.handleRefresh();
             this.props.onCloseModal();
           }
@@ -357,7 +364,7 @@ class CheckoutModal extends Component {
 
     // Calculate Redeemed Points
     if (this.state.redeemedPoints) {
-      rewardPointDiscount = this.state.redeemedPoints * 0.1; // 1 reward point = 10 cents
+      rewardPointDiscount = this.state.redeemedPoints * 1; // 1 reward point = $1
     }
 
     // Calculate Tax & Total
@@ -974,7 +981,7 @@ class CheckoutModal extends Component {
                                 <NumberFormat
                                   prefix="-$"
                                   value={(
-                                    this.state.redeemedPoints * 0.1
+                                    this.state.redeemedPoints * 1
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
