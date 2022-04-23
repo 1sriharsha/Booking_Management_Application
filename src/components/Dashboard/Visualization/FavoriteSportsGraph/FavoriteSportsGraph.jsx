@@ -120,10 +120,10 @@ class FavoriteSportsGraph extends Component {
             y="totalBookings"
             alignment="middle"
             barRatio={0.2}
-            animate={{
-              duration: 2000,
-              onLoad: { duration: 1000 },
-            }}
+            // animate={{
+            //   duration: 2000,
+            //   onLoad: { duration: 1000 },
+            // }}
           />
         </VictoryChart>
       </React.Fragment>

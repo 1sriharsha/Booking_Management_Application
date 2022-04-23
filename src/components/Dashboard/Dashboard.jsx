@@ -524,6 +524,7 @@ class Dashboard extends Component {
                   icon="fa-solid fa-medal"
                   iconClass="icon iconOrange"
                   onClick={this.onClickTabItem}
+                  userEmail={this.props.userEmail}
                 />
                 {/* Payment Shortcut */}
                 <Shortcut

@@ -9,7 +9,10 @@ class ShortcutModal extends Component {
       <React.Fragment>
         {this.props.shortcutTo === "interests" && (
           <React.Fragment>
-            <InterestModal onCloseModal={this.props.onCloseModal} />
+            <InterestModal
+              onCloseModal={this.props.onCloseModal}
+              userEmail={this.props.userEmail}
+            />
           </React.Fragment>
         )}
 
