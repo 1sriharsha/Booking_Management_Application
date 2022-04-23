@@ -9,7 +9,6 @@ const session = require('express-session')
 var cors = require('cors')
 const middleware = require('./middleware')
 const aliveTime = 1000 * 60 * 30
-var io = require('socket.io')(3002);
 
 
 //Load Configurations
@@ -55,10 +54,6 @@ app.use(passport.session())
 //     res.send({name: 'harsha'});
 // });
 
-io.on('connection',socket=>{
-    socket.emit('chat-message',"Hello, Welcome to Athlos Chat Support!!")
-})
-
 
 app.use(bodyParser.json())
 //Routes
@@ -69,6 +64,7 @@ app.use('/book',require('./routes/book'))
 app.use('/facilities',require('./routes/facilities'))
 app.use('/interests',require('./routes/interests'))
 
+app.use('/chat',require('./routes/chat'))
 const PORT  = process.env.PORT || 5000
 
 app.listen(PORT,console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${PORT}`))  
