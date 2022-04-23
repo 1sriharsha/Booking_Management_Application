@@ -102,17 +102,12 @@ class CheckoutModal extends Component {
           if (res.status === 200) {
             console.log("Booked Successfully");
 
-            // Decrement redeemed points (tmp)
+            // Calculate points (points equivalent to 2% back)
             localStorage.setItem(
               "rewardPoints",
-              userRewardPoints - this.state.redeemedPoints
-            );
-
-            // Calculate points (2% back)
-            localStorage.setItem(
-              "rewardPoints",
-              parseInt(userRewardPoints) +
-                parseInt(this.state.reservationTotal * 0.02)
+              parseInt(userRewardPoints) -
+                this.state.redeemedPoints +
+                parseInt(this.state.reservationTotal * 0.2)
             );
 
             this.props.handleRefresh();
@@ -364,7 +359,7 @@ class CheckoutModal extends Component {
 
     // Calculate Redeemed Points
     if (this.state.redeemedPoints) {
-      rewardPointDiscount = this.state.redeemedPoints * 1; // 1 reward point = $1
+      rewardPointDiscount = this.state.redeemedPoints * 0.1; // 1 reward point = $1
     }
 
     // Calculate Tax & Total
@@ -981,7 +976,7 @@ class CheckoutModal extends Component {
                                 <NumberFormat
                                   prefix="-$"
                                   value={(
-                                    this.state.redeemedPoints * 1
+                                    this.state.redeemedPoints * 0.1
                                   ).toFixed(2)}
                                   displayType={"text"}
                                   thousandSeparator={true}
