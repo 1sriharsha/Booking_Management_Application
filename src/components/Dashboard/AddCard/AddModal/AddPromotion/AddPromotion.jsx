@@ -99,8 +99,9 @@ class AddPromotion extends Component {
         }
       });
 
+    this.props.handleRefresh();
     this.props.onCloseModal();
-  };;
+  };
 
   render() {
     return (

@@ -62,11 +62,18 @@ class Dashboard extends Component {
 
   handleRefresh = () => {
     this.getMyBookings();
+    this.getFacilities();
     this.props.handleRefresh();
   };
 
   componentDidMount() {
     document.body.style.backgroundColor = "var(--color-tertiary)";
+    
+    this.getFacilities();
+    this.getMyBookings();
+  }
+
+  getFacilities() {
     var tempFacData = [];
 
     // Get Facilities from API
@@ -83,7 +90,6 @@ class Dashboard extends Component {
           let counter = 1;
 
           for (let temp of res.data) {
-
             const facData = {
               id: counter,
               uniqFacId: temp.facilityId,
@@ -98,8 +104,8 @@ class Dashboard extends Component {
               availableNow: false,
               reservationPeriodStart: parseInt(temp.reservationPeriodStart),
               reservationPeriodEnd: parseInt(temp.reservationPeriodEnd),
-              latitude:temp.latitude,
-              longitude:temp.longitude
+              latitude: temp.latitude,
+              longitude: temp.longitude,
             };
             counter = counter + 1;
             tempFacData.push(facData);
@@ -123,8 +129,6 @@ class Dashboard extends Component {
           console.log("Error", err.message);
         }
       });
-
-    this.getMyBookings();
   }
 
   getMyBookings() {
@@ -282,6 +286,7 @@ class Dashboard extends Component {
                 reservationPeriodEnd={reservationPeriodEnd}
                 isAuthenticated={this.props.isAuthenticated}
                 onShowModal={this.props.onShowModal}
+                handleRefresh={this.handleRefresh}
               />
             </React.Fragment>
           );
@@ -549,6 +554,7 @@ class Dashboard extends Component {
                 key={uniqid("", "-addcard")}
                 type={"facility"}
                 animationDelay={animationDelay}
+                handleRefresh={this.handleRefresh}
               />
               {nEditCards && nEditCards}
               {nEditCards.length === 0 && (
@@ -568,6 +574,7 @@ class Dashboard extends Component {
                 key={uniqid("", "-addcard")}
                 type={"equipment"}
                 animationDelay={animationDelay}
+                handleRefresh={this.handleRefresh}
               />
             </div>
           )}
@@ -579,12 +586,13 @@ class Dashboard extends Component {
                 key={uniqid("", "-addcard")}
                 type={"promotion"}
                 animationDelay={animationDelay}
+                handleRefresh={this.handleRefresh}
               />
               {nPromotionCards}
             </div>
           )}
 
-          <Chat userType={this.props.userType}/>
+          <Chat userType={this.props.userType} />
         </div>
       </React.Fragment>
     );

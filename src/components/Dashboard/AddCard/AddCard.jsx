@@ -50,6 +50,7 @@ class AddCard extends Component {
             key={uniqid("", "-addmodal")}
             type={this.props.type}
             onCloseModal={this.closeAddModal}
+            handleRefresh={this.props.handleRefresh}
           />
         )}
       </React.Fragment>
