@@ -29,8 +29,6 @@ class InterestModal extends Component {
       api_url = REACT_APP_LOCAL_URL;
     }
 
-    var tempInterestData = [];
-
     axios({
       method: "POST",
       headers: {

@@ -213,7 +213,7 @@ class Dashboard extends Component {
             <React.Fragment>
               <BookCard
                 key={uniqid(id, "-bookcard")}
-                facilityID={id}
+                facilityID={uniqFacId}
                 uniqFacId={uniqFacId}
                 facilityName={facilityName}
                 facilityLocation={facilityLocation}
@@ -407,6 +407,7 @@ class Dashboard extends Component {
                 userLastName={this.props.userLastName}
                 onShowModal={this.props.onShowModal}
                 onLogout={this.props.onLogout}
+                userRewardPoints={this.props.userRewardPoints}
               />
             </div>
           </div>

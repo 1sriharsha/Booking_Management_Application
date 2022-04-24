@@ -9,6 +9,7 @@ class TimeSlot extends Component {
         reservationSlotEnd,
         setReservedSlot,
         reservedSlot,
+        disabled,
       },
     } = this;
 
@@ -23,6 +24,7 @@ class TimeSlot extends Component {
         <button
           onClick={() => setReservedSlot(reservationID)}
           className={className}
+          disabled={disabled}
         >
           {reservationSlotStart + ":00"} - {reservationSlotEnd + ":00"}
         </button>
