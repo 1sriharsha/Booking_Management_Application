@@ -39,8 +39,8 @@ const LocationPin = ({ text }) => (
 
 
 
-const origin = { lat: 40.756795, lng: -73.954298 };
-const destination = { lat: 41.756795, lng: -78.954298 };
+// const origin = { lat: 40.756795, lng: -73.954298 };
+// const destination = { lat: 41.756795, lng: -78.954298 };
 
 // directionsService.route(
 //   {
