@@ -19,6 +19,8 @@ const {
 let startSection = 1;
 let userRewardPoints = localStorage.getItem("rewardPoints");
 
+
+
 class CheckoutModal extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +60,10 @@ class CheckoutModal extends Component {
       isGearSelected: false,
       isExtrasSelected: false,
       isPaid: true,
+
+      // Reserved Data
+      reservedSlots: {},
+      reservedFacilities: [],
     };
 
     if (this.props.userType === "Employee" || this.props.userType === "Guest") {
@@ -408,13 +414,70 @@ class CheckoutModal extends Component {
     }
   }
 
+  getReservedSlots() {
+    var api_url;
+    if (process.env.NODE_ENV === "production") {
+      api_url = REACT_APP_PRODUCTION_URL;
+    } else {
+      api_url = REACT_APP_LOCAL_URL;
+    }
+
+    axios({
+      method: "GET",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      url: api_url + "/book/booked_slots",
+    })
+      .then((res) => {
+        var reservedSlots = {};
+
+        if (res.status === 200 || res.status === 304) {
+          for (let temp of res.data) {
+            if (reservedSlots[temp.facilityID] === undefined) {
+              reservedSlots[temp.facilityID] = [temp.intime];
+            } else {
+              reservedSlots[temp.facilityID].push(temp.intime);
+            }
+          }
+        }
+
+        console.log(reservedSlots);
+
+        this.setState({ reservedSlots });
+        // this.setState((prevState) => ({
+        //   selectedInterests: interest,
+        // }));
+      })
+      .catch(function (err) {
+        console.log(err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            console.log("Couldn't retrieve reserved slots");
+          }
+        } else if (err.request) {
+          //Response not received from API
+          console.log("Error: ", err.request);
+        } else {
+          //Unexpected Error
+          console.log("Error", err.message);
+        }
+      });
+  }
+
   componentDidUpdate() {
     if (this.state.sectionNumber === 4) {
       this.createScrollShadow();
     }
   }
 
+  componentDidMount() {
+    this.getReservedSlots();
+  }
+
   render() {
+    console.log("Facility ID: " + this.props.facilityID);
     userRewardPoints = localStorage.getItem("rewardPoints"); // tmp
 
     const {
@@ -453,6 +516,12 @@ class CheckoutModal extends Component {
           reservationSlotEnd={reservationSlotEnd}
           setReservedSlot={this.setReservedSlot}
           reservedSlot={this.state.reservedSlot}
+          disabled={
+            this.props.facilityID in this.state.reservedSlots &&
+            this.state.reservedSlots[this.props.facilityID].includes(
+              reservationSlotStart
+            )
+          }
         />
       );
       reservationSlotStart++;

@@ -213,7 +213,7 @@ class Dashboard extends Component {
             <React.Fragment>
               <BookCard
                 key={uniqid(id, "-bookcard")}
-                facilityID={id}
+                facilityID={uniqFacId}
                 uniqFacId={uniqFacId}
                 facilityName={facilityName}
                 facilityLocation={facilityLocation}
