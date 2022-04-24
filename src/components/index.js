@@ -35,3 +35,4 @@ export { default as FavoriteSportsGraph } from "./Dashboard/Visualization/Favori
 export { default as SalesGraph } from "./Dashboard/Visualization/SalesGraph/SalesGraph";
 export { default as ExpensesGraph } from "./Dashboard/Visualization/ExpensesGraph/ExpensesGraph";
 export { default as Map } from "./Dashboard/MyBookCard/ConfirmationModal/Map/Map";
+export { default as Chat} from "./Dashboard/Chat/Chat";
