@@ -21,6 +21,53 @@ class InterestModal extends Component {
     this.setState({ selectedInterests });
   }
 
+  getInterests() {
+    var api_url;
+    if (process.env.NODE_ENV === "production") {
+      api_url = REACT_APP_PRODUCTION_URL;
+    } else {
+      api_url = REACT_APP_LOCAL_URL;
+    }
+
+    var tempInterestData = [];
+
+    axios({
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      url: api_url + "/interests/userinterests",
+      data: {
+        email: this.props.userEmail,
+      },
+    })
+      .then((res) => {
+        var interest;
+
+        if (res.status === 200 || res.status === 304) {
+          interest = res.data[0].interest;
+        }
+        this.setState((prevState) => ({
+          selectedInterests: interest,
+        }));
+      })
+      .catch(function (err) {
+        console.log(err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            console.log("Couldn't retrieve interests");
+          }
+        } else if (err.request) {
+          //Response not received from API
+          console.log("Error: ", err.request);
+        } else {
+          //Unexpected Error
+          console.log("Error", err.message);
+        }
+      });
+  }
+
   onSubmit = () => {
     var api_url;
     if (process.env.NODE_ENV === "production") {
@@ -64,6 +111,10 @@ class InterestModal extends Component {
     this.props.onCloseModal();
   };
 
+  componentDidMount() {
+    this.getInterests();
+  }
+
   render() {
     const nInterests = SupportedSports.map(({ sportName }) => {
       return (
@@ -75,6 +126,7 @@ class InterestModal extends Component {
               value={sportName}
               onClick={(e) => this.toggleInterest(e)}
               name={sportName}
+              defaultChecked={this.state.selectedInterests.includes(sportName)}
             />
             <label className={styles.sportName} htmlFor={sportName}>
               {sportName}
