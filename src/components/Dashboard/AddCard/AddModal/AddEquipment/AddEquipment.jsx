@@ -87,8 +87,9 @@ class AddEquipment extends Component {
         }
       });
 
+    this.props.handleRefresh();
     this.props.onCloseModal();
-  };;
+  };
 
   render() {
     // Map supported sports to category options

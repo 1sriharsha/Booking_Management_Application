@@ -17,6 +17,7 @@ class AddModal extends Component {
               <AddFacility
                 key={uniqid("", "-addfacility")}
                 onCloseModal={this.props.onCloseModal}
+                handleRefresh={this.props.handleRefresh}
               />
             )}
             {/* Add Promotion Interface */}
@@ -24,6 +25,7 @@ class AddModal extends Component {
               <AddPromotion
                 key={uniqid("", "-addpromotion")}
                 onCloseModal={this.props.onCloseModal}
+                handleRefresh={this.props.handleRefresh}
               />
             )}
             {/* Add Equipment Interface */}
@@ -31,6 +33,7 @@ class AddModal extends Component {
               <AddEquipment
                 key={uniqid("", "-addequipment")}
                 onCloseModal={this.props.onCloseModal}
+                handleRefresh={this.props.handleRefresh}
               />
             )}
           </div>

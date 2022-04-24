@@ -30,7 +30,7 @@ class EditCard extends Component {
       })
         .then((res) => {
           console.log("Deleted Successfully");
-          //Add redirect to Dashboard
+          this.props.handleRefresh();
         })
         .catch((err) => {
           console.log(err);
