@@ -59,9 +59,6 @@ class FavoriteSportsGraph extends Component {
         }
       }
 
-      console.log("fav");
-      console.log(tempBookData);
-
       this.setState((prevState) => ({
         myBookData: tempBookData,
       }));
@@ -99,7 +96,6 @@ class FavoriteSportsGraph extends Component {
 
   render() {
     let favoritesData = this.findOcc(this.state.myBookData, "facilitySport");
-    console.log(favoritesData);
 
     return (
       <React.Fragment>
