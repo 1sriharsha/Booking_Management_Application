@@ -69,66 +69,63 @@ class CheckoutModal extends Component {
   }
 
   onPay = () => {
-    if (!this.props.isAuthenticated) {
-      this.props.onShowModal("login");
+    var api_url;
+    if (process.env.NODE_ENV === "production") {
+      api_url = REACT_APP_PRODUCTION_URL;
     } else {
-      var api_url;
-      if (process.env.NODE_ENV === "production") {
-        api_url = REACT_APP_PRODUCTION_URL;
-      } else {
-        api_url = REACT_APP_LOCAL_URL;
-      }
-
-      axios({
-        method: "POST",
-        headers: {
-          "Access-Control-Allow-Origin": api_url,
-        },
-        withCredentials: true,
-        url: api_url + "/book/add",
-        data: {
-          facilityID: this.state.uniqFacId,
-          firstName: this.state.reservationFirstName,
-          lastName: this.state.reservationLastName,
-          email: this.state.reservationEmail,
-          gear: this.state.reservedGear,
-          intime: this.state.reservedSlot,
-          outtime: this.state.reservedSlot + 1,
-          upgrade: this.state.reservedExtras,
-          totalAmount: this.state.reservationTotal,
-        },
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("Booked Successfully");
-
-            // Calculate points (points equivalent to 2% back)
-            localStorage.setItem(
-              "rewardPoints",
-              parseInt(userRewardPoints) -
-                this.state.redeemedPoints +
-                parseInt(this.state.reservationTotal * 0.2)
-            );
-
-            this.props.handleRefresh();
-            this.props.onCloseModal();
-          }
-        })
-        .catch(function (err) {
-          console.log(err);
-          if (err.response) {
-            if (err.response.status === 404) {
-              console.log("Couldn't Book");
-            }
-          } else if (err.request) {
-            //Response not received from API
-            console.log("Error: ", err.request);
-          } else {
-            //Unexpected Error
-            console.log("Error", err.message);
-          }
-        });
+      api_url = REACT_APP_LOCAL_URL;
     }
+
+    axios({
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      url: api_url + "/book/add",
+      data: {
+        facilityID: this.state.uniqFacId,
+        firstName: this.state.reservationFirstName,
+        lastName: this.state.reservationLastName,
+        email: this.state.reservationEmail,
+        gear: this.state.reservedGear,
+        intime: this.state.reservedSlot,
+        outtime: this.state.reservedSlot + 1,
+        upgrade: this.state.reservedExtras,
+        totalAmount: this.state.reservationTotal,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res);
+          console.log("Booked Successfully");
+
+          // Calculate points (points equivalent to 2% back)
+          localStorage.setItem(
+            "rewardPoints",
+            parseInt(userRewardPoints) -
+              this.state.redeemedPoints +
+              parseInt(this.state.reservationTotal * 0.2)
+          );
+
+          this.props.handleRefresh();
+          this.props.onCloseModal();
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            console.log("Couldn't Book");
+          }
+        } else if (err.request) {
+          //Response not received from API
+          console.log("Error: ", err.request);
+        } else {
+          //Unexpected Error
+          console.log("Error", err.message);
+        }
+      });
   };
 
   setPageNumber(page) {
@@ -844,35 +841,37 @@ class CheckoutModal extends Component {
                         )}
 
                         <div className={styles.discounts}>
-                          {/* Promotion Code */}
-                          <section>
-                            <label htmlFor="promo">Promotion Code</label>
-                            <input
-                              type="text"
-                              id="promo"
-                              name="promo"
-                              value={this.state.promotionCode}
-                              onChange={this.validatePromotion}
-                            />
-                          </section>
                           {/* Reward Points */}
                           {this.props.userType !== "Employee" && (
-                            <section>
-                              <label htmlFor="rewards">
-                                Reward Points -{" "}
-                                {userRewardPoints - this.state.redeemedPoints}{" "}
-                                remaining
-                              </label>
-                              <input
-                                type="number"
-                                id="rewards"
-                                name="rewards"
-                                value={this.state.redeemedPoints}
-                                onChange={this.validatePoints}
-                                min={0}
-                                max={userRewardPoints}
-                              />
-                            </section>
+                            <React.Fragment>
+                              {/* Promotion Code */}
+                              <section>
+                                <label htmlFor="promo">Promotion Code</label>
+                                <input
+                                  type="text"
+                                  id="promo"
+                                  name="promo"
+                                  value={this.state.promotionCode}
+                                  onChange={this.validatePromotion}
+                                />
+                              </section>
+                              <section>
+                                <label htmlFor="rewards">
+                                  Reward Points -{" "}
+                                  {userRewardPoints - this.state.redeemedPoints}{" "}
+                                  remaining
+                                </label>
+                                <input
+                                  type="number"
+                                  id="rewards"
+                                  name="rewards"
+                                  value={this.state.redeemedPoints}
+                                  onChange={this.validatePoints}
+                                  min={0}
+                                  max={userRewardPoints}
+                                />
+                              </section>
+                            </React.Fragment>
                           )}
                           {/* [Employee] Cash Option */}
                           {this.props.userType === "Employee" && (
@@ -1005,7 +1004,7 @@ class CheckoutModal extends Component {
                         </div>
                       </div>
                       {/* Payment Buttons */}
-                      {!isAuthenticated && (
+                      {/* {!isAuthenticated && (
                         <button
                           type="button"
                           onClick={() => this.props.onShowModal("login")}
@@ -1015,9 +1014,9 @@ class CheckoutModal extends Component {
                         >
                           <React.Fragment>Login</React.Fragment>
                         </button>
-                      )}
+                      )} */}
 
-                      {isAuthenticated && this.state.reservationTotal === 0 && (
+                      {this.props.userType === "Employee" && (
                         <button
                           onClick={this.onPay}
                           className={[styles.button, styles.buttonPrimary].join(
@@ -1025,7 +1024,7 @@ class CheckoutModal extends Component {
                           )}
                         >
                           <React.Fragment>
-                            Pay
+                            Charge Customer
                             <NumberFormat
                               prefix="$"
                               value={this.state.reservationTotal.toFixed(2)}
@@ -1036,46 +1035,69 @@ class CheckoutModal extends Component {
                         </button>
                       )}
 
-                      {isAuthenticated && this.state.reservationTotal > 0 && (
-                        <div className={styles.paypal}>
-                          <PayPalScriptProvider
-                            options={{
-                              "client-id": REACT_APP_PAYPAL_CLIENT_ID,
-                            }}
+                      {this.props.userType !== "Employee" &&
+                        this.state.reservationTotal === 0 && (
+                          <button
+                            onClick={this.onPay}
+                            className={[
+                              styles.button,
+                              styles.buttonPrimary,
+                            ].join(" ")}
                           >
-                            <PayPalButtons
-                              style={{
-                                color: "blue",
-                                label: "pay",
-                                layout: "horizontal",
-                                tagline: false,
-                                shape: "rect",
+                            <React.Fragment>
+                              Pay
+                              <NumberFormat
+                                prefix="$"
+                                value={this.state.reservationTotal.toFixed(2)}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                              />
+                            </React.Fragment>
+                          </button>
+                        )}
+
+                      {this.props.userType !== "Employee" &&
+                        this.state.reservationTotal > 0 && (
+                          <div className={styles.paypal}>
+                            <PayPalScriptProvider
+                              options={{
+                                "client-id": REACT_APP_PAYPAL_CLIENT_ID,
                               }}
-                              fundingSource="paypal"
-                              createOrder={(data, actions) => {
-                                return actions.order.create({
-                                  purchase_units: [
-                                    {
-                                      amount: {
-                                        value: this.state.reservationTotal,
+                            >
+                              <PayPalButtons
+                                style={{
+                                  color: "blue",
+                                  label: "pay",
+                                  layout: "horizontal",
+                                  tagline: false,
+                                  shape: "rect",
+                                }}
+                                fundingSource="paypal"
+                                createOrder={(data, actions) => {
+                                  return actions.order.create({
+                                    purchase_units: [
+                                      {
+                                        amount: {
+                                          value: this.state.reservationTotal,
+                                        },
                                       },
-                                    },
-                                  ],
-                                });
-                              }}
-                              onApprove={(data, actions) => {
-                                return actions.order
-                                  .capture()
-                                  .then((details) => {
-                                    const name = details.payer.name.given_name;
-                                    this.onPay();
-                                    alert(`Transaction completed by ${name}`);
+                                    ],
                                   });
-                              }}
-                            />
-                          </PayPalScriptProvider>
-                        </div>
-                      )}
+                                }}
+                                onApprove={(data, actions) => {
+                                  return actions.order
+                                    .capture()
+                                    .then((details) => {
+                                      const name =
+                                        details.payer.name.given_name;
+                                      this.onPay();
+                                      alert(`Transaction completed by ${name}`);
+                                    });
+                                }}
+                              />
+                            </PayPalScriptProvider>
+                          </div>
+                        )}
                     </aside>
                   </main>
                 </section>
