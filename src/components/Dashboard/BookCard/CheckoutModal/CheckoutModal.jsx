@@ -60,7 +60,7 @@ class CheckoutModal extends Component {
       isPaid: true,
     };
 
-    if (this.props.userType === "Employee") {
+    if (this.props.userType === "Employee" || this.props.userType === "Guest") {
       startSection = 0;
       this.state.reservationFirstName = null;
       this.state.reservationLastName = null;
@@ -842,37 +842,39 @@ class CheckoutModal extends Component {
 
                         <div className={styles.discounts}>
                           {/* Reward Points */}
-                          {this.props.userType !== "Employee" && (
-                            <React.Fragment>
-                              {/* Promotion Code */}
-                              <section>
-                                <label htmlFor="promo">Promotion Code</label>
-                                <input
-                                  type="text"
-                                  id="promo"
-                                  name="promo"
-                                  value={this.state.promotionCode}
-                                  onChange={this.validatePromotion}
-                                />
-                              </section>
-                              <section>
-                                <label htmlFor="rewards">
-                                  Reward Points -{" "}
-                                  {userRewardPoints - this.state.redeemedPoints}{" "}
-                                  remaining
-                                </label>
-                                <input
-                                  type="number"
-                                  id="rewards"
-                                  name="rewards"
-                                  value={this.state.redeemedPoints}
-                                  onChange={this.validatePoints}
-                                  min={0}
-                                  max={userRewardPoints}
-                                />
-                              </section>
-                            </React.Fragment>
-                          )}
+                          {this.props.userType !== "Employee" &&
+                            this.props.userType !== "Guest" && (
+                              <React.Fragment>
+                                {/* Promotion Code */}
+                                <section>
+                                  <label htmlFor="promo">Promotion Code</label>
+                                  <input
+                                    type="text"
+                                    id="promo"
+                                    name="promo"
+                                    value={this.state.promotionCode}
+                                    onChange={this.validatePromotion}
+                                  />
+                                </section>
+                                <section>
+                                  <label htmlFor="rewards">
+                                    Reward Points -{" "}
+                                    {userRewardPoints -
+                                      this.state.redeemedPoints}{" "}
+                                    remaining
+                                  </label>
+                                  <input
+                                    type="number"
+                                    id="rewards"
+                                    name="rewards"
+                                    value={this.state.redeemedPoints}
+                                    onChange={this.validatePoints}
+                                    min={0}
+                                    max={userRewardPoints}
+                                  />
+                                </section>
+                              </React.Fragment>
+                            )}
                           {/* [Employee] Cash Option */}
                           {this.props.userType === "Employee" && (
                             <section className={styles.cash}>
