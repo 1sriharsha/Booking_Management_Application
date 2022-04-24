@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require("bcrypt");
 
 
 const PaymentSchema = mongoose.Schema({
@@ -7,6 +6,7 @@ const PaymentSchema = mongoose.Schema({
     cardHolderName:{type:String,required:true},
     cardNumber:{type:String,required:true},
     cardExpiry:{type:String,required:true},
+    cvv:{type:String,required:true},
     billingLocation:{
         streetAddress:{type:String,required:true},
         streetAddress2:{type:String},
@@ -18,3 +18,7 @@ const PaymentSchema = mongoose.Schema({
     promotionCodeUsed:{type:String},
     rewardPointsUsed:{type:String}
 })
+
+
+const Payment = mongoose.model('Payment', PaymentSchema,'payment_methods');
+module.exports = Payment;
