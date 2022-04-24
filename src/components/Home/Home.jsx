@@ -49,12 +49,6 @@ class Home extends Component {
                   <li>
                     <a href="/dashboard">Dashboard</a>
                   </li>
-                  <li>
-                    <a href="/">Support</a>
-                  </li>
-                  <li>
-                    <a href="/">Account</a>
-                  </li>
                 </ul>
               </div>
 
@@ -94,6 +88,8 @@ class Home extends Component {
           <div className={styles.image}>
             <img src="images/runner.jpeg" alt="" />
           </div>
+
+          
         </div>
       </>
     );
