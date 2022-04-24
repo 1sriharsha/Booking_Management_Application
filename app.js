@@ -62,6 +62,8 @@ app.use('/auth',require('./routes/auth'))
 app.use('/users',require('./routes/users'))
 app.use('/book',require('./routes/book'))
 app.use('/facilities',require('./routes/facilities'))
+app.use('/interests',require('./routes/interests'))
+
 app.use('/chat',require('./routes/chat'))
 const PORT  = process.env.PORT || 5000
 
