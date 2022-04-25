@@ -124,6 +124,7 @@ class App extends Component {
                 isAuthenticated={this.state.isAuthenticated}
                 userFirstName={this.state.userFirstName}
                 userLastName={this.state.userLastName}
+                userRewardPoints={this.state.userRewardPoints}
                 userType={this.state.userType}
                 onShowModal={this.showModal}
                 onLogout={this.onLogout}

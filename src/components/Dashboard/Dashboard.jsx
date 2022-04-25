@@ -405,6 +405,7 @@ class Dashboard extends Component {
                 isAuthenticated={this.props.isAuthenticated}
                 userFirstName={this.props.userFirstName}
                 userLastName={this.props.userLastName}
+                userType={this.props.userType}
                 onShowModal={this.props.onShowModal}
                 onLogout={this.props.onLogout}
                 userRewardPoints={this.props.userRewardPoints}
