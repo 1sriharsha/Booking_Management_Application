@@ -76,6 +76,7 @@ class ConfirmationModal extends Component {
         facilityLocation,
         facilitySport,
         facilityInfo,
+        totalAmount,
         latitude,
         longitude,
         intime,
@@ -253,8 +254,8 @@ class ConfirmationModal extends Component {
                             </React.Fragment>
                           )}
                           {/* Subtotal, Tax, & Total */}
-                          {/* <div className={styles.reservedPricing}>
-                      <div>
+                          <div className={styles.reservedPricing}>
+                            {/* <div>
                         Subtotal:
                         <NumberFormat
                           prefix="$"
@@ -271,19 +272,36 @@ class ConfirmationModal extends Component {
                           displayType={"text"}
                           thousandSeparator={true}
                         />
-                      </div>
-                      <div className={styles.reservationTotal}>
-                        Total:
-                        <NumberFormat
-                          prefix="$"
-                          value={this.state.reservationTotal.toFixed(2)}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                        />
-                      </div>
-                    </div> */}
+                      </div> */}
+                            <div className={styles.reservationTotal}>
+                              Total:
+                              <NumberFormat
+                                prefix="$"
+                                value={totalAmount.toFixed(2)}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
+                      {/* Cancel Button */}
+                      <button
+                        onClick={this.props.handleCancelation}
+                        className={[styles.button, styles.cancelButton].join(
+                          " "
+                        )}
+                      >
+                        <React.Fragment>
+                          Refund
+                          <NumberFormat
+                            prefix="$"
+                            value={totalAmount.toFixed(2)}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                          />
+                        </React.Fragment>
+                      </button>
                     </aside>
                   </main>
                 </section>

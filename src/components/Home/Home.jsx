@@ -88,7 +88,7 @@ class Home extends Component {
 
           {/* Introduction: Image [Right] */}
           <div className={styles.image}>
-            <img src="images/runner.jpeg" alt="" />
+            <img src="images/runner.jpeg" alt="Runner Illustration" />
           </div>
         </section>
 
@@ -97,7 +97,7 @@ class Home extends Component {
           <div>
             <div className={styles.icon}>
               <FontAwesomeIcon icon="fa-solid fa-heart-pulse" />
-              <img src="images/blob.svg" />
+              <img src="images/blob.svg" alt="Icon background" />
             </div>
             <div className={styles.title}>Train</div>
             <div className={styles.desc}>
@@ -107,7 +107,7 @@ class Home extends Component {
           <div>
             <div className={styles.icon}>
               <FontAwesomeIcon icon="fa-solid fa-person-walking" />
-              <img src="images/blob.svg" />
+              <img src="images/blob.svg" alt="Icon background" />
             </div>
             <div className={styles.title}>Play</div>
             <div className={styles.desc}>
@@ -117,7 +117,7 @@ class Home extends Component {
           <div>
             <div className={styles.icon}>
               <FontAwesomeIcon icon="fa-solid fa-stopwatch-20" />
-              <img src="images/blob.svg" />
+              <img src="images/blob.svg" alt="Icon background" />
             </div>
             <div className={styles.title}>Compete</div>
             <div className={styles.desc}>

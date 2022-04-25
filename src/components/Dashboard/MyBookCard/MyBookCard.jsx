@@ -12,7 +12,7 @@ class MyBookCard extends Component {
 
   onDelete = () => {
     let isExecuted = window.confirm(
-      "Are you sure you want to delete this booking ?"
+      "Are you sure you want to cancel this booking ?"
     );
     if (isExecuted) {
       var api_url;
@@ -32,6 +32,7 @@ class MyBookCard extends Component {
       })
         .then((res) => {
           console.log("Deleted Successfully");
+          window.alert(`Refund requested for $${this.props.totalAmount}`);
           // Refresh My Bookings Data
           this.props.handleRefresh();
         })
@@ -64,6 +65,7 @@ class MyBookCard extends Component {
         facilityLocation,
         facilitySport,
         facilityInfo,
+        totalAmount,
         latitude,
         longitude,
         animationDelay,
@@ -145,12 +147,14 @@ class MyBookCard extends Component {
             facilityLocation={facilityLocation}
             facilitySport={facilitySport}
             facilityInfo={facilityInfo}
+            totalAmount={totalAmount}
             latitude={latitude}
             longitude={longitude}
             gear={gear}
             upgrade={upgrade}
             intime={intime}
             outtime={outtime}
+            handleCancelation={this.onDelete}
           />
         )}
       </React.Fragment>

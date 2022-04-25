@@ -161,6 +161,7 @@ class Dashboard extends Component {
             facilitySport: temp.facility_info.facilitySports,
             facilityName: temp.facility_info.facilityName,
             facilityInfo: temp.facility_info.facilityInformation,
+            totalAmount: temp.totalAmount,
           };
           counter = counter + 1;
           tempBookData.push(bookData);
@@ -341,6 +342,7 @@ class Dashboard extends Component {
         facilityLocation,
         facilitySport,
         facilityInfo,
+        totalAmount,
         latitude,
         longitude,
       }) => {
@@ -364,6 +366,7 @@ class Dashboard extends Component {
               facilityLocation={facilityLocation}
               facilitySport={facilitySport}
               facilityInfo={facilityInfo}
+              totalAmount={totalAmount}
               latitude={latitude}
               longitude={longitude}
               userFirstName={this.props.userFirstName}
@@ -594,6 +597,7 @@ class Dashboard extends Component {
             </div>
           )}
 
+          {/* Support Chat */}
           <Chat userType={this.props.userType} />
         </div>
       </React.Fragment>
