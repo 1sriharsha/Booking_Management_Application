@@ -19,9 +19,8 @@ router.post("/add", async (req,res)=>{
 });
 
 router.get("/promos",async function (req,res){
-    Promotion.find({}, {"promotionCode": 1, "promotionStart": 1, "promotionEnd":1 }).then((promotion)=>{
-        res.status(200).send(book)
-        // res.status(200).json(book)
+    Promotion.find({}).then((promotion)=>{
+        res.status(200).send(promotion)
     }).catch((err)=>{
         res.status(500).send(err)
     })
