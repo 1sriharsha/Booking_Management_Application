@@ -24,13 +24,13 @@ class ManagementTabs extends Component {
           tabLabel="Edit Facilities"
           icon="fa-solid fa-pen-to-square"
         ></Tab>
-        <Tab
+        {/* <Tab
           key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
           onClick={this.props.onClick}
           tabLabel="Edit Equipment"
           icon="fa-solid fa-pen-to-square"
-        ></Tab>
+        ></Tab> */}
         <Tab
           key={uniqid("", "-tab")}
           activeTab={this.props.activeTab}
