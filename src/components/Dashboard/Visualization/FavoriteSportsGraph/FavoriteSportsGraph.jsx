@@ -101,7 +101,12 @@ class FavoriteSportsGraph extends Component {
       <React.Fragment>
         {/* Earnings Data */}
         <h1 className={styles.title}>Your Favorite Sports</h1>
-        <VictoryChart width={1000} height={450} theme={VictoryTheme.material}>
+        <VictoryChart
+          width={1000}
+          height={450}
+          padding={90}
+          theme={VictoryTheme.material}
+        >
           <VictoryAxis label={"Sport"} tickFormat={(t) => ``} />
           <VictoryAxis
             dependentAxis
@@ -114,8 +119,9 @@ class FavoriteSportsGraph extends Component {
             labels={({ datum }) => `${datum.facilitySport}`}
             x="facilitySport"
             y="totalBookings"
-            alignment="middle"
+            alignment={"start"}
             barRatio={0.2}
+            barWidth={10}
             // animate={{
             //   duration: 2000,
             //   onLoad: { duration: 1000 },
