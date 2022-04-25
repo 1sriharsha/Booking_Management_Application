@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Home.module.css";
 import "./Home.css";
 import { NavProfile } from "..";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Home extends Component {
   constructor(props) {
@@ -67,7 +68,7 @@ class Home extends Component {
         </header>
 
         {/* Introduction Section */}
-        <div className={[styles.intro, styles.container].join(" ")}>
+        <section className={[styles.intro, styles.container].join(" ")}>
           {/* Introduction: Text [Left] */}
           <div className={styles.text}>
             <div className={styles.title}>The #1 Sports Booking Platform</div>
@@ -89,9 +90,54 @@ class Home extends Component {
           <div className={styles.image}>
             <img src="images/runner.jpeg" alt="" />
           </div>
+        </section>
 
-          
-        </div>
+        {/* Information Section */}
+        <section className={styles.info}>
+          <div>
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon="fa-solid fa-heart-pulse" />
+              <img src="images/blob.svg" />
+            </div>
+            <div className={styles.title}>Train</div>
+            <div className={styles.desc}>
+              Hire personal trainers to up your game.
+            </div>
+          </div>
+          <div>
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon="fa-solid fa-person-walking" />
+              <img src="images/blob.svg" />
+            </div>
+            <div className={styles.title}>Play</div>
+            <div className={styles.desc}>
+              Reserve your favorite sports facility for all your friends.
+            </div>
+          </div>
+          <div>
+            <div className={styles.icon}>
+              <FontAwesomeIcon icon="fa-solid fa-stopwatch-20" />
+              <img src="images/blob.svg" />
+            </div>
+            <div className={styles.title}>Compete</div>
+            <div className={styles.desc}>
+              Enlist game officials to oversee your next match.
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className={styles.footer}>
+          <div className={styles.container}>
+            &copy; 2022 Athlos
+            {/* <section>
+              <div className={styles.footerlogo}>
+                <a href="/">Athlos</a>
+              </div>
+              <div>The #1 Sports Booking Platform</div>
+            </section> */}
+          </div>
+        </footer>
       </>
     );
   }
