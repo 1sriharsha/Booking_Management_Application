@@ -59,7 +59,6 @@ class AddPromotion extends Component {
       api_url = REACT_APP_LOCAL_URL;
     }
 
-
     axios({
       method: "POST",
       headers: {

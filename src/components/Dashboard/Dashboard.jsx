@@ -209,7 +209,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props.userImage)
+    console.log(this.props.userImage);
 
     var i = 0;
     var animationDelay = 0;
@@ -579,7 +579,7 @@ class Dashboard extends Component {
                   userFirstName={this.props.userFirstName}
                   userLastName={this.props.userLastName}
                   userRewardPoints={this.props.userRewardPoints}
-                  userImage = {this.props.userImage}
+                  userImage={this.props.userImage}
                 />
                 {/* Payment Shortcut */}
                 <Shortcut
@@ -591,7 +591,7 @@ class Dashboard extends Component {
                   icon="fa-solid fa-credit-card"
                   iconClass="icon iconGreen"
                   onClick={this.onClickTabItem}
-                  userImage = {this.props.userImage}
+                  userImage={this.props.userImage}
                 />
               </div>
             </React.Fragment>

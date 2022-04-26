@@ -128,11 +128,11 @@
 }
 
 .timeSlotContainer button:disabled {
-  border: 1px solid #C0C0C0;
+  border: 1px solid #c0c0c0;
 }
 
 .timeSlotContainer button:disabled:hover {
-  color: #C0C0C0;
+  color: #c0c0c0;
 }
 
 /* Navigation */

@@ -3,16 +3,14 @@ import Agent from "./Agent/Agent";
 import Client from "./Client/Client";
 
 class Chat extends Component {
-
-render() {
+  render() {
     return (
-        <React.Fragment>
-            {this.props.userType === 'Support' && <Agent />}
-            {this.props.userType === 'Customer' && <Client />}
-        </React.Fragment>
-    )
+      <React.Fragment>
+        {this.props.userType === "Support" && <Agent />}
+        {this.props.userType === "Customer" && <Client />}
+      </React.Fragment>
+    );
+  }
 }
 
-}
-
-export default Chat
+export default Chat;

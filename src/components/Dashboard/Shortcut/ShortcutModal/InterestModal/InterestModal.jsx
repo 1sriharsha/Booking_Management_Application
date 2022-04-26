@@ -9,7 +9,7 @@ const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 class InterestModal extends Component {
   state = {
     sectionNumber: 1,
-    selectedInterests: []
+    selectedInterests: [],
   };
 
   setPageNumber(page) {
@@ -122,7 +122,7 @@ class InterestModal extends Component {
   }
 
   render() {
-    console.log(this.props.userImage)
+    console.log(this.props.userImage);
     const nInterests = SupportedSports.map(({ sportName }) => {
       return (
         <React.Fragment>
@@ -148,7 +148,6 @@ class InterestModal extends Component {
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div className={styles.navigation}>
-
               <button
                 className={styles.close}
                 onClick={this.props.onCloseModal}
@@ -193,11 +192,11 @@ class InterestModal extends Component {
               </nav>
             </div>
 
-
             {this.state.sectionNumber === 1 && (
-
               <div className={styles.interestContainer}>
-                <section className={styles.title}>Select Your Interests</section>
+                <section className={styles.title}>
+                  Select Your Interests
+                </section>
                 <section className={styles.interests}>{nInterests}</section>
 
                 <section>
@@ -215,9 +214,9 @@ class InterestModal extends Component {
               <div className={styles.container}>
                 <div className={styles.title}>My Profile Details</div>
                 <div className={styles.profile}>
-                <div className={styles.profileIcon}>
-                  <img src={this.props.userImage} alt="Your Image"></img>
-                </div>
+                  <div className={styles.profileIcon}>
+                    <img src={this.props.userImage} alt="Your Image"></img>
+                  </div>
                   <p>First Name: {this.props.userFirstName}</p>
                   <p>Last Name: {this.props.userLastName}</p>
                   <p>Email ID: {this.props.userEmail}</p>

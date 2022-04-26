@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NumberFormat from "react-number-format";
 import uniqid from "uniqid";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import MapSection from './Map/Map'
-const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL,REACT_APP_API_KEY } = process.env;
-
+import MapSection from "./Map/Map";
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_API_KEY } =
+  process.env;
 
 class ConfirmationModal extends Component {
   state = {

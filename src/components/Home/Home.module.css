@@ -14,7 +14,7 @@
   --font-title: "Noto Serif", serif;
   --color-primary: rgb(41, 176, 176);
   --color-primary-dark: #219292;
-  --color-primary-tint: #CAEFEF;
+  --color-primary-tint: #caefef;
   --color-secondary: #ddcecd;
   --color-tertiary: #eff2f1;
   --color-gray: rgb(79, 90, 107);
@@ -331,7 +331,7 @@ input[type]:focus,
   text-align: center;
   font-size: 1.3em;
   font-weight: 600;
-margin-bottom: 0.3em;
+  margin-bottom: 0.3em;
 }
 
 .info .desc {
@@ -355,7 +355,6 @@ margin-bottom: 0.3em;
   align-items: center;
 }
 
-
 .footer section {
   display: flex;
   flex-flow: column nowrap;
@@ -363,7 +362,6 @@ margin-bottom: 0.3em;
 }
 
 .footer .footerlogo {
-  
   font-family: var(--font-logo);
   font-size: 30px;
 }
@@ -371,4 +369,3 @@ margin-bottom: 0.3em;
 .footer .footerlogo a {
   color: white;
 }
-

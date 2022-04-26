@@ -106,7 +106,7 @@ class App extends Component {
 
     if (storedUser) {
       user = storedUser;
-      console.log(user.profilePicture)
+      console.log(user.profilePicture);
     }
 
     return user;

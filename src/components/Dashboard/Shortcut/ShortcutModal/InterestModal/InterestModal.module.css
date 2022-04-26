@@ -181,7 +181,6 @@
   cursor: not-allowed;
 }
 
-
 .sectionText {
   width: 105px;
 }
@@ -204,7 +203,6 @@
   text-align: left;
   font-weight: 800;
 }
-
 
 .payment form {
   display: flex;
@@ -241,10 +239,9 @@
   gap: 2em;
 }
 
-p { 
+p {
   font-size: 30px;
 }
-
 
 .profileIcon {
   height: 85px;

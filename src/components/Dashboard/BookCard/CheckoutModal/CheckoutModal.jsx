@@ -19,8 +19,6 @@ const {
 let startSection = 1;
 let userRewardPoints = localStorage.getItem("rewardPoints");
 
-
-
 class CheckoutModal extends Component {
   constructor(props) {
     super(props);

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class ErrorCard extends Component {
   onClick = () => {
     this.props.handleRefresh();
-  };;
+  };
 
   render() {
     return (

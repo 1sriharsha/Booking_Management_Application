@@ -5,11 +5,17 @@ import MDSpinner from "react-md-spinner";
 // const region = process.env.REACT_APP_REGION;
 // const AUTH_KEY = process.env.REACT_APP_AUTH_KEY;
 // const wid = process.env.REACT_APP_W2;
-const {REACT_APP_AGENT_ID, REACT_APP_ID, REACT_APP_REGION, REACT_APP_AUTH_KEY, REACT_APP_W2} = process.env;
+const {
+  REACT_APP_AGENT_ID,
+  REACT_APP_ID,
+  REACT_APP_REGION,
+  REACT_APP_AUTH_KEY,
+  REACT_APP_W2,
+} = process.env;
 const Agent = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-      console.log(REACT_APP_ID)
+    console.log(REACT_APP_ID);
     window.CometChatWidget.init({
       appID: "2079391d99294330",
       appRegion: "us",
