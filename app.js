@@ -66,6 +66,6 @@ app.use('/interests',require('./routes/interests'))
 app.use('/promotion',require('./routes/promotion'))
 app.use('/payment',require('./routes/payment'))
 app.use('/chat',require('./routes/chat'))
-const PORT  = process.env.PORT || 5000
+const PORT  = process.env.PORT || 3000
 
 app.listen(PORT,console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${PORT}`))  

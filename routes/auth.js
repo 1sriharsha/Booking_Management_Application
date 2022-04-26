@@ -45,7 +45,7 @@ router.post('/google',(req,res)=>{
                         res
                         .cookie("access_token",token,{
                             httpOnly:true,
-                            // secure:process.env.NODE_ENV === 'production'? true: false,
+                            //secure:process.env.NODE_ENV === 'production'? true: false,
                             expires:new Date(Date.now() + 900000)})
                         .status(409)
                         .json(
@@ -67,7 +67,7 @@ router.post('/google',(req,res)=>{
                         googleUser =GoogleUser.create(googleUser)
                         res.cookie("access_token",token,{
                             httpOnly:true,
-                            // secure:process.env.NODE_ENV === 'production'? true: false,
+                            secure:process.env.NODE_ENV === 'production'? true: false,
                             expires:new Date(Date.now() + 900000)})
                         .status(200)
                         .json(
