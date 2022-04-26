@@ -58,6 +58,7 @@ class CheckoutModal extends Component {
       isGearSelected: false,
       isExtrasSelected: false,
       isPaid: true,
+      isUsingCredit: false,
 
       // Reserved Data
       reservedSlots: {},
@@ -130,6 +131,25 @@ class CheckoutModal extends Component {
           console.log("Error", err.message);
         }
       });
+  };
+
+  onPayCredit = (e) => {
+    var creditData = {
+      cardHolderName: e.target.cardholder.value,
+      cardNumber: e.target.number.value,
+      expiration: e.target.exp.value,
+      cvv: e.target.csc.value,
+      streetAddress: e.target.streetAddress.value,
+      streetAddress2: e.target.aptAddress.value,
+      country: e.target.country.value,
+      city: e.target.city.value,
+      state: e.target.state.value,
+      zipcode: e.target.zip.value,
+      promotionUsed: e.target.promo.value,
+      rewardPointsUsed: e.target.rewards.value,
+    };
+    console.log(creditData);
+    e.preventDefault(); // Prevent page refresh
   };
 
   setPageNumber(page) {
@@ -823,7 +843,7 @@ class CheckoutModal extends Component {
                           <React.Fragment>Guest Payment Method</React.Fragment>
                         )}
                       </div>
-                      <form>
+                      <form onSubmit={(e) => this.onPayCredit(e)}>
                         {this.props.userType !== "Employee" && (
                           <React.Fragment>
                             <input
@@ -835,6 +855,7 @@ class CheckoutModal extends Component {
                             />
                             <InputMask
                               id="cardnumber"
+                              name="number"
                               mask={"9999 9999 9999 9999"}
                               type={"text"}
                               placeholder="Card Number"
@@ -843,6 +864,7 @@ class CheckoutModal extends Component {
                             <div>
                               <InputMask
                                 id="expirationdate"
+                                name="exp"
                                 mask={"99/99"}
                                 type={"text"}
                                 placeholder="MM/YY"
@@ -850,6 +872,7 @@ class CheckoutModal extends Component {
                               ></InputMask>
                               <InputMask
                                 id="securitycode"
+                                name="csc"
                                 mask={"999"}
                                 type={"text"}
                                 placeholder="CVV"
@@ -950,6 +973,9 @@ class CheckoutModal extends Component {
                             </section>
                           )}
                         </div>
+                        <button className={styles.button} type={"submit"}>
+                          Pay with credit
+                        </button>
                       </form>
                     </aside>
                     {/* Checkout Summary */}
