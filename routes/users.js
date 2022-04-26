@@ -55,7 +55,7 @@ router.post('/add',async function(req, res){
 router.post('/login',async function(req,res){
    
     try{
-        console.log(req.body.loginData.email)
+        //console.log(req.body.loginData.email)
         let user =await User.findOne({email:req.body.loginData.email}).exec(async (err,user)=>{
             if(err){
                 console.log(err)
@@ -78,10 +78,10 @@ router.post('/login',async function(req,res){
                         res
                           .cookie("access_token", token, {
                             httpOnly: true,
-                            secure:
-                              process.env.NODE_ENV === "production"
-                                ? true
-                                : false,
+                            // secure:
+                            //   process.env.NODE_ENV === "production"
+                            //     ? true
+                            //     : false,
                             expires: new Date(Date.now() + 900000),
                           })
                           .status(200)

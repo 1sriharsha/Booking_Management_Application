@@ -40,12 +40,12 @@ router.post('/google',(req,res)=>{
                 else{
                     if(user){
                         let token = jwt.sign({email:googleUser.email},process.env.JWT_SECRET);
-                        console.log(user)
+                        //console.log(user)
                         //console.log(token)
                         res
                         .cookie("access_token",token,{
                             httpOnly:true,
-                            secure:process.env.NODE_ENV === 'production'? true: false,
+                            // secure:process.env.NODE_ENV === 'production'? true: false,
                             expires:new Date(Date.now() + 900000)})
                         .status(409)
                         .json(
@@ -67,7 +67,7 @@ router.post('/google',(req,res)=>{
                         googleUser =GoogleUser.create(googleUser)
                         res.cookie("access_token",token,{
                             httpOnly:true,
-                            secure:process.env.NODE_ENV === 'production'? true: false,
+                            // secure:process.env.NODE_ENV === 'production'? true: false,
                             expires:new Date(Date.now() + 900000)})
                         .status(200)
                         .json(
