@@ -64,6 +64,7 @@ class Dashboard extends Component {
   handleRefresh = () => {
     this.getMyBookings();
     this.getFacilities();
+    this.getPromotions();
     this.props.handleRefresh();
   };
 
@@ -535,6 +536,7 @@ class Dashboard extends Component {
                   key={uniqid("", "-errorcard")}
                   userType={this.props.userType}
                   onClickTabItem={this.onClickTabItem}
+                  handleRefresh={this.handleRefresh}
                 />
               )}
             </div>

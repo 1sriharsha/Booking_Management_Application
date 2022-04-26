@@ -4,12 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class ErrorCard extends Component {
   onClick = () => {
-    if (this.props.userType === "Manager") {
-      this.props.onClickTabItem("Edit Bookings");
-    } else {
-      this.props.onClickTabItem("Book");
-    }
-  };
+    this.props.handleRefresh();
+  };;
 
   render() {
     return (
