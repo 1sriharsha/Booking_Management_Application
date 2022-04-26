@@ -49,6 +49,9 @@ class Shortcut extends Component {
             shortcutTo={this.props.shortcutTo}
             onCloseModal={this.onCloseModal}
             userEmail={this.props.userEmail}
+            userFirstName={this.props.userFirstName}
+            userLastName={this.props.userLastName}
+            userRewardPoints={this.props.userRewardPoints}
           />
         )}
       </React.Fragment>

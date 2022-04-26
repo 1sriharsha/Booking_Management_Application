@@ -572,6 +572,9 @@ class Dashboard extends Component {
                   iconClass="icon iconOrange"
                   onClick={this.onClickTabItem}
                   userEmail={this.props.userEmail}
+                  userFirstName={this.props.userFirstName}
+                  userLastName={this.props.userLastName}
+                  userRewardPoints={this.props.userRewardPoints}
                 />
                 {/* Payment Shortcut */}
                 <Shortcut

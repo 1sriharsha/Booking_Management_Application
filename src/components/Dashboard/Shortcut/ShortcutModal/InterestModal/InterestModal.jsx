@@ -2,11 +2,19 @@ import React, { Component } from "react";
 import { SupportedSports } from "../../../../../data";
 import styles from "./InterestModal.module.css";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 class InterestModal extends Component {
-  state = { selectedInterests: [] };
+  state = {
+    sectionNumber: 1,
+    selectedInterests: []
+  };
+
+  setPageNumber(page) {
+    this.setState({ sectionNumber: page });
+  }
 
   toggleInterest(e) {
     let selectedInterests = this.state.selectedInterests;
@@ -138,27 +146,87 @@ class InterestModal extends Component {
       <React.Fragment>
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <button
-              className={styles.close}
-              onClick={this.props.onCloseModal}
-              title="Close"
-            >
-              &times;
-            </button>
+            <div className={styles.navigation}>
 
-            <div className={styles.interestContainer}>
-              <section className={styles.title}>Select Your Interests</section>
-              <section className={styles.interests}>{nInterests}</section>
-
-              <section>
+              <button
+                className={styles.close}
+                onClick={this.props.onCloseModal}
+                title="Close"
+              >
+                &times;
+              </button>
+              {/* Status Bar */}
+              <nav className={styles.statusBar}>
+                {/* Status Bar: Interests Summary */}
                 <button
-                  onClick={() => this.onSubmit()}
-                  className={[styles.button, styles.buttonPrimary].join(" ")}
+                  className={[
+                    styles.statusSection,
+                    this.state.sectionNumber === 1 ? "completedSection" : "",
+                  ].join(" ")}
+                  onClick={() => this.setPageNumber(1)}
                 >
-                  Submit
+                  <div className={styles.sectionIcon}>
+                    <FontAwesomeIcon icon="fa-solid fa-bars-progress" />
+                  </div>
+                  <div className={styles.sectionText}>
+                    <div className={styles.sectionSelection}>Interests</div>
+                    <div className={styles.sectionTitle}>My Interests</div>
+                  </div>
                 </button>
-              </section>
+                {/* Status Bar: My Profile Information  */}
+                <button
+                  className={[
+                    styles.statusSection,
+                    this.state.sectionNumber === 2 ? "completedSection" : "",
+                  ].join(" ")}
+                  onClick={() => this.setPageNumber(2)}
+                >
+                  <div className={styles.sectionIcon}>
+                    <FontAwesomeIcon icon="fa-solid fa-qrcode" />
+                  </div>
+                  <div className={styles.sectionText}>
+                    <div className={styles.sectionSelection}>Profile</div>
+                    <div className={styles.sectionTitle}>My Profile</div>
+                  </div>
+                </button>
+              </nav>
             </div>
+
+
+            {this.state.sectionNumber === 1 && (
+
+              <div className={styles.interestContainer}>
+                <section className={styles.title}>Select Your Interests</section>
+                <section className={styles.interests}>{nInterests}</section>
+
+                <section>
+                  <button
+                    onClick={() => this.onSubmit()}
+                    className={[styles.button, styles.buttonPrimary].join(" ")}
+                  >
+                    Submit
+                  </button>
+                </section>
+              </div>
+            )}
+
+            {this.state.sectionNumber === 2 && (
+              <div className={styles.container}>
+                <div className={styles.title}>My Profile Details</div>
+                <div className={styles.profileIcon}>
+                  <span>
+                    {this.props.userFirstName.charAt(0) +
+                      this.props.userLastName.charAt(0)}
+                  </span>
+                </div>
+                <div className={styles.profile}>
+                  <p>First Name: {this.props.userFirstName}</p>
+                  <p>Last Name: {this.props.userLastName}</p>
+                  <p>Email ID: {this.props.userEmail}</p>
+                  <p>Your Reward Points: {this.props.userRewardPoints}</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </React.Fragment>
