@@ -4,53 +4,95 @@ import styles from "./Map.module.css";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify/icons-mdi/map-marker";
 const { REACT_APP_API_KEY } = process.env;
-var directions;
-const Map = ({ location, zoomLevel }) => (
+
+
+const MapSection = ({ location, zoomLevel }) => (
   <div>
+    
     <div className={styles.map}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: REACT_APP_API_KEY }}
         defaultCenter={location}
         defaultZoom={zoomLevel}
+        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps,{lat:location.lat,lng:location.lng},location.address)}
       >
-        <LocationPin
-          lat={location.lat}
-          lng={location.lng}
-          text={location.address}
-        />
+      
+       
       </GoogleMapReact>
-      {/* <div >
-          
-          <h1>Coordinates</h1>
-          <button onClick={getLocation}>Get Location</button>
-        </div> */}
+         
     </div>
   </div>
 );
-const LocationPin = ({ text }) => (
-  <div className={styles.pin}>
-    <Icon icon={locationIcon} className={styles.icon} />
-    <p className={styles.text}>{text}</p>
-  </div>
-);
 
-// const origin = { lat: 40.756795, lng: -73.954298 };
-// const destination = { lat: 41.756795, lng: -78.954298 };
 
-// directionsService.route(
-//   {
-//     origin: origin,
-//     destination: destination,
-//     travelMode: google.maps.TravelMode.DRIVING
-//   },
-//   (result, status) => {
-//     if (status === google.maps.DirectionsStatus.OK) {
-//       this.setState({
-//         directions: result
-//       });
-//     } else {
-//       console.error(`error fetching directions ${result}`);
-//     }
-//   }
-// );
-export default Map;
+const handleApiLoaded = (map, maps,destination,facAddress) => {
+  console.log(facAddress)
+  let facInfoWindow,infoWindow;
+  const marker = new maps.Marker({
+    position: destination,
+    map: map,
+  });
+  facInfoWindow = new maps.InfoWindow()
+  facInfoWindow.setPosition(destination)
+  facInfoWindow.setContent(facAddress);
+  facInfoWindow.open(map)
+
+  console.log(destination)
+  var directionsService = new maps.DirectionsService();
+  var directionsRenderer = new maps.DirectionsRenderer();
+  
+
+  infoWindow = new maps.InfoWindow()
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        
+        infoWindow.setPosition(pos);
+        infoWindow.setContent("Location Based on IP Address");
+        infoWindow.open(map);
+        directionsRenderer.setMap(map);
+        var request = {
+          origin:pos,
+          destination:destination,
+          travelMode: 'DRIVING'
+        };
+        directionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+            directionsRenderer.setDirections(response);
+            document.getElementById("pin").style.display = "none";
+          }
+        });
+      
+
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter(),origin);
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter(),origin);
+}
+
+
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos,origin) {
+  infoWindow.setPosition(origin);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open();
+}
+  
+
+};
+
+
+export default MapSection;
