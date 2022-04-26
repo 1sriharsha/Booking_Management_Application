@@ -18,7 +18,7 @@ class PaymentModal extends Component {
     super(props)
     this.state={
       paymentData:[],
-      selectCard:{}
+      cardIdSelected:""
     }
   }
   componentDidMount(){
@@ -50,12 +50,14 @@ class PaymentModal extends Component {
       })
       
       
-      console.log(this.state.paymentData)
+      
   }
   
 
   onUpdatePayment = (e) => {
+    var id=this.state.cardIdSelected
     var creditData = {
+      email:this.props.userEmail,
       cardHolderName: e.target.cardholder.value,
       cardNumber: e.target.number.value,
       expiration: e.target.exp.value,
@@ -68,7 +70,35 @@ class PaymentModal extends Component {
       zipcode: e.target.zip.value,
     };
     console.log(creditData);
+    axios({
+      method:"PUT",
+      url:api_url+"/payment/update/"+id,
+      withCredentials:true,
+      data:{
+        userEmail:this.props.userEmail,
+        cardHolderName: e.target.cardholder.value,
+        cardNumber: e.target.number.value,
+        expiration: e.target.exp.value,
+        cvv: e.target.csc.value,
+        billingLocation:{
+          streetAddress: e.target.streetAddress.value,
+          streetAddress2: e.target.aptAddress.value,
+          country: e.target.country.value,
+          city: e.target.city.value,
+          state: e.target.state.value,
+          zipcode: e.target.zip.value,
+        }
+    }
 
+    }).then((res)=>{
+      if(res.status===200){
+        alert("Payment Details Updated")
+      }
+      else{
+        console.log("Alert Updating Payment")
+      }
+    })
+    
     this.props.onCloseModal();
     e.preventDefault(); // Prevent page refresh
   };
@@ -86,23 +116,29 @@ class PaymentModal extends Component {
     document.getElementById("state").value=""
     document.getElementById("zip").value=""
     }
-    console.log("Inside Function")
-    const index = this.state.paymentData.findIndex(object => {
-      return object.cardNumber === c.value;
-    });
-    console.log(index)
-    console.log(this.state.paymentData)
-    console.log(c.value)
-    document.getElementById("name").value=this.state.paymentData[index].cardHolderName
-    document.getElementById("cardnumber").value=this.state.paymentData[index].cardNumber
-    document.getElementById("expirationdate").value=this.state.paymentData[index].cardExpiry
-    document.getElementById("streetAddress").value=this.state.paymentData[index].billingLocation.streetAddress
-    document.getElementById("aptAddress").value=this.state.paymentData[index].billingLocation.streetAddress2
-    document.getElementById("country").value=this.state.paymentData[index].billingLocation.country
-    document.getElementById("city").value=this.state.paymentData[index].billingLocation.city
-    document.getElementById("state").value=this.state.paymentData[index].billingLocation.state
-    document.getElementById("zip").value=this.state.paymentData[index].billingLocation.zipcode
-
+    else
+      {
+      const index = this.state.paymentData.findIndex(object => {
+        return object.cardNumber === c.value;
+      });
+      //console.log(index)
+      console.log(this.state.paymentData)
+      //console.log(c.value)
+      document.getElementById("name").value=this.state.paymentData[index].cardHolderName
+      document.getElementById("cardnumber").value=this.state.paymentData[index].cardNumber
+      document.getElementById("expirationdate").value=this.state.paymentData[index].cardExpiry
+      document.getElementById("streetAddress").value=this.state.paymentData[index].billingLocation.streetAddress
+      document.getElementById("aptAddress").value=this.state.paymentData[index].billingLocation.streetAddress2
+      document.getElementById("country").value=this.state.paymentData[index].billingLocation.country
+      document.getElementById("city").value=this.state.paymentData[index].billingLocation.city
+      document.getElementById("state").value=this.state.paymentData[index].billingLocation.state
+      document.getElementById("zip").value=this.state.paymentData[index].billingLocation.zipcode
+      this.setState((prevState) => ({
+        cardIdSelected:this.state.paymentData[index]._id
+      }));
+    
+   
+    }
   }
 
   render() {
@@ -123,7 +159,7 @@ class PaymentModal extends Component {
               <aside className={styles.payment}>
                 <div className={styles.title}>Update your payment details</div>
                 <select onChange={this.cardSelected} id="cardSelected">
-                  <option value="Please Select">---Please Select ---</option>
+                  <option value="Please Select">---Please Select---</option>
                 {
                   this.state.paymentData.map(el => <option value={el.cardNumber} key={el.cardNumber}> {el.cardNumber} </option>)
                 }
