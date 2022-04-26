@@ -255,6 +255,7 @@ p {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .profileIcon > span {

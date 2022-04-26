@@ -23,7 +23,7 @@ class App extends Component {
       userLastName: userData.lastName,
       userEmail: userData.email,
       userType: userData.userType,
-      userImage: userData.image,
+      userImage: userData.profilePicture,
       userRewardPoints: localStorage.getItem("rewardPoints"),
       showModal: false,
       showModalLogin: false,
@@ -57,11 +57,10 @@ class App extends Component {
       userLastName: res.data.lastName,
       userEmail: res.data.email,
       userType: res.data.type,
-      userImage: res.data.image,
+      userImage: res.data.profilePicture,
       userRewardPoints: localStorage.getItem("rewardPoints"),
       showModal: false,
     });
-
     localStorage.setItem("isAuthenticated", true);
     localStorage.setItem("user", JSON.stringify(res.data));
 
@@ -99,7 +98,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
-      image: "",
+      profilePicture: "",
       userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee", "Support"
     };
 
@@ -107,6 +106,7 @@ class App extends Component {
 
     if (storedUser) {
       user = storedUser;
+      console.log(user.profilePicture)
     }
 
     return user;
@@ -143,6 +143,7 @@ class App extends Component {
                 userLastName={this.state.userLastName}
                 userEmail={this.state.userEmail}
                 userType={this.state.userType}
+                userImage={this.state.userImage}
                 userRewardPoints={this.state.userRewardPoints}
                 onShowModal={this.showModal}
                 onLogout={this.onLogout}

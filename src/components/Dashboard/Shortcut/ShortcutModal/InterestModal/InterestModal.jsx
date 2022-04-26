@@ -122,6 +122,7 @@ class InterestModal extends Component {
   }
 
   render() {
+    console.log(this.props.userImage)
     const nInterests = SupportedSports.map(({ sportName }) => {
       return (
         <React.Fragment>
@@ -213,14 +214,10 @@ class InterestModal extends Component {
             {this.state.sectionNumber === 2 && (
               <div className={styles.container}>
                 <div className={styles.title}>My Profile Details</div>
-                <div className={styles.profileIcon}>
-                  <span>
-                    {this.props.userFirstName.charAt(0) +
-                      this.props.userLastName.charAt(0)}
-                  </span>
-                </div>
                 <div className={styles.profile}>
+                <div className={styles.profileIcon}>
                   <img src={this.props.userImage} alt="Your Image"></img>
+                </div>
                   <p>First Name: {this.props.userFirstName}</p>
                   <p>Last Name: {this.props.userLastName}</p>
                   <p>Email ID: {this.props.userEmail}</p>

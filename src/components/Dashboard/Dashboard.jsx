@@ -209,6 +209,8 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log(this.props.userImage)
+
     var i = 0;
     var animationDelay = 0;
 
@@ -589,6 +591,7 @@ class Dashboard extends Component {
                   icon="fa-solid fa-credit-card"
                   iconClass="icon iconGreen"
                   onClick={this.onClickTabItem}
+                  userImage = {this.props.userImage}
                 />
               </div>
             </React.Fragment>
