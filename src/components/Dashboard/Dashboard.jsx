@@ -76,6 +76,8 @@ class Dashboard extends Component {
     this.getPromotions();
   }
 
+  
+
   getFacilities() {
     var tempFacData = [];
 
@@ -587,6 +589,7 @@ class Dashboard extends Component {
                   behavior={"showModal"}
                   title="Payments"
                   description="Update Payment"
+                  userEmail={this.props.userEmail}
                   icon="fa-solid fa-credit-card"
                   iconClass="icon iconGreen"
                   onClick={this.onClickTabItem}

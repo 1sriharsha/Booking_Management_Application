@@ -20,7 +20,9 @@ let startSection = 1;
 let userRewardPoints = localStorage.getItem("rewardPoints");
 
 class CheckoutModal extends Component {
+  
   constructor(props) {
+    
     super(props);
 
     this.state = {
@@ -74,13 +76,13 @@ class CheckoutModal extends Component {
   }
 
   onPay = () => {
+   
     var api_url;
     if (process.env.NODE_ENV === "production") {
       api_url = REACT_APP_PRODUCTION_URL;
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
-
     axios({
       method: "POST",
       headers: {
@@ -134,25 +136,49 @@ class CheckoutModal extends Component {
   };
 
   onPayCredit = (e) => {
-    var creditData = {
-      cardHolderName: e.target.cardholder.value,
-      cardNumber: e.target.number.value,
-      expiration: e.target.exp.value,
-      cvv: e.target.csc.value,
-      streetAddress: e.target.streetAddress.value,
-      streetAddress2: e.target.aptAddress.value,
-      country: e.target.country.value,
-      city: e.target.city.value,
-      state: e.target.state.value,
-      zipcode: e.target.zip.value,
-      promotionUsed: e.target.promo.value,
-      rewardPointsUsed: e.target.rewards.value,
-    };
-    console.log(creditData);
+    var api_url;
+    if (process.env.NODE_ENV === "production") {
+      api_url = REACT_APP_PRODUCTION_URL;
+    } else {
+      api_url = REACT_APP_LOCAL_URL;
+    }
+   
+    axios({
+      method:"POST",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      data:{
+        userEmail:this.state.reservationEmail,
+        cardHolderName: e.target.cardholder.value,
+        cardNumber: e.target.number.value,
+        cardExpiry: e.target.exp.value,
+        cvv: e.target.csc.value,
+        billingLocation:{
+          streetAddress: e.target.streetAddress.value,
+          streetAddress2: e.target.aptAddress.value,
+          country: e.target.country.value,
+          city: e.target.city.value,
+          state: e.target.state.value,
+          zipcode: e.target.zip.value,
+      },
+        promotionUsed: e.target.promo.value,
+        rewardPointsUsed: e.target.rewards.value,
+      },
+      url: api_url + "/payment/add",
 
-    this.props.handleRefresh();
-    this.props.onCloseModal();
-    e.preventDefault(); // Prevent page refresh
+    }).then((res)=>{
+      if(res.status === 409 || res.status===200){
+        console.log(res)
+        this.props.handleRefresh();
+        this.props.onCloseModal();
+      }
+    }).catch(function (err) {
+      console.log(err)
+    })
+    e.preventDefault(); 
+    // Prevent page refresh
   };
 
   setPageNumber(page) {
