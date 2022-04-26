@@ -63,7 +63,6 @@ class AddEquipment extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/promotions/add",
       data: { newEquipmentData },
     })

@@ -87,7 +87,6 @@ class Dashboard extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/facilities/",
     })
       .then((res) => {
@@ -144,7 +143,6 @@ class Dashboard extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/book/userbookings",
       data: {
         email: this.props.userEmail,
@@ -186,7 +184,6 @@ class Dashboard extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/promotion/promos",
     }).then((res) => {
       if (res.status === 200 || res.status === 304) {

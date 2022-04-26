@@ -71,7 +71,6 @@ class App extends Component {
     axios({
       method: "GET",
       url: api_url + "/users/logout",
-      withCredentials: true,
     }).then((res) => {
       if (res.status === 200) {
         console.log("Logged Out");

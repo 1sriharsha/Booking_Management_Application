@@ -108,7 +108,6 @@ class AddFacility extends Component {
           headers: {
             "Access-Control-Allow-Origin": api_url,
           },
-          withCredentials: true,
           url: api_url + "/facilities/add",
           data: { newFacilityData },
         })

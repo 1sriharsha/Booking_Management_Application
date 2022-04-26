@@ -30,7 +30,6 @@ const RegistrationModal = (props) => {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/users/login",
       data: { loginData },
     })

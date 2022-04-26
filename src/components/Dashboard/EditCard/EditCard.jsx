@@ -25,7 +25,6 @@ class EditCard extends Component {
         headers: {
           "Access-Control-Allow-Origin": api_url,
         },
-        withCredentials: true,
         url: api_url + "/facilities/delete/" + this.props.uniqFacId,
       })
         .then((res) => {

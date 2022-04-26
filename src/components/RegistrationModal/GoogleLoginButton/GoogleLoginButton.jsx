@@ -26,7 +26,6 @@ function GoogleLoginButton(props) {
         "Access-Control-Allow-Origin": api_url,
       },
       url: api_url + "/auth/google",
-      withCredentials: true,
       data: { tokenId: res.tokenId },
     })
       .then((res) => {

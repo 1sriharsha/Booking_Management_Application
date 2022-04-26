@@ -76,7 +76,6 @@ class CheckoutModal extends Component {
   }
 
   onPay = () => {
-   
     var api_url;
     if (process.env.NODE_ENV === "production") {
       api_url = REACT_APP_PRODUCTION_URL;
@@ -88,7 +87,6 @@ class CheckoutModal extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/book/add",
       data: {
         facilityID: this.state.uniqFacId,
@@ -142,42 +140,42 @@ class CheckoutModal extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
-   
+
     axios({
-      method:"POST",
+      method: "POST",
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
-      data:{
-        userEmail:this.state.reservationEmail,
+      data: {
+        userEmail: this.state.reservationEmail,
         cardHolderName: e.target.cardholder.value,
         cardNumber: e.target.number.value,
         cardExpiry: e.target.exp.value,
         cvv: e.target.csc.value,
-        billingLocation:{
+        billingLocation: {
           streetAddress: e.target.streetAddress.value,
           streetAddress2: e.target.aptAddress.value,
           country: e.target.country.value,
           city: e.target.city.value,
           state: e.target.state.value,
           zipcode: e.target.zip.value,
-      },
+        },
         promotionUsed: e.target.promo.value,
         rewardPointsUsed: e.target.rewards.value,
       },
       url: api_url + "/payment/add",
-
-    }).then((res)=>{
-      if(res.status === 409 || res.status===200){
-        console.log(res)
-        this.props.handleRefresh();
-        this.props.onCloseModal();
-      }
-    }).catch(function (err) {
-      console.log(err)
     })
-    e.preventDefault(); 
+      .then((res) => {
+        if (res.status === 409 || res.status === 200) {
+          console.log(res);
+          this.props.handleRefresh();
+          this.props.onCloseModal();
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    e.preventDefault();
     // Prevent page refresh
   };
 
@@ -474,7 +472,6 @@ class CheckoutModal extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/book/booked_slots",
     })
       .then((res) => {

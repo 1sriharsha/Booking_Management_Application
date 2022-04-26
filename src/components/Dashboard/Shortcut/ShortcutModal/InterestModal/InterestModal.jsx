@@ -42,7 +42,6 @@ class InterestModal extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/interests/userinterests",
       data: {
         email: this.props.userEmail,
@@ -87,7 +86,6 @@ class InterestModal extends Component {
       headers: {
         "Access-Control-Allow-Origin": api_url,
       },
-      withCredentials: true,
       url: api_url + "/interests/add",
       data: {
         email: this.props.userEmail,

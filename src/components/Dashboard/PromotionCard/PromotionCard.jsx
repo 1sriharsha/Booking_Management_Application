@@ -29,7 +29,6 @@ class PromotionCard extends Component {
         headers: {
           "Access-Control-Allow-Origin": api_url,
         },
-        withCredentials: true,
         url: api_url + "/promotion/delete/" + this.props.promotionID,
       })
         .then((res) => {
