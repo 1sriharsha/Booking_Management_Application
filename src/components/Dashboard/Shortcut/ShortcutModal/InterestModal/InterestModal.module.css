@@ -255,9 +255,10 @@ p {
   margin: 0 auto;
 }
 
-.profileIcon > span {
-  color: rgb(255, 255, 255);
-  font-size: 1.5em;
+.profileIcon > img {
+  border-width: 0 !important;
+  color: white;
+  font-size: 2em;
   font-weight: 800;
   letter-spacing: 1px;
 }

@@ -558,7 +558,6 @@ class Dashboard extends Component {
           {this.state.activeTab === "Account" && (
             <React.Fragment>
               <section className={styles.settingsImageContainer}>
-                {this.props.userRewardPoints} Reward Points
                 <Visualization
                   userType={this.props.userType}
                   userEmail={this.props.userEmail}
@@ -570,9 +569,9 @@ class Dashboard extends Component {
                   key={uniqid("", "-shortcut")}
                   shortcutTo="interests"
                   behavior={"showModal"}
-                  title="Interests"
-                  description="Select Interests"
-                  icon="fa-solid fa-medal"
+                  title="Profile"
+                  description="View Profile"
+                  icon="fa-solid fa-user"
                   iconClass="icon iconOrange"
                   onClick={this.onClickTabItem}
                   userEmail={this.props.userEmail}

@@ -182,7 +182,7 @@ class InterestModal extends Component {
                   onClick={() => this.setPageNumber(2)}
                 >
                   <div className={styles.sectionIcon}>
-                    <FontAwesomeIcon icon="fa-solid fa-qrcode" />
+                    <FontAwesomeIcon icon="fa-solid fa-user" />
                   </div>
                   <div className={styles.sectionText}>
                     <div className={styles.sectionSelection}>Profile</div>
@@ -215,7 +215,18 @@ class InterestModal extends Component {
                 <div className={styles.title}>My Profile Details</div>
                 <div className={styles.profile}>
                   <div className={styles.profileIcon}>
-                    <img src={this.props.userImage} alt="Your Image"></img>
+                    <img
+                      src={this.props.userImage}
+                      alt={
+                        this.props.userFirstName.charAt(0) +
+                        this.props.userLastName.charAt(0)
+                      }
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src = "";
+                        currentTarget.style.borderWidth = 0;
+                      }}
+                    ></img>
                   </div>
                   <p>First Name: {this.props.userFirstName}</p>
                   <p>Last Name: {this.props.userLastName}</p>
