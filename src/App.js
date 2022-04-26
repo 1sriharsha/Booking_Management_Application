@@ -23,6 +23,7 @@ class App extends Component {
       userLastName: userData.lastName,
       userEmail: userData.email,
       userType: userData.userType,
+      userImage: userData.image,
       userRewardPoints: localStorage.getItem("rewardPoints"),
       showModal: false,
       showModalLogin: false,
@@ -56,6 +57,7 @@ class App extends Component {
       userLastName: res.data.lastName,
       userEmail: res.data.email,
       userType: res.data.type,
+      userImage: res.data.image,
       userRewardPoints: localStorage.getItem("rewardPoints"),
       showModal: false,
     });
@@ -97,6 +99,7 @@ class App extends Component {
       firstName: "",
       lastName: "",
       email: "",
+      image: "",
       userType: "Guest", // Implemented Options: "Guest", "Customer", "Manager", "Employee", "Support"
     };
 

@@ -220,6 +220,7 @@ class InterestModal extends Component {
                   </span>
                 </div>
                 <div className={styles.profile}>
+                  <img src={this.props.userImage} alt="Your Image"></img>
                   <p>First Name: {this.props.userFirstName}</p>
                   <p>Last Name: {this.props.userLastName}</p>
                   <p>Email ID: {this.props.userEmail}</p>

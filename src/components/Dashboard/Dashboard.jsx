@@ -577,6 +577,7 @@ class Dashboard extends Component {
                   userFirstName={this.props.userFirstName}
                   userLastName={this.props.userLastName}
                   userRewardPoints={this.props.userRewardPoints}
+                  userImage = {this.props.userImage}
                 />
                 {/* Payment Shortcut */}
                 <Shortcut
