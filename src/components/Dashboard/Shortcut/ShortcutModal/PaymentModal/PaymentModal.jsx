@@ -4,6 +4,26 @@ import InputMask from "react-input-mask";
 
 class PaymentModal extends Component {
   state = {};
+
+  onUpdatePayment = (e) => {
+    var creditData = {
+      cardHolderName: e.target.cardholder.value,
+      cardNumber: e.target.number.value,
+      expiration: e.target.exp.value,
+      cvv: e.target.csc.value,
+      streetAddress: e.target.streetAddress.value,
+      streetAddress2: e.target.aptAddress.value,
+      country: e.target.country.value,
+      city: e.target.city.value,
+      state: e.target.state.value,
+      zipcode: e.target.zip.value,
+    };
+    console.log(creditData);
+
+    this.props.onCloseModal();
+    e.preventDefault(); // Prevent page refresh
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -19,7 +39,7 @@ class PaymentModal extends Component {
             <div className={styles.container}>
               <aside className={styles.payment}>
                 <div className={styles.title}>Enter your payment details</div>
-                <form>
+                <form onSubmit={(e) => this.onUpdatePayment(e)}>
                   <input
                     id="name"
                     type="text"
@@ -29,6 +49,7 @@ class PaymentModal extends Component {
                   />
                   <InputMask
                     id="cardnumber"
+                    name="number"
                     mask={"9999 9999 9999 9999"}
                     type={"text"}
                     placeholder="Card Number"
@@ -37,6 +58,7 @@ class PaymentModal extends Component {
                   <div>
                     <InputMask
                       id="expirationdate"
+                      name="exp"
                       mask={"99/99"}
                       type={"text"}
                       placeholder="MM/YY"
@@ -44,6 +66,7 @@ class PaymentModal extends Component {
                     ></InputMask>
                     <InputMask
                       id="securitycode"
+                      name="csc"
                       mask={"999"}
                       type={"text"}
                       placeholder="CVV"
@@ -92,16 +115,13 @@ class PaymentModal extends Component {
                       autoComplete={"postal-code"}
                     />
                   </div>
+                  <button
+                    className={[styles.button, styles.buttonPrimary].join(" ")}
+                  >
+                    Submit
+                  </button>
                 </form>
               </aside>
-              <section>
-                <button
-                  onClick={this.props.onCloseModal}
-                  className={[styles.button, styles.buttonPrimary].join(" ")}
-                >
-                  Submit
-                </button>
-              </section>
             </div>
           </div>
         </div>

@@ -149,6 +149,9 @@ class CheckoutModal extends Component {
       rewardPointsUsed: e.target.rewards.value,
     };
     console.log(creditData);
+
+    this.props.handleRefresh();
+    this.props.onCloseModal();
     e.preventDefault(); // Prevent page refresh
   };
 
