@@ -53,9 +53,10 @@ router.post('/google',(req,res)=>{
                                 success: true,
                                 firstName:user.firstName,
                                 lastName:user.lastName,
-                                userType:user.userType,
+                                profilePicture:user.image,
                                 email:user.email,
-                                message:'Authentication Successful!!'
+                                userType:'Customer',
+                                message:'Authentication Successful!!!'
                             }
                         )
                     }
@@ -72,9 +73,10 @@ router.post('/google',(req,res)=>{
                         .json(
                             {
                                 success: true,
-                                firstName:response.payload.given_name,
-                                lastName:response.payload.family_name,
-                                email:googleUser.email,
+                                firstName:user.firstName,
+                                lastName:user.lastName,
+                                profilePicture:user.image,
+                                email:user.email,
                                 userType:'Customer',
                                 message:'Authentication Successful!!!'
                             }

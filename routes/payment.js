@@ -22,9 +22,9 @@ router.post("/add",async function(req,res){
         promotionUsed:req.body.promotionUsed || "No Promotion Used",
         rewardPointsUsed:req.body.rewardPointsUsed
     }
-
-    }
     paymentMethod=await Payment.create(paymentObject)
+    }
+    
     
 
 })
