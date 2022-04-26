@@ -645,7 +645,11 @@ class Dashboard extends Component {
           )}
 
           {/* Support Chat */}
-          <Chat userType={this.props.userType} />
+          <Chat
+            userFirstName={this.props.userFirstName}
+            userLastName={this.props.userLastName}
+            userType={this.props.userType}
+          />
         </div>
       </React.Fragment>
     );

@@ -7,7 +7,7 @@ import MDSpinner from "react-md-spinner";
 const { REACT_APP_ID, REACT_APP_REGION, REACT_APP_AUTH_KEY, REACT_APP_W1 } =
   process.env;
 
-const Client = () => {
+const Client = (userFirstName, userLastName) => {
   const [load, setLoad] = useState(true);
   useEffect(() => {
     console.log(REACT_APP_ID);

@@ -122,18 +122,20 @@ class PaymentModal extends Component {
             <div className={styles.container}>
               <aside className={styles.payment}>
                 <div className={styles.title}>Update your payment details</div>
-                <select onChange={this.cardSelected} id="cardSelected">
-                  <option value="Please Select">---Please Select ---</option>
-                {
-                  this.state.paymentData.map(el => <option value={el.cardNumber} key={el.cardNumber}> {el.cardNumber} </option>)
-                }
-                </select>
+
                 <form onSubmit={(e) => this.onUpdatePayment(e)}>
+                  <select onChange={this.cardSelected} id="cardSelected">
+                    <option value="Please Select">---Please Select ---</option>
+                    {this.state.paymentData.map((el) => (
+                      <option value={el.cardNumber} key={el.cardNumber}>
+                        {el.cardNumber}
+                      </option>
+                    ))}
+                  </select>
                   <input
                     id="name"
                     type="text"
                     name="cardholder"
-                    
                     placeholder="Card Holder Name"
                     autoComplete={"cc-name"}
                   />
