@@ -99,7 +99,7 @@ const RegistrationModal = (props) => {
           console.log("Error", err.message);
         }
       });
-    event.preventDefault();
+    // event.preventDefault();
   };
 
   const toggleShowPassword = () => {
@@ -370,11 +370,7 @@ const RegistrationModal = (props) => {
                   id="signup-form"
                   className={styles.slideInLeft}
                   onSubmit={(e) => {
-                    if (isValid) {
-                      onSignUp(e);
-                    } else {
-                      validate(e);
-                    }
+                    onSignUp(e);
                   }}
                   method="post"
                 >

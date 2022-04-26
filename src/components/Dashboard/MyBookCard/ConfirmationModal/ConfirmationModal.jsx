@@ -171,6 +171,22 @@ class ConfirmationModal extends Component {
                     <div className={styles.sectionTitle}>Information</div>
                   </div>
                 </button>
+                {/* Status Bar: Review  */}
+                <button
+                  className={[
+                    styles.statusSection,
+                    this.state.sectionNumber === 3 ? "completedSection" : "",
+                  ].join(" ")}
+                  onClick={() => this.setPageNumber(3)}
+                >
+                  <div className={styles.sectionIcon}>
+                    <FontAwesomeIcon icon="fa-solid fa-star" />
+                  </div>
+                  <div className={styles.sectionText}>
+                    <div className={styles.sectionSelection}>Submit</div>
+                    <div className={styles.sectionTitle}>Feedback</div>
+                  </div>
+                </button>
               </nav>
             </div>
 
@@ -323,6 +339,12 @@ class ConfirmationModal extends Component {
                     Please use the above code to check in for your reservation.
                   </div>
                 </div>
+              </section>
+            )}
+
+            {this.state.sectionNumber === 3 && (
+              <section className={styles.container}>
+                <div className={styles.title}>Feedback</div>
               </section>
             )}
           </div>

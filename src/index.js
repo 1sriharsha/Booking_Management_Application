@@ -49,6 +49,7 @@ import {
   faPersonWalking,
   faHeartPulse,
   faStopwatch20,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -93,7 +94,8 @@ library.add(
   faBarsProgress,
   faPersonWalking,
   faHeartPulse,
-  faStopwatch20
+  faStopwatch20,
+  faStar
 );
 
 ReactDOM.render(
