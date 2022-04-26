@@ -127,6 +127,14 @@
   background-color: var(--color-background);
 }
 
+.timeSlotContainer button:disabled {
+  border: 1px solid #C0C0C0;
+}
+
+.timeSlotContainer button:disabled:hover {
+  color: #C0C0C0;
+}
+
 /* Navigation */
 .navigation {
   height: 70px;

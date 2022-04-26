@@ -308,15 +308,7 @@ class ConfirmationModal extends Component {
                           " "
                         )}
                       >
-                        <React.Fragment>
-                          Refund
-                          <NumberFormat
-                            prefix="$"
-                            value={totalAmount.toFixed(2)}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                          />
-                        </React.Fragment>
+                        <React.Fragment>Cancel</React.Fragment>
                       </button>
                     </aside>
                   </main>
