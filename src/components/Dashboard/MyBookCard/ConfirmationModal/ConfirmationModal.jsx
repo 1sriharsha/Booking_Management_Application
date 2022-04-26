@@ -359,9 +359,9 @@ class ConfirmationModal extends Component {
                 <p>Your Review:</p>
                 <input
                     type="textarea"
-                    id="aptAddress"
-                    name="aptAddress"
-                    placeholder="Apt, unit, suite, etc. (optional)"
+                    id="review"
+                    name="review"
+                    placeholder="Your Review"
                   />
                 </div>
                 <button
