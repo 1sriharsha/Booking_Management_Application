@@ -59,16 +59,6 @@ class AddPromotion extends Component {
       api_url = REACT_APP_LOCAL_URL;
     }
 
-    var newPromotionData = {
-      promotionName: this.state.promotionName,
-      promotionCode: this.state.promotionCode,
-      promotionStart: this.state.promotionStart,
-      promotionEnd: this.state.promotionEnd,
-      promotionPercentage: this.state.promotionPercentage / 100, // Convert to value between 0.0 - 1.0
-      promotionInfo: this.state.promotionInfo,
-    };
-
-    console.log(newPromotionData); // TODO Remove
 
     axios({
       method: "POST",
@@ -76,8 +66,15 @@ class AddPromotion extends Component {
         "Access-Control-Allow-Origin": api_url,
       },
       withCredentials: true,
-      url: api_url + "/promotions/add",
-      data: { newPromotionData },
+      url: api_url + "/promotion/add",
+      data: {
+        promotionName: this.state.promotionName,
+        promotionCode: this.state.promotionCode,
+        promotionStart: this.state.promotionStart,
+        promotionEnd: this.state.promotionEnd,
+        promotionPercentage: this.state.promotionPercentage / 100, // Convert to value between 0.0 - 1.0
+        promotionInfo: this.state.promotionInfo,
+      },
     })
       .then((res) => {
         if (res.status === 200) {

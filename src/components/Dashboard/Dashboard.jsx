@@ -31,8 +31,8 @@ class Dashboard extends Component {
     let defaultTab = "Book";
     if (props.userType === "Customer" || props.userType === "Manager") {
       defaultTab = "Dashboard";
-    } else if(props.userType === 'Support') {
-      defaultTab = 'Chat Support'
+    } else if (props.userType === "Support") {
+      defaultTab = "Chat Support";
     }
 
     this.state = {
@@ -41,6 +41,7 @@ class Dashboard extends Component {
       sportFilterValue: "",
       facilityData: [],
       myBookData: [],
+      promotionData: [],
     };
   }
 
@@ -68,9 +69,10 @@ class Dashboard extends Component {
 
   componentDidMount() {
     document.body.style.backgroundColor = "var(--color-tertiary)";
-    
+
     this.getFacilities();
     this.getMyBookings();
+    this.getPromotions();
   }
 
   getFacilities() {
@@ -169,6 +171,38 @@ class Dashboard extends Component {
       }
       this.setState((prevState) => ({
         myBookData: tempBookData,
+      }));
+    });
+  }
+
+  getPromotions() {
+    var tempPromoData = [];
+
+    axios({
+      method: "Get",
+      headers: {
+        "Access-Control-Allow-Origin": api_url,
+      },
+      withCredentials: true,
+      url: api_url + "/promotion/promos",
+    }).then((res) => {
+      if (res.status === 200 || res.status === 304) {
+        for (let temp of res.data) {
+          const promoData = {
+            id: temp._id,
+            promotionCode: temp.promotionCode,
+            promotionEnd: temp.promotionEnd,
+            promotionInfo: temp.promotionInfo,
+            promotionName: temp.promotionName,
+            promotionPercentage: temp.promotionPercentage,
+            promotionStart: temp.promotionStart,
+          };
+
+          tempPromoData.push(promoData);
+        }
+      }
+      this.setState((prevState) => ({
+        promotionData: tempPromoData,
       }));
     });
   }
@@ -295,7 +329,7 @@ class Dashboard extends Component {
       );
 
     // [Customer] Generates n PromotionCard components from Database
-    const nPromotionCards = TestPromotionData.map(
+    const nPromotionCards = this.state.promotionData.map(
       ({
         id,
         promotionName,
@@ -323,6 +357,8 @@ class Dashboard extends Component {
               promotionPercentage={promotionPercentage}
               promotionInfo={promotionInfo}
               animationDelay={animationDelay}
+              userType={this.props.userType}
+              handleRefresh={this.handleRefresh}
             />
           </React.Fragment>
         );

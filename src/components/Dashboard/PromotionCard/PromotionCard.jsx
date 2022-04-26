@@ -2,11 +2,45 @@ import React, { Component } from "react";
 import styles from "./PromotionCard.module.css";
 import "./PromotionCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL } = process.env;
 
 class PromotionCard extends Component {
   state = {
     showCheckoutModal: false,
     buttonLabel: "Copy Code",
+    isDeleted: false,
+  };
+
+  onDelete = () => {
+    let isExecuted = window.confirm(
+      "Are you sure you want to delete this promotion?"
+    );
+    if (isExecuted) {
+      var api_url;
+      if (process.env.NODE_ENV === "production") {
+        api_url = REACT_APP_PRODUCTION_URL;
+      } else {
+        api_url = REACT_APP_LOCAL_URL;
+      }
+
+      axios({
+        method: "DELETE",
+        headers: {
+          "Access-Control-Allow-Origin": api_url,
+        },
+        withCredentials: true,
+        url: api_url + "/promotion/delete/" + this.props.promotionID,
+      })
+        .then((res) => {
+          console.log("Deleted Successfully");
+          this.props.handleRefresh();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.setState({ isDeleted: true });
+    }
   };
 
   render() {
@@ -78,16 +112,27 @@ class PromotionCard extends Component {
                 {promotionInfo}
               </div>
             )}
-            <button
-              title={promotionCode}
-              className={[styles.button, styles.buttonPrimary].join(" ")}
-              onClick={() => {
-                this.setState({ buttonLabel: "Copied" });
-                navigator.clipboard.writeText(promotionCode);
-              }}
-            >
-              {this.state.buttonLabel}
-            </button>
+            {/* Delete Button */}
+            {this.props.userType === "Manager" && (
+              <button
+                className={[styles.button, styles.deleteButton].join(" ")}
+                onClick={this.onDelete}
+              >
+                Delete
+              </button>
+            )}
+            {this.props.userType === "Customer" && (
+              <button
+                title={promotionCode}
+                className={[styles.button, styles.buttonPrimary].join(" ")}
+                onClick={() => {
+                  this.setState({ buttonLabel: "Copied" });
+                  navigator.clipboard.writeText(promotionCode);
+                }}
+              >
+                {this.state.buttonLabel}
+              </button>
+            )}
           </div>
         </div>
       </React.Fragment>
