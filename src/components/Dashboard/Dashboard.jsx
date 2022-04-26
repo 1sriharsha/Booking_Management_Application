@@ -536,6 +536,7 @@ class Dashboard extends Component {
                   key={uniqid("", "-errorcard")}
                   userType={this.props.userType}
                   onClickTabItem={this.onClickTabItem}
+                  handleRefresh={this.handleRefresh}
                 />
               )}
             </div>
