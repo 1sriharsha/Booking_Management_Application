@@ -6,6 +6,8 @@ import NumberFormat from "react-number-format";
 import uniqid from "uniqid";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import MapSection from "./Map/Map";
+import ReactStars from "react-rating-stars-component";
+
 const { REACT_APP_LOCAL_URL, REACT_APP_PRODUCTION_URL, REACT_APP_API_KEY } =
   process.env;
 
@@ -63,6 +65,10 @@ class ConfirmationModal extends Component {
     }
   }
 
+  ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+
   componentDidUpdate() {
     if (this.state.sectionNumber === 1) {
       this.createScrollShadow();
@@ -103,7 +109,6 @@ class ConfirmationModal extends Component {
 
     // List of Selected Gear & Extras
     const combinedOptions = gear.concat(upgrade);
-
     const optionsList = combinedOptions.map(
       ({ itemName, value, itemPrice }) => {
         return (
@@ -126,7 +131,7 @@ class ConfirmationModal extends Component {
     );
 
     return (
-      <React.Fragment>
+      <React.Fragment>   
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div className={styles.navigation}>
@@ -337,6 +342,33 @@ class ConfirmationModal extends Component {
             {this.state.sectionNumber === 3 && (
               <section className={styles.container}>
                 <div className={styles.title}>Feedback</div>
+                <div className={styles.ratings}>
+                  <p>Your Rating:</p>
+                  <ReactStars
+                    count={5}
+                    onChange={this.ratingChanged}
+                    size={24}
+                    isHalf={true}
+                    emptyIcon={<i className="far fa-star"></i>}
+                    halfIcon={<i className="fa fa-star-half-alt"></i>}
+                    fullIcon={<i className="fa fa-star"></i>}
+                    activeColor="#ffd700"
+                  />
+                </div>
+                <div className={styles.reviews}>
+                <p>Your Review:</p>
+                <input
+                    type="textarea"
+                    id="review"
+                    name="review"
+                    placeholder="Your Review"
+                  />
+                </div>
+                <button
+                    className={[styles.button, styles.buttonPrimary].join(" ")}
+                  >
+                    Submit
+                  </button>
               </section>
             )}
           </div>

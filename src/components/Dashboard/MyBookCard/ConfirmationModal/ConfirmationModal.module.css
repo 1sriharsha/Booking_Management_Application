@@ -367,6 +367,45 @@
   display: none;
 }
 
+.ratings {
+  padding-left: 30em;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 2em;
+}
+
+.reviews {
+  padding-left: 30em;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 2em;
+
+}
+
+
+
+/* Buttons */
+.button {
+  border-radius: var(--default-border-radius);
+  border: 1px solid var(--color-gray);
+  color: var(--color-gray);
+  padding: 0.7em 1.2em;
+  margin: 1em auto;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  background-color: transparent;
+}
+
+.button:hover {
+  color: white;
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
 /* Responsive Layout */
 @media screen and (min-width: 1630px) {
   .sectionText {
