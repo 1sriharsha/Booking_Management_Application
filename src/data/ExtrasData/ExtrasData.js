@@ -1,4 +1,4 @@
-// TODO Get Extras from Database
+
 
 // Add-ons available for every reservation
 const ExtrasData = [
