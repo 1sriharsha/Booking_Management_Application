@@ -45,7 +45,7 @@ router.post('/google',(req,res)=>{
                         res
                         .cookie("access_token",token,{
                             httpOnly:true,
-                            //secure:process.env.NODE_ENV === 'production'? true: false,
+                            secure:process.env.NODE_ENV === 'production'? true: false,
                             expires:new Date(Date.now() + 900000)})
                         .status(409)
                         .json(
@@ -55,7 +55,7 @@ router.post('/google',(req,res)=>{
                                 lastName:user.lastName,
                                 profilePicture:user.image,
                                 email:user.email,
-                                userType:'Customer',
+                                userType:user.userType,
                                 message:'Authentication Successful!!!'
                             }
                         )
