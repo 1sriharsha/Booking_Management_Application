@@ -26,6 +26,12 @@ class Searchbar extends Component {
   };
 
   setSearchValue = (value) => {
+    if (this.props.userType === "Manager") {
+      this.props.onClickTabItem("Edit Facilities");
+    } else {
+      this.props.onClickTabItem("Book");
+    }
+    
     this.props.handleSearchValue(value);
     this.setState({ searchValue: value, showOptions: false });
   };
