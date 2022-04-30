@@ -31,7 +31,7 @@ class Searchbar extends Component {
     } else {
       this.props.onClickTabItem("Book");
     }
-    
+
     this.props.handleSearchValue(value);
     this.setState({ searchValue: value, showOptions: false });
   };

@@ -24,15 +24,12 @@ class Shortcut extends Component {
   };
 
   render() {
-    
     const {
       onClick,
-      props: { icon, iconClass, title, description,userEmail },
+      props: { icon, iconClass, title, description, userEmail },
     } = this;
-    
-    
+
     return (
-      
       <React.Fragment>
         <div className={styles.shortcutContainer}>
           <button className={styles.button} onClick={onClick}>
@@ -56,7 +53,6 @@ class Shortcut extends Component {
             userLastName={this.props.userLastName}
             userRewardPoints={this.props.userRewardPoints}
             userImage={this.props.userImage}
-            
           />
         )}
       </React.Fragment>

@@ -21,15 +21,12 @@
   border-radius: 50%;
   border: none;
   background-color: var(--color-tertiary);
-  
 }
 
 .micActive {
   color: var(--color-red);
-  
 }
 
 .micInactive {
   color: var(--color-gray);
-  
 }

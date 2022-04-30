@@ -1,5 +1,3 @@
-
-
 // Add-ons available for every reservation
 const ExtrasData = [
   { id: 1, value: 0, itemName: "Referee", itemPrice: 20, maxItems: 3 },

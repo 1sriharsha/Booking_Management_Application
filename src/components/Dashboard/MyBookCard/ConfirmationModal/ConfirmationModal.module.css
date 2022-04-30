@@ -381,10 +381,7 @@
   flex-flow: row nowrap;
   align-items: center;
   gap: 2em;
-
 }
-
-
 
 /* Responsive Layout */
 @media screen and (min-width: 1630px) {
