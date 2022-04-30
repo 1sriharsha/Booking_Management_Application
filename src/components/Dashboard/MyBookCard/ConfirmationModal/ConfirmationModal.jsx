@@ -131,7 +131,7 @@ class ConfirmationModal extends Component {
     );
 
     return (
-      <React.Fragment>   
+      <React.Fragment>
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div className={styles.navigation}>
@@ -342,33 +342,36 @@ class ConfirmationModal extends Component {
             {this.state.sectionNumber === 3 && (
               <section className={styles.container}>
                 <div className={styles.title}>Feedback</div>
-                <div className={styles.ratings}>
-                  <p>Your Rating:</p>
-                  <ReactStars
-                    count={5}
-                    onChange={this.ratingChanged}
-                    size={24}
-                    isHalf={true}
-                    emptyIcon={<i className="far fa-star"></i>}
-                    halfIcon={<i className="fa fa-star-half-alt"></i>}
-                    fullIcon={<i className="fa fa-star"></i>}
-                    activeColor="#ffd700"
-                  />
-                </div>
-                <div className={styles.reviews}>
-                <p>Your Review:</p>
-                <input
-                    type="textarea"
-                    id="review"
-                    name="review"
-                    placeholder="Your Review"
-                  />
-                </div>
-                <button
+                <div className={styles.feedback}>
+                  <div className={styles.ratings}>
+                    <p>Rating:</p>
+                    <ReactStars
+                      count={5}
+                      onChange={this.ratingChanged}
+                      size={24}
+                      isHalf={true}
+                      emptyIcon={<i className="far fa-star"></i>}
+                      halfIcon={<i className="fa fa-star-half-alt"></i>}
+                      fullIcon={<i className="fa fa-star"></i>}
+                      activeColor="#ffd700"
+                    />
+                  </div>
+                  <div className={styles.reviews}>
+                    <p>Review:</p>
+                    <input
+                      type="textarea"
+                      id="review"
+                      name="review"
+                      placeholder=""
+                    />
+                  </div>
+                  <button
                     className={[styles.button, styles.buttonPrimary].join(" ")}
+                    onClick={this.props.onCloseModal}
                   >
                     Submit
                   </button>
+                </div>
               </section>
             )}
           </div>
