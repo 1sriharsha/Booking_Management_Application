@@ -20,9 +20,7 @@ let startSection = 1;
 let userRewardPoints = localStorage.getItem("rewardPoints");
 
 class CheckoutModal extends Component {
-  
   constructor(props) {
-    
     super(props);
 
     this.state = {
@@ -102,7 +100,6 @@ class CheckoutModal extends Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
           console.log("Booked Successfully");
 
           // Calculate points (points equivalent to 2% back)
@@ -167,7 +164,6 @@ class CheckoutModal extends Component {
     })
       .then((res) => {
         if (res.status === 409 || res.status === 200) {
-          console.log(res);
           this.props.handleRefresh();
           this.props.onCloseModal();
         }
@@ -487,8 +483,6 @@ class CheckoutModal extends Component {
           }
         }
 
-        console.log(reservedSlots);
-
         this.setState({ reservedSlots });
         // this.setState((prevState) => ({
         //   selectedInterests: interest,
@@ -521,7 +515,6 @@ class CheckoutModal extends Component {
   }
 
   render() {
-    console.log("Facility ID: " + this.props.facilityID);
     userRewardPoints = localStorage.getItem("rewardPoints"); // tmp
 
     const {
@@ -532,7 +525,6 @@ class CheckoutModal extends Component {
         facilityInfo,
         reservationPeriodStart,
         reservationPeriodEnd,
-        isAuthenticated,
       },
     } = this;
 

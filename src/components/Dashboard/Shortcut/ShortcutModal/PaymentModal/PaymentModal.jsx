@@ -33,7 +33,6 @@ class PaymentModal extends Component {
       .then((res) => {
         if (res.status === 200 || res.status === 304) {
           for (let payment of res.data) {
-            //console.log(payment)
             payData.push(payment);
           }
         }
@@ -48,20 +47,7 @@ class PaymentModal extends Component {
 
   onUpdatePayment = (e) => {
     var id = this.state.cardIdSelected;
-    var creditData = {
-      email: this.props.userEmail,
-      cardHolderName: e.target.cardholder.value,
-      cardNumber: e.target.number.value,
-      expiration: e.target.exp.value,
-      cvv: e.target.csc.value,
-      streetAddress: e.target.streetAddress.value,
-      streetAddress2: e.target.aptAddress.value,
-      country: e.target.country.value,
-      city: e.target.city.value,
-      state: e.target.state.value,
-      zipcode: e.target.zip.value,
-    };
-    console.log(creditData);
+
     axios({
       method: "PUT",
       url: api_url + "/payment/update/" + id,
@@ -108,9 +94,6 @@ class PaymentModal extends Component {
       const index = this.state.paymentData.findIndex((object) => {
         return object.cardNumber === c.value;
       });
-      //console.log(index)
-      console.log(this.state.paymentData);
-      //console.log(c.value)
       document.getElementById("name").value =
         this.state.paymentData[index].cardHolderName;
       document.getElementById("cardnumber").value =

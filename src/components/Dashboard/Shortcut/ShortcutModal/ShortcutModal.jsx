@@ -3,9 +3,7 @@ import InterestModal from "./InterestModal/InterestModal";
 import PaymentModal from "./PaymentModal/PaymentModal";
 
 class ShortcutModal extends Component {
-  // state = { showModal: false };
   render() {
-    console.log(this.props.userEmail)
     return (
       <React.Fragment>
         {this.props.shortcutTo === "interests" && (
@@ -23,7 +21,10 @@ class ShortcutModal extends Component {
 
         {this.props.shortcutTo === "payments" && (
           <React.Fragment>
-            <PaymentModal onCloseModal={this.props.onCloseModal} userEmail={this.props.userEmail} />
+            <PaymentModal
+              onCloseModal={this.props.onCloseModal}
+              userEmail={this.props.userEmail}
+            />
           </React.Fragment>
         )}
       </React.Fragment>

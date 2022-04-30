@@ -1,49 +1,41 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
 import styles from "./Map.module.css";
-import { Icon } from "@iconify/react";
-import locationIcon from "@iconify/icons-mdi/map-marker";
 const { REACT_APP_API_KEY } = process.env;
-
 
 const MapSection = ({ location, zoomLevel }) => (
   <div>
-    
     <div className={styles.map}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: REACT_APP_API_KEY }}
         defaultCenter={location}
         defaultZoom={zoomLevel}
         yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps,{lat:location.lat,lng:location.lng},location.address)}
-      >
-      
-       
-      </GoogleMapReact>
-         
+        onGoogleApiLoaded={({ map, maps }) =>
+          handleApiLoaded(
+            map,
+            maps,
+            { lat: location.lat, lng: location.lng },
+            location.address
+          )
+        }
+      ></GoogleMapReact>
     </div>
   </div>
 );
 
+const handleApiLoaded = (map, maps, destination, facAddress) => {
+  let facInfoWindow, infoWindow;
 
-const handleApiLoaded = (map, maps,destination,facAddress) => {
-  console.log(facAddress)
-  let facInfoWindow,infoWindow;
-  const marker = new maps.Marker({
-    position: destination,
-    map: map,
-  });
-  facInfoWindow = new maps.InfoWindow()
-  facInfoWindow.setPosition(destination)
+  facInfoWindow = new maps.InfoWindow();
+  facInfoWindow.setPosition(destination);
   facInfoWindow.setContent(facAddress);
-  facInfoWindow.open(map)
+  facInfoWindow.open(map);
 
-  console.log(destination)
   var directionsService = new maps.DirectionsService();
   var directionsRenderer = new maps.DirectionsRenderer();
-  
 
-  infoWindow = new maps.InfoWindow()
+  infoWindow = new maps.InfoWindow();
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -51,48 +43,41 @@ const handleApiLoaded = (map, maps,destination,facAddress) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        
+
         infoWindow.setPosition(pos);
         infoWindow.setContent("Location Based on IP Address");
         infoWindow.open(map);
         directionsRenderer.setMap(map);
         var request = {
-          origin:pos,
-          destination:destination,
-          travelMode: 'DRIVING'
+          origin: pos,
+          destination: destination,
+          travelMode: "DRIVING",
         };
-        directionsService.route(request, function(response, status) {
-          if (status == 'OK') {
+        directionsService.route(request, function (response, status) {
+          if (status === "OK") {
             directionsRenderer.setDirections(response);
             document.getElementById("pin").style.display = "none";
           }
         });
-      
-
       },
       () => {
-        handleLocationError(true, infoWindow, map.getCenter(),origin);
+        handleLocationError(true, infoWindow, map.getCenter(), origin);
       }
     );
   } else {
     // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter(),origin);
-}
+    handleLocationError(false, infoWindow, map.getCenter(), origin);
+  }
 
-
-
-function handleLocationError(browserHasGeolocation, infoWindow, pos,origin) {
-  infoWindow.setPosition(origin);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open();
-}
-  
-
+  function handleLocationError(browserHasGeolocation, infoWindow, pos, origin) {
+    infoWindow.setPosition(origin);
+    infoWindow.setContent(
+      browserHasGeolocation
+        ? "Error: The Geolocation service failed."
+        : "Error: Your browser doesn't support geolocation."
+    );
+    infoWindow.open();
+  }
 };
-
 
 export default MapSection;

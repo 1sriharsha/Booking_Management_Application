@@ -1,5 +1,3 @@
-// TODO Get Gear from Database
-
 // Gear available to rent by sport
 const GearData = [
   {

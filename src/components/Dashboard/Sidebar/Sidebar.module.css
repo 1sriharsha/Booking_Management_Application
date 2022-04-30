@@ -22,8 +22,6 @@
   --default-border-radius: 5px;
 }
 
-/* TODO Remove CSS Not Needed For Sidebar Component  */
-
 /* General */
 body {
   background-color: var(--color-background);

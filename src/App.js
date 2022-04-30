@@ -17,7 +17,7 @@ class App extends Component {
     let userData = this.getUser();
 
     this.state = {
-      isAuthenticated: localStorage.getItem("isAuthenticated") === "true", // TODO Check cookie for Authentication
+      isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
       user: userData,
       userFirstName: userData.firstName,
       userLastName: userData.lastName,
@@ -31,7 +31,6 @@ class App extends Component {
     };
   }
 
-  // TODO Simplify
   showModal = (tab) => {
     if (tab === "login") {
       this.setState({
@@ -105,7 +104,6 @@ class App extends Component {
 
     if (storedUser) {
       user = storedUser;
-      console.log(user.profilePicture);
     }
 
     return user;

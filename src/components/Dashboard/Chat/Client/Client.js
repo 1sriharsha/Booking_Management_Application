@@ -1,23 +1,15 @@
 import { useEffect, useState } from "react";
 import MDSpinner from "react-md-spinner";
-// const appID = process.env.REACT_APP_ID;
-// const region = process.env.REACT_APP_REGION;
-// const AUTH_KEY = process.env.REACT_APP_AUTH_KEY;
-// const wid = process.env.REACT_APP_W1;
-const { REACT_APP_ID, REACT_APP_REGION, REACT_APP_AUTH_KEY, REACT_APP_W1 } =
-  process.env;
 
 const Client = (userFirstName, userLastName) => {
   const [load, setLoad] = useState(true);
   useEffect(() => {
-    console.log(REACT_APP_ID);
     setLoad(true);
     window.CometChatWidget.init({
       appID: "2079391d99294330",
       appRegion: "us",
       authKey: "7cf2425060750748696b231c31aec31d3ec06a17",
     }).then((response) => {
-      console.log("Initialization completed successfully");
       //You can now call login function.
       let uid = localStorage.getItem("cc-uid");
       if (uid === null) {

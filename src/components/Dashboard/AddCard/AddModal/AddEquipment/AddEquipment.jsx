@@ -56,7 +56,6 @@ class AddEquipment extends Component {
       itemPrice: this.state.itemPrice,
       maxItems: this.state.maxItems,
     };
-    console.log(newEquipmentData); // TODO Remove
 
     axios({
       method: "POST",

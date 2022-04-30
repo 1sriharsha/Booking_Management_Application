@@ -120,7 +120,6 @@ class InterestModal extends Component {
   }
 
   render() {
-    console.log(this.props.userImage);
     const nInterests = SupportedSports.map(({ sportName }) => {
       return (
         <React.Fragment>

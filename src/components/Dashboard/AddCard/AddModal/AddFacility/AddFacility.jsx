@@ -80,16 +80,13 @@ class AddFacility extends Component {
     } else {
       api_url = REACT_APP_LOCAL_URL;
     }
-    console.log(this.state.facilityLocation.place_id);
+
     var lat, long;
     var newFacilityData;
     geocodeByPlaceId(this.state.facilityLocation.place_id)
       .then((results) => {
-        //console.log(results)
         lat = results[0].geometry.location.lat();
         long = results[0].geometry.location.lng();
-        console.log(lat);
-        console.log(long);
       })
       .then(() => {
         newFacilityData = {
@@ -102,7 +99,7 @@ class AddFacility extends Component {
           reservationPeriodStart: this.state.reservationPeriodStart,
           reservationPeriodEnd: this.state.reservationPeriodEnd,
         };
-        console.log(newFacilityData);
+
         axios({
           method: "POST",
           headers: {

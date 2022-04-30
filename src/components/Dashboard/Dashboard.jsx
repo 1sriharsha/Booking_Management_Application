@@ -9,7 +9,6 @@ import Searchbar from "./Searchbar/Searchbar";
 import ErrorCard from "./ErrorCard/ErrorCard";
 import uniqid from "uniqid";
 import axios from "axios";
-import { TestPromotionData } from "../../data";
 import Visualization from "./Visualization/Visualization";
 import MyBookCard from "./MyBookCard/MyBookCard";
 import Chat from "./Chat/Chat";
@@ -75,8 +74,6 @@ class Dashboard extends Component {
     this.getMyBookings();
     this.getPromotions();
   }
-
-  
 
   getFacilities() {
     var tempFacData = [];
@@ -208,8 +205,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props.userImage);
-
     var i = 0;
     var animationDelay = 0;
 
