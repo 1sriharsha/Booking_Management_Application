@@ -36,6 +36,7 @@
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
+    "react-speech-recognition": "^3.9.0",
     "serve": "^13.0.2",
     "uniqid": "^5.4.0",
     "victory": "^36.3.1",
