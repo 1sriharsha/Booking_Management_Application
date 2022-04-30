@@ -3,6 +3,7 @@ import styles from "./Searchbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import uniqid from "uniqid";
 import SportFilter from "./SportFilter/SportFilter";
+import Dictaphone from "./Dictaphone/Dictaphone";
 
 class Searchbar extends Component {
   state = {
@@ -25,6 +26,7 @@ class Searchbar extends Component {
   };
 
   setSearchValue = (value) => {
+    console.log("Set search: " + value);
     this.props.handleSearchValue(value);
     this.setState({ searchValue: value, showOptions: false });
   };
@@ -82,6 +84,9 @@ class Searchbar extends Component {
             >
               <FontAwesomeIcon icon={"fa-solid fa-circle-xmark"} />
             </button>
+            <div className={styles.voiceSearch}>
+              <Dictaphone setSearchValue={this.setSearchValue} />
+            </div>
           </div>
 
           {/* Autocomplete Options */}

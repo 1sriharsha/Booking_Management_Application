@@ -50,6 +50,7 @@ import {
   faHeartPulse,
   faStopwatch20,
   faStar,
+  faMicrophone,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -95,7 +96,8 @@ library.add(
   faPersonWalking,
   faHeartPulse,
   faStopwatch20,
-  faStar
+  faStar,
+  faMicrophone
 );
 
 ReactDOM.render(
