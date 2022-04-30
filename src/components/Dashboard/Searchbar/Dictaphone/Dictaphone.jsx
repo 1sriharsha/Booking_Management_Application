@@ -13,14 +13,14 @@ const Dictaphone = (props) => {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
 
-  if (!browserSupportsSpeechRecognition) {
-    console.log("Browser doesn't support speech recognition.");
-  }
-
   return (
     <div>
       <button
-        title="Search by Voice"
+        title={
+          !browserSupportsSpeechRecognition
+            ? "Not supported by browser."
+            : "Search by Voice"
+        }
         className={listening ? "mic micActive" : "mic micInactive"}
         onMouseDown={() => {
           SpeechRecognition.startListening({ continuous: true });
