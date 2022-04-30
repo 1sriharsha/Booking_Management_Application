@@ -79,7 +79,8 @@ const RegistrationModal = (props) => {
     })
       .then((res) => {
         if (res.status === 200) {
-          props.handleAuthState(res);
+          // props.handleAuthState(res);
+          window.location.href = "/"; // Redirect to Home
           console.log("User Added to Database");
         }
       })
