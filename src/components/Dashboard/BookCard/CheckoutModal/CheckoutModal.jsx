@@ -165,6 +165,7 @@ class CheckoutModal extends Component {
       .then((res) => {
         if (res.status === 409 || res.status === 200) {
           this.props.handleRefresh();
+          this.onPay();
           this.props.onCloseModal();
         }
       })
