@@ -27,8 +27,8 @@ if(process.env.NODE_ENV === 'development'){
     origin = "http://localhost:3001"   
 }
 console.log(origin)
-app.use(cors({credentials:true,origin:origin}))
-
+app.use(cors({credentials:true,origin:true}))
+app.set('trust proxy', 1)
 //Session Middleware
 app.use(session({   
     key:'session_id',
@@ -40,7 +40,6 @@ app.use(session({
         secure:true,
         httpOnly:true,
         sameSite:true
-        
     }
 }))
 app.use(cookieParser())
@@ -66,6 +65,7 @@ app.use('/interests',require('./routes/interests'))
 app.use('/promotion',require('./routes/promotion'))
 app.use('/payment',require('./routes/payment'))
 app.use('/chat',require('./routes/chat'))
+
 const PORT  = process.env.PORT || 3000
 
 app.listen(PORT,console.log(`Server Running in ${process.env.NODE_ENV} mode on port ${PORT}`))  

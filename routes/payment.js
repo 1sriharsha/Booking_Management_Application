@@ -55,10 +55,7 @@ router.post("/add",async function(req,res){
 router.post("/getpaymethod", async (req,res)=>{
    
     Payment.find({"userEmail":req.body.email}).then( (pMethods)=>{
-        //console.log(pMethods)
-        for(let method of pMethods){
-
-        }
+        
         res.status(200).json(pMethods)
     }).catch((err)=>{
         res.status(500).send(err)
