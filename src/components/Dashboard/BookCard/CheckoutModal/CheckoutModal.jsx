@@ -23,6 +23,10 @@ class CheckoutModal extends Component {
   constructor(props) {
     super(props);
 
+    if (this.props.userType === "Employee" || this.props.userType === "Guest") {
+      startSection = 0;
+    }
+
     this.state = {
       // Facility Data
       facilityID: this.props.facilityID,
@@ -66,7 +70,6 @@ class CheckoutModal extends Component {
     };
 
     if (this.props.userType === "Employee" || this.props.userType === "Guest") {
-      startSection = 0;
       this.state.reservationFirstName = null;
       this.state.reservationLastName = null;
       this.state.reservationEmail = null;
