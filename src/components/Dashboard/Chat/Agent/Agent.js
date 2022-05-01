@@ -39,11 +39,7 @@ const Agent = () => {
     );
   }, []);
   if (loading) {
-    return (
-      <div>
-        <MDSpinner />
-      </div>
-    );
+    return <div>{/* <MDSpinner /> */}</div>;
   }
   return <div id="cometchat" style={{ margin: "0 auto", width: "60%" }} />;
 };
