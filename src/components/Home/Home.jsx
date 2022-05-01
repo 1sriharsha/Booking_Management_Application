@@ -3,6 +3,7 @@ import styles from "./Home.module.css";
 import "./Home.css";
 import { NavProfile } from "..";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 class Home extends Component {
   constructor(props) {
@@ -41,14 +42,14 @@ class Home extends Component {
             <div className={styles.navigation}>
               {/* Navigation: Athlos Branding [Left] */}
               <div className={styles.logo}>
-                <a href="/">Athlos</a>
+                <Link to={"/"}>Athlos</Link>
               </div>
 
               {/* Navigation: Nav Links [Middle] */}
               <div className={styles.menu}>
                 <ul className={styles.menuItem}>
                   <li>
-                    <a href="/dashboard">Dashboard</a>
+                    <Link to={"/dashboard"}>Dashboard</Link>
                   </li>
                 </ul>
               </div>

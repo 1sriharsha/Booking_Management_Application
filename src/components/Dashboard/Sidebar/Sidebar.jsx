@@ -5,6 +5,7 @@ import ManagementTabs from "./ManagementTabs/ManagementTabs";
 import GuestTabs from "./GuestTabs/GuestTabs";
 import EmployeeTabs from "./EmployeeTabs/EmployeeTabs";
 import SupportTabs from "./SupportTabs/SupportTabs";
+import { Link } from "react-router-dom";
 
 class Sidebar extends Component {
   render() {
@@ -13,7 +14,7 @@ class Sidebar extends Component {
         <div className={styles.sidebar}>
           {/* Athlos Branding */}
           <div className={styles.logo}>
-            <a href="/">Athlos</a>
+            <Link to={"/"}>Athlos</Link>
           </div>
 
           {/* Guest View Tabs */}
